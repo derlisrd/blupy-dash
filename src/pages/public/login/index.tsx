@@ -15,20 +15,19 @@ function Login() {
 
   const onsubmit = async (values: { email: string; password: string }) => {
     setLoading(true);
-    const res = await APICALLER.login(values);
+    const { success, results, message } = await APICALLER.login(values);
     setLoading(false);
-    console.log(res);
-    if (!res.success) {
+    if (!success) {
       toast({
         title: "Error",
-        description: res.message,
+        description: message,
         status: "error",
         duration: 6000,
         isClosable: true,
       });
       return;
     }
-    const userData = userDataModelResponse(res.results);
+    const userData = userDataModelResponse(results);
     setIsAuth(true);
     setDataUser(userData);
   };
