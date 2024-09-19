@@ -6,7 +6,7 @@ export type userDataModel = {
     token: string 
 }
 
-type userType = {
+export type userType = {
     name: string
     id: string | number
     email: string
@@ -14,7 +14,9 @@ type userType = {
 }
 
 type respuesta = {
-    user : userType,
+    name: string
+    id: string | number
+    email: string
     token: string
 }
 
@@ -26,9 +28,9 @@ export const userDataModelResponse = (res : resultstype )=> {
 
     const json = res.results
     return {
-        name: json.user.name,
-        id: json.user.id,
-        email: json.user.email,
+        name: json.name,
+        id: json.id,
+        email: json.email,
         token:json.token
     }
 }
