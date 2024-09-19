@@ -8,6 +8,10 @@ export default defineConfig({
       plugins: [fixReactVirtualized],
     },
   },
+  build:{
+    outDir: './site',
+    emptyOutDir: true
+  },
   plugins: [react(),fixReactVirtualized],
   server:{
     port: 1232
