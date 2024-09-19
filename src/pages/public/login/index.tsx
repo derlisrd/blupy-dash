@@ -29,7 +29,6 @@ function Login() {
       return;
     }
     const userData = userDataModelResponse(res.results);
-
     setIsAuth(true);
     setDataUser(userData);
   };
