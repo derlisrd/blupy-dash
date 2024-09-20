@@ -4,6 +4,7 @@ import { EnviarNotiModel } from "../models/enviar_noti_model";
 import { env } from "../config/env";
 import { typefiltrosClientes } from "../models/clientes_data_model";
 import { typefiltrosSolicitudes, typeIngresarVendedor } from "../models/solicitudes_data_model";
+import { LoginResponse } from "models/user_data_model";
 
 
 
@@ -16,10 +17,10 @@ const BLUPY = axios.create({baseURL: env.API_BLUPY, headers:{Accept: 'applicatio
 
 export const APICALLER = {
 
-    login: async(form: {email:string,password:string})=>{
+    login: async(form: {email:string,password:string}) : Promise<LoginResponse> =>{
       try {
         const {data} = await BLUPY.post('/login',form)
-        return {success:data.success,results: data.results };
+        return {success:data.success,results: data.results, message: '' };
       } catch (error) {
         return {success:false,message:'Error en el servidor'}
       }
@@ -45,7 +46,7 @@ export const APICALLER = {
     },
     enviarNotificaciones: async({title,text,token}: {title:string,text:string,token:string})=>{
       try {
-        const { data,status } = await BLUPY.post('/enviar-notificaciones',{title,text},{headers:{Authorization:`Bearer ${token}`}})
+        const { data,status } = await BLUPY.post('/enviar-notificaciones-masivas',{title,text},{headers:{Authorization:`Bearer ${token}`}})
         return { success: data.success, message: data.message, status };
       }catch (e) {
         if(axios.isAxiosError(e)){
@@ -67,9 +68,10 @@ export const APICALLER = {
     },
     check: async(token:string | null)=>{
       try {
-        const res = await BLUPY.post('/check',{},{headers:{ 'Authorization':`Bearer ${token}`}})
-        return {success:res.data.success,message:  (res.data.message) };
+        const {data} = await BLUPY.get('/check',{headers:{ 'Authorization':`Bearer ${token}`}})
+        return {success:data.success,message:  data.message };
       } catch (error) {
+        console.log(error)
         return {success:false,message:'Error en el servidor'}
       }
     },

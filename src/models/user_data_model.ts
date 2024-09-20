@@ -20,13 +20,10 @@ type respuesta = {
     token: string
 }
 
-type resultstype = {
-    results: respuesta
-}
 
-export const userDataModelResponse = (res : resultstype )=> {
 
-    const json = res.results
+export const userDataModelResponse = (json : respuesta )=> {
+
     return {
         name: json.name,
         id: json.id,
@@ -35,4 +32,15 @@ export const userDataModelResponse = (res : resultstype )=> {
     }
 }
 
+export interface LoginResults{
+    name: string
+    id: number
+    email: string
+    token: string
+}
 
+export interface LoginResponse {
+    success: boolean;
+    message: string;
+    results?: LoginResults
+}

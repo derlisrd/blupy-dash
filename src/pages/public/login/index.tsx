@@ -5,7 +5,6 @@ import { APICALLER } from "../../../services/api";
 import { useState } from "react";
 import { LoadindScreen } from "../../../components";
 import userDataHook from "../../../store/user_data_store";
-import { userDataModelResponse } from "../../../models/user_data_model";
 
 function Login() {
   const { setIsAuth, setDataUser } = userDataHook();
@@ -25,11 +24,12 @@ function Login() {
         duration: 6000,
         isClosable: true,
       });
-      return;
+      return false;
     }
-    const userData = userDataModelResponse(results);
-    setIsAuth(true);
-    setDataUser(userData);
+    if (results) {
+      setDataUser(results);
+      setIsAuth(true);
+    }
   };
 
   if (loading) {
