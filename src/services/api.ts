@@ -35,7 +35,7 @@ export const APICALLER = {
     },
     reiniciarContrasena: async({password,id,token}:{password:string, id: number, token:string})=>{
       try {
-        const { data,status } = await BLUPY.post('/reiniciar-contrasena',{password,id},{headers:{Authorization:`Bearer ${token}`}})
+        const { data,status } = await BLUPY.post('/restablecer-contrasena',{password,id},{headers:{Authorization:`Bearer ${token}`}})
         return { success: data.success, message: data.message, status };
       }catch (e) {
         if(axios.isAxiosError(e)){
