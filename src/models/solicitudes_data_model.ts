@@ -8,6 +8,7 @@ export type tipoEstadoContrato = {
 export type solicitudesData = {
     id: number | string | null
     user_id: number
+    uid: number
     estado: string
     estado_id: number 
     name: string
