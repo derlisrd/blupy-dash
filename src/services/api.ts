@@ -1,6 +1,6 @@
 import axios from "axios";
 import { EnviarSmsModel } from "../models/enviar_sms_model";
-import { EnviarNotiModel } from "../models/enviar_noti_model";
+import { enviarEmailModel, EnviarNotiModel, enviarWaModel } from "../models/enviar_noti_model";
 import { env } from "../config/env";
 import { typefiltrosClientes } from "../models/clientes_data_model";
 import { typefiltrosSolicitudes, typeIngresarVendedor } from "../models/solicitudes_data_model";
@@ -115,7 +115,7 @@ export const APICALLER = {
         return {success:false,message:'Error en el servidor'}
       }
     },
-    enviarEmail: async({token,body}:{token:string, body: EnviarNotiModel})=>{
+    enviarEmail: async({token,body}:{token:string, body: enviarEmailModel})=>{
       try {
         const res = await BLUPY.post('/enviar-email',body,{headers:{ 'Authorization':`Bearer ${token}`}})
         return {success:res.data.success,message:  (res.data.message) };
@@ -123,7 +123,7 @@ export const APICALLER = {
         return {success:false,message:'Error en el servidor'}
       }
     },
-    enviarWa: async({token,body}:{token:string, body: EnviarNotiModel})=>{
+    enviarWa: async({token,body}:{token:string, body: enviarWaModel})=>{
       try {
         const res = await BLUPY.post('/enviar-wa',body,{headers:{ 'Authorization':`Bearer ${token}`}})
         return {success:res.data.success,message:  (res.data.message) };
