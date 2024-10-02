@@ -189,7 +189,7 @@ export const APICALLER = {
     },
     actualizarSolicitudes:async(token:string)=>{
       try {
-        const {data} = await BLUPY.put(`/actualizar-solicitudes`, {headers:{ 'Authorization':`Bearer ${token}`}})
+        const {data} = await BLUPY.put(`/actualizar-solicitudes`,{}, {headers:{ 'Authorization':`Bearer ${token}`}})
         return {success:data.success};
       } catch (error) {
         return {success:false,message:'Error en el servidor'}
