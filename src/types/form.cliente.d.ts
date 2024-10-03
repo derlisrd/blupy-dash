@@ -7,6 +7,7 @@ export type formClienteType = {
   foto_ci_frente: string
   funcionario: number
   id: number
+  uid:number
   id_micredito: string
   name: string
   user_id: number
