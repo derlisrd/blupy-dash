@@ -13,9 +13,10 @@ type modalType = {
   solicitud: boolean;
   wa: boolean;
   password: boolean;
+  editar: boolean;
 };
 
-const initialModal: modalType = { sms: false, email: false, noti: false, ficha: false, solicitud: false, wa: false, filtros: false, password: false };
+const initialModal: modalType = { sms: false, email: false, noti: false, ficha: false, solicitud: false, wa: false, filtros: false, password: false, editar: false };
 const initialForm: formClienteType = {
   uid: 0,
   vendedor_id: null,
@@ -68,7 +69,17 @@ interface Props {
 function ClientesProvider({ children }: Props) {
   const { dataUser } = userDataHook();
   const [loading, setLoading] = useState(true);
-  const [modals, setModals] = useState<modalType>({ sms: false, email: false, noti: false, ficha: false, solicitud: false, wa: false, filtros: false, password: false });
+  const [modals, setModals] = useState<modalType>({
+    editar: false,
+    sms: false,
+    email: false,
+    noti: false,
+    ficha: false,
+    solicitud: false,
+    wa: false,
+    filtros: false,
+    password: false,
+  });
   const [form, setForm] = useState<formClienteType>(initialForm);
   const [lista, setLista] = useState<formClienteType[]>([]);
   const [filtros, setFiltros] = useState<filtrosClienteType>(initialFiltros);
