@@ -1,5 +1,12 @@
+import VentasProvider from "./provider";
+import Page from "./page";
+
 function VentasPage() {
-    return ( <h1>VENTAS</h1> );
+  return (
+    <VentasProvider>
+      <Page />
+    </VentasProvider>
+  );
 }
 
 export default VentasPage;

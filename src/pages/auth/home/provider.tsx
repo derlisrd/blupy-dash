@@ -38,6 +38,7 @@ interface ContextProps {
   datosTotales: datosTotalesType;
   lista: clienteData[];
   loading: boolean;
+  porcentaje: string;
 }
 
 export const HomeContext = createContext<ContextProps>({
@@ -73,6 +74,7 @@ export const HomeContext = createContext<ContextProps>({
   },
   lista: [],
   loading: true,
+  porcentaje: "",
 });
 
 interface Props {
@@ -113,13 +115,15 @@ function HomeProvider({ children }: Props) {
   const [lista, setLista] = useState<[]>([]);
   const [datosTotales, setDatosTotales] = useState(datosIniciales);
   const [loading, setLoading] = useState(true);
+  const [porcentaje, setPorcentajeUso] = useState("");
 
   const getLista = useCallback(async () => {
     setLoading(true);
-    const res = await APICALLER.totales(dataUser.token);
-    if (res.success) {
+    const [totales, uso] = await Promise.all([APICALLER.totales(dataUser.token), APICALLER.porcentajeUso(dataUser.token)]);
+    if (totales.success) {
       setLista([]);
-      setDatosTotales(res.results);
+      setPorcentajeUso(uso.results.porcentajeUso);
+      setDatosTotales(totales.results);
     }
     setLoading(false);
   }, [dataUser.token]);
@@ -135,13 +139,13 @@ function HomeProvider({ children }: Props) {
       ca.abort();
     };
   }, [getLista]);
-  const values = { lista, loading, datosTotales };
+  const values = { lista, loading, datosTotales, porcentaje };
   return <HomeContext.Provider value={values}>{children}</HomeContext.Provider>;
 }
 
 export const useHomeProvider = () => {
-  const { lista, loading, datosTotales } = useContext(HomeContext);
-  return { lista, loading, datosTotales };
+  const { lista, loading, datosTotales, porcentaje } = useContext(HomeContext);
+  return { lista, loading, datosTotales, porcentaje };
 };
 
 export default HomeProvider;
