@@ -211,6 +211,14 @@ export const APICALLER = {
         return {success:false,message:'Error en el servidor'}
       }
     },
+    porcentajeUso: async(token:string)=>{
+      try {
+        const {data} = await BLUPY.get(`/porcentaje-uso`, {headers:{ 'Authorization':`Bearer ${token}`}})
+        return {success:data.success,results: data.results};
+      } catch (error) {
+        return {success:false,message:'Error en el servidor'}
+      }
+    },
     ingresarVendedor: async({token,body}:{token:string,body: typeIngresarVendedor})=>{
       try {
         const {data} = await BLUPY.post(`/ingresar-vendedor`,body, {headers:{ 'Authorization':`Bearer ${token}`}})
@@ -219,4 +227,20 @@ export const APICALLER = {
         return {success:false,message:'Error en el servidor'}
       }
     },
+    ventasTotales: async(token:string)=>{
+      try {
+        const {data} = await BLUPY.get(`/ventas-totales`, {headers:{ 'Authorization':`Bearer ${token}`}})
+        return {success: data.success, results: data.results,message:''}
+      } catch (error) {
+        return {success:false,message:'Error en el servidor'}
+      }
+    },
+    listaVentas: async({token}:{token:string})=>{
+      try {
+        const {data} = await BLUPY.get(`/lista-ventas`, {headers:{ 'Authorization':`Bearer ${token}`}})
+        return {success: data.success, results: data.results,message:''}
+      } catch (error) {
+        return {success:false,message:'Error en el servidor'}
+      }
+    }
 }
