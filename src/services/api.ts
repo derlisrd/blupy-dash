@@ -5,14 +5,11 @@ import { env } from "../config/env";
 import { typefiltrosClientes } from "../models/clientes_data_model";
 import { typefiltrosSolicitudes, typeIngresarVendedor } from "../models/solicitudes_data_model";
 import { LoginResponse } from "models/user_data_model";
-
+import { ConsultaClienteResponse } from "./dto/consultacliente";
 
 
 
 const BLUPY = axios.create({baseURL: env.API_BLUPY, headers:{Accept: 'application/json', 'Content-Type': 'application/json', 'x-api-key':env.X_API_KEY}})
-
-
-
 
 
 export const APICALLER = {
@@ -25,12 +22,20 @@ export const APICALLER = {
         return {success:false,message:'Error en el servidor'}
       }
     },
-    consultaFarma:async(form: {cedula:string,token:string})=>{
+    consultaCliente:async(form: {cedula:string,token:string}) : Promise<ConsultaClienteResponse> =>{
       try {
-        const {data} = await BLUPY.get(`/consultas/farma?cedula=${form.cedula}`,{headers:{ 'Authorization':`Bearer ${form.token}`}})
-        return {success:data.success,results:  (data.results) };
+        const {data} = await BLUPY.get(`/consultas/cliente?cedula=${form.cedula}`,{headers:{ 'Authorization':`Bearer ${form.token}`}})
+        return ConsultaClienteResponse.fromJSON({
+          success: data.success ,
+          message: '',
+          results: (data.results)
+        })
       } catch (error) {
-        return {success:false,message:'Error en el servidor'}
+        return ConsultaClienteResponse.fromJSON({
+          success: false,
+          message: 'Error de servidor',
+          results: null 
+        })
       }
     },
     reiniciarContrasena: async({password,id,token}:{password:string, id: number, token:string})=>{
