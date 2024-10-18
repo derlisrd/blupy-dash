@@ -37,7 +37,7 @@ function ConsultasPage() {
         <Input disabled={loading} id="_buscar" ref={buscarRef} placeholder="Busca y presiona ENTER..." onKeyUp={buscarEnter} />
       </Box>
 
-      {resultado && resultado.farma && (
+      {resultado && resultado?.farma !== null && (
         <Card>
           <CardHeader>
             <Heading size="md">FICHA DE CLIENTE</Heading>

@@ -27,8 +27,8 @@ export class ConsultaClienteResults {
     ){}
 
     static fromJSON(data: any) : ConsultaClienteResults{
-        const farma = ConsultaClienteResultsFarma.fromJSON(data.farma) || null
-        const micredito = ConsultaClienteResultsMiCredito.fromJSON(data.micredito) || null
+        const farma = data.farma ? ConsultaClienteResultsFarma.fromJSON(data.farma) : null
+        const micredito = data.micredito ?  ConsultaClienteResultsMiCredito.fromJSON(data.micredito) : null
 
         return new ConsultaClienteResults(
             farma,
@@ -50,8 +50,7 @@ export class ConsultaClienteResultsFarma{
         public alianzas: Array<ConsultaClienteResultsFarmaAlianzas> | null
     ){}
     static fromJSON(data : any) : ConsultaClienteResultsFarma{
-        const alianzas = ConsultaClienteResultsFarmaAlianzas.mapper(data.alianzas) || null
-        
+        const alianzas = ConsultaClienteResultsFarmaAlianzas.mapper(data.alianzas || null)
         return new ConsultaClienteResultsFarma(
             data.persCi,
             data.persNombre,
