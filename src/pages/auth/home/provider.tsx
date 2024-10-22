@@ -122,7 +122,7 @@ function HomeProvider({ children }: Props) {
     const [totales, uso] = await Promise.all([APICALLER.totales(dataUser.token), APICALLER.porcentajeUso(dataUser.token)]);
     if (totales.success) {
       setLista([]);
-      setPorcentajeUso(uso.results.porcentajeUso);
+      setPorcentajeUso(uso.results.tasaUsoTotal);
       setDatosTotales(totales.results);
     }
     setLoading(false);
