@@ -2,6 +2,7 @@ import { createContext, MutableRefObject, ReactNode, useCallback, useEffect, use
 import { APICALLER } from "../../../services/api";
 import userDataHook from "../../../store/user_data_store";
 import { solicitudesData } from "../../../models/solicitudes_data_model";
+import swal from "sweetalert";
 
 interface userForm extends solicitudesData {
   cliente_id: number | string;
@@ -14,6 +15,7 @@ type filtrosType = {
   tipo: string;
   asofarma: string;
   funcionario: string;
+  externos: number;
 };
 
 type solicitudesTypes = {
@@ -29,6 +31,7 @@ type solicitudesTypes = {
   form: userForm;
   setForm: React.Dispatch<React.SetStateAction<userForm>>;
   getListaCB: () => void;
+  actualizarSolicitud: (e: solicitudesData) => Promise<void>;
 };
 const listaOriginalRef: MutableRefObject<solicitudesData[]> = { current: [] };
 
@@ -38,7 +41,7 @@ export const SolicitudesContext = createContext<solicitudesTypes>({
   setConteo: () => {},
   loading: true,
   setLoading: () => {},
-  filtros: { desde: "", hasta: "", estado_id: "", tipo: "", asofarma: "", funcionario: "" },
+  filtros: { desde: "", hasta: "", estado_id: "", tipo: "", asofarma: "", funcionario: "", externos: 0 },
   setFiltros: () => {},
   lista: [],
   setLista: () => {},
@@ -62,6 +65,7 @@ export const SolicitudesContext = createContext<solicitudesTypes>({
   },
   setForm: () => {},
   getListaCB: () => {},
+  actualizarSolicitud: async () => {},
 });
 
 type Props = {
@@ -81,6 +85,7 @@ function SolicitudesProvider({ children }: Props) {
     tipo: "",
     asofarma: "",
     funcionario: "",
+    externos: 0,
   });
   const [loading, setLoading] = useState(true);
 
@@ -104,6 +109,17 @@ function SolicitudesProvider({ children }: Props) {
   };
   const [form, setForm] = useState<userForm>(initialForm);
 
+  const actualizarSolicitud = async (e: solicitudesData) => {
+    const res = await APICALLER.actualizarSolicitud(dataUser.token, e.codigo);
+    if (res.success) {
+      const copia: solicitudesData[] = [...lista];
+      const index = copia.findIndex((e) => e.id === res.results.id);
+      copia[index].estado = res.results.estado;
+      setLista(copia);
+      swal({ title: "Actualizado", text: "Estado de solicitud actualizada", icon: "success" });
+    }
+  };
+
   const getListaCB = useCallback(async () => {
     const res = await APICALLER.solicitudes({ token: dataUser.token });
     setLoading(false);
@@ -124,7 +140,7 @@ function SolicitudesProvider({ children }: Props) {
     };
   }, [getListaCB]);
 
-  const values = { listaOriginal, conteo, setConteo, lista, setLista, filtros, setFiltros, loading, setLoading, form, setForm, getListaCB };
+  const values = { listaOriginal, conteo, setConteo, lista, setLista, filtros, setFiltros, loading, setLoading, form, setForm, getListaCB, actualizarSolicitud };
   return <SolicitudesContext.Provider value={values}>{children}</SolicitudesContext.Provider>;
 }
 

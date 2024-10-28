@@ -1,40 +1,19 @@
 import { Badge, IconButton, Text, Button, Stack, Tooltip, Checkbox } from "@chakra-ui/react";
 import { solicitudesData } from "../../../models/solicitudes_data_model";
 import { useSolicitudes } from "./usesolicitudes";
-import moment from "moment";
-import { APICALLER } from "../../../services/api";
-import userDataHook from "../../../store/user_data_store";
-import swal from "sweetalert";
 import { CSVLink } from "react-csv";
 import { Column, Table } from "react-virtualized";
 import { BellIcon, CalendarIcon, ChatIcon, EmailIcon, RepeatIcon } from "@chakra-ui/icons";
 import { useSolicitudStore } from "./store";
 import { estados, retornaColor, solicitado, tipos } from "./tabla.helpers";
+import useTablaSolicitudes from "./usetabla.solicitudes";
+import moment from "moment";
 
 function TablaSolicitudes() {
   const { setModals } = useSolicitudStore();
-  const { setForm, lista, setLista, filtros, conteo, setFiltros } = useSolicitudes();
-  const { dataUser } = userDataHook();
+  const { setForm, lista, actualizarSolicitud, filtros, conteo, setFiltros } = useSolicitudes();
+  const { ancho, cabeceras } = useTablaSolicitudes();
 
-  const cabeceras: { label: string; key: string }[] = [
-    { label: "id", key: "id" },
-    { label: "cedula", key: "cedula" },
-    { label: "Nombre", key: "name" },
-    { label: "Celular", key: "celular" },
-    { label: "Solicitado", key: "solicitado" },
-    { label: "Fecha", key: "fecha" },
-  ];
-
-  const actualizarSolicitud = async (e: solicitudesData) => {
-    const res = await APICALLER.actualizarSolicitud(dataUser.token, e.codigo);
-    if (res.success) {
-      const copia: solicitudesData[] = [...lista];
-      const index = copia.findIndex((e) => e.id === res.results.id);
-      copia[index].estado = res.results.estado;
-      setLista(copia);
-      swal({ title: "Actualizado", text: "Estado de solicitud actualizada" });
-    }
-  };
   const openModal = (f: solicitudesData, modal: string) => {
     if (f) {
       setForm(f);
@@ -42,28 +21,47 @@ function TablaSolicitudes() {
     }
   };
 
-  const list = lista.map((e: solicitudesData) => ({
-    id: e.id,
-    name: e.name,
-    cedula: e.cedula,
-    celular: e.celular,
-    codigo: e.codigo,
-    fecha: moment(e.created_at).format("DD-MMM-YYYY HH:mm"),
-    aso: e.asofarma,
-    estado: e.estado,
-    solicito: { solicito: solicitado[e.solicitud_credito]["label"], tipo: e.tipo, credito: e.solicitud_credito },
-    farma: e.funcionario,
-    tipo: tipos[e.tipo],
-    accion: e,
-  }));
+  const filteredList = lista
+    .filter((e: solicitudesData) => {
+      if (filtros.externos === 1) {
+        return e.asofarma === 0 && e.funcionario === 0;
+      }
 
-  const ancho = window.innerWidth > 1380 ? 1380 : window.innerWidth - 60;
+      if (filtros.funcionario === "1") {
+        return e.funcionario === 1;
+      }
+      if (filtros.asofarma === "1") {
+        return e.asofarma === 1;
+      }
+      // If not active, show all records
+      return true;
+    })
+    .map((e: solicitudesData) => ({
+      id: e.id,
+      name: e.name,
+      cedula: e.cedula,
+      celular: e.celular,
+      codigo: e.codigo,
+      fecha: moment(e.created_at).format("DD-MMM-YYYY HH:mm"),
+      aso: e.asofarma,
+      estado: e.estado,
+      solicito: { solicito: solicitado[e.solicitud_credito]["label"], tipo: e.tipo, credito: e.solicitud_credito },
+      farma: e.funcionario,
+      tipo: tipos[e.tipo],
+      accion: e,
+    }));
 
   return (
     <>
       <Stack direction="row" justifyContent="center" alignItems="center" gap={12} paddingBottom={3}>
-        <Checkbox size="sm" checked={filtros.funcionario === "1"}>
+        <Checkbox size="sm" onChange={() => setFiltros({ ...filtros, externos: filtros.externos === 1 ? 0 : 1 })} checked={filtros.externos === 1}>
+          Externos
+        </Checkbox>
+        <Checkbox size="sm" onChange={() => setFiltros({ ...filtros, funcionario: filtros.funcionario === "1" ? "0" : "1" })} checked={filtros.funcionario === "1"}>
           Funcionario
+        </Checkbox>
+        <Checkbox size="sm" onChange={() => setFiltros({ ...filtros, asofarma: filtros.asofarma === "1" ? "0" : "1" })} checked={filtros.asofarma === "1"}>
+          Aso
         </Checkbox>
         <Text fontSize="small" as="b" color="tomato">
           Total: {conteo}{" "}
@@ -72,12 +70,20 @@ function TablaSolicitudes() {
           Desde: {filtros.desde} Hasta: {filtros.hasta} | Producto: {tipos[parseInt(filtros.tipo)]} | Estado: {estados[filtros.estado_id]}
         </Text>
         <Button size="sm">
-          <CSVLink headers={cabeceras} data={list} filename={"dashboard"}>
+          <CSVLink headers={cabeceras} data={filteredList} filename={"dashboard"}>
             EXCEL
           </CSVLink>
         </Button>
       </Stack>
-      <Table width={ancho} autoWidth height={window.innerHeight - 255} headerHeight={20} rowHeight={30} rowCount={lista.length} rowGetter={({ index }) => list[index]}>
+      <Table
+        width={ancho}
+        autoWidth
+        height={window.innerHeight - 255}
+        headerHeight={20}
+        rowHeight={30}
+        rowCount={filteredList.length}
+        rowGetter={({ index }) => filteredList[index]}
+      >
         <Column headerRenderer={({ dataKey }) => <div>{dataKey}</div>} dataKey="codigo" label="Contrato" width={80} />
         <Column dataKey="cedula" label="CI" width={90} />
         <Column dataKey="name" label="Nombre" width={250} />
@@ -179,17 +185,3 @@ function TablaSolicitudes() {
 }
 
 export default TablaSolicitudes;
-
-{
-  /* <Menu>
-              <MenuButton as={IconButton} size='xs' color='white' backgroundColor='blue.500' icon={<ChevronDownIcon />} />
-              <MenuList>
-                <MenuItem onClick={()=>{openModal(e,'ficha')}}>Ver ficha</MenuItem>
-                <MenuItem onClick={()=>{openModal(e,'wa')}}>Enviar whatsapp</MenuItem>
-                <MenuItem onClick={()=>{openModal(e,'sms')}}>Enviar sms</MenuItem>
-                <MenuItem onClick={()=>{openModal(e,'noti')}}>Enviar notificación</MenuItem>
-                <MenuItem onClick={()=>{openModal(e,'email')}}>Enviar email</MenuItem>
-                <MenuItem onClick={()=>{actualizarSolicitud(e)}}>Actualizar solicitud</MenuItem>
-              </MenuList>
-                </Menu> */
-}
