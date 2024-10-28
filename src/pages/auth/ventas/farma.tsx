@@ -1,7 +1,6 @@
 import { Card, CardBody, CardHeader, Flex, Grid, GridItem, Text } from "@chakra-ui/react";
 import { InfoIcon, WarningIcon } from "@chakra-ui/icons";
 import { useVentasProvider } from "./provider";
-import { formatNumberString } from "../../../utils/helpers";
 function Farma() {
   const { ventasTotales } = useVentasProvider();
 
@@ -18,7 +17,7 @@ function Farma() {
             <Flex direction="row" gap="2" alignItems="center">
               <InfoIcon boxSize={6} color="yellowgreen" />
               <Text fontSize="xl" as="samp">
-                {formatNumberString(ventasTotales.importeTotalAyerFuncionario)}
+                {ventasTotales.importeTotalAyerFuncionario.toLocaleString("es-PY")}
               </Text>
             </Flex>
           </CardBody>
@@ -35,7 +34,7 @@ function Farma() {
             <Flex direction="row" gap="2" alignItems="center">
               <InfoIcon boxSize={6} color="#7B341E" />
               <Text fontSize="xl" as="samp">
-                {formatNumberString(ventasTotales.importeTotalSemanaFuncionario)}
+                {ventasTotales.importeTotalSemanaFuncionario.toLocaleString("es-PY")}
               </Text>
             </Flex>
           </CardBody>
@@ -52,7 +51,7 @@ function Farma() {
             <Flex direction="row" gap="2" alignItems="center">
               <WarningIcon boxSize={6} color="#A0AEC0" />
               <Text fontSize="xl" as="samp">
-                {formatNumberString(ventasTotales.importeTotalMesFuncionario)}
+                {ventasTotales.importeTotalMesFuncionario.toLocaleString("es-PY")}
               </Text>
             </Flex>
           </CardBody>

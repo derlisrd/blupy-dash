@@ -5,6 +5,7 @@ import Vigentes from "./vigentes";
 import Rechazados from "./rechazados";
 import Pendientes from "./pendientes";
 import Solicitudes from "./solicitudes";
+import Uso from "./uso";
 
 function HomePage() {
   return (
@@ -13,6 +14,10 @@ function HomePage() {
         Registros
       </Text>
       <Registros />
+      <Text as="b" casing="uppercase">
+        Tasa de uso
+      </Text>
+      <Uso />
       <RegistrosTotales />
       <Text as="b" casing="uppercase">
         Solicitudes

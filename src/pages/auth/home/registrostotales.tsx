@@ -1,31 +1,14 @@
-import { QuestionIcon, StarIcon, SunIcon, WarningIcon } from "@chakra-ui/icons";
+import { QuestionIcon, StarIcon, WarningIcon } from "@chakra-ui/icons";
 import { Card, CardBody, CardHeader, Flex, Grid, GridItem, Text } from "@chakra-ui/react";
-import { useHomeProvider } from "./provider";
+import { useHomeProvider } from "./useHome";
 
 function RegistrosTotales() {
-  const { datosTotales, porcentaje } = useHomeProvider();
+  const { datosTotales } = useHomeProvider();
 
   return (
-    <Grid templateColumns={["repeat(1, 1fr)", "repeat(1, 1fr)", "repeat(4, 1fr)", "repeat(4, 1fr)"]} marginBottom={8} gap={2}>
+    <Grid templateColumns={["repeat(1, 1fr)", "repeat(1, 1fr)", "repeat(3, 1fr)", "repeat(3, 1fr)"]} marginBottom={8} gap={2}>
       <GridItem w="100%">
-        <Card bgColor="#FEEBC8">
-          <CardHeader>
-            <Text as="b" fontSize="sm" casing="uppercase">
-              Uso:
-            </Text>
-          </CardHeader>
-          <CardBody>
-            <Flex direction="row" gap="2" alignItems="center">
-              <SunIcon boxSize={6} color="black" />
-              <Text fontSize="xl" as="samp">
-                {porcentaje}
-              </Text>
-            </Flex>
-          </CardBody>
-        </Card>
-      </GridItem>
-      <GridItem w="100%">
-        <Card bgColor="#BEE3F8">
+        <Card bgColor="#BEEC4F1F93F8">
           <CardHeader>
             <Text as="b" fontSize="sm" casing="uppercase">
               Funcionarios:
@@ -42,7 +25,7 @@ function RegistrosTotales() {
         </Card>
       </GridItem>
       <GridItem w="100%">
-        <Card bgColor="#EBF8FF">
+        <Card bgColor="#C4F1F9">
           <CardHeader>
             <Text as="b" fontSize="sm" casing="uppercase">
               Asociaciones:
@@ -50,7 +33,7 @@ function RegistrosTotales() {
           </CardHeader>
           <CardBody>
             <Flex direction="row" gap="2" alignItems="center">
-              <WarningIcon boxSize={6} color="tomato" />
+              <WarningIcon boxSize={6} color="blue" />
               <Text fontSize="xl" as="samp">
                 {datosTotales.asociaciones}
               </Text>

@@ -1,6 +1,6 @@
 import { InfoIcon } from "@chakra-ui/icons";
 import { Card, CardBody, CardHeader, Flex, Grid, GridItem, Text } from "@chakra-ui/react";
-import { useHomeProvider } from "./provider";
+import { useHomeProvider } from "./useHome";
 
 function SolicitudesFarma() {
   const { datosTotales } = useHomeProvider();

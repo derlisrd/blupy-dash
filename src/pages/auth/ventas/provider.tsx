@@ -3,22 +3,22 @@ import { APICALLER } from "../../../services/api";
 import userDataHook from "../../../store/user_data_store";
 
 type ventasTotalesType = {
-  descuentoTotalMes: string;
-  importeTotalAyer: string;
-  importeTotalSemana: string;
-  importeTotalMes: string;
+  descuentoTotalMes: number;
+  importeTotalAyer: number;
+  importeTotalSemana: number;
+  importeTotalMes: number;
 
-  importeTotalAyerDigital: string;
-  importeTotalSemanaDigital: string;
-  importeTotalMesDigital: string;
+  importeTotalAyerDigital: number;
+  importeTotalSemanaDigital: number;
+  importeTotalMesDigital: number;
 
-  importeTotalAyerFuncionario: string;
-  importeTotalSemanaFuncionario: string;
-  importeTotalMesFuncionario: string;
+  importeTotalAyerFuncionario: number;
+  importeTotalSemanaFuncionario: number;
+  importeTotalMesFuncionario: number;
 
-  importeTotalAyerAso: string;
-  importeTotalSemanaAso: string;
-  importeTotalMesAso: string;
+  importeTotalAyerAso: number;
+  importeTotalSemanaAso: number;
+  importeTotalMesAso: number;
 };
 
 interface ContextProps {
@@ -28,22 +28,22 @@ interface ContextProps {
 
 export const VentasContext = createContext<ContextProps>({
   ventasTotales: {
-    descuentoTotalMes: "",
-    importeTotalAyer: "",
-    importeTotalSemana: "",
-    importeTotalMes: "",
+    descuentoTotalMes: 0,
+    importeTotalAyer: 0,
+    importeTotalSemana: 0,
+    importeTotalMes: 0,
 
-    importeTotalAyerDigital: "",
-    importeTotalSemanaDigital: "",
-    importeTotalMesDigital: "",
+    importeTotalAyerDigital: 0,
+    importeTotalSemanaDigital: 0,
+    importeTotalMesDigital: 0,
 
-    importeTotalAyerFuncionario: "",
-    importeTotalSemanaFuncionario: "",
-    importeTotalMesFuncionario: "",
+    importeTotalAyerFuncionario: 0,
+    importeTotalSemanaFuncionario: 0,
+    importeTotalMesFuncionario: 0,
 
-    importeTotalAyerAso: "",
-    importeTotalSemanaAso: "",
-    importeTotalMesAso: "",
+    importeTotalAyerAso: 0,
+    importeTotalSemanaAso: 0,
+    importeTotalMesAso: 0,
   },
   loading: true,
 });
@@ -54,22 +54,22 @@ interface Props {
 function VentasProvider({ children }: Props) {
   const { dataUser } = userDataHook();
   const datosIniciales = {
-    descuentoTotalMes: "",
-    importeTotalAyer: "0",
-    importeTotalSemana: "0",
-    importeTotalMes: "0",
+    descuentoTotalMes: 0,
+    importeTotalAyer: 0,
+    importeTotalSemana: 0,
+    importeTotalMes: 0,
 
-    importeTotalAyerDigital: "0",
-    importeTotalSemanaDigital: "0",
-    importeTotalMesDigital: "0",
+    importeTotalAyerDigital: 0,
+    importeTotalSemanaDigital: 0,
+    importeTotalMesDigital: 0,
 
-    importeTotalAyerFuncionario: "0",
-    importeTotalSemanaFuncionario: "0",
-    importeTotalMesFuncionario: "0",
+    importeTotalAyerFuncionario: 0,
+    importeTotalSemanaFuncionario: 0,
+    importeTotalMesFuncionario: 0,
 
-    importeTotalAyerAso: "0",
-    importeTotalSemanaAso: "0",
-    importeTotalMesAso: "0",
+    importeTotalAyerAso: 0,
+    importeTotalSemanaAso: 0,
+    importeTotalMesAso: 0,
   };
 
   const [ventasTotales, setVentasTotales] = useState(datosIniciales);

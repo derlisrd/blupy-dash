@@ -1,4 +1,4 @@
-import { ReactNode, createContext, useCallback, useContext, useEffect, useState } from "react";
+import { ReactNode, createContext, useCallback, useEffect, useState } from "react";
 import { APICALLER } from "../../../services/api";
 import userDataHook from "../../../store/user_data_store";
 import { clienteData } from "../../../models/clientes_data_model";
@@ -34,11 +34,18 @@ type datosTotalesType = {
   porcentajeRechazo: string;
 };
 
+type porcentajeType = {
+  tasaUsoTotal: string;
+  tasaUsoFuncionario: string;
+  tasaUsoAsoc: string;
+  tasaUsoDigital: string;
+};
+
 interface ContextProps {
   datosTotales: datosTotalesType;
   lista: clienteData[];
   loading: boolean;
-  porcentaje: string;
+  porcentaje: porcentajeType;
 }
 
 export const HomeContext = createContext<ContextProps>({
@@ -74,7 +81,12 @@ export const HomeContext = createContext<ContextProps>({
   },
   lista: [],
   loading: true,
-  porcentaje: "",
+  porcentaje: {
+    tasaUsoDigital: "",
+    tasaUsoFuncionario: "",
+    tasaUsoAsoc: "",
+    tasaUsoTotal: "",
+  },
 });
 
 interface Props {
@@ -115,14 +127,19 @@ function HomeProvider({ children }: Props) {
   const [lista, setLista] = useState<[]>([]);
   const [datosTotales, setDatosTotales] = useState(datosIniciales);
   const [loading, setLoading] = useState(true);
-  const [porcentaje, setPorcentajeUso] = useState("");
+  const [porcentaje, setPorcentajeUso] = useState<porcentajeType>({
+    tasaUsoAsoc: "0%",
+    tasaUsoDigital: "0%",
+    tasaUsoFuncionario: "0%",
+    tasaUsoTotal: "0%",
+  });
 
   const getLista = useCallback(async () => {
     setLoading(true);
     const [totales, uso] = await Promise.all([APICALLER.totales(dataUser.token), APICALLER.porcentajeUso(dataUser.token)]);
     if (totales.success) {
       setLista([]);
-      setPorcentajeUso(uso.results.tasaUsoTotal);
+      setPorcentajeUso(uso.results);
       setDatosTotales(totales.results);
     }
     setLoading(false);
@@ -142,10 +159,5 @@ function HomeProvider({ children }: Props) {
   const values = { lista, loading, datosTotales, porcentaje };
   return <HomeContext.Provider value={values}>{children}</HomeContext.Provider>;
 }
-
-export const useHomeProvider = () => {
-  const { lista, loading, datosTotales, porcentaje } = useContext(HomeContext);
-  return { lista, loading, datosTotales, porcentaje };
-};
 
 export default HomeProvider;

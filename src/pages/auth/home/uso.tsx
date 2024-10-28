@@ -1,76 +1,69 @@
-import { CheckCircleIcon, InfoIcon, WarningIcon } from "@chakra-ui/icons";
 import { Card, CardBody, CardHeader, Flex, Grid, GridItem, Text } from "@chakra-ui/react";
 import { useHomeProvider } from "./useHome";
 
-function Registros() {
-  const { datosTotales } = useHomeProvider();
-
+function Uso() {
+  const { porcentaje } = useHomeProvider();
   return (
     <Grid templateColumns={["repeat(1, 1fr)", "repeat(2, 1fr)", "repeat(4, 1fr)", "repeat(4, 1fr)"]} marginBottom={8} gap={2}>
       <GridItem w="100%">
-        <Card>
+        <Card bgColor="#fff">
           <CardHeader>
-            <Text as="b" casing="uppercase">
-              Hoy:
+            <Text as="b" fontSize="sm" casing="uppercase">
+              Digital:
             </Text>
           </CardHeader>
           <CardBody>
             <Flex direction="row" gap="2" alignItems="center">
-              <InfoIcon boxSize={6} color="yellowgreen" />
-              <Text fontSize="2xl" as="samp">
-                {datosTotales.registrosHoy}
+              <Text fontSize="xl" as="samp">
+                {porcentaje.tasaUsoDigital}
               </Text>
             </Flex>
           </CardBody>
         </Card>
       </GridItem>
       <GridItem w="100%">
-        <Card>
+        <Card bgColor="#fff">
           <CardHeader>
-            <Text as="b" casing="uppercase">
-              Semana:
+            <Text as="b" fontSize="sm" casing="uppercase">
+              Funcionarios:
             </Text>
           </CardHeader>
           <CardBody>
             <Flex direction="row" gap="2" alignItems="center">
-              <InfoIcon boxSize={6} color="#7B341E" />
-              <Text fontSize="2xl" as="samp">
-                {datosTotales.registrosSemana}
+              <Text fontSize="xl" as="samp">
+                {porcentaje.tasaUsoFuncionario}
               </Text>
             </Flex>
           </CardBody>
         </Card>
       </GridItem>
       <GridItem w="100%">
-        <Card>
+        <Card bgColor="#fff">
           <CardHeader>
-            <Text as="b" casing="uppercase">
-              Mes:
+            <Text as="b" fontSize="sm" casing="uppercase">
+              Asociaciones:
             </Text>
           </CardHeader>
           <CardBody>
             <Flex direction="row" gap="2" alignItems="center">
-              <WarningIcon boxSize={6} color="#A0AEC0" />
-              <Text fontSize="2xl" as="samp">
-                {datosTotales.registrosMes}
+              <Text fontSize="xl" as="samp">
+                {porcentaje.tasaUsoAsoc}
               </Text>
             </Flex>
           </CardBody>
         </Card>
       </GridItem>
-
       <GridItem w="100%">
-        <Card bgColor="#E9D8FD">
+        <Card bgColor="#1c0b19">
           <CardHeader>
-            <Text as="b" casing="uppercase">
-              Total:
+            <Text as="b" fontSize="sm" casing="uppercase" color="#fff">
+              Todos:
             </Text>
           </CardHeader>
           <CardBody>
             <Flex direction="row" gap="2" alignItems="center">
-              <CheckCircleIcon boxSize={6} color="#805AD5" />
-              <Text fontSize="2xl" as="samp">
-                {datosTotales.registrosTotales}
+              <Text fontSize="xl" as="samp" color="#fff">
+                {porcentaje.tasaUsoTotal}
               </Text>
             </Flex>
           </CardBody>
@@ -80,4 +73,4 @@ function Registros() {
   );
 }
 
-export default Registros;
+export default Uso;
