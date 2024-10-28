@@ -3,7 +3,7 @@ import { EnviarSmsModel } from "../models/enviar_sms_model";
 import { enviarEmailModel, EnviarNotiModel, enviarWaModel } from "../models/enviar_noti_model";
 import { env } from "../config/env";
 import { typefiltrosClientes } from "../models/clientes_data_model";
-import { typefiltrosSolicitudes, typeIngresarVendedor } from "../models/solicitudes_data_model";
+import { typeIngresarVendedor } from "../models/solicitudes_data_model";
 import { LoginResponse } from "models/user_data_model";
 import { ConsultaClienteResponse } from "./dto/consultacliente";
 
@@ -176,9 +176,9 @@ export const APICALLER = {
         return {success:false,message:'Error en el servidor'}
       }
     },
-    solicitudesPorFiltros: async({token,filtros}:{token:string,filtros: typefiltrosSolicitudes})=>{
+    solicitudesPorFiltros: async({token,desde,hasta,estado_id}:{token:string,desde: string, hasta: string, estado_id: string})=>{
       try {
-        const {data} = await BLUPY.post(`/solicitud-filtros`,filtros, {headers:{ 'Authorization':`Bearer ${token}`}})
+        const {data} = await BLUPY.get(`/solicitudes-filtros?desde=${desde}&hasta=${hasta}&estado_id=${estado_id}`, {headers:{ 'Authorization':`Bearer ${token}`}})
         return {success:data.success,results:data.results, pages: data.pages, total: data.total, current: data.current};
       } catch (error) {
         return {success:false,message:'Error en el servidor'}
