@@ -11,7 +11,7 @@ import moment from "moment";
 
 function TablaSolicitudes() {
   const { setModals } = useSolicitudStore();
-  const { setForm, lista, actualizarSolicitud, filtros, conteo, setFiltros } = useSolicitudes();
+  const { setForm, lista, actualizarSolicitud, filtros, setFiltros } = useSolicitudes();
   const { ancho, cabeceras } = useTablaSolicitudes();
 
   const openModal = (f: solicitudesData, modal: string) => {
@@ -64,7 +64,7 @@ function TablaSolicitudes() {
           Aso
         </Checkbox>
         <Text fontSize="small" as="b" color="tomato">
-          Total: {conteo}{" "}
+          Total: {filteredList.length}
         </Text>
         <Text fontSize="small" as="b">
           Desde: {filtros.desde} Hasta: {filtros.hasta} | Producto: {tipos[parseInt(filtros.tipo)]} | Estado: {estados[filtros.estado_id]}
