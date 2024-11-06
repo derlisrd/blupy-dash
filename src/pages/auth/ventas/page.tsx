@@ -3,11 +3,16 @@ import VentasMes from "./totales";
 import Digital from "./digital";
 import Farma from "./farma";
 import Aso from "./aso";
+import Tickets from "./tickets";
 
 function VentasPage() {
   return (
     <Container maxW="5xl">
       <VentasMes />
+      <Text as="b" casing="uppercase">
+        Tickets
+      </Text>
+      <Tickets />
       <Text as="b" casing="uppercase">
         Blupy digital
       </Text>

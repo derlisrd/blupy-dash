@@ -11,10 +11,14 @@ function useVentas() {
 
     const getLista = useCallback(async()=>{
         setLoading(true)
-        const res = await APICALLER.listaVentas({token: dataUser.token})
-        if(res.success){
-            setLista(res.results)
+        const [ventas, tickets] = await Promise.all([
+            APICALLER.listaVentas({token: dataUser.token}),
+            APICALLER.tickets({token: dataUser.token})
+        ])
+        if(ventas.success){
+            setLista(ventas.results)
         }
+        console.log(tickets)
         setLoading(false)
     },[dataUser.token])
 

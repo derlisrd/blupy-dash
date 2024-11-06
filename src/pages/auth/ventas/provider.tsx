@@ -20,10 +20,16 @@ type ventasTotalesType = {
   importeTotalSemanaAso: number;
   importeTotalMesAso: number;
 };
+type ticketsType = {
+  aso: number;
+  digital: number;
+  farma: number;
+};
 
 interface ContextProps {
   ventasTotales: ventasTotalesType;
   loading: boolean;
+  tickets: ticketsType;
 }
 
 export const VentasContext = createContext<ContextProps>({
@@ -46,6 +52,11 @@ export const VentasContext = createContext<ContextProps>({
     importeTotalMesAso: 0,
   },
   loading: true,
+  tickets: {
+    aso: 0,
+    digital: 0,
+    farma: 0,
+  },
 });
 
 interface Props {
@@ -71,16 +82,16 @@ function VentasProvider({ children }: Props) {
     importeTotalSemanaAso: 0,
     importeTotalMesAso: 0,
   };
-
+  const [tickets, setTickets] = useState<ticketsType>({ aso: 0, digital: 0, farma: 0 });
   const [ventasTotales, setVentasTotales] = useState(datosIniciales);
   const [loading, setLoading] = useState(true);
 
   const getLista = useCallback(async () => {
     setLoading(true);
-    const res = await APICALLER.ventasTotales(dataUser.token);
-    if (res.success) {
-      setVentasTotales(res.results);
-    }
+    const [ventas, tickets] = await Promise.all([APICALLER.ventasTotales(dataUser.token), APICALLER.tickets({ token: dataUser.token })]);
+    ventas.success && setVentasTotales(ventas.results);
+    tickets.success && setTickets(tickets.results);
+
     setLoading(false);
   }, [dataUser.token]);
 
@@ -95,13 +106,13 @@ function VentasProvider({ children }: Props) {
       ca.abort();
     };
   }, [getLista]);
-  const values = { loading, ventasTotales };
+  const values = { loading, ventasTotales, tickets };
   return <VentasContext.Provider value={values}>{children}</VentasContext.Provider>;
 }
 
 export const useVentasProvider = () => {
-  const { loading, ventasTotales } = useContext(VentasContext);
-  return { loading, ventasTotales };
+  const { loading, ventasTotales, tickets } = useContext(VentasContext);
+  return { loading, ventasTotales, tickets };
 };
 
 export default VentasProvider;

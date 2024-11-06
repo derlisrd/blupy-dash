@@ -247,5 +247,13 @@ export const APICALLER = {
       } catch (error) {
         return {success:false,message:'Error en el servidor'}
       }
+    },
+    tickets: async({token}:{token:string})=>{
+      try {
+        const {data} = await BLUPY.get(`/ventas-tickets`, {headers:{ 'Authorization':`Bearer ${token}`}})
+        return {success: data.success, results: data.results,message:''}
+      } catch (error) {
+        return {success:false,message:'Error en el servidor'}
+      }
     }
 }
