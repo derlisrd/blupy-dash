@@ -208,17 +208,17 @@ export const APICALLER = {
         return {success:false,message:'Error en el servidor'}
       }
     },
-    totales: async(token:string)=>{
+    totales: async(token:string,desde?: string | null, hasta?: string | null)=>{
       try {
-        const {data} = await BLUPY.get(`/totales`, {headers:{ 'Authorization':`Bearer ${token}`}})
+        const {data} = await BLUPY.get(`/totales?desde=${desde}&hasta=${hasta}`, {headers:{ 'Authorization':`Bearer ${token}`}})
         return {success:data.success,results: data.results};
       } catch (error) {
         return {success:false,message:'Error en el servidor'}
       }
     },
-    porcentajeUso: async(token:string)=>{
+    porcentajeUso: async(token:string,desde:string | null, hasta: string | null)=>{
       try {
-        const {data} = await BLUPY.get(`/porcentaje-uso`, {headers:{ 'Authorization':`Bearer ${token}`}})
+        const {data} = await BLUPY.get(`/porcentaje-uso?desde=${desde}&hasta=${hasta}`, {headers:{ 'Authorization':`Bearer ${token}`}})
         return {success:data.success,results: data.results};
       } catch (error) {
         return {success:false,message:'Error en el servidor'}
@@ -232,9 +232,9 @@ export const APICALLER = {
         return {success:false,message:'Error en el servidor'}
       }
     },
-    ventasTotales: async(token:string)=>{
+    ventasTotales: async(token:string,desde: string | null,hasta: string |null)=>{
       try {
-        const {data} = await BLUPY.get(`/ventas-totales`, {headers:{ 'Authorization':`Bearer ${token}`}})
+        const {data} = await BLUPY.get(`/ventas-totales?desde=${desde}&hasta=${hasta}`, {headers:{ 'Authorization':`Bearer ${token}`}})
         return {success: data.success, results: data.results,message:''}
       } catch (error) {
         return {success:false,message:'Error en el servidor'}
@@ -248,9 +248,9 @@ export const APICALLER = {
         return {success:false,message:'Error en el servidor'}
       }
     },
-    tickets: async({token}:{token:string})=>{
+    tickets: async({token,desde=null,hasta=null}:{token:string,desde: string | null, hasta: string | null})=>{
       try {
-        const {data} = await BLUPY.get(`/ventas-tickets`, {headers:{ 'Authorization':`Bearer ${token}`}})
+        const {data} = await BLUPY.get(`/ventas-tickets?desde=${desde}&hasta=${hasta}`, {headers:{ 'Authorization':`Bearer ${token}`}})
         return {success: data.success, results: data.results,message:''}
       } catch (error) {
         return {success:false,message:'Error en el servidor'}

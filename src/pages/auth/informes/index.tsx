@@ -1,4 +1,4 @@
-import { Button, Container, Grid, GridItem, Input, Text } from "@chakra-ui/react";
+import { Container, Grid, GridItem, Input, Text } from "@chakra-ui/react";
 import useInformes from "./useInformes";
 import Titles from "./titles";
 import Registros from "./registros";
@@ -12,18 +12,18 @@ import { Fragment } from "react";
 import Rechazados from "./rechazados";
 
 function InformesPage() {
-  const { datos, loading, periodo, setPeriodo } = useInformes();
+  const { datos, loading, setPeriodo } = useInformes();
   return (
     <Container maxW="4xl">
       <Text fontSize="xl" as="b">
         INFORME MENSUAL
       </Text>
       <Grid my={4} gap={12} templateColumns={["repeat(1, 1fr)", "repeat(4, 1fr)"]}>
-        <GridItem>
+        <GridItem alignSelf="center">
           <Input
             variant="unstyled"
             type="month"
-            value={`${periodo.getFullYear()}-${String(periodo.getMonth() + 1).padStart(2, "0")}`} // Formato yyyy-MM
+            // value={`${periodo.getFullYear()}-${String(periodo.getMonth() + 1).padStart(2, "0")}`} // Formato yyyy-MM
             name="periodo"
             placeholder="Seleccionar mes"
             onChange={({ target }) => {
@@ -31,9 +31,6 @@ function InformesPage() {
               setPeriodo(new Date(parseInt(year), parseInt(month) - 1));
             }}
           />
-        </GridItem>
-        <GridItem alignSelf="center">
-          <Button size="sm">Traer datos</Button>
         </GridItem>
       </Grid>
       <Grid templateColumns={["repeat(1, 1fr)", "repeat(5, 1fr)"]} gap={1}>

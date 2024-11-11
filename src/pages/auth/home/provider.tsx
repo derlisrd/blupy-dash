@@ -136,7 +136,10 @@ function HomeProvider({ children }: Props) {
 
   const getLista = useCallback(async () => {
     setLoading(true);
-    const [totales, uso] = await Promise.all([APICALLER.totales(dataUser.token), APICALLER.porcentajeUso(dataUser.token)]);
+    const periodo = new Date();
+    const desde = `${periodo.getFullYear()}-${String(periodo.getMonth() + 1).padStart(2, "0")}-01`;
+    const hasta = new Date(periodo.getFullYear(), periodo.getMonth() + 1, 0).toISOString().split("T")[0];
+    const [totales, uso] = await Promise.all([APICALLER.totales(dataUser.token, desde, hasta), APICALLER.porcentajeUso(dataUser.token, desde, hasta)]);
     if (totales.success) {
       setLista([]);
       setPorcentajeUso(uso.results);
