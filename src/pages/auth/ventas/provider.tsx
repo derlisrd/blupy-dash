@@ -88,7 +88,10 @@ function VentasProvider({ children }: Props) {
 
   const getLista = useCallback(async () => {
     setLoading(true);
-    const [ventas, tickets] = await Promise.all([APICALLER.ventasTotales(dataUser.token), APICALLER.tickets({ token: dataUser.token })]);
+    const periodo = new Date();
+    const desde = `${periodo.getFullYear()}-${String(periodo.getMonth() + 1).padStart(2, "0")}-01`;
+    const hasta = new Date(periodo.getFullYear(), periodo.getMonth() + 1, 0).toISOString().split("T")[0];
+    const [ventas, tickets] = await Promise.all([APICALLER.ventasTotales(dataUser.token, desde, hasta), APICALLER.tickets({ token: dataUser.token, desde, hasta })]);
     ventas.success && setVentasTotales(ventas.results);
     tickets.success && setTickets(tickets.results);
 
