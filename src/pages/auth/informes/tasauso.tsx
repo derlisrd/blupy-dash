@@ -9,7 +9,7 @@ interface Props {
 function TasaUso({ datos }: Props) {
   return (
     <Fragment>
-      <GridItem bgColor="#ededed" padding={1} borderRadius={2}>
+      <GridItem bgColor="#f5f5f5" padding={1} borderRadius={2}>
         <Text fontSize="md" as="b">
           Tasa de uso
         </Text>

@@ -20,12 +20,15 @@ export type datosMainType = {
     cantidadTickets: datosTypeNumber,
     registros: datosTypeNumber,
     vigentes: datosTypeNumber,
+    rechazados: datosTypeNumber,
     porcentajeUso: datosTypeString
 }
 
 
 function useInformes() {
     const { dataUser } = userDataHook();
+    const [periodo,setPeriodo] = useState<Date>(new Date())
+    const [loading,setLoading] = useState(true)
     const [datos,setDatos] = useState<datosMainType>({
         ventas: {
             farma: 0,
@@ -40,6 +43,12 @@ function useInformes() {
             total: 0
         },
         registros: {
+            farma: 0,
+            alianzas: 0,
+            digital: 0,
+            total: 0 
+        },
+        rechazados: {
             farma: 0,
             alianzas: 0,
             digital: 0,
@@ -67,7 +76,7 @@ function useInformes() {
                 APICALLER.tickets({token: dataUser.token}),
                 APICALLER.ventasTotales(dataUser.token),
             ])
-
+            setLoading(false)
            setDatos({
             ventas: {
                 farma: ventas.results.importeTotalMesFuncionario,
@@ -82,16 +91,22 @@ function useInformes() {
                 total:  tickets.results.farma + tickets.results.aso + tickets.results.digital
             },
             registros: {
-                farma: registros.results.funcionarios,
-                alianzas: registros.results.asociaciones,
-                digital: registros.results.externos,
-                total: registros.results.registrosTotales 
+                farma: registros.results.registrosMesFuncionarios,
+                alianzas: registros.results.registrosMesAso,
+                digital: registros.results.registrosMesDigital,
+                total: registros.results.registrosMes 
+            },
+            rechazados: {
+                farma: 0,
+                alianzas: 0,
+                digital: registros.results.rechazadosMes,
+                total: registros.results.rechazadosMes
             },
             vigentes: {
-                farma: registros.results.funcionarios,
-                alianzas: registros.results.asociaciones,
-                digital: registros.results.solicitudesVigentes,
-                total: registros.results.funcionarios + registros.results.asociaciones + registros.results.solicitudesVigentes
+                farma: registros.results.registrosMesFuncionarios,
+                alianzas: registros.results.registrosMesAso,
+                digital: registros.results.vigentesMes,
+                total: registros.results.registrosMesFuncionarios + registros.results.registrosMesAso + registros.results.vigentesMes
             },
             porcentajeUso: {
                 farma: porcentajes.results.tasaUsoFuncionario,
@@ -104,7 +119,7 @@ function useInformes() {
         ()
     },[dataUser.token])
 
-    return {datos}
+    return {datos, loading, periodo, setPeriodo}
 }
 
 export default useInformes;
