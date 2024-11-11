@@ -6,36 +6,36 @@ interface Props {
   datos: datosMainType;
 }
 
-function Registros({ datos }: Props) {
+function Vigentes({ datos }: Props) {
   return (
     <Fragment>
       <GridItem bgColor="#ededed" padding={1} borderRadius={2}>
         <Text fontSize="md" as="b">
-          Registros
+          Vigentes
         </Text>
       </GridItem>
-      <GridItem borderBottomWidth={1} p={1}>
-        <Text fontSize="sm" as="b">
+      <GridItem alignSelf="center" borderBottomWidth={1} p={1}>
+        <Text fontSize="sm" as="b" align="center">
           {datos.registros.farma.toLocaleString("es-PY")}
         </Text>
       </GridItem>
-      <GridItem borderBottomWidth={1} p={1}>
+      <GridItem alignSelf="center" borderBottomWidth={1} p={1}>
         <Text fontSize="sm" as="b">
           {datos.registros.alianzas.toLocaleString("es-PY")}
         </Text>
       </GridItem>
-      <GridItem borderBottomWidth={1} p={1}>
+      <GridItem alignSelf="center" borderBottomWidth={1} p={1}>
         <Text fontSize="sm" as="b">
-          {datos.registros.digital.toLocaleString("es-PY")}
+          {datos.vigentes.digital.toLocaleString("es-PY")}
         </Text>
       </GridItem>
-      <GridItem bgColor="#fde1ff" p={1}>
+      <GridItem bgColor="#fde1ff" p={1} alignSelf="center">
         <Text fontSize="sm" as="b">
-          {datos.registros.total.toLocaleString("es-PY")}
+          {datos.vigentes.total.toLocaleString("es-PY")}
         </Text>
       </GridItem>
     </Fragment>
   );
 }
 
-export default Registros;
+export default Vigentes;

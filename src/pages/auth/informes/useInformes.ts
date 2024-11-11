@@ -19,6 +19,7 @@ export type datosMainType = {
     ventas : datosTypeNumber,
     cantidadTickets: datosTypeNumber,
     registros: datosTypeNumber,
+    vigentes: datosTypeNumber,
     porcentajeUso: datosTypeString
 }
 
@@ -39,6 +40,12 @@ function useInformes() {
             total: 0
         },
         registros: {
+            farma: 0,
+            alianzas: 0,
+            digital: 0,
+            total: 0 
+        },
+        vigentes: {
             farma: 0,
             alianzas: 0,
             digital: 0,
@@ -79,6 +86,12 @@ function useInformes() {
                 alianzas: registros.results.asociaciones,
                 digital: registros.results.externos,
                 total: registros.results.registrosTotales 
+            },
+            vigentes: {
+                farma: registros.results.funcionarios,
+                alianzas: registros.results.asociaciones,
+                digital: registros.results.solicitudesVigentes,
+                total: registros.results.funcionarios + registros.results.asociaciones + registros.results.solicitudesVigentes
             },
             porcentajeUso: {
                 farma: porcentajes.results.tasaUsoFuncionario,

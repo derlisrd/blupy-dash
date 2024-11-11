@@ -14,23 +14,23 @@ function Share({ datos }: Props) {
           Share
         </Text>
       </GridItem>
-      <GridItem>
-        <Text fontSize="md" as="b">
+      <GridItem borderBottomWidth={1} p={1} alignSelf="end">
+        <Text fontSize="sm" as="b">
           {((datos.cantidadTickets.farma * 100) / datos.cantidadTickets.total).toFixed(2)}%
         </Text>
       </GridItem>
-      <GridItem>
-        <Text fontSize="md" as="b">
+      <GridItem borderBottomWidth={1} p={1} alignSelf="end">
+        <Text fontSize="sm" as="b">
           {((datos.cantidadTickets.alianzas * 100) / datos.cantidadTickets.total).toFixed(2)}%
         </Text>
       </GridItem>
-      <GridItem>
-        <Text fontSize="md" as="b">
+      <GridItem borderBottomWidth={1} p={1} alignSelf="end">
+        <Text fontSize="sm" as="b">
           {((datos.cantidadTickets.digital * 100) / datos.cantidadTickets.total).toFixed(2)}%
         </Text>
       </GridItem>
       <GridItem bgColor="#fde1ff" p={1}>
-        <Text fontSize="md" as="b">
+        <Text fontSize="sm" as="b">
           100%
         </Text>
       </GridItem>

@@ -24,7 +24,7 @@ function Titles() {
           DIGITAL
         </Text>
       </GridItem>
-      <GridItem borderRadius={4} p={2} bgColor="#ededed">
+      <GridItem borderRadius={4} p={2} bgColor="#f5f5f5">
         <Text fontSize="md" as="b">
           TOTAL
         </Text>

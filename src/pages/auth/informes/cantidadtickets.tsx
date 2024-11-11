@@ -6,36 +6,36 @@ interface Props {
   datos: datosMainType;
 }
 
-function TasaUso({ datos }: Props) {
+function CantidadTickets({ datos }: Props) {
   return (
     <Fragment>
       <GridItem bgColor="#ededed" padding={1} borderRadius={2}>
         <Text fontSize="md" as="b">
-          Tasa de uso
+          Cant. tickets
         </Text>
       </GridItem>
       <GridItem borderBottomWidth={1} p={1}>
         <Text fontSize="sm" as="b">
-          {datos.porcentajeUso.farma}
+          {datos.cantidadTickets.farma.toLocaleString("es-PY")}
         </Text>
       </GridItem>
       <GridItem borderBottomWidth={1} p={1}>
         <Text fontSize="sm" as="b">
-          {datos.porcentajeUso.alianzas}
+          {datos.cantidadTickets.alianzas.toLocaleString("es-PY")}
         </Text>
       </GridItem>
       <GridItem borderBottomWidth={1} p={1}>
         <Text fontSize="sm" as="b">
-          {datos.porcentajeUso.digital}
+          {datos.cantidadTickets.digital.toLocaleString("es-PY")}
         </Text>
       </GridItem>
       <GridItem bgColor="#fde1ff" p={1}>
         <Text fontSize="sm" as="b">
-          {datos.porcentajeUso.total}
+          {datos.cantidadTickets.total.toLocaleString("es-PY")}
         </Text>
       </GridItem>
     </Fragment>
   );
 }
 
-export default TasaUso;
+export default CantidadTickets;
