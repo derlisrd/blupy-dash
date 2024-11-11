@@ -12,10 +12,10 @@
     "isolatedModules": true,
     "noEmit": true,
     "jsx": "react-jsx",
-    "baseUrl": "./src",
+    "baseUrl": "./src/",
     "paths": {
       "@/*" : ["./*"],
-      "@config/*" : ["./config/*"]
+      "@/config/*" : ["./config/*"]
     },
     /* Linting */
     "strict": true,

@@ -1,8 +1,13 @@
 export const menuList = [
     {
         id: 1,
-        label:'HOME',
+        label:'INICIO',
         link: '/'
+    },
+    {
+        id: 10,
+        label:'INFORMES',
+        link: '/informes'
     },
     {
         id: 2,

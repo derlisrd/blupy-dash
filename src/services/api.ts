@@ -4,7 +4,7 @@ import { enviarEmailModel, EnviarNotiModel, enviarWaModel } from "../models/envi
 import { env } from "../config/env";
 import { typefiltrosClientes } from "../models/clientes_data_model";
 import { typeIngresarVendedor } from "../models/solicitudes_data_model";
-import { LoginResponse } from "models/user_data_model";
+import { LoginResponse } from "../models/user_data_model";
 import { ConsultaClienteResponse } from "./dto/consultacliente";
 
 
