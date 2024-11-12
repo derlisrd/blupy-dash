@@ -34,6 +34,11 @@ function Vigentes({ datos }: Props) {
           {datos.vigentes.total.toLocaleString("es-PY")}
         </Text>
       </GridItem>
+      <GridItem p={1} alignSelf="center">
+        <Text fontSize="sm" as="b">
+          {datos.vigentes.anio.toLocaleString("es-PY")}
+        </Text>
+      </GridItem>
     </Fragment>
   );
 }

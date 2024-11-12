@@ -34,6 +34,11 @@ function Rechazados({ datos }: Props) {
           {datos.rechazados.total.toLocaleString("es-PY")}
         </Text>
       </GridItem>
+      <GridItem p={1} alignSelf="center">
+        <Text fontSize="sm" as="b">
+          {datos.rechazados.anio.toLocaleString("es-PY")}
+        </Text>
+      </GridItem>
     </Fragment>
   );
 }

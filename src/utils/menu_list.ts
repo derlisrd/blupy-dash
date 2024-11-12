@@ -10,6 +10,11 @@ export const menuList = [
         link: '/informes'
     },
     {
+        id: 12,
+        label:'GRAFICAS',
+        link: '/graficas'
+    },
+    {
         id: 2,
         label:'CLIENTES',
         link: '/clientes'

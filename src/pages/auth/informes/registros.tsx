@@ -34,6 +34,11 @@ function Registros({ datos }: Props) {
           {datos.registros.total.toLocaleString("es-PY")}
         </Text>
       </GridItem>
+      <GridItem p={1}>
+        <Text fontSize="sm" as="b">
+          {datos.registros.anio.toLocaleString("es-PY")}
+        </Text>
+      </GridItem>
     </Fragment>
   );
 }

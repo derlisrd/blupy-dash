@@ -7,12 +7,14 @@ type datosTypeString = {
     alianzas: string;
     digital: string;
     total: string;
+    anio: string;
 }
 type datosTypeNumber = {
     farma: number;
     alianzas: number;
     digital: number;
     total: number;
+    anio: number;
 }
 
 export type datosMainType = {
@@ -35,43 +37,50 @@ function useInformes() {
             farma: 0,
             alianzas: 0,
             digital:0,
-            total: 0
+            total: 0,
+            anio: 0
         },
         cantidadTickets: {
             farma: 0,
             alianzas: 0,
             digital: 0,
-            total: 0
+            total:0,
+            anio:0
         },
         promedioTickets: {
             farma: 0,
             alianzas: 0,
             digital: 0,
-            total: 0
+            total: 0,
+            anio:0
         },
         registros: {
             farma: 0,
             alianzas: 0,
             digital: 0,
-            total: 0 
+            total: 0,
+            anio:0 
         },
         rechazados: {
             farma: 0,
             alianzas: 0,
             digital: 0,
-            total: 0 
+            total: 0 ,
+            anio:0
         },
         vigentes: {
             farma: 0,
             alianzas: 0,
             digital: 0,
-            total: 0 
+            total: 0,
+            anio:0 
         },
         porcentajeUso: {
             farma: '',
             alianzas: '',
             digital: '',
-            total: ''
+            total: '',
+            anio:''
         }
     })
 
@@ -92,43 +101,50 @@ function useInformes() {
             farma: ventas.results.importeTotalMesFuncionario,
             alianzas: ventas.results.importeTotalMesAso,
             digital:ventas.results.importeTotalMesDigital,
-            total: ventas.results.importeTotalMes
+            total: ventas.results.importeTotalMes,
+            anio: ventas.results.importeTotalAnio
         },
         cantidadTickets: {
             farma: tickets.results.farma,
             alianzas: tickets.results.aso,
             digital: tickets.results.digital,
-            total:  tickets.results.farma + tickets.results.aso + tickets.results.digital
+            total:  tickets.results.farma + tickets.results.aso + tickets.results.digital,
+            anio: tickets.results.totalAnio,
         },
         promedioTickets: {
-            farma: tickets.results.promedioFarma,
-            alianzas: tickets.results.promedioAso,
-            digital: tickets.results.promedioDigital,
-            total:  tickets.results.promedioFarma + tickets.results.promedioAso + tickets.results.promedioDigital / 3
+            farma: ventas.results.importeTotalMesFuncionario / tickets.results.farma,
+            alianzas: ventas.results.importeTotalMesAso / tickets.results.aso,
+            digital: ventas.results.importeTotalMesDigital / tickets.results.digital,
+            total:  tickets.results.farma + tickets.results.aso + tickets.results.digital / 3,
+            anio: 0
         },
         registros: {
             farma: registros.results.registrosMesFuncionarios,
             alianzas: registros.results.registrosMesAso,
             digital: registros.results.registrosMesDigital,
-            total: registros.results.registrosMes 
+            total: registros.results.registrosMes,
+            anio: registros.results.registroDelAnio
         },
         rechazados: {
             farma: 0,
             alianzas: 0,
             digital: registros.results.rechazadosMes,
-            total: registros.results.rechazadosMes
+            total: registros.results.rechazadosMes,
+            anio: registros.results.rechazadosDelAnio
         },
         vigentes: {
             farma: registros.results.registrosMesFuncionarios,
             alianzas: registros.results.registrosMesAso,
             digital: registros.results.vigentesMes,
-            total: registros.results.registrosMesFuncionarios + registros.results.registrosMesAso + registros.results.vigentesMes
+            total: registros.results.registrosMesFuncionarios + registros.results.registrosMesAso + registros.results.vigentesMes,
+            anio: registros.results.vigentesDelAnio
         },
         porcentajeUso: {
             farma: porcentajes.results.tasaUsoFuncionario,
             alianzas: porcentajes.results.tasaUsoAsoc,
             digital: porcentajes.results.tasaUsoDigital,
-            total: porcentajes.results.tasaUsoTotal
+            total: porcentajes.results.tasaUsoTotal,
+            anio: '_'
         }
        })
     },[dataUser.token,periodo])

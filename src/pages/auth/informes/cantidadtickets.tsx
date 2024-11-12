@@ -34,6 +34,11 @@ function CantidadTickets({ datos }: Props) {
           {datos.cantidadTickets.total.toLocaleString("es-PY")}
         </Text>
       </GridItem>
+      <GridItem p={1}>
+        <Text fontSize="sm" as="b">
+          {datos.cantidadTickets.anio.toLocaleString("es-PY")}
+        </Text>
+      </GridItem>
     </Fragment>
   );
 }

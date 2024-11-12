@@ -34,7 +34,7 @@ function InformesPage() {
           />
         </GridItem>
       </Grid>
-      <Grid templateColumns={["repeat(1, 1fr)", "repeat(5, 1fr)"]} gap={1}>
+      <Grid templateColumns={["repeat(1, 1fr)", "repeat(6, 1fr)"]} gap={1}>
         <Titles />
         {loading ? (
           <LoadingDatas />

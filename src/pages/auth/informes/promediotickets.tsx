@@ -34,6 +34,11 @@ function PromedioTickets({ datos }: Props) {
           {datos.promedioTickets.total.toFixed(0)}
         </Text>
       </GridItem>
+      <GridItem p={1}>
+        <Text fontSize="sm" as="b">
+          _
+        </Text>
+      </GridItem>
     </Fragment>
   );
 }

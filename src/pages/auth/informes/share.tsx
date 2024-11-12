@@ -34,6 +34,11 @@ function Share({ datos }: Props) {
           100%
         </Text>
       </GridItem>
+      <GridItem p={1}>
+        <Text fontSize="sm" as="b">
+          _
+        </Text>
+      </GridItem>
     </Fragment>
   );
 }

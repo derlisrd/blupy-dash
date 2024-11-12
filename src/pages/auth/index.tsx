@@ -16,6 +16,7 @@ import EnviarNotificacion from "./enviar_notificacion";
 import ReporteComisionVendedor from "./reporte/comision.vendedor";
 import ListaVentas from "./ventas/lista";
 import InformesPage from "./informes";
+import Graficas from "./graficas";
 
 function AuthPages() {
   const { dataUser, logOutUserData } = userDataHook();
@@ -42,6 +43,7 @@ function AuthPages() {
           <Route path="/ventas" element={<VentasPage />} />
           <Route path="/ventas/lista" element={<ListaVentas />} />
           <Route path="/vendedores" element={<Vendedores />} />
+          <Route path="/graficas" element={<Graficas />} />
           <Route path="/informes" element={<InformesPage />} />
           <Route path="/enviar-notificacion" element={<EnviarNotificacion />} />
           <Route path="/reporte-comision" element={<ReporteComisionVendedor />} />

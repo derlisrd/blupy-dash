@@ -29,6 +29,11 @@ function Titles() {
           TOTAL
         </Text>
       </GridItem>
+      <GridItem borderRadius={4} p={2} bgColor="#f5f5f5">
+        <Text fontSize="md" as="b">
+          Acumulado
+        </Text>
+      </GridItem>
     </Fragment>
   );
 }

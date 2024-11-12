@@ -38,6 +38,15 @@ function Ventas({ datos }: Props) {
           })}
         </Text>
       </GridItem>
+      <GridItem p={1} alignSelf="center">
+        <Text fontSize="sm" as="b">
+          {datos.ventas.anio.toLocaleString("es-PY", {
+            style: "currency",
+            currency: "PYG",
+            minimumFractionDigits: 0, // Opcional, para evitar decimales si no los necesitas
+          })}
+        </Text>
+      </GridItem>
     </Fragment>
   );
 }
