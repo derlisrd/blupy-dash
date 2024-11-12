@@ -10,6 +10,7 @@ import Vigentes from "./vigentes";
 import LoadingDatas from "./loading";
 import { Fragment } from "react";
 import Rechazados from "./rechazados";
+import PromedioTickets from "./promediotickets";
 
 function InformesPage() {
   const { datos, loading, setPeriodo } = useInformes();
@@ -46,6 +47,7 @@ function InformesPage() {
             <TasaUso datos={datos} />
 
             <CantidadTickets datos={datos} />
+            <PromedioTickets datos={datos} />
 
             <Registros datos={datos} />
             <Vigentes datos={datos} />

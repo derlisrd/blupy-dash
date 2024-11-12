@@ -18,6 +18,7 @@ type datosTypeNumber = {
 export type datosMainType = {
     ventas : datosTypeNumber,
     cantidadTickets: datosTypeNumber,
+    promedioTickets: datosTypeNumber,
     registros: datosTypeNumber,
     vigentes: datosTypeNumber,
     rechazados: datosTypeNumber,
@@ -37,6 +38,12 @@ function useInformes() {
             total: 0
         },
         cantidadTickets: {
+            farma: 0,
+            alianzas: 0,
+            digital: 0,
+            total: 0
+        },
+        promedioTickets: {
             farma: 0,
             alianzas: 0,
             digital: 0,
@@ -92,6 +99,12 @@ function useInformes() {
             alianzas: tickets.results.aso,
             digital: tickets.results.digital,
             total:  tickets.results.farma + tickets.results.aso + tickets.results.digital
+        },
+        promedioTickets: {
+            farma: tickets.results.promedioFarma,
+            alianzas: tickets.results.promedioAso,
+            digital: tickets.results.promedioDigital,
+            total:  tickets.results.promedioFarma + tickets.results.promedioAso + tickets.results.promedioDigital / 3
         },
         registros: {
             farma: registros.results.registrosMesFuncionarios,
