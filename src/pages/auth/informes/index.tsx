@@ -15,7 +15,7 @@ import PromedioTickets from "./promediotickets";
 function InformesPage() {
   const { datos, loading, setPeriodo } = useInformes();
   return (
-    <Container maxW="4xl">
+    <Container maxW="3xl">
       <Text fontSize="xl" as="b">
         INFORME MENSUAL
       </Text>

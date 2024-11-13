@@ -10,32 +10,32 @@ function PromedioTickets({ datos }: Props) {
   return (
     <Fragment>
       <GridItem bgColor="#f5f5f5" padding={1} borderRadius={2}>
-        <Text fontSize="md" as="b">
+        <Text fontSize="xs" as="b">
           Prom. tickets
         </Text>
       </GridItem>
       <GridItem borderBottomWidth={1} p={1}>
-        <Text fontSize="sm" as="b">
+        <Text fontSize="xs" as="b">
           {datos.promedioTickets.farma.toFixed(0)}
         </Text>
       </GridItem>
       <GridItem borderBottomWidth={1} p={1}>
-        <Text fontSize="sm" as="b">
+        <Text fontSize="xs" as="b">
           {datos.promedioTickets.alianzas.toFixed(0)}
         </Text>
       </GridItem>
       <GridItem borderBottomWidth={1} p={1}>
-        <Text fontSize="sm" as="b">
+        <Text fontSize="xs" as="b">
           {datos.promedioTickets.digital.toFixed(0)}
         </Text>
       </GridItem>
       <GridItem bgColor="#fde1ff" p={1}>
-        <Text fontSize="sm" as="b">
+        <Text fontSize="xs" as="b">
           {datos.promedioTickets.total.toFixed(0)}
         </Text>
       </GridItem>
       <GridItem p={1}>
-        <Text fontSize="sm" as="b">
+        <Text fontSize="xs" as="b">
           _
         </Text>
       </GridItem>

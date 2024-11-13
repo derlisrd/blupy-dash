@@ -133,10 +133,10 @@ function useInformes() {
             anio: registros.results.rechazadosDelAnio
         },
         vigentes: {
-            farma: registros.results.registrosMesFuncionarios,
-            alianzas: registros.results.registrosMesAso,
-            digital: registros.results.vigentesMes,
-            total: registros.results.registrosMesFuncionarios + registros.results.registrosMesAso + registros.results.vigentesMes,
+            farma: registros.results.solicitudesFuncionariosVigentesMes,
+            alianzas: registros.results.solicitudesAsociacionesVigentesMes,
+            digital: registros.results.solicitudVigentesExternosMes,
+            total: registros.results.solicitudesFuncionariosVigentesMes + registros.results.solicitudesAsociacionesVigentesMes + registros.results.solicitudVigentesExternosMes,
             anio: registros.results.vigentesDelAnio
         },
         porcentajeUso: {
