@@ -1,5 +1,5 @@
 import { APICALLER } from "@/services/api";
-import { VentasPorSucursalResults } from "@/services/dto/ventasPorSucursal";
+import { VentasPorSucursalResults } from "../../../services/dto/VentasPorSucursal";
 import userDataHook from "@/store/user_data_store";
 import { createContext, Dispatch, SetStateAction, useContext, useState } from "react";
 
