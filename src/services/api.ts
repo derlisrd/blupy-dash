@@ -255,5 +255,13 @@ export const APICALLER = {
       } catch (error) {
         return {success:false,message:'Error en el servidor'}
       }
+    },
+    ventasPorSucursal: async(token : string, punto : string, desde : string | null, hasta: string | null)=>{
+      try {
+        const {data, status} = await BLUPY.get(`/ventas-por-sucursal?punto=${punto}&desde=${desde}&hasta=${hasta}`, {headers:{ 'Authorization':`Bearer ${token}`}})
+        return {success: data.success, results: data.results, status}
+      } catch (error) {
+        return {success:false,message:'Error en el servidor', status: 500}
+      }
     }
 }
