@@ -6,6 +6,7 @@ import { typefiltrosClientes } from "../models/clientes_data_model";
 import { typeIngresarVendedor } from "../models/solicitudes_data_model";
 import { LoginResponse } from "../models/user_data_model";
 import { ConsultaClienteResponse } from "./dto/consultacliente";
+import { SucursalesVentasResponse } from "./dto/sucursalesventas";
 
 
 
@@ -259,9 +260,19 @@ export const APICALLER = {
     ventasPorSucursal: async(token : string, punto : string, desde : string | null, hasta: string | null)=>{
       try {
         const {data, status} = await BLUPY.get(`/ventas-por-sucursal?punto=${punto}&desde=${desde}&hasta=${hasta}`, {headers:{ 'Authorization':`Bearer ${token}`}})
-        return {success: data.success, results: data.results, status}
+        return new SucursalesVentasResponse({
+          success: data.success,
+          results: data.results,
+          status,
+          message: ''
+        })
       } catch (error) {
-        return {success:false,message:'Error en el servidor', status: 500}
+        return new SucursalesVentasResponse({
+          success: false,
+          results:[],
+          status: 500,
+          message: 'Error de servidor'
+        })
       }
     }
 }

@@ -11,7 +11,7 @@ function TablaVentas() {
       <Column dataKey="forma_pago" label="Forma" width={90} />
       <Column dataKey="documento" label="Documento" width={90} />
       <Column dataKey="factura_numero" label="Factura" width={120} />
-      <Column dataKey="importe" label="Importe" width={90} />
+      <Column dataKey="importe" cellRenderer={(e) => <b>{e.cellData.toLocaleString("es-Py") as number}</b>} label="Importe" width={90} />
       <Column dataKey="sucursal" label="Sucursal" width={220} />
       <Column dataKey="fecha" label="Fecha" width={120} />
     </Table>

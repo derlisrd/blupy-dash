@@ -1,5 +1,6 @@
 import { APICALLER } from "@/services/api";
-import { VentasPorSucursalResults } from "../../../services/dto/VentasPorSucursal";
+import { SucursalesVentasResults } from "@/services/dto/sucursalesventas";
+
 import userDataHook from "@/store/user_data_store";
 import { createContext, Dispatch, SetStateAction, useContext, useState } from "react";
 
@@ -18,7 +19,8 @@ interface SucursalesContextProps {
   setHasta: Dispatch<SetStateAction<string | null>>;
   loading: boolean;
   getVentas: () => void;
-  ventas: Array<VentasPorSucursalResults>;
+  ventas: Array<SucursalesVentasResults>;
+  total: number;
 }
 
 const SucursalesContext = createContext<SucursalesContextProps>({
@@ -33,6 +35,7 @@ const SucursalesContext = createContext<SucursalesContextProps>({
   loading: false,
   getVentas: () => {},
   ventas: [],
+  total: 0,
 });
 
 interface SucursalesProviderProps {
@@ -43,7 +46,8 @@ function SucursalesProvider({ children }: SucursalesProviderProps) {
   const { dataUser } = userDataHook();
 
   const [modal, setModal] = useState({ filtros: false });
-  const [ventas, setVentas] = useState([]);
+  const [total, setTotal] = useState(0);
+  const [ventas, setVentas] = useState<SucursalesVentasResults[]>([]);
   const [punto, setPunto] = useState("");
   const [loading, setLoading] = useState(false);
   const [desde, setDesde] = useState<string | null>(null);
@@ -54,17 +58,22 @@ function SucursalesProvider({ children }: SucursalesProviderProps) {
     const res = await APICALLER.ventasPorSucursal(dataUser.token, punto, desde, hasta);
     setLoading(false);
     if (res.success) {
+      let total = 0;
       setVentas(res.results);
+      res.results.forEach((item) => {
+        total += item.importe_final;
+      });
+      setTotal(total);
     }
   };
 
-  const values = { modal, setModal, desde, setDesde, hasta, setHasta, loading, getVentas, ventas, setPunto, punto };
+  const values = { modal, setModal, desde, setDesde, hasta, setHasta, loading, getVentas, ventas, setPunto, punto, total };
   return <SucursalesContext.Provider value={values}>{children}</SucursalesContext.Provider>;
 }
 
 export const useSucursales = () => {
-  const { modal, setModal, desde, setDesde, hasta, setHasta, loading, getVentas, ventas, setPunto, punto } = useContext(SucursalesContext);
-  return { modal, setModal, desde, setDesde, hasta, setHasta, loading, getVentas, ventas, setPunto, punto };
+  const { modal, setModal, desde, setDesde, hasta, setHasta, loading, getVentas, ventas, setPunto, punto, total } = useContext(SucursalesContext);
+  return { modal, setModal, desde, setDesde, hasta, setHasta, loading, getVentas, ventas, setPunto, punto, total };
 };
 
 export default SucursalesProvider;

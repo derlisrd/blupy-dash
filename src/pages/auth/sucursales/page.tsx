@@ -5,7 +5,7 @@ import TablaVentas from "./tablaventas";
 import { CSVLink } from "react-csv";
 
 function Page() {
-  const { modal, setModal, desde, hasta, punto, loading, ventas } = useSucursales();
+  const { modal, setModal, desde, hasta, punto, loading, ventas, total } = useSucursales();
 
   const cabeceras: Array<{ label: string; key: string }> = [
     { label: "Codigo", key: "codigo" },
@@ -35,6 +35,7 @@ function Page() {
           <Text>Desde: {desde}</Text>
           <Text>Hasta: {hasta}</Text>
           <Text>Punto: {punto}</Text>
+          <b>Total: {total.toLocaleString("es-Py")}</b>
         </Stack>
         <Button variant="outline" size="sm">
           <CSVLink headers={cabeceras} data={ventas} filename={"ventas_por_sucursales.csv"}>
