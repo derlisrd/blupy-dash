@@ -217,14 +217,7 @@ export const APICALLER = {
         return {success:false,message:'Error en el servidor'}
       }
     },
-    porcentajeUso: async(token:string,desde:string | null, hasta: string | null)=>{
-      try {
-        const {data} = await BLUPY.get(`/porcentaje-uso?desde=${desde}&hasta=${hasta}`, {headers:{ 'Authorization':`Bearer ${token}`}})
-        return {success:data.success,results: data.results};
-      } catch (error) {
-        return {success:false,message:'Error en el servidor'}
-      }
-    },
+    
     ingresarVendedor: async({token,body}:{token:string,body: typeIngresarVendedor})=>{
       try {
         const {data} = await BLUPY.post(`/ingresar-vendedor`,body, {headers:{ 'Authorization':`Bearer ${token}`}})
@@ -273,6 +266,46 @@ export const APICALLER = {
           status: 500,
           message: 'Error de servidor'
         })
+      }
+    },
+    porcentajeUso: async(token:string,desde:string | null, hasta: string | null)=>{
+      try {
+        const {data} = await BLUPY.get(`/ventas/porcentaje-uso?desde=${desde}&hasta=${hasta}`, {headers:{ 'Authorization':`Bearer ${token}`}})
+        return {success:data.success,results: data.results};
+      } catch (error) {
+        return {success:false,message:'Error en el servidor'}
+      }
+    },
+    topSucursalesIngresos: async(token: string)=>{
+      try {
+        const {data, status} = await BLUPY.get(`/ventas/top-sucursales-ingresos`, { headers:{ Authorization: `Bearer ${token}`}}) 
+        return {success: data.success as boolean, results: data.results, status, message: ''}
+      } catch (error) {
+        return {success:false,message:'Error en el servidor', status: 500, results: null}
+      }
+    },
+    topSucursalesTickets: async(token: string)=>{
+      try {
+        const {data, status} = await BLUPY.get(`/ventas/top-sucursales-tickets`, { headers:{ Authorization: `Bearer ${token}`}}) 
+        return {success: data.success as boolean, results: data.results, status, message: ''}
+      } catch (error) {
+        return {success:false,message:'Error en el servidor', status: 500, results: null}
+      }
+    },
+    compararMeses: async(token: string, fecha1 : string, fecha2 : string)=>{
+      try {
+        const {data, status} = await BLUPY.get(`/ventas/comparar-meses?fecha1=${fecha1}&fecha2=${fecha2}`, { headers:{ Authorization: `Bearer ${token}`}}) 
+        return {success: data.success as boolean, results: data.results, status, message: ''}
+      } catch (error) {
+        return {success:false,message:'Error en el servidor', status: 500, results: null}
+      }
+    },
+    formaPago: async(token: string)=>{
+      try {
+        const {data, status} = await BLUPY.get(`/ventas/forma-pago`, { headers:{ Authorization: `Bearer ${token}`}}) 
+        return {success: data.success as boolean, results: data.results, status, message: ''}
+      } catch (error) {
+        return {success:false,message:'Error en el servidor', status: 500, results: null}
       }
     }
 }

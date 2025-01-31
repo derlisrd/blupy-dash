@@ -1,101 +1,104 @@
-import { ReactNode, createContext, useCallback, useContext, useEffect, useState } from "react";
-import { APICALLER } from "../../../services/api";
-import userDataHook from "../../../store/user_data_store";
+import { APICALLER } from "@/services/api";
+import { VentaFormaPagoResults, VentasCompararMesesResults, VentaTopSucursalesTicketsResults, VentaTopSucursalIngresosResults } from "@/services/dto/informeventa";
+import userDataHook from "@/store/user_data_store";
+import { createContext, Dispatch, ReactNode, SetStateAction, useCallback, useContext, useEffect, useState } from "react";
 
-type ventasTotalesType = {
-  descuentoTotalMes: number;
-  importeTotalAyer: number;
-  importeTotalSemana: number;
-  importeTotalMes: number;
-
-  importeTotalAyerDigital: number;
-  importeTotalSemanaDigital: number;
-  importeTotalMesDigital: number;
-
-  importeTotalAyerFuncionario: number;
-  importeTotalSemanaFuncionario: number;
-  importeTotalMesFuncionario: number;
-
-  importeTotalAyerAso: number;
-  importeTotalSemanaAso: number;
-  importeTotalMesAso: number;
-};
-type ticketsType = {
-  aso: number;
-  digital: number;
-  farma: number;
-};
-
-interface ContextProps {
-  ventasTotales: ventasTotalesType;
+interface VentasContextType {
+  forma: VentaFormaPagoResults[];
   loading: boolean;
-  tickets: ticketsType;
+  fecha1: string;
+  fecha2: string;
+  setFecha1: Dispatch<SetStateAction<string>>;
+  setFecha2: Dispatch<SetStateAction<string>>;
+  topSucursalesIngresos: VentaTopSucursalIngresosResults[];
+  topSucursalesTickets: VentaTopSucursalesTicketsResults[];
+  compararMeses: VentasCompararMesesResults;
+  cambioFecha: (fechaInicio: string, fechaHasta: string) => void;
 }
 
-export const VentasContext = createContext<ContextProps>({
-  ventasTotales: {
-    descuentoTotalMes: 0,
-    importeTotalAyer: 0,
-    importeTotalSemana: 0,
-    importeTotalMes: 0,
-
-    importeTotalAyerDigital: 0,
-    importeTotalSemanaDigital: 0,
-    importeTotalMesDigital: 0,
-
-    importeTotalAyerFuncionario: 0,
-    importeTotalSemanaFuncionario: 0,
-    importeTotalMesFuncionario: 0,
-
-    importeTotalAyerAso: 0,
-    importeTotalSemanaAso: 0,
-    importeTotalMesAso: 0,
+const VentasContext = createContext<VentasContextType>({
+  forma: [],
+  loading: false,
+  fecha1: "",
+  fecha2: "",
+  setFecha1: () => {},
+  setFecha2: () => {},
+  topSucursalesIngresos: [],
+  topSucursalesTickets: [],
+  compararMeses: {
+    tickets1: 0,
+    tickets2: 0,
+    total1: 0,
+    total2: 0,
   },
-  loading: true,
-  tickets: {
-    aso: 0,
-    digital: 0,
-    farma: 0,
-  },
+  cambioFecha: () => {},
 });
 
-interface Props {
-  children: ReactNode;
-}
-function VentasProvider({ children }: Props) {
+const obtenerMesAnterior = () => {
+  const fecha = new Date();
+  fecha.setMonth(fecha.getMonth() - 1);
+  return `${fecha.getFullYear()}-${String(fecha.getMonth() + 1).padStart(2, "0")}`;
+};
+
+const obtenerMesActual = () => {
+  const fecha = new Date();
+  return `${fecha.getFullYear()}-${String(fecha.getMonth() + 1).padStart(2, "0")}`;
+};
+
+function VentasProvider({ children }: { children: ReactNode }) {
   const { dataUser } = userDataHook();
-  const datosIniciales = {
-    descuentoTotalMes: 0,
-    importeTotalAyer: 0,
-    importeTotalSemana: 0,
-    importeTotalMes: 0,
+  const [loading, setLoading] = useState<boolean>(false);
+  const [fecha1, setFecha1] = useState<string>(obtenerMesAnterior());
+  const [fecha2, setFecha2] = useState<string>(obtenerMesActual());
+  const [forma, setForma] = useState<VentaFormaPagoResults[]>([]);
+  const [topSucursalesIngresos, setSucursalesTopIngresos] = useState<VentaTopSucursalIngresosResults[]>([]);
+  const [topSucursalesTickets, setSucursalesTopTickets] = useState<VentaTopSucursalesTicketsResults[]>([]);
+  const [compararMeses, setCompararMeses] = useState<VentasCompararMesesResults>({
+    tickets1: 0,
+    tickets2: 0,
+    total1: 0,
+    total2: 0,
+  });
 
-    importeTotalAyerDigital: 0,
-    importeTotalSemanaDigital: 0,
-    importeTotalMesDigital: 0,
+  const cambioFecha = useCallback(
+    async (fechaInicio: string, fechaHasta: string) => {
+      setLoading(true);
 
-    importeTotalAyerFuncionario: 0,
-    importeTotalSemanaFuncionario: 0,
-    importeTotalMesFuncionario: 0,
+      // Convertir MM-YYYY a YYYY-MM
+      const convertirFormato = (fecha: string) => {
+        const [mes, año] = fecha.split("-");
+        return `${año}-${mes}`; // Convertimos a YYYY-MM
+      };
 
-    importeTotalAyerAso: 0,
-    importeTotalSemanaAso: 0,
-    importeTotalMesAso: 0,
-  };
-  const [tickets, setTickets] = useState<ticketsType>({ aso: 0, digital: 0, farma: 0 });
-  const [ventasTotales, setVentasTotales] = useState(datosIniciales);
-  const [loading, setLoading] = useState(true);
+      const fechaInicioConvertida = convertirFormato(fechaInicio);
+      const fechaHastaConvertida = convertirFormato(fechaHasta);
 
+      const res = await APICALLER.compararMeses(dataUser.token, fechaInicioConvertida, fechaHastaConvertida);
+
+      setLoading(false);
+      setCompararMeses(res.results);
+    },
+    [dataUser.token]
+  );
   const getLista = useCallback(async () => {
-    setLoading(true);
-    const periodo = new Date();
-    const desde = `${periodo.getFullYear()}-${String(periodo.getMonth() + 1).padStart(2, "0")}-01`;
-    const hasta = new Date(periodo.getFullYear(), periodo.getMonth() + 1, 0).toISOString().split("T")[0];
-    const [ventas, tickets] = await Promise.all([APICALLER.ventasTotales(dataUser.token, desde, hasta), APICALLER.tickets({ token: dataUser.token, desde, hasta })]);
-    ventas.success && setVentasTotales(ventas.results);
-    tickets.success && setTickets(tickets.results);
+    const fechaActual = new Date();
+    const fechaHasta = `${String(fechaActual.getMonth() + 1).padStart(2, "0")}-${fechaActual.getFullYear()}`;
+    fechaActual.setMonth(fechaActual.getMonth() - 1);
+    const fechaDesde = `${String(fechaActual.getMonth()).padStart(2, "0")}-${fechaActual.getFullYear()}`;
 
+    const { topSucursalesIngresos, topSucursalesTickets, compararMeses, formaPago } = APICALLER;
+    setLoading(true);
+    const [topIngresos, topTickets, meses, forma] = await Promise.all([
+      topSucursalesIngresos(dataUser.token),
+      topSucursalesTickets(dataUser.token),
+      compararMeses(dataUser.token, fechaDesde, fechaHasta),
+      formaPago(dataUser.token),
+    ]);
     setLoading(false);
+    setForma(forma.results.map((f: VentaFormaPagoResults) => VentaFormaPagoResults.fromJson(f)));
+    setSucursalesTopIngresos(VentaTopSucursalIngresosResults.mapFromJson(topIngresos.results));
+    setSucursalesTopTickets(VentaTopSucursalesTicketsResults.mapFromJson(topTickets.results));
+    setCompararMeses(meses.results);
   }, [dataUser.token]);
 
   useEffect(() => {
@@ -109,13 +112,25 @@ function VentasProvider({ children }: Props) {
       ca.abort();
     };
   }, [getLista]);
-  const values = { loading, ventasTotales, tickets };
+
+  const values = {
+    loading,
+    forma,
+    fecha1,
+    fecha2,
+    setFecha1,
+    setFecha2,
+    topSucursalesIngresos,
+    topSucursalesTickets,
+    compararMeses,
+    cambioFecha,
+  };
   return <VentasContext.Provider value={values}>{children}</VentasContext.Provider>;
 }
 
-export const useVentasProvider = () => {
-  const { loading, ventasTotales, tickets } = useContext(VentasContext);
-  return { loading, ventasTotales, tickets };
+export const useVentas = () => {
+  const { loading, forma, fecha1, fecha2, setFecha1, setFecha2, topSucursalesIngresos, topSucursalesTickets, compararMeses, cambioFecha } = useContext(VentasContext);
+  return { loading, forma, fecha1, fecha2, setFecha1, setFecha2, topSucursalesIngresos, topSucursalesTickets, compararMeses, cambioFecha };
 };
 
 export default VentasProvider;

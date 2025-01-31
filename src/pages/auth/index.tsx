@@ -14,7 +14,6 @@ import VentasPage from "./ventas";
 import Vendedores from "./vendedores";
 import EnviarNotificacion from "./enviar_notificacion";
 import ReporteComisionVendedor from "./reporte/comision.vendedor";
-import ListaVentas from "./ventas/lista";
 import InformesPage from "./informes";
 import Graficas from "./graficas";
 import Sucursales from "./sucursales";
@@ -42,7 +41,6 @@ function AuthPages() {
           <Route path="/mensajes" element={<Mensajes />} />
           <Route path="/consultas" element={<ConsultasPage />} />
           <Route path="/ventas" element={<VentasPage />} />
-          <Route path="/ventas/lista" element={<ListaVentas />} />
           <Route path="/vendedores" element={<Vendedores />} />
           <Route path="/sucursales" element={<Sucursales />} />
           <Route path="/graficas" element={<Graficas />} />
