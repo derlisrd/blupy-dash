@@ -34,22 +34,11 @@ const VentasContext = createContext<VentasContextType>({
   cambioFecha: () => {},
 });
 
-const obtenerMesAnterior = () => {
-  const fecha = new Date();
-  fecha.setMonth(fecha.getMonth() - 1);
-  return `${fecha.getFullYear()}-${String(fecha.getMonth() + 1).padStart(2, "0")}`;
-};
-
-const obtenerMesActual = () => {
-  const fecha = new Date();
-  return `${fecha.getFullYear()}-${String(fecha.getMonth() + 1).padStart(2, "0")}`;
-};
-
 function VentasProvider({ children }: { children: ReactNode }) {
   const { dataUser } = userDataHook();
   const [loading, setLoading] = useState<boolean>(false);
-  const [fecha1, setFecha1] = useState<string>(obtenerMesAnterior());
-  const [fecha2, setFecha2] = useState<string>(obtenerMesActual());
+  const [fecha1, setFecha1] = useState<string>("");
+  const [fecha2, setFecha2] = useState<string>("");
   const [forma, setForma] = useState<VentaFormaPagoResults[]>([]);
   const [topSucursalesIngresos, setSucursalesTopIngresos] = useState<VentaTopSucursalIngresosResults[]>([]);
   const [topSucursalesTickets, setSucursalesTopTickets] = useState<VentaTopSucursalesTicketsResults[]>([]);
@@ -80,18 +69,14 @@ function VentasProvider({ children }: { children: ReactNode }) {
     },
     [dataUser.token]
   );
-  const getLista = useCallback(async () => {
-    const fechaActual = new Date();
-    const fechaHasta = `${String(fechaActual.getMonth() + 1).padStart(2, "0")}-${fechaActual.getFullYear()}`;
-    fechaActual.setMonth(fechaActual.getMonth() - 1);
-    const fechaDesde = `${String(fechaActual.getMonth()).padStart(2, "0")}-${fechaActual.getFullYear()}`;
 
+  const getLista = useCallback(async () => {
     const { topSucursalesIngresos, topSucursalesTickets, compararMeses, formaPago } = APICALLER;
     setLoading(true);
     const [topIngresos, topTickets, meses, forma] = await Promise.all([
       topSucursalesIngresos(dataUser.token),
       topSucursalesTickets(dataUser.token),
-      compararMeses(dataUser.token, fechaDesde, fechaHasta),
+      compararMeses(dataUser.token, "", ""),
       formaPago(dataUser.token),
     ]);
     setLoading(false);
