@@ -30,6 +30,11 @@ export const menuList = [
         link: '/solicitudes'
     },
     {
+        id: 14,
+        label:'CONTRATOS',
+        link: '/contratos'
+    },
+    {
         id: 4,
         label:'MENSAJES',
         link: '/mensajes'

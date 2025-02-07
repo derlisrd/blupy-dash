@@ -23,6 +23,14 @@ export const APICALLER = {
         return {success:false,message:'Error en el servidor'}
       }
     },
+    consultaEstadoContrato: async(documento: string, token: string) =>{
+      try {
+        const {data} = await BLUPY.get('/contratos/consulta?documento='+documento,{headers:{ 'Authorization':`Bearer ${token}`}})
+        return {success:data.success,results: data.results, message: '' };
+      } catch (error) {
+        return {success:false,message:'Error en el servidor'}
+      }
+    },
     consultaCliente:async(form: {cedula:string,token:string}) : Promise<ConsultaClienteResponse> =>{
       try {
         const {data} = await BLUPY.get(`/consultas/cliente?cedula=${form.cedula}`,{headers:{ 'Authorization':`Bearer ${form.token}`}})

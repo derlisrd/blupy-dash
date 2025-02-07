@@ -17,6 +17,7 @@ import ReporteComisionVendedor from "./reporte/comision.vendedor";
 import InformesPage from "./informes";
 import Graficas from "./graficas";
 import Sucursales from "./sucursales";
+import ContratosPage from "./contratos";
 
 function AuthPages() {
   const { dataUser, logOutUserData } = userDataHook();
@@ -40,6 +41,7 @@ function AuthPages() {
           <Route path="/solicitudes" element={<Solicitudes />} />
           <Route path="/mensajes" element={<Mensajes />} />
           <Route path="/consultas" element={<ConsultasPage />} />
+          <Route path="/contratos" element={<ContratosPage />} />
           <Route path="/ventas" element={<VentasPage />} />
           <Route path="/vendedores" element={<Vendedores />} />
           <Route path="/sucursales" element={<Sucursales />} />
