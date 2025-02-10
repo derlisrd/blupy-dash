@@ -77,7 +77,7 @@ function ContratosPage() {
               <h4>Nombre:</h4>
               <p>{results.cliente.id}</p>
               <h4>Cedula:</h4>
-              <Image src={env.PUBLIC_PATH + results.cliente.foto_ci_frente} />
+              <Image src={env.PUBLIC_PATH + "/" + results.cliente.foto_ci_frente} />
             </GridItem>
             <GridItem>
               {results.contratos.map((e, i) => (
