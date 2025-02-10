@@ -315,5 +315,15 @@ export const APICALLER = {
       } catch (error) {
         return {success:false,message:'Error en el servidor', status: 500, results: null}
       }
+    },
+    aprobarContrato: async(micoCodigo: number, token: string)=>{
+      try {
+        const {data, status} = await BLUPY.post(`/solicitudes/aprobar`,{
+          codigo: micoCodigo
+        }, { headers:{ Authorization: `Bearer ${token}`}})
+        return {success: data.success as boolean, results: data.results, status, message: ''}
+      } catch (error) {
+        return {success:false,message:'Error en el servidor', status: 500, results: null}
+      }
     }
 }

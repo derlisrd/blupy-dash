@@ -28,6 +28,17 @@ function ContratosPage() {
   const buscarRef = useRef(null);
   const [results, setResults] = useState<resultsType | null>(null);
 
+  const aprobarContrato = async (contrato: ContratosDataType) => {
+    setLoading(true);
+    const res = await APICALLER.aprobarContrato(contrato.micoCodigo, dataUser.token);
+    setLoading(false);
+    if (res.success) {
+      alert("Contrato aprobado");
+    } else {
+      alert("Error al aprobar el contrato");
+    }
+  };
+
   const buscarEnter = async (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === "Enter") {
       const inputElement = document.getElementById("_buscar") as HTMLInputElement | null;
@@ -78,7 +89,14 @@ function ContratosPage() {
                   <p>Estado: {e.micoEstado}</p>
                   <p>Impresor: {e.usuarioImpresor}</p>
                   <p>Valor linea de credito: {e.micoValorLineaCredito}</p>
-                  <Button mt={3}>activar contrato</Button>
+                  <Button
+                    mt={3}
+                    onClick={() => {
+                      aprobarContrato(e);
+                    }}
+                  >
+                    activar contrato
+                  </Button>
                 </Fragment>
               ))}
             </GridItem>
