@@ -10,7 +10,7 @@ function ModalFicha() {
   const { dataUser } = userDataHook();
   const [loading, setLoading] = useState(true);
   const { modals, setModals, form } = useClienteProvider();
-  const initialDatos = { foto_ci_frente: "" };
+  const initialDatos = { foto_ci_frente: "", selfie: "" };
   const [datos, setDatos] = useState(initialDatos);
   const onClose = () => {
     setModals({ ...modals, ficha: false });
@@ -24,6 +24,7 @@ function ModalFicha() {
         const f = res.results;
         setDatos({
           foto_ci_frente: f.foto_ci_frente,
+          selfie: f.selfie,
         });
       }
     }
@@ -72,7 +73,8 @@ function ModalFicha() {
                   <u>Fecha de registro:</u> {moment.utc(form.created_at).format("HH:mm DD-MMM-YYYY")}
                 </ListItem>
               </List>
-              <Image boxSize="360px" objectFit="cover" src={env.PUBLIC_PATH + `${datos?.foto_ci_frente}`} alt="Frontal" />
+              <Image boxSize="360px" objectFit="cover" src={env.PUBLIC_PATH + `/${datos?.foto_ci_frente}`} alt="Frontal" />
+              <Image boxSize="360px" objectFit="cover" src={env.PUBLIC_PATH + `/${datos?.selfie}`} alt="Frontal" />
             </Stack>
           )}
         </ModalBody>
