@@ -1,11 +1,10 @@
-import { Navigate, Route, Routes } from "react-router-dom";
-import Login from "./login";
+import { Routes, Route } from "react-router-dom";
+import LoginPage from "./login";
 
 function PublicPages() {
   return (
     <Routes>
-      <Route path="/" element={<Login />} />
-      <Route path="*" element={<Navigate to='/' />} />
+      <Route path="/" element={<LoginPage />} />
     </Routes>
   );
 }

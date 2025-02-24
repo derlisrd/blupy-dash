@@ -1,17 +1,15 @@
-import { ChakraProvider } from '@chakra-ui/react'
-import Pages from './pages/pages'
-import { BrowserRouter } from 'react-router-dom'
-import { theme } from './providers/theme_provider'
+import { BrowserRouter } from "react-router-dom";
+import AuthProvider from "./providers/AuthProvider";
+import Pages from "./pages";
 
 function App() {
-  
   return (
-    <ChakraProvider theme={theme}>
+    <AuthProvider>
       <BrowserRouter>
         <Pages />
       </BrowserRouter>
-    </ChakraProvider>
-  )
+    </AuthProvider>
+  );
 }
 
-export default App
+export default App;

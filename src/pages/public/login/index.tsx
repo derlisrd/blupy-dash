@@ -1,99 +1,83 @@
-import { Formik, Field } from "formik";
-import { Box, Button, Flex, FormControl, FormLabel, FormErrorMessage, Input, VStack, useToast } from "@chakra-ui/react";
-import { validate } from "../../../utils/validate";
-import { APICALLER } from "../../../services/api";
-import { useState } from "react";
-import { LoadindScreen } from "../../../components";
-import userDataHook from "../../../store/user_data_store";
+import useLogin from "@/core/hooks/useLogin";
+import useAuth from "@/hooks/useAuth";
+import { TextField, Stack, Button, Typography, Container, Icon, InputAdornment, CircularProgress, Alert, IconButton } from "@mui/material";
 
 function Login() {
-  const { setIsAuth, setDataUser } = userDataHook();
+  const { username, setUsername, password, setPassword, handleLogin, isLoading, error, hide, toggleHide } = useLogin();
+  const { loading } = useAuth();
 
-  const [loading, setLoading] = useState<boolean>(false);
-  const toast = useToast();
-
-  const onsubmit = async (values: { email: string; password: string }) => {
-    setLoading(true);
-    const { success, results, message } = await APICALLER.login(values);
-    setLoading(false);
-    if (!success) {
-      toast({
-        title: "Error",
-        description: message,
-        status: "error",
-        duration: 6000,
-        isClosable: true,
-      });
-      return false;
-    }
-    if (results) {
-      setDataUser(results);
-      setIsAuth(true);
-    }
-  };
-
-  if (loading) {
-    return <LoadindScreen />;
-  }
   return (
-    <Flex bg="gray.100" align="center" justify="center" h="100vh">
-      <Box bg="white" p={6} rounded="md" w={64}>
-        <Formik
-          initialValues={{
-            email: "",
-            password: "",
-          }}
-          onSubmit={onsubmit}
-        >
-          {({ handleSubmit, errors, touched }) => (
-            <form onSubmit={handleSubmit}>
-              <VStack spacing={4} align="flex-start">
-                <FormControl isInvalid={!!errors.email && touched.email}>
-                  <FormLabel htmlFor="email">Email</FormLabel>
-                  <Field
-                    as={Input}
-                    autoFocus
-                    id="email"
-                    name="email"
-                    type="email"
-                    variant="filled"
-                    validate={(value: string) => {
-                      let error;
-                      if (!validate.email(value)) {
-                        error = "Ingrese su email";
-                      }
-                      return error;
-                    }}
-                  />
-                  <FormErrorMessage>{errors.email}</FormErrorMessage>
-                </FormControl>
-                <FormControl isInvalid={!!errors.password && touched.password}>
-                  <FormLabel htmlFor="password">Clave</FormLabel>
-                  <Field
-                    as={Input}
-                    id="password"
-                    name="password"
-                    type="password"
-                    variant="filled"
-                    validate={(value: string) => {
-                      let error;
-                      if (value.length < 1) {
-                        error = "Ingrese su contraseña";
-                      }
-                      return error;
-                    }}
-                  />
-                  <FormErrorMessage>{errors.password}</FormErrorMessage>
-                </FormControl>
-                <Button type="submit" colorScheme="blue" width="full">
-                  Login
-                </Button>
-              </VStack>
-            </form>
-          )}
-        </Formik>
-      </Box>
-    </Flex>
+    <Container maxWidth="md">
+      {isLoading || loading ? (
+        <Stack sx={{ height: "100vh", alignItems: "center", justifyContent: "center", width: "100%" }}>
+          <CircularProgress />
+        </Stack>
+      ) : (
+        <form onSubmit={handleLogin}>
+          <Stack sx={{ height: "100vh", alignItems: "center", justifyContent: "center", width: "100%" }}>
+            <Stack gap={2} p={3} boxShadow={5} borderRadius={3} maxWidth={360} width="100%" alignItems="center" sx={{ border: "1px solid #efefef" }}>
+              <Typography variant="button" fontSize={20}>
+                INGRESAR
+              </Typography>
+              {error.code > 0 && <Alert severity="error">{error.message}</Alert>}
+
+              <TextField
+                slotProps={{
+                  input: {
+                    startAdornment: (
+                      <InputAdornment position="start">
+                        <Icon>person</Icon>
+                      </InputAdornment>
+                    ),
+                  },
+                }}
+                autoFocus
+                required
+                variant="outlined"
+                placeholder="Usuario o email"
+                label="Usuario"
+                fullWidth
+                onChange={({ target }) => {
+                  setUsername(target.value);
+                }}
+                value={username}
+              />
+              <TextField
+                slotProps={{
+                  input: {
+                    startAdornment: (
+                      <InputAdornment position="start">
+                        <Icon>lock</Icon>
+                      </InputAdornment>
+                    ),
+                    endAdornment: (
+                      <InputAdornment position="end">
+                        <IconButton onClick={toggleHide}>
+                          <Icon>{hide ? `visibility_off` : `visibility`}</Icon>
+                        </IconButton>
+                      </InputAdornment>
+                    ),
+                  },
+                }}
+                variant="outlined"
+                placeholder="Contraseña"
+                label="Contraseña"
+                type={hide ? `password` : `text`}
+                fullWidth
+                onChange={({ target }) => {
+                  setPassword(target.value);
+                }}
+                id="password_user"
+                value={password}
+              />
+              <Button variant="contained" type="submit" size="large">
+                Ingresar
+              </Button>
+            </Stack>
+          </Stack>
+        </form>
+      )}
+    </Container>
   );
 }
 
