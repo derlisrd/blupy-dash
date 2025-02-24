@@ -1,7 +1,7 @@
 import { PaletteOptions } from "@mui/material";
 
 export const pallete = {
-  mode: "dark",
+  mode: "light",
   primary: {
     main: "#0b57d0"
     // light: will be calculated from palette.primary.main,
@@ -15,11 +15,11 @@ export const pallete = {
     contrastText: "#47008F"
   },
   background: {
-    default: "#242b33",
-    paper: "#1f262e"
+    default: "#fff",
+    paper: "#ccc"
   },
   text:{
-    primary: "#EDF2F7",
-    secondary: "#A0AEC0"
+    primary: "#000",
+    secondary: "#bbb"
   }
 } as PaletteOptions;
