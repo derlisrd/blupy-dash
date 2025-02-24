@@ -22,6 +22,7 @@
     "react-virtualized": "9.22.5",
     "react-virtualized-auto-sizer": "1.0.24",
     "react-window": "1.8.10",
+    "simplebar-react": "3.3.0",
     "sweetalert": "2.1.2",
     "zustand": "4.4.6"
   },

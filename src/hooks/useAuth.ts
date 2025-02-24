@@ -1,14 +1,12 @@
 import AuthContext from "@/contexts/AuthContext";
 import { useContext } from "react";
 
-function useAuth() {
+// Hook personalizado para usar el contexto
+export const useAuth = () => {
     const context = useContext(AuthContext);
-
     if (context === undefined) {
-        throw new Error("useAuth must be used within a AuthProvider");
+      throw new Error("useAuth debe ser usado dentro de un AuthProvider");
     }
-    const { isAuthenticated, login, logout, loading } = context;
-    return {isAuthenticated, login, logout, loading} 
-}
-
-export default useAuth;
+    const { isAuth, userData, iniciarSesion, cerrarSesion, loading, updateUserData } = context;
+    return { isAuth, userData, iniciarSesion, cerrarSesion, loading, updateUserData };
+  };

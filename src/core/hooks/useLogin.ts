@@ -1,10 +1,10 @@
 
-import useAuth from "@/hooks/useAuth";
+import { useAuth } from "@/hooks/useAuth";
 import API from "@/services";
 import { useState } from "react";
 
 function useLogin() {
-    const {login} = useAuth()
+    const {iniciarSesion} = useAuth()
     const [username,setUsername] = useState('')
     const [password,setPassword] = useState('')
     const [hide,setHide] = useState(true)
@@ -40,7 +40,7 @@ function useLogin() {
             return false;
         }
 
-        //iniciarSesion(res.results,true)
+        iniciarSesion(res.results,true)
     }
 
     return { username,setUsername,password,setPassword, handleLogin, error, isLoading, clearError, hide,toggleHide }

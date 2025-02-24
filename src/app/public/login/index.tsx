@@ -1,5 +1,5 @@
 import useLogin from "@/core/hooks/useLogin";
-import useAuth from "@/hooks/useAuth";
+import { useAuth } from "@/hooks/useAuth";
 import { TextField, Stack, Button, Typography, Container, Icon, InputAdornment, CircularProgress, Alert, IconButton } from "@mui/material";
 
 function Login() {
@@ -33,9 +33,10 @@ function Login() {
                 }}
                 autoFocus
                 required
+                type="email"
                 variant="outlined"
-                placeholder="Usuario o email"
-                label="Usuario"
+                placeholder="Email"
+                label="Email"
                 fullWidth
                 onChange={({ target }) => {
                   setUsername(target.value);
