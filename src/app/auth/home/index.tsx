@@ -33,7 +33,7 @@ function Home() {
           <Card sx={{ bgcolor: "white" }}>
             <CardContent>
               <Typography variant="overline" color="primary">
-                Registros mes
+                Registros de mes
               </Typography>
               <Typography variant="h4" color="primary">
                 10
@@ -45,51 +45,7 @@ function Home() {
           <Card sx={{ bgcolor: "white" }}>
             <CardContent>
               <Typography variant="overline" color="primary">
-                Total
-              </Typography>
-              <Typography variant="h4" color="primary">
-                10
-              </Typography>
-            </CardContent>
-          </Card>
-        </Grid>
-        <Grid size={{ xs: 12, sm: 6, md: 3 }}>
-          <Card>
-            <CardContent>
-              <Typography variant="overline">Solicitudes hoy</Typography>
-              <Typography variant="h4">10</Typography>
-            </CardContent>
-          </Card>
-        </Grid>
-        <Grid size={{ xs: 12, sm: 6, md: 3 }}>
-          <Card sx={{ bgcolor: "white" }}>
-            <CardContent>
-              <Typography variant="overline" color="primary">
-                Registros semana
-              </Typography>
-              <Typography variant="h4" color="primary">
-                10
-              </Typography>
-            </CardContent>
-          </Card>
-        </Grid>
-        <Grid size={{ xs: 12, sm: 6, md: 3 }}>
-          <Card sx={{ bgcolor: "white" }}>
-            <CardContent>
-              <Typography variant="overline" color="primary">
-                Registros mes
-              </Typography>
-              <Typography variant="h4" color="primary">
-                10
-              </Typography>
-            </CardContent>
-          </Card>
-        </Grid>
-        <Grid size={{ xs: 12, sm: 6, md: 3 }}>
-          <Card sx={{ bgcolor: "white" }}>
-            <CardContent>
-              <Typography variant="overline" color="primary">
-                Total
+                Total Registros
               </Typography>
               <Typography variant="h4" color="primary">
                 10
