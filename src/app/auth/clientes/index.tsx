@@ -43,7 +43,7 @@ function ClientesList() {
             </Grid>
             <Grid size={{ xs: 12, md: 4 }}></Grid>
           </Grid>
-          <TableContainer component={Paper} sx={{ borderRadius: 0, border: 0, boxShadow: 0, minHeight: `calc(100% - 200px)` }}>
+          <TableContainer component={Paper} sx={{ borderRadius: 0, border: 0, boxShadow: 0, minHeight: `calc(100% - 160px)` }}>
             {listado && (
               <AutoSizer>
                 {({ height, width }) => (
@@ -56,8 +56,8 @@ function ClientesList() {
                     rowCount={listado.length}
                     rowGetter={({ index }) => listado[index]}
                   >
-                    <Column headerRenderer={headerRenderer} dataKey="id" label="ID" width={50} cellRenderer={cellRenderer} />
-                    <Column headerRenderer={headerRenderer} dataKey="cedula" label="Cedula" width={80} cellRenderer={cellRenderer} />
+                    <Column headerRenderer={headerRenderer} cellRenderer={cellRenderer} dataKey="id" label="ID" width={50} />
+                    <Column headerRenderer={headerRenderer} cellRenderer={cellRenderer} dataKey="cedula" label="Cedula" width={80} />
                     <Column headerRenderer={headerRenderer} cellRenderer={cellRenderer} dataKey="name" label="Nombre" width={280} />
                     <Column headerRenderer={headerRenderer} cellRenderer={cellRenderer} dataKey="fecha" label="Fecha Registro" width={148} />
                   </Table>

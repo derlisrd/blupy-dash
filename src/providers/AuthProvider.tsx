@@ -1,8 +1,9 @@
-import { useState, useEffect, useCallback, ReactNode } from "react";
+import { useState, useCallback, ReactNode } from "react";
 import { useSessionStorage } from "@/hooks/useSessionStorage";
 import { LoginResults } from "@/services/dto/auth/login";
 import API from "@/services";
 import AuthContext from "@/contexts/AuthContext";
+import { useQuery } from "@tanstack/react-query";
 
 // Proveedor del contexto
 const AuthProvider = ({ children }: { children: ReactNode }) => {
@@ -10,7 +11,6 @@ const AuthProvider = ({ children }: { children: ReactNode }) => {
 
   const [isAuth, setIsAuth] = useState(false);
   const [userData, setUserData] = useState<LoginResults | null>(null);
-  const [loading, setLoading] = useState(true);
   const updateUserData = (data: LoginResults) => {
     setUserData(data);
     setSessionUserData(data);
@@ -35,34 +35,32 @@ const AuthProvider = ({ children }: { children: ReactNode }) => {
     setSessionUserData(null);
   }, [setSessionUserData]);
 
-  // Función para verificar autenticación
-  const checkIsAuth = useCallback(async () => {
-    setLoading(true);
-    const localStorage = window.sessionStorage.getItem("userData");
-    if (localStorage && localStorage !== "null") {
-      const local = JSON.parse(localStorage);
-      const res = await API.auth.check(local.token);
-      if (!res) {
-        cerrarSesion();
-        setLoading(false);
-        return;
+  const { isLoading } = useQuery({
+    queryKey: ["checkAuth"],
+    queryFn: async () => {
+      const localStorage = window.sessionStorage.getItem("userData");
+      if (localStorage && localStorage !== "null") {
+        const local = JSON.parse(localStorage);
+        const res = await API.auth.check(local.token);
+        if (!res) {
+          cerrarSesion();
+          return null;
+        }
+        iniciarSesion(local);
+        return local;
       }
-      iniciarSesion(localStorage ? JSON.parse(localStorage) : null);
-    }
-    setLoading(false);
-  }, [cerrarSesion, iniciarSesion]);
-
-  // Verificación inicial en el montaje del componente
-  useEffect(() => {
-    checkIsAuth();
-  }, [checkIsAuth]);
+      return null;
+    },
+    staleTime: 5 * 60 * 1000, // Evita reconsultas innecesarias por 5 minutos
+    refetchOnWindowFocus: false, // Evita que se vuelva a ejecutar cuando el usuario cambia de pestaña
+  });
 
   const values = {
     isAuth,
     userData,
     iniciarSesion,
     cerrarSesion,
-    loading,
+    loading: isLoading,
     updateUserData,
   };
 

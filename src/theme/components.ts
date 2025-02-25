@@ -108,6 +108,14 @@ export const components = {
           borderRadius:"12px"
         }
       }
+    },
+    MuiTextField:{
+      styleOverrides:{
+        root:{
+          borderRadius:"12px",
+          backgroundColor: '#fff',
+        }
+      }
     }
     
   } as Components<Omit<Theme, 'components' | 'palette'> & CssVarsTheme>

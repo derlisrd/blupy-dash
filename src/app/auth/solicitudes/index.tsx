@@ -68,7 +68,7 @@ function Solicitudes() {
             </Grid>
             <Grid size={{ xs: 12, md: 4 }}></Grid>
           </Grid>
-          <TableContainer component={Paper} sx={{ borderRadius: 0, border: 0, boxShadow: 0, minHeight: `calc(100% - 210px)` }}>
+          <TableContainer component={Paper} sx={{ borderRadius: 0, border: 0, boxShadow: 0, minHeight: `calc(100% - 160px)` }}>
             {listado && (
               <AutoSizer>
                 {({ height, width }) => (
@@ -82,7 +82,8 @@ function Solicitudes() {
                     rowGetter={({ index }) => listado[index]}
                   >
                     <Column headerRenderer={headerRenderer} dataKey="id" label="#" width={60} cellRenderer={cellRenderer} />
-                    <Column headerRenderer={headerRenderer} dataKey="cedula" label="Cedula" width={80} cellRenderer={cellRenderer} />
+                    <Column headerRenderer={headerRenderer} dataKey="cedula" label="Cedula" width={70} cellRenderer={cellRenderer} />
+                    <Column headerRenderer={headerRenderer} cellRenderer={cellRenderer} dataKey="codigo" label="Contrato" width={90} />
                     <Column headerRenderer={headerRenderer} cellRenderer={cellRenderer} dataKey="name" label="Nombre" width={280} />
                     <Column headerRenderer={headerRenderer} cellRenderer={cellRenderer} dataKey="estado" label="Estado" width={140} />
                     <Column headerRenderer={headerRenderer} cellRenderer={cellRenderer} dataKey="fecha" label="fecha" width={148} />
