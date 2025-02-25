@@ -16,9 +16,12 @@ export class LoginResults {
     id: number;
     email: string;
     token: string;
+    tokenWithBearer: string;
+
     constructor({ id = 0, email = '', token = '' }: { id: number, email: string, token: string }) {
         this.id = id;
         this.email = email;
-        this.token = token;
+        this.token =  token;
+        this.tokenWithBearer = `Bearer ${token}`;
     }
 }

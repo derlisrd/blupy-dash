@@ -16,7 +16,7 @@ export const pallete = {
   },
   background: {
     default: "#fff",
-    paper: "#ccc"
+    paper: "#f1f1f1"
   },
   text:{
     primary: "#000",

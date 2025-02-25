@@ -5,6 +5,7 @@ function PublicPages() {
   return (
     <Routes>
       <Route path="/" element={<LoginPage />} />
+      <Route path="*" element={<LoginPage />} />
     </Routes>
   );
 }

@@ -3,10 +3,13 @@ import useDrawerMenu from "@/hooks/useDrawerMenu";
 import { Drawer, Box, Toolbar, Stack, Icon, IconButton, Tooltip } from "@mui/material";
 import { NavigateOptions, Outlet, To, useNavigate } from "react-router-dom";
 import MenuNavList from "./MenuNavList";
+import { useAuth } from "@/hooks/useAuth";
 
 function AuthMenuLayout() {
   const navigate = useNavigate();
   const { isOpenMenu, toggleMenu, isOpenMobileMenu, toggleMobileMenu, DRAWER_WIDTH } = useDrawerMenu();
+
+  const { cerrarSesion } = useAuth();
 
   const margin_left = isOpenMenu ? `${DRAWER_WIDTH}px` : "0";
   const width_main = isOpenMenu ? `calc(100% - ${DRAWER_WIDTH}px)` : "100%";
@@ -15,7 +18,6 @@ function AuthMenuLayout() {
     navigate(to, options);
     isMobile && toggleMobileMenu();
   };
-  const signOut = () => navigate("/logout");
 
   const TopBar = () => {
     return (
@@ -31,7 +33,7 @@ function AuthMenuLayout() {
             <Icon color="primary">{isOpenMenu ? "arrow_forward_ios" : "arrow_back_ios"}</Icon>
           </IconButton>
           <Stack flexDirection="row">
-            <IconButton onClick={signOut}>
+            <IconButton onClick={cerrarSesion}>
               <Tooltip placement="bottom" arrow title="Cerrar sesión">
                 <Icon>exit_to_app</Icon>
               </Tooltip>
@@ -67,7 +69,7 @@ function AuthMenuLayout() {
         onClose={toggleMobileMenu}
         sx={{
           display: { xs: "block", md: "none" },
-          "& .MuiDrawer-paper": { bosmizing: "border-box", width: 256 },
+          "& .MuiDrawer-paper": { bosmizing: "border-box", width: DRAWER_WIDTH, background: "#697fad" },
         }}
       >
         <MenuNavList navegar={navegar} isMobile />

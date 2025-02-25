@@ -17,7 +17,7 @@ const MenuNavList = ({ isMobile = false, navegar }: { isMobile?: boolean; navega
       margin: "0",
       borderLeftStyle: "solid",
       background: "#253248",
-      borderLeftWidth: "4px",
+      borderLeftWidth: "0px",
       color: "white",
       borderLeftColor: "#253248",
       div: { color: "white" },

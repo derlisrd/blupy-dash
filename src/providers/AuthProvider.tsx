@@ -11,7 +11,6 @@ const AuthProvider = ({ children }: { children: ReactNode }) => {
   const [isAuth, setIsAuth] = useState(false);
   const [userData, setUserData] = useState<LoginResults | null>(null);
   const [loading, setLoading] = useState(true);
-
   const updateUserData = (data: LoginResults) => {
     setUserData(data);
     setSessionUserData(data);
