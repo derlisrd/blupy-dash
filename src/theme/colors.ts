@@ -38,7 +38,14 @@ export const availableColors : Array<availableColorsType> = [
   
   
   export const colors  = {
-    
+    primary: {
+      lighter: '#585858',
+      light: '#4a4a4a',
+      main: '#373737',
+      dark: '#272727',
+      darker: '#181818',
+      contrastText: '#fff',
+    },
     new: {
       primary:{
         lighter: '#D1E9FC',

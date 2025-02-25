@@ -5,7 +5,7 @@ export const clientesApiService = {
     list: async(token: string | null)=>{
         try {
             const {data, status} = await BASE.get('/clientes',{headers: { Authorization: token}})
-            return new ClientesResponse({success: true, message: '', results: data.results  , status: status})
+            return  ClientesResponse.fromJson({success: true, message: '', results: data.results  , status: status})
         } catch (error) {
             if (error instanceof Error) {
                 return new ClientesResponse({success: false, message: error.message, results: [], status: 500})

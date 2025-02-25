@@ -3,13 +3,12 @@ import useDrawerMenu from "@/hooks/useDrawerMenu";
 import { Drawer, Box, Toolbar, Stack, Icon, IconButton, Tooltip } from "@mui/material";
 import { NavigateOptions, Outlet, To, useNavigate } from "react-router-dom";
 import MenuNavList from "./MenuNavList";
-import { useAuth } from "@/hooks/useAuth";
 
 function AuthMenuLayout() {
   const navigate = useNavigate();
   const { isOpenMenu, toggleMenu, isOpenMobileMenu, toggleMobileMenu, DRAWER_WIDTH } = useDrawerMenu();
 
-  const { cerrarSesion } = useAuth();
+  const out = () => navigate("/logout");
 
   const margin_left = isOpenMenu ? `${DRAWER_WIDTH}px` : "0";
   const width_main = isOpenMenu ? `calc(100% - ${DRAWER_WIDTH}px)` : "100%";
@@ -33,7 +32,7 @@ function AuthMenuLayout() {
             <Icon color="primary">{isOpenMenu ? "arrow_forward_ios" : "arrow_back_ios"}</Icon>
           </IconButton>
           <Stack flexDirection="row">
-            <IconButton onClick={cerrarSesion}>
+            <IconButton onClick={out}>
               <Tooltip placement="bottom" arrow title="Cerrar sesión">
                 <Icon>exit_to_app</Icon>
               </Tooltip>
@@ -52,11 +51,12 @@ function AuthMenuLayout() {
         onClose={toggleMenu}
         sx={{
           display: { xs: "none", md: "block" },
+
           "& .MuiDrawer-paper": {
             boxSizing: "border-box",
-            background: "white",
+            backgroundColor: "primary.darker",
             width: DRAWER_WIDTH,
-            borderRight: "1px dashed rgba(145, 158, 171, 0.24)",
+            borderRight: "0",
           },
         }}
       >
@@ -69,7 +69,7 @@ function AuthMenuLayout() {
         onClose={toggleMobileMenu}
         sx={{
           display: { xs: "block", md: "none" },
-          "& .MuiDrawer-paper": { bosmizing: "border-box", width: DRAWER_WIDTH, background: "white" },
+          "& .MuiDrawer-paper": { bosmizing: "border-box", width: DRAWER_WIDTH, bgcolor: "primary.darker" },
         }}
       >
         <MenuNavList navegar={navegar} isMobile />

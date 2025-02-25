@@ -5,6 +5,7 @@ export default [
         icon: 'home_outline',
         color: '#0066cc',
         url: '/',
+        open: false
     },
     {
         id: 2,
@@ -12,20 +13,35 @@ export default [
         icon: 'person',
         color: '#0066cc',
         url: '/clientes',
+        open: false
     },
     {
         id: 3,
         title: 'Solicitudes',
         icon: 'contact_page',
         color: '#0066cc',
-        url: '/productos',
+        url: '/solicitudes',
+        open: false
     },
     {
         id: 4,
-        title: 'Contratos',
-        icon: 'description',
+        title: 'Farma',
+        icon: 'business',
         color: '#0066cc',
-        url: '/contratos',
+        url: '#',
+        open: false,
+        submenu: [
+            {
+                id: 1,
+                title: 'Consulta de firma',
+                url: '/farma/consulta-firma-contratos',
+            },
+            {
+                id: 2,
+                title: 'Consulta de clientes',
+                url: '/farma/consulta-clientes',
+            }
+        ]
     },
     {
         id: 5,
@@ -33,6 +49,7 @@ export default [
         icon: 'notifications',
         color: '#0066cc',
         url: '/reportes',
+        open: false
     },
     {
         id: 6,
@@ -40,5 +57,6 @@ export default [
         icon: 'sell',
         color: '#0066cc',
         url: '/ventas',
+        open: false
     }
 ]

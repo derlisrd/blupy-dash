@@ -1,44 +1,30 @@
 import useClientes from "@/core/hooks/clientes/useClientes";
-import { Box, Container, LinearProgress, Paper, Stack, Grid2 as Grid, TextField, InputAdornment, Icon, TableContainer } from "@mui/material";
+import { Box, Container, LinearProgress, Paper, Grid2 as Grid, TextField, InputAdornment, Icon, TableContainer } from "@mui/material";
 import AutoSizer from "react-virtualized-auto-sizer";
 import { Column, Table, TableCellProps, TableHeaderProps } from "react-virtualized";
-import MuiTableCell from "@mui/material/TableCell";
-
-const TableCell = ({ children }: { children: React.ReactNode }) => {
-  return (
-    <MuiTableCell
-      sx={{
-        flex: 1,
-        display: "flex",
-        alignItems: "center",
-        boxSizing: "border-box",
-        cursor: "pointer",
-        height: 48,
-      }}
-      variant="head"
-    >
-      {children}
-    </MuiTableCell>
-  );
-};
+import TableCell from "@/core/components/clientes/tableCell";
+import TableCellHead from "@/core/components/clientes/tablecellhead";
+import "@/styles/tables/virtualized.css";
+import { useState } from "react";
 
 function ClientesList() {
   const { lista, isLoading } = useClientes();
 
-  const headerRenderer = ({ label }: TableHeaderProps) => <TableCell>{label}</TableCell>;
+  const [search, setSearch] = useState("");
+
+  const headerRenderer = ({ label }: TableHeaderProps) => <TableCellHead>{label}</TableCellHead>;
   const cellRenderer = ({ cellData }: TableCellProps) => <TableCell>{cellData}</TableCell>;
 
-  return (
-    <Container sx={{ paddingBottom: 4 }}>
-      <Stack direction={{ xs: "row" }} justifyContent="space-between" alignItems="center" padding={2}>
-        <h3>Clientes</h3>
-      </Stack>
+  const listado = lista?.filter((cliente) => cliente.name.toLowerCase().includes(search.toLowerCase()) || cliente.cedula.toLowerCase().includes(search.toLowerCase())) || [];
 
+  return (
+    <Container>
+      <h3>Clientes</h3>
       {isLoading ? (
         <LinearProgress />
       ) : (
-        <Box boxShadow={6} borderRadius={4} component={Paper} py={{ xs: 2 }}>
-          <Grid container padding={2} spacing={{ xs: 1 }}>
+        <Box boxShadow={6} borderRadius={4} component={Paper}>
+          <Grid container p={1.5} spacing={0}>
             <Grid size={{ xs: 12, md: 4 }}>
               <TextField
                 slotProps={{
@@ -51,13 +37,14 @@ function ClientesList() {
                   },
                 }}
                 placeholder="Buscar..."
+                onChange={(e) => setSearch(e.target.value)}
                 fullWidth
               />
             </Grid>
             <Grid size={{ xs: 12, md: 4 }}></Grid>
           </Grid>
-          <TableContainer component={Paper} sx={{ borderRadius: 0, border: 0, boxShadow: 0, minHeight: `calc(100% - 280px)` }}>
-            {lista && (
+          <TableContainer component={Paper} sx={{ borderRadius: 0, border: 0, boxShadow: 0, minHeight: `calc(100% - 200px)` }}>
+            {listado && (
               <AutoSizer>
                 {({ height, width }) => (
                   <Table
@@ -66,14 +53,13 @@ function ClientesList() {
                     rowHeight={48!}
                     headerHeight={48!}
                     rowStyle={{ display: "flex", alignItems: "center" }}
-                    rowCount={lista.length}
-                    rowGetter={({ index }) => lista[index]}
+                    rowCount={listado.length}
+                    rowGetter={({ index }) => listado[index]}
                   >
-                    <Column headerRenderer={headerRenderer} dataKey="id" label="#" width={80} cellRenderer={cellRenderer} />
+                    <Column headerRenderer={headerRenderer} dataKey="id" label="ID" width={50} cellRenderer={cellRenderer} />
                     <Column headerRenderer={headerRenderer} dataKey="cedula" label="Cedula" width={80} cellRenderer={cellRenderer} />
-                    <Column headerRenderer={headerRenderer} cellRenderer={cellRenderer} dataKey="name" label="Nombre" width={250} />
-                    <Column headerRenderer={headerRenderer} cellRenderer={cellRenderer} dataKey="vendedor_id" label="vendedor" width={90} />
-                    <Column headerRenderer={headerRenderer} cellRenderer={cellRenderer} dataKey="created_at" label="fecha" width={128} />
+                    <Column headerRenderer={headerRenderer} cellRenderer={cellRenderer} dataKey="name" label="Nombre" width={280} />
+                    <Column headerRenderer={headerRenderer} cellRenderer={cellRenderer} dataKey="fecha" label="Fecha Registro" width={148} />
                   </Table>
                 )}
               </AutoSizer>
