@@ -49,7 +49,14 @@ export default [
         icon: 'notifications',
         color: '#0066cc',
         url: '/reportes',
-        open: false
+        open: false,
+        submenu: [
+            {
+                id: 1,
+                title: 'Enviar notificaciones',
+                url: '/notificaciones/enviar-notificaciones',
+            }
+        ]
     },
     {
         id: 6,

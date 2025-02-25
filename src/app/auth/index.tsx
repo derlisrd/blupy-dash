@@ -7,6 +7,7 @@ import Solicitudes from "./solicitudes";
 import Contratos from "./farma/consultas/contratos";
 import { lazy, LazyExoticComponent, Suspense } from "react";
 import Loading from "@/components/ui/loading";
+import EnviarNotificaciones from "./notificaciones/enviarNotificaciones";
 
 const Loadable =
   <T extends object>(Component: LazyExoticComponent<() => JSX.Element>) =>
@@ -27,6 +28,7 @@ function AuthPages() {
         <Route path="/solicitudes" element={<Solicitudes />} />
         <Route path="/farma/consulta-firma-contratos" element={<Contratos />} />
         <Route path="/farma/consulta-clientes" element={<ConsultaClientesFarma />} />
+        <Route path="/notificaciones/enviar-notificaciones" element={<EnviarNotificaciones />} />
         <Route path="/logout" element={<LogOut />} />
       </Route>
       <Route path="*" element={<h1>404</h1>} />
