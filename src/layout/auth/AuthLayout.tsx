@@ -54,7 +54,7 @@ function AuthMenuLayout() {
           display: { xs: "none", md: "block" },
           "& .MuiDrawer-paper": {
             boxSizing: "border-box",
-            background: "#697fad",
+            background: "white",
             width: DRAWER_WIDTH,
             borderRight: "1px dashed rgba(145, 158, 171, 0.24)",
           },
@@ -69,7 +69,7 @@ function AuthMenuLayout() {
         onClose={toggleMobileMenu}
         sx={{
           display: { xs: "block", md: "none" },
-          "& .MuiDrawer-paper": { bosmizing: "border-box", width: DRAWER_WIDTH, background: "#697fad" },
+          "& .MuiDrawer-paper": { bosmizing: "border-box", width: DRAWER_WIDTH, background: "white" },
         }}
       >
         <MenuNavList navegar={navegar} isMobile />

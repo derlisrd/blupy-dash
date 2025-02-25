@@ -14,12 +14,14 @@ export class LoginResponse{
 
 export class LoginResults {
     id: number;
+    name: string;
     email: string;
     token: string;
     tokenWithBearer: string;
 
-    constructor({ id = 0, email = '', token = '' }: { id: number, email: string, token: string }) {
+    constructor({ id = 0, email = '', token = '', name ='' }: Partial<LoginResults>) {
         this.id = id;
+        this.name = name;
         this.email = email;
         this.token =  token;
         this.tokenWithBearer = `Bearer ${token}`;

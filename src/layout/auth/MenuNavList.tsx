@@ -13,23 +13,25 @@ const MenuNavList = ({ isMobile = false, navegar }: { isMobile?: boolean; navega
 
   const SELECTED = {
     "&.Mui-selected": {
-      borderRadius: "0 18px 18px 0",
+      borderRadius: "18px",
       margin: "0",
       borderLeftStyle: "solid",
-      background: "#253248",
-      borderLeftWidth: "0px",
-      color: "white",
-      borderLeftColor: "#253248",
-      div: { color: "white" },
-      span: { fontWeight: "bold", color: "white" },
-    },
-    span: {
-      color: "white",
-    },
-    color: "white",
-    ":hover": {
-      borderRadius: "0 18px 18px 0",
       background: "primary.main",
+      borderLeftWidth: "0px",
+      borderLeftColor: "#fff",
+      backgroundColor: "primary.main",
+      span: { fontWeight: "bold", color: "#fff" },
+      "&:hover": {
+        backgroundColor: "primary.main",
+        color: "#fff",
+        span: { color: "#fff" },
+      },
+    },
+    "&:hover": {
+      borderRadius: "18px",
+      backgroundColor: "primary.main",
+      color: "#fff",
+      span: { color: "#fff" },
     },
   } as ListItemButtonBaseProps["sx"];
 
@@ -42,13 +44,11 @@ const MenuNavList = ({ isMobile = false, navegar }: { isMobile?: boolean; navega
           </Typography>
           <Stack direction="column" justifyContent="center" alignItems="center" gap={1}>
             <Avatar sx={{ bgcolor: "primary.main", width: 48, height: 48 }} />
-            <Typography variant="caption" sx={{ color: "white" }}>
-              {userData && userData.email}
-            </Typography>
+            <Typography variant="caption">{userData && userData.name}</Typography>
           </Stack>
         </Stack>
       </Toolbar>
-      <List>
+      <List sx={{ px: 1 }}>
         {menu.map((e) => (
           <Fragment key={e.id}>
             <ListItem disablePadding>
