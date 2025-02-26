@@ -32,6 +32,7 @@ export class ClientesResults {
   foto_ci_frente: string;
   selfie: string;
   funcionario: number;
+  asofarma: number;
   extranjero: number;
   active: number;
   solicitud_credito: number;
@@ -51,6 +52,7 @@ export class ClientesResults {
     foto_ci_frente = "",
     selfie = "",
     funcionario = 0,
+    asofarma = 0,
     extranjero = 0,
     active = 0,
     solicitud_credito = 0,
@@ -67,6 +69,7 @@ export class ClientesResults {
     this.foto_ci_frente = foto_ci_frente;
     this.selfie = selfie;
     this.funcionario = funcionario;
+    this.asofarma = asofarma;
     this.extranjero = extranjero;
     this.active = active;
     this.solicitud_credito = solicitud_credito;

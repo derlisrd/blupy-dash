@@ -20,7 +20,7 @@ function AuthMenuLayout() {
 
   const TopBar = () => {
     return (
-      <Toolbar component="header" sx={{ position: "fixed", display: "flex", width: "100%", zIndex: 1100, alignItems: "center", padding: "0 !important" }}>
+      <Toolbar component="header" sx={{ position: "fixed", display: "flex", width: "100%", zIndex: 1100, alignItems: "center" }}>
         <Stack justifyContent="space-between" flexDirection="row" width="100%" alignItems="center">
           <IconButton onClick={toggleMobileMenu} sx={{ minWidth: "50px", display: { xs: "block", md: "none" } }}>
             <Icon color="primary">arrow_forward_ios</Icon>
@@ -41,7 +41,7 @@ function AuthMenuLayout() {
   };
 
   return (
-    <Box sx={{ display: "flex", bgcolor: "primary.darker", height: "100vh" }}>
+    <Box sx={{ display: "flex", bgcolor: "primary.darker", height: "100vh", py: 1, pr: 1, pl: isOpenMenu ? "0" : 1 }}>
       <Drawer
         variant="persistent"
         open={isOpenMenu}

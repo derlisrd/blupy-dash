@@ -13,7 +13,7 @@ function Home() {
         <LinearProgress />
       ) : (
         <Grid container spacing={2}>
-          <Grid size={{ xs: 12, sm: 6, md: 3 }}>
+          <Grid size={{ xs: 12, sm: 6, md: 4, lg: 3 }}>
             <Card sx={{ bgcolor: "primary.light", boxShadow: 3 }}>
               <CardContent>
                 <Typography variant="overline" color="white">
@@ -25,7 +25,7 @@ function Home() {
               </CardContent>
             </Card>
           </Grid>
-          <Grid size={{ xs: 12, sm: 6, md: 3 }}>
+          <Grid size={{ xs: 12, sm: 6, md: 4, lg: 3 }}>
             <Card sx={{ bgcolor: "primary.contrastText", boxShadow: 3 }}>
               <CardContent>
                 <Typography variant="overline" color="primary">
@@ -37,7 +37,7 @@ function Home() {
               </CardContent>
             </Card>
           </Grid>
-          <Grid size={{ xs: 12, sm: 6, md: 3 }}>
+          <Grid size={{ xs: 12, sm: 6, md: 4, lg: 3 }}>
             <Card sx={{ boxShadow: 3 }}>
               <CardContent>
                 <Typography variant="overline" color="primary">
@@ -49,7 +49,7 @@ function Home() {
               </CardContent>
             </Card>
           </Grid>
-          <Grid size={{ xs: 12, sm: 6, md: 3 }}>
+          <Grid size={{ xs: 12, sm: 6, md: 4, lg: 3 }}>
             <Card sx={{ bgcolor: "white", boxShadow: 5 }}>
               <CardContent>
                 <Typography variant="overline" color="primary">

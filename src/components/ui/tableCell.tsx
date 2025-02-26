@@ -8,8 +8,8 @@ const TableCell = ({ children }: { children: React.ReactNode }) => {
         display: "flex",
         alignItems: "center",
         boxSizing: "border-box",
-        cursor: "pointer",
         height: 48,
+        fontSize: 13,
       }}
     >
       {children}

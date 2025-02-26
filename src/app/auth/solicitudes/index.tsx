@@ -1,24 +1,28 @@
-import { Box, Container, LinearProgress, Paper, Grid2 as Grid, TextField, InputAdornment, Icon, TableContainer, IconButton, Menu, MenuItem } from "@mui/material";
+import { Box, Container, LinearProgress, Paper, Icon, TableContainer, IconButton, Menu, MenuItem } from "@mui/material";
 import AutoSizer from "react-virtualized-auto-sizer";
-import { Column, Table, TableCellProps, TableHeaderProps } from "react-virtualized";
-import TableCell from "@/core/components/clientes/tableCell";
-import TableCellHead from "@/core/components/clientes/tablecellhead";
+import { Column, Table, TableCellProps } from "react-virtualized";
 import "@/styles/tables/virtualized.css";
 import useSolicitudes from "@/core/hooks/solicitudes/useSolicitudes";
 import { useState } from "react";
 import { SolicitudesResults } from "@/services/dto/solicitudes/solicitudes";
 import Ficha from "./modal/ficha";
-
-const headerRenderer = ({ label }: TableHeaderProps) => <TableCellHead>{label}</TableCellHead>;
-const cellRenderer = ({ cellData }: TableCellProps) => <TableCell>{cellData}</TableCell>;
+import TableCell from "@/components/ui/tableCell";
+import { cellRenderer, cellRendererEstado, headerRenderer, cellRendererTipo } from "@/core/components/solicitudes/celdas";
+import Filtros from "./filtros";
 
 function Solicitudes() {
-  const { lista, isLoading } = useSolicitudes();
+  const { lista, isLoading, buscar, isPending } = useSolicitudes();
 
   const [openFicha, setOpenFicha] = useState(false);
   const [search, setSearch] = useState("");
+  const [estadoFiltro, setEstadoFiltro] = useState<number | "">("");
 
-  const listado = lista?.filter((cliente) => cliente.name.toLowerCase().includes(search.toLowerCase()) || cliente.cedula.toLowerCase().includes(search.toLowerCase())) || [];
+  const listado =
+    lista?.filter(
+      (cliente) =>
+        (cliente.name.toLowerCase().includes(search.toLowerCase()) || cliente.cedula.includes(search) || cliente.codigo.includes(search)) &&
+        (estadoFiltro === "" || cliente.estado_id === estadoFiltro) // Filtrar por estado si está seleccionado
+    ) || [];
 
   // Estado para el menú contextual
   const [menuAnchor, setMenuAnchor] = useState<null | HTMLElement>(null);
@@ -29,9 +33,7 @@ function Solicitudes() {
     setSelectedRow(row);
   };
 
-  const handleMenuClose = () => {
-    setMenuAnchor(null);
-  };
+  const handleMenuClose = () => setMenuAnchor(null);
 
   const cellOptionRenderer = ({ rowData }: TableCellProps) => (
     <TableCell>
@@ -45,29 +47,11 @@ function Solicitudes() {
     <Container>
       <h3>Solicitudes de línea</h3>
 
-      {isLoading ? (
+      {isLoading || isPending ? (
         <LinearProgress />
       ) : (
         <Box boxShadow={6} borderRadius={4} component={Paper}>
-          <Grid container p={1.5} spacing={0}>
-            <Grid size={{ xs: 12, md: 4 }}>
-              <TextField
-                slotProps={{
-                  input: {
-                    startAdornment: (
-                      <InputAdornment position="start">
-                        <Icon>search</Icon>
-                      </InputAdornment>
-                    ),
-                  },
-                }}
-                placeholder="Buscar..."
-                onChange={(e) => setSearch(e.target.value)}
-                fullWidth
-              />
-            </Grid>
-            <Grid size={{ xs: 12, md: 4 }}></Grid>
-          </Grid>
+          <Filtros setSearch={setSearch} setEstadoFiltro={setEstadoFiltro} estadoFiltro={estadoFiltro} buscar={buscar} search={search} />
           <TableContainer component={Paper} sx={{ borderRadius: 0, border: 0, boxShadow: 0, minHeight: `calc(100% - 160px)` }}>
             {listado && (
               <AutoSizer>
@@ -82,12 +66,13 @@ function Solicitudes() {
                     rowGetter={({ index }) => listado[index]}
                   >
                     <Column headerRenderer={headerRenderer} dataKey="id" label="#" width={60} cellRenderer={cellRenderer} />
-                    <Column headerRenderer={headerRenderer} dataKey="cedula" label="Cedula" width={70} cellRenderer={cellRenderer} />
-                    <Column headerRenderer={headerRenderer} cellRenderer={cellRenderer} dataKey="codigo" label="Contrato" width={90} />
+                    <Column headerRenderer={headerRenderer} dataKey="cedula" label="Cedula" width={80} cellRenderer={cellRenderer} />
                     <Column headerRenderer={headerRenderer} cellRenderer={cellRenderer} dataKey="name" label="Nombre" width={280} />
-                    <Column headerRenderer={headerRenderer} cellRenderer={cellRenderer} dataKey="estado" label="Estado" width={140} />
+                    <Column headerRenderer={headerRenderer} cellRenderer={cellRendererEstado} dataKey="estado_id" label="Estado" width={140} />
+                    <Column headerRenderer={headerRenderer} cellRenderer={cellRenderer} dataKey="codigo" label="Codigo" width={100} />
+                    <Column headerRenderer={headerRenderer} cellRenderer={cellRendererTipo} dataKey="tipo" label="Producto" width={148} />
                     <Column headerRenderer={headerRenderer} cellRenderer={cellRenderer} dataKey="fecha" label="fecha" width={148} />
-                    <Column headerRenderer={headerRenderer} cellRenderer={cellOptionRenderer} dataKey="acciones" label="_" width={148} />
+                    <Column headerRenderer={headerRenderer} cellRenderer={cellOptionRenderer} dataKey="acciones" label="" width={60} />
                   </Table>
                 )}
               </AutoSizer>

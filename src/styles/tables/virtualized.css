@@ -4,6 +4,10 @@
     text-transform : uppercase;
     padding: 0 18px;
 }
+@media (max-width: 900px) {
+
+}
+
 .ReactVirtualized__Table__row{
     background-color:rgb(249, 249, 249);
     border-bottom-width: 1px;

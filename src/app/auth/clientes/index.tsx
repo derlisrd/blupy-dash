@@ -1,48 +1,27 @@
-import useClientes from "@/core/hooks/clientes/useClientes";
-import { Box, Container, LinearProgress, Paper, Grid2 as Grid, TextField, InputAdornment, Icon, TableContainer } from "@mui/material";
-import AutoSizer from "react-virtualized-auto-sizer";
-import { Column, Table, TableCellProps, TableHeaderProps } from "react-virtualized";
-import TableCell from "@/core/components/clientes/tableCell";
-import TableCellHead from "@/core/components/clientes/tablecellhead";
 import "@/styles/tables/virtualized.css";
+import useClientes from "@/core/hooks/clientes/useClientes";
+import { Box, Container, LinearProgress, Paper, TableContainer } from "@mui/material";
+import AutoSizer from "react-virtualized-auto-sizer";
+import { Column, Table } from "react-virtualized";
 import { useState } from "react";
+import { cellRenderer, cellRendererAlianza, cellRendererFuncionario, headerRenderer } from "@/core/components/clientes/celdas";
+import Filtros from "./filtros";
 
 function ClientesList() {
-  const { lista, isLoading } = useClientes();
+  const { lista, isLoading, buscar, isPending } = useClientes();
 
   const [search, setSearch] = useState("");
 
-  const headerRenderer = ({ label }: TableHeaderProps) => <TableCellHead>{label}</TableCellHead>;
-  const cellRenderer = ({ cellData }: TableCellProps) => <TableCell>{cellData}</TableCell>;
-
-  const listado = lista?.filter((cliente) => cliente.name.toLowerCase().includes(search.toLowerCase()) || cliente.cedula.toLowerCase().includes(search.toLowerCase())) || [];
+  const listado = lista?.filter((cliente) => cliente.name.toLowerCase().includes(search.toLowerCase()) || cliente.cedula.includes(search)) || [];
 
   return (
     <Container>
       <h3>Clientes</h3>
-      {isLoading ? (
+      {isLoading || isPending ? (
         <LinearProgress />
       ) : (
         <Box boxShadow={6} borderRadius={4} component={Paper}>
-          <Grid container p={1.5} spacing={0}>
-            <Grid size={{ xs: 12, md: 4 }}>
-              <TextField
-                slotProps={{
-                  input: {
-                    startAdornment: (
-                      <InputAdornment position="start">
-                        <Icon>search</Icon>
-                      </InputAdornment>
-                    ),
-                  },
-                }}
-                placeholder="Buscar..."
-                onChange={(e) => setSearch(e.target.value)}
-                fullWidth
-              />
-            </Grid>
-            <Grid size={{ xs: 12, md: 4 }}></Grid>
-          </Grid>
+          <Filtros setSearch={setSearch} buscar={buscar} search={search} />
           <TableContainer component={Paper} sx={{ borderRadius: 0, border: 0, boxShadow: 0, minHeight: `calc(100% - 160px)` }}>
             {listado && (
               <AutoSizer>
@@ -59,6 +38,9 @@ function ClientesList() {
                     <Column headerRenderer={headerRenderer} cellRenderer={cellRenderer} dataKey="id" label="ID" width={50} />
                     <Column headerRenderer={headerRenderer} cellRenderer={cellRenderer} dataKey="cedula" label="Cedula" width={80} />
                     <Column headerRenderer={headerRenderer} cellRenderer={cellRenderer} dataKey="name" label="Nombre" width={280} />
+                    <Column headerRenderer={headerRenderer} cellRenderer={cellRenderer} dataKey="celular" label="Tel." width={148} />
+                    <Column headerRenderer={headerRenderer} cellRenderer={cellRendererFuncionario} dataKey="funcionario" label="_" width={148} />
+                    <Column headerRenderer={headerRenderer} cellRenderer={cellRendererAlianza} dataKey="asofarma" label="_" width={148} />
                     <Column headerRenderer={headerRenderer} cellRenderer={cellRenderer} dataKey="fecha" label="Fecha Registro" width={148} />
                   </Table>
                 )}

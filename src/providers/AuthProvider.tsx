@@ -52,7 +52,7 @@ const AuthProvider = ({ children }: { children: ReactNode }) => {
       return null;
     },
     staleTime: 5 * 60 * 1000, // Evita reconsultas innecesarias por 5 minutos
-    refetchOnWindowFocus: false, // Evita que se vuelva a ejecutar cuando el usuario cambia de pestaña
+    refetchOnWindowFocus: true,
   });
 
   const values = {
