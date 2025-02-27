@@ -14,20 +14,22 @@ export class ConsultaClienteResponse{
 
     static fromJSON(data: any) : ConsultaClienteResponse{
         const results = data.results ? ConsultaClienteResults.fromJSON(data.results) : null
-    return new ConsultaClienteResponse({success: data.success, status: data.status, message: data.message, results})
+        return new ConsultaClienteResponse({success: data.success, status: data.status, message: data.message, results})
     }
 
 }
 export class ConsultaClienteResults {
     farma : ConsultaClienteResultsFarma | null;
-    constructor({farma = null}: Partial<ConsultaClienteResults>) {
+    registro: boolean;
+    constructor({farma = null, registro = false}: Partial<ConsultaClienteResults>) {
         this.farma = farma;
+        this.registro = registro
     }
 
     static fromJSON(data: any) : ConsultaClienteResults{
         const farma = data.farma ? ConsultaClienteResultsFarma.fromJSON(data.farma) : null
 
-        return new ConsultaClienteResults({farma})
+        return new ConsultaClienteResults({farma, registro: data.registro})
     } 
 }
 

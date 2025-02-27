@@ -17,6 +17,16 @@ function Ficha({ open, onClose, fichaSeleccionada }: FichaProps) {
         <Grid container spacing={1}>
           <Grid size={{ xs: 12, sm: 4 }}>
             <Typography variant="overline" sx={{ textDecoration: "underline" }} display="block" fontSize={14}>
+              Documento:
+            </Typography>
+          </Grid>
+          <Grid size={{ xs: 12, sm: 8 }}>
+            <Typography variant="overline" fontSize={14}>
+              {fichaSeleccionada.cedula}
+            </Typography>
+          </Grid>
+          <Grid size={{ xs: 12, sm: 4 }}>
+            <Typography variant="overline" sx={{ textDecoration: "underline" }} display="block" fontSize={14}>
               Nombre completo:
             </Typography>
           </Grid>

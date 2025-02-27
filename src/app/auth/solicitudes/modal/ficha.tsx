@@ -14,7 +14,7 @@ function Ficha({ open, onClose, fichaSeleccionada }: FichaProps) {
     <Dialog open={open} onClose={onClose} fullWidth>
       <DialogTitle>Ficha de cliente</DialogTitle>
       <DialogContent>
-        <Grid container spacing={1}>
+        <Grid container spacing={0}>
           <Grid size={{ xs: 12, sm: 4 }}>
             <Typography variant="overline" sx={{ textDecoration: "underline" }} display="block" fontSize={14}>
               Nombre completo:
@@ -36,6 +36,7 @@ function Ficha({ open, onClose, fichaSeleccionada }: FichaProps) {
               {fichaSeleccionada.celular}
             </Typography>
           </Grid>
+
           <Grid size={{ xs: 12, sm: 4 }}>
             <Typography display="block" variant="overline" fontSize={14}>
               Email:
@@ -65,6 +66,16 @@ function Ficha({ open, onClose, fichaSeleccionada }: FichaProps) {
             <Typography variant="overline" fontSize={14}>
               {fichaSeleccionada.codigo}
             </Typography>
+          </Grid>
+          <Grid size={{ xs: 12, sm: 4 }}>
+            <Typography display="block" variant="overline" fontSize={14}>
+              Mapa:
+            </Typography>
+          </Grid>
+          <Grid size={{ xs: 12, sm: 8 }}>
+            <a href={`https://www.google.com/maps?q=${fichaSeleccionada.latitud},${fichaSeleccionada.longitud}`} target="_blank">
+              Ver en Google Maps
+            </a>
           </Grid>
           <Grid size={{ xs: 12, sm: 6 }}>
             {fichaSeleccionada.selfie ? (

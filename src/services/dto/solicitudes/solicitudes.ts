@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { format } from "@formkit/tempo";
 
 export class SolicitudesResponse{
@@ -45,8 +46,12 @@ export class SolicitudesResults{
     funcionario : number;
     fecha : string;
     selfie: string;
+    salario: number | null;
+    longitud: string | null;
+    latitud: string | null;
+    empresa: string | null;
 
-    constructor({ selfie = '', fecha = '', id = 0, codigo = '', estado = '', estado_id = 0, created_at = '', updated_at = '', tipo = 0, cliente_id = 0, name = '', email = '', uid = 0, cedula = '', cliid = '', celular = '', foto_ci_frente = '', foto_ci_dorso = '', asofarma = 0, solicitud_credito = 0, funcionario = 0 } : Partial<SolicitudesResults>) {
+    constructor({ salario = null, longitud ='', latitud='', empresa='', selfie = '', fecha = '', id = 0, codigo = '', estado = '', estado_id = 0, created_at = '', updated_at = '', tipo = 0, cliente_id = 0, name = '', email = '', uid = 0, cedula = '', cliid = '', celular = '', foto_ci_frente = '', foto_ci_dorso = '', asofarma = 0, solicitud_credito = 0, funcionario = 0 } : Partial<SolicitudesResults>) {
         this.id = id;
         this.codigo = codigo;
         this.estado = estado;
@@ -68,11 +73,17 @@ export class SolicitudesResults{
         this.funcionario = funcionario;
         this.fecha = fecha;
         this.selfie = selfie;
+        this.salario = salario;
+        this.longitud = longitud;
+        this.latitud = latitud;
+        this.empresa = empresa;
     }
 
-    static fromJSON(data: SolicitudesResults): SolicitudesResults {
+    static fromJSON(data: any): SolicitudesResults {
         return new SolicitudesResults({
            ...data,
+           latitud: data.latitud_direccion ?? null,
+           longitud: data.longitud_direccion ?? null,
            fecha: format(data.created_at ?? new Date(), {date: 'medium', time: 'short'}, 'es-ES')
         });
     }
