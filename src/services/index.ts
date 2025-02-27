@@ -1,5 +1,6 @@
 import { authApiService } from "./api/auth";
 import { clientesApiService } from "./api/clientes";
+import { consultasApiService } from "./api/consultas";
 import { solicitudesApiService } from "./api/solicitudes";
 import { totalesApiService } from "./api/totales";
 
@@ -9,7 +10,8 @@ import { totalesApiService } from "./api/totales";
     auth : authApiService,
     clientes: clientesApiService,
     info:  totalesApiService,
-    solicitudes: solicitudesApiService
+    solicitudes: solicitudesApiService,
+    consultas: consultasApiService
 }
 
 export default API;
