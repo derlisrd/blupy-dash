@@ -1,18 +1,38 @@
 import "@/styles/tables/virtualized.css";
 import useClientes from "@/core/hooks/clientes/useClientes";
-import { Box, Container, LinearProgress, Paper, TableContainer } from "@mui/material";
+import { Box, Container, Icon, IconButton, LinearProgress, Menu, MenuItem, Paper, TableContainer } from "@mui/material";
 import AutoSizer from "react-virtualized-auto-sizer";
-import { Column, Table } from "react-virtualized";
+import { Column, Table, TableCellProps } from "react-virtualized";
 import { useState } from "react";
 import { cellRenderer, cellRendererAlianza, cellRendererFuncionario, headerRenderer } from "@/core/components/clientes/celdas";
 import Filtros from "./filtros";
+import Ficha from "./ficha";
+import { ClientesResults } from "@/services/dto/clientes/clientes";
+import TableCell from "@/components/ui/tableCell";
 
 function ClientesList() {
   const { lista, isLoading, buscar, isPending } = useClientes();
-
+  const [openFicha, setOpenFicha] = useState(false);
   const [search, setSearch] = useState("");
 
   const listado = lista?.filter((cliente) => cliente.name.toLowerCase().includes(search.toLowerCase()) || cliente.cedula.includes(search)) || [];
+
+  const [menuAnchor, setMenuAnchor] = useState<null | HTMLElement>(null);
+  const [selectedRow, setSelectedRow] = useState<ClientesResults | null>(null);
+
+  const handleMenuOpen = (event: React.MouseEvent<HTMLElement>, row: ClientesResults) => {
+    setMenuAnchor(event.currentTarget);
+    setSelectedRow(row);
+  };
+
+  const handleMenuClose = () => setMenuAnchor(null);
+  const cellOptionRenderer = ({ rowData }: TableCellProps) => (
+    <TableCell>
+      <IconButton onClick={(event) => handleMenuOpen(event, rowData)}>
+        <Icon>more_vert</Icon>
+      </IconButton>
+    </TableCell>
+  );
 
   return (
     <Container>
@@ -35,13 +55,14 @@ function ClientesList() {
                     rowCount={listado.length}
                     rowGetter={({ index }) => listado[index]}
                   >
-                    <Column headerRenderer={headerRenderer} cellRenderer={cellRenderer} dataKey="id" label="ID" width={50} />
-                    <Column headerRenderer={headerRenderer} cellRenderer={cellRenderer} dataKey="cedula" label="Cedula" width={80} />
-                    <Column headerRenderer={headerRenderer} cellRenderer={cellRenderer} dataKey="name" label="Nombre" width={280} />
-                    <Column headerRenderer={headerRenderer} cellRenderer={cellRenderer} dataKey="celular" label="Tel." width={148} />
-                    <Column headerRenderer={headerRenderer} cellRenderer={cellRendererFuncionario} dataKey="funcionario" label="_" width={148} />
-                    <Column headerRenderer={headerRenderer} cellRenderer={cellRendererAlianza} dataKey="asofarma" label="_" width={148} />
-                    <Column headerRenderer={headerRenderer} cellRenderer={cellRenderer} dataKey="fecha" label="Fecha Registro" width={148} />
+                    <Column headerRenderer={headerRenderer} cellRenderer={cellRenderer} dataKey="id" label="ID" width={width * 0.1} />
+                    <Column headerRenderer={headerRenderer} cellRenderer={cellRenderer} dataKey="cedula" label="Cedula" width={width * 0.1} />
+                    <Column headerRenderer={headerRenderer} cellRenderer={cellRenderer} dataKey="name" label="Nombre" width={width * 0.3} />
+                    <Column headerRenderer={headerRenderer} cellRenderer={cellRenderer} dataKey="celular" label="Tel." width={width * 0.1} />
+                    <Column headerRenderer={headerRenderer} cellRenderer={cellRendererFuncionario} dataKey="funcionario" label="_" width={width * 0.1} />
+                    <Column headerRenderer={headerRenderer} cellRenderer={cellRendererAlianza} dataKey="asofarma" label="_" width={width * 0.1} />
+                    <Column headerRenderer={headerRenderer} cellRenderer={cellRenderer} dataKey="fecha" label="Fecha Registro" width={width * 0.2} />
+                    <Column headerRenderer={headerRenderer} cellRenderer={cellOptionRenderer} dataKey="acciones" label="" width={60} />
                   </Table>
                 )}
               </AutoSizer>
@@ -49,6 +70,25 @@ function ClientesList() {
           </TableContainer>
         </Box>
       )}
+      <Menu anchorEl={menuAnchor} open={Boolean(menuAnchor)} onClose={handleMenuClose}>
+        <MenuItem
+          onClick={() => {
+            setSelectedRow(selectedRow);
+            handleMenuClose();
+            setOpenFicha(true);
+          }}
+        >
+          Ver Ficha
+        </MenuItem>
+        <MenuItem onClick={() => console.log("Editar", selectedRow)}>Enviar notificación </MenuItem>
+      </Menu>
+      <Ficha
+        open={openFicha}
+        fichaSeleccionada={selectedRow}
+        onClose={() => {
+          setOpenFicha(false);
+        }}
+      />
     </Container>
   );
 }
