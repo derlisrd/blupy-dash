@@ -76,8 +76,8 @@ function AuthMenuLayout() {
       <Box
         sx={{
           paddingTop: "48px",
-          paddingLeft: 2,
-          paddingRight: 2,
+          paddingLeft: 0,
+          paddingRight: 0,
           width: { xs: "100%", md: width_main },
           marginLeft: { xs: 0, md: margin_left },
           transition: "all 0.2s",
