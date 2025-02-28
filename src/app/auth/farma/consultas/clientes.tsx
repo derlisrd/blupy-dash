@@ -8,7 +8,7 @@ function ClientesFarma() {
   const { isPending, datos, buscar } = useClienteConsulta();
 
   return (
-    <Container>
+    <Container sx={{ py: 1.5 }}>
       <h3>Consulta de clientes de farma</h3>
       <Grid container p={1.5} spacing={1} alignItems="center">
         <Grid size={12}>{isPending && <LinearProgress />}</Grid>
@@ -111,7 +111,7 @@ function ClientesFarma() {
               <Grid size={12}>
                 <Typography variant="h6">Alianza</Typography>
               </Grid>
-              <Grid size={{ xs: 12, sm: 3 }}>
+              <Grid size={{ xs: 12, sm: 4 }}>
                 <Card sx={{ boxShadow: 3, bgcolor: "primary.contrastText" }}>
                   <CardContent>
                     <Typography variant="caption">Alianza:</Typography>
@@ -119,7 +119,7 @@ function ClientesFarma() {
                   </CardContent>
                 </Card>
               </Grid>
-              <Grid size={{ xs: 12, sm: 3 }}>
+              <Grid size={{ xs: 12, sm: 4 }}>
                 <Card sx={{ boxShadow: 3, bgcolor: "primary.contrastText" }}>
                   <CardContent>
                     <Typography variant="caption">Código alianza:</Typography>
@@ -127,7 +127,15 @@ function ClientesFarma() {
                   </CardContent>
                 </Card>
               </Grid>
-              <Grid size={{ xs: 12, sm: 6 }}>
+              <Grid size={{ xs: 12, sm: 4 }}>
+                <Card sx={{ boxShadow: 3, bgcolor: "primary.contrastText" }}>
+                  <CardContent>
+                    <Typography variant="caption">Forma de pago:</Typography>
+                    <Typography variant="body1">{item.formaPago}</Typography>
+                  </CardContent>
+                </Card>
+              </Grid>
+              <Grid size={{ xs: 12, sm: 4 }}>
                 <Card sx={{ boxShadow: 3, bgcolor: "primary.contrastText" }}>
                   <CardContent>
                     <Typography variant="caption">Vencimiento:</Typography>
