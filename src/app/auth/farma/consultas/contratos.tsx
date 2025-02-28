@@ -7,7 +7,6 @@ function Contratos() {
   const [search, setSearch] = useState("");
   const { isPending, buscar, datos } = useContratoConsulta();
 
-  console.log(datos);
   return (
     <Container>
       <h3>Consulta de firma de contrato</h3>
@@ -48,11 +47,28 @@ function Contratos() {
               <CardMedia image={`${config.PATH_IMAGE}${datos.cliente?.imagenCedula}`} sx={{ height: 256 }} title="Imagen de cedula" />
             </Card>
           </Grid>
-          <Grid size={{ xs: 12, sm: 8 }}>
+          <Grid size={{ xs: 12, sm: 4 }}>
+            <Card sx={{ boxShadow: 3, bgcolor: "primary.contrastText" }}>
+              <CardMedia image={`${config.PATH_IMAGE}${datos.cliente?.selfie}`} sx={{ height: 256 }} title="Imagen de cedula" />
+            </Card>
+          </Grid>
+          <Grid size={{ xs: 12, sm: 4 }}>
             <Card sx={{ boxShadow: 3, bgcolor: "primary.contrastText" }}>
               <CardContent>
-                <Typography variant="caption">Cedula</Typography>
-                <Typography variant="body1">{datos.cliente?.cedula}</Typography>
+                <Grid container rowSpacing={4}>
+                  <Grid size={12}>
+                    <Typography variant="caption">Cedula</Typography>
+                    <Typography variant="body1">{datos.cliente?.cedula}</Typography>
+                  </Grid>
+                  <Grid size={12}>
+                    <Typography variant="caption">Nombre</Typography>
+                    <Typography variant="body1">{datos.cliente?.nombre}</Typography>
+                  </Grid>
+                  <Grid size={12}>
+                    <Typography variant="caption">Celular</Typography>
+                    <Typography variant="body1">{datos.cliente?.celular}</Typography>
+                  </Grid>
+                </Grid>
               </CardContent>
             </Card>
           </Grid>
