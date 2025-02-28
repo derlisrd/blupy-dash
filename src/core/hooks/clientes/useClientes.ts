@@ -7,6 +7,14 @@ import { useEffect, useState } from "react";
 function useClientes() {
     const {userData} = useAuth()
 
+    const [modals, setModals] = useState({
+      ficha: false
+    });
+    
+    const handleModals = (modal: keyof typeof modals, open: boolean) => {
+      setModals((prev) => ({ ...prev, [modal]:open }));
+    };
+    
     const [lista,setLista] = useState<ClientesResults[]>([])
 
     const { data, isLoading } = useQuery({
@@ -27,6 +35,9 @@ function useClientes() {
             }
         }
     });
+
+    
+
     const buscar = (q: string) => {mutate(q)}
     
 
@@ -36,7 +47,7 @@ function useClientes() {
       }
     }, [data]);
     
-    return {lista, isLoading, isPending, buscar}
+    return {lista, isLoading, isPending, buscar, modals, handleModals}
 }
 
 export default useClientes;

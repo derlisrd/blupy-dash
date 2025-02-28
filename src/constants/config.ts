@@ -5,7 +5,7 @@ const APP_PRODUCTION = (import.meta.env.VITE_APP_PRODUCTION  === 'true') as bool
 const API_URL = APP_PRODUCTION ? import.meta.env.VITE_API_BASE_URL : import.meta.env.VITE_API_BASE_DEV_URL;
 
 
-const PATH_IMAGE = import.meta.env.VITE_PUBLIC_PATH;
+const PATH_IMAGE = APP_PRODUCTION ? import.meta.env.VITE_PUBLIC_PATH : import.meta.env.VITE_PUBLIC_PATH_DEV;
 
 
 export const config = {

@@ -6,17 +6,16 @@ import { Column, Table, TableCellProps } from "react-virtualized";
 import { useState } from "react";
 import { cellRenderer, cellRendererAlianza, cellRendererFuncionario, headerRenderer } from "@/core/components/clientes/celdas";
 import Filtros from "./filtros";
-import Ficha from "./ficha";
 import { ClientesResults } from "@/services/dto/clientes/clientes";
 import TableCell from "@/components/ui/tableCell";
+import Ficha from "./modals/ficha";
+import { useNavigate } from "react-router-dom";
 
 function ClientesList() {
-  const { lista, isLoading, buscar, isPending } = useClientes();
-  const [openFicha, setOpenFicha] = useState(false);
+  const { lista, isLoading, buscar, isPending, handleModals, modals } = useClientes();
   const [search, setSearch] = useState("");
-
+  const navigate = useNavigate();
   const listado = lista?.filter((cliente) => cliente.name.toLowerCase().includes(search.toLowerCase()) || cliente.cedula.includes(search)) || [];
-
   const [menuAnchor, setMenuAnchor] = useState<null | HTMLElement>(null);
   const [selectedRow, setSelectedRow] = useState<ClientesResults | null>(null);
 
@@ -75,18 +74,27 @@ function ClientesList() {
           onClick={() => {
             setSelectedRow(selectedRow);
             handleMenuClose();
-            setOpenFicha(true);
+            handleModals("ficha", true);
           }}
         >
           Ver Ficha
         </MenuItem>
-        <MenuItem onClick={() => console.log("Editar", selectedRow)}>Enviar notificación </MenuItem>
+        <MenuItem
+          onClick={() => {
+            if (selectedRow) {
+              navigate("/clientes/foto-cedula", { state: { cliente: selectedRow } });
+            }
+            handleMenuClose();
+          }}
+        >
+          Actualizar foto cédula
+        </MenuItem>
       </Menu>
       <Ficha
-        open={openFicha}
+        open={modals.ficha}
         fichaSeleccionada={selectedRow}
         onClose={() => {
-          setOpenFicha(false);
+          handleModals("ficha", false);
         }}
       />
     </Container>

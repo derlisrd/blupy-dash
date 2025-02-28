@@ -25,6 +25,7 @@ function AuthPages() {
       <Route path="/" element={<AuthMenuLayout />}>
         <Route index element={<Home />} />
         <Route path="/clientes" element={<Clientes />} />
+        <Route path="/clientes/foto-cedula" element={<ClientesFotoCedula />} />
         <Route path="/solicitudes" element={<Solicitudes />} />
         <Route path="/farma/consulta-firma-contratos" element={<Contratos />} />
         <Route path="/farma/consulta-clientes" element={<ConsultaClientesFarma />} />
@@ -35,7 +36,7 @@ function AuthPages() {
     </Routes>
   );
 }
-
+const ClientesFotoCedula = Loadable(lazy(() => import("./clientes/fotocedula")));
 const ConsultaClientesFarma = Loadable(lazy(() => import("./farma/consultas/clientes")));
 
 export default AuthPages;

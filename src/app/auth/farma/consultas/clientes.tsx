@@ -8,7 +8,7 @@ function ClientesFarma() {
   const { isPending, datos, buscar } = useClienteConsulta();
 
   return (
-    <Container sx={{ py: 1.5 }}>
+    <Container>
       <h3>Consulta de clientes de farma</h3>
       <Grid container p={1.5} spacing={1} alignItems="center">
         <Grid size={12}>{isPending && <LinearProgress />}</Grid>
