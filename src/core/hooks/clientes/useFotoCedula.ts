@@ -1,12 +1,26 @@
 import { useCallback, useState } from "react";
 import imageCompression from "browser-image-compression";
 import { useDropzone } from "react-dropzone";
+import { useMutation } from "@tanstack/react-query";
+import API from "@/services";
+import { useAuth } from "@/hooks/useAuth";
 
 function useFotoCedula({id, foto_cedula}: {id: string, foto_cedula: File | null}) {
     
+  const { userData} = useAuth()
+
+    const {data, isPending, mutate} = useMutation({
+      mutationFn: async () => API.clientes.actualizarFotoCedula(userData && userData.tokenWithBearer, id,form),
+      onSuccess: (data) => {
+        console.log(data);
+      },
+      onError: (error) => {
+        console.log(error);
+      },
+    })
+
     const [form, setForm] = useState<FormData>(() => {
         const formData = new FormData();
-        if (id) formData.append("id", id);
         if (foto_cedula) formData.append("foto_cedula", foto_cedula);
         return formData;
       });
@@ -73,7 +87,7 @@ function useFotoCedula({id, foto_cedula}: {id: string, foto_cedula: File | null}
       });
     
     
-    return {form, imagePreview, onDrop, removeImage, getRootProps, getInputProps, isDragActive}
+    return {form, imagePreview, onDrop, removeImage, getRootProps, getInputProps, isDragActive, isPending, data, subir : mutate}
 }
 
 export default useFotoCedula 

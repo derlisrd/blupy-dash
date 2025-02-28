@@ -1,5 +1,5 @@
 import useFotoCedula from "@/core/hooks/clientes/useFotoCedula";
-import { Box, Button, Card, CardMedia, Container, Grid2 as Grid, Icon, IconButton, Typography } from "@mui/material";
+import { Box, Button, Card, CardMedia, Container, Grid2 as Grid, Icon, IconButton, LinearProgress, Typography } from "@mui/material";
 import { Fragment } from "react";
 
 import { useLocation } from "react-router-dom";
@@ -8,13 +8,14 @@ const FotoCedula = () => {
   const location = useLocation();
   const cliente = location.state?.cliente;
 
-  const { imagePreview, isDragActive, getInputProps, getRootProps, removeImage } = useFotoCedula({ id: String(cliente.id), foto_cedula: null });
+  const { imagePreview, isDragActive, getInputProps, getRootProps, removeImage, subir, isPending } = useFotoCedula({ id: String(cliente.id), foto_cedula: null });
 
   if (!cliente) return <p>No hay datos de cliente.</p>;
 
   return (
     <Container>
-      <h2>Actualizar foto de cédula</h2>
+      <h2>Actualizar foto de cédula : {cliente?.cedula}</h2>
+      {isPending && <LinearProgress />}
       <Grid container spacing={1}>
         {imagePreview ? (
           <Fragment>
@@ -36,7 +37,7 @@ const FotoCedula = () => {
               </Card>
             </Grid>
             <Grid size={{ xs: 12, sm: 6 }}>
-              <Button variant="contained" color="primary" onClick={() => {}}>
+              <Button variant="contained" color="primary" onClick={() => subir()}>
                 Subir
               </Button>
             </Grid>
