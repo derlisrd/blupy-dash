@@ -3,12 +3,12 @@ import { useSessionStorage } from "@/hooks/useSessionStorage";
 import { LoginResults } from "@/services/dto/auth/login";
 import API from "@/services";
 import AuthContext from "@/contexts/AuthContext";
-import { useQuery } from "@tanstack/react-query";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
 
 // Proveedor del contexto
 const AuthProvider = ({ children }: { children: ReactNode }) => {
   const { setItemValue: setSessionUserData } = useSessionStorage<LoginResults | null>("userData", null);
-
+  const useQueryCliente = useQueryClient();
   const [isAuth, setIsAuth] = useState(false);
   const [userData, setUserData] = useState<LoginResults | null>(null);
   const updateUserData = (data: LoginResults) => {
@@ -33,7 +33,8 @@ const AuthProvider = ({ children }: { children: ReactNode }) => {
     setIsAuth(false);
     setUserData(null);
     setSessionUserData(null);
-  }, [setSessionUserData]);
+    useQueryCliente.clear();
+  }, [setSessionUserData, useQueryCliente]);
 
   const { isLoading } = useQuery({
     queryKey: ["checkAuth"],
