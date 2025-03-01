@@ -30,7 +30,7 @@ export const clientesApiService = {
     actualizarFotoCedula: async(token: string | null, id: string, formData: FormData)=>{
         try {
             const {data, status} = await BASE.post(`/clientes/actualizar-foto-cedula/${id}`,formData,{headers: { Authorization: token}})
-            return  ActualizarFotoCedulaResponse.fromJson({success: true, message: '', results: data.results  , status: status})
+            return  ActualizarFotoCedulaResponse.fromJson({success: true, message: data.message, results: data.results  , status: status})
         } catch (error) {
             if (error instanceof Error) {
                 return new ActualizarFotoCedulaResponse({success: false, message: error.message, results: null, status: 500})

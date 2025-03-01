@@ -99,7 +99,7 @@ function AuthMenuLayout() {
           position: "relative",
           overflow: "auto",
           flexGrow: 1,
-          minHeight: "100vh",
+          height: "100vh",
         }}
       >
         <Outlet />

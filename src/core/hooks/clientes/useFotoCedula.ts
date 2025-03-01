@@ -4,26 +4,41 @@ import { useDropzone } from "react-dropzone";
 import { useMutation } from "@tanstack/react-query";
 import API from "@/services";
 import { useAuth } from "@/hooks/useAuth";
+import swal from "sweetalert";
+import { useNavigate } from "react-router-dom";
 
 function useFotoCedula({id, foto_cedula}: {id: string, foto_cedula: File | null}) {
-    
+
   const { userData} = useAuth()
+  const navigate = useNavigate()
+
+  const [form, setForm] = useState<FormData>(() => {
+    const formData = new FormData();
+    if (foto_cedula) formData.append("foto_cedula", foto_cedula);
+    return formData;
+  });
 
     const {data, isPending, mutate} = useMutation({
       mutationFn: async () => API.clientes.actualizarFotoCedula(userData && userData.tokenWithBearer, id,form),
-      onSuccess: (data) => {
-        console.log(data);
-      },
       onError: (error) => {
         console.log(error);
       },
+      onSettled: async(data)=> {
+        if(data && data.success){
+          data.message
+          const res = await swal({
+            title: 'Correcto',
+            icon: "success",
+            text: data.message
+          })
+          if(res)
+            navigate('/clientes')
+          
+        }
+      },
     })
-
-    const [form, setForm] = useState<FormData>(() => {
-        const formData = new FormData();
-        if (foto_cedula) formData.append("foto_cedula", foto_cedula);
-        return formData;
-      });
+    
+    
       const [imagePreview, setImagePreview] = useState<string | null>(null);
       // Función para comprimir imágenes
       const compressImages = async (file: File) => {
