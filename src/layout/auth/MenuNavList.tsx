@@ -1,11 +1,12 @@
 import "simplebar-react/dist/simplebar.min.css";
 import { Fragment, useState } from "react";
 import SimpleBar from "simplebar-react";
-import { Toolbar, List, ListItem, ListItemButton, ListItemText, ListItemIcon, Icon, Typography, ListItemButtonBaseProps, Stack, Avatar, Collapse } from "@mui/material";
+import { Toolbar, List, ListItem, ListItemButton, ListItemText, ListItemIcon, Typography, ListItemButtonBaseProps, Stack, Avatar, Collapse } from "@mui/material";
 
 import { useLocation } from "react-router-dom";
 import { useAuth } from "@/hooks/useAuth";
 import menu from "@/constants/menu";
+import Icon from "@/components/ui/icon";
 
 const MenuNavList = ({ isMobile = false, navegar }: { isMobile?: boolean; navegar: (to: string, mobile: boolean) => void }) => {
   const { pathname } = useLocation();
@@ -26,12 +27,15 @@ const MenuNavList = ({ isMobile = false, navegar }: { isMobile?: boolean; navega
         color: "primary.main",
         span: { color: "primary.main" },
       },
+      i: { color: "primary.main" },
     },
     "&:hover": {
       backgroundColor: "primary.contrastText",
       color: "primary.main",
       span: { color: "primary.main" },
+      i: { color: "primary.main" },
     },
+    i: { color: "primary.contrastText" },
     span: { color: "primary.contrastText" },
   } as ListItemButtonBaseProps["sx"];
 
@@ -65,10 +69,10 @@ const MenuNavList = ({ isMobile = false, navegar }: { isMobile?: boolean; navega
                 <ListItem disablePadding>
                   <ListItemButton onClick={() => openCollapseMenu(e.open, e.id)} sx={SELECTED}>
                     <ListItemIcon>
-                      <Icon>{e.icon}</Icon>
+                      <Icon size={22}>{e.icon}</Icon>
                     </ListItemIcon>
                     <ListItemText primary={e.title} />
-                    <Icon>{e.open ? `expand_less` : `keyboard_arrow_right`} </Icon>
+                    <Icon size={22}>{e.open ? "chevron-up" : "chevron-down"}</Icon>
                   </ListItemButton>
                 </ListItem>
                 <Collapse in={e.open} timeout="auto" unmountOnExit>
@@ -77,7 +81,7 @@ const MenuNavList = ({ isMobile = false, navegar }: { isMobile?: boolean; navega
                       <ListItem disablePadding key={elem.id}>
                         <ListItemButton sx={SELECTED} selected={pathname === elem.url} onClick={() => navegar(elem.url ?? "#", isMobile)}>
                           <ListItemIcon>
-                            <Icon> {pathname === elem.url ? "arrow_drop_down" : "arrow_right"}</Icon>
+                            <Icon size={20}>point</Icon>
                           </ListItemIcon>
                           <ListItemText primary={elem.title} />
                         </ListItemButton>
@@ -90,7 +94,7 @@ const MenuNavList = ({ isMobile = false, navegar }: { isMobile?: boolean; navega
               <ListItem disablePadding>
                 <ListItemButton selected={pathname === e.url} onClick={() => navegar(e.url ?? "#", isMobile)} sx={SELECTED}>
                   <ListItemIcon>
-                    <Icon>{e.icon}</Icon>
+                    <Icon size={22}>{e.icon}</Icon>
                   </ListItemIcon>
                   <ListItemText>{e.title}</ListItemText>
                 </ListItemButton>

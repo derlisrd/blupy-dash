@@ -2,7 +2,7 @@ export default [
     {
         id: 1,
         title: 'Inicio',
-        icon: 'home_outline',
+        icon: 'home',
         color: '#0066cc',
         url: '/',
         open: false
@@ -10,7 +10,7 @@ export default [
     {
         id: 2,
         title: 'Clientes',
-        icon: 'person',
+        icon: 'users',
         color: '#0066cc',
         url: '/clientes',
         open: false
@@ -18,7 +18,7 @@ export default [
     {
         id: 3,
         title: 'Solicitudes',
-        icon: 'contact_page',
+        icon: 'clipboard',
         color: '#0066cc',
         url: '/solicitudes',
         open: false
@@ -26,7 +26,7 @@ export default [
     {
         id: 4,
         title: 'Farma',
-        icon: 'business',
+        icon: 'building',
         color: '#0066cc',
         url: '#',
         open: false,
@@ -46,7 +46,7 @@ export default [
     {
         id: 5,
         title: 'Notificaciones',
-        icon: 'notifications',
+        icon: 'bell',
         color: '#0066cc',
         url: '/reportes',
         open: false,
@@ -61,7 +61,7 @@ export default [
     {
         id: 6,
         title: 'Ventas',
-        icon: 'sell',
+        icon: 'message',
         color: '#0066cc',
         url: '/ventas',
         open: false

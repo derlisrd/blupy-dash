@@ -1,8 +1,9 @@
 import useDrawerMenu from "@/hooks/useDrawerMenu";
 
-import { Drawer, Box, Toolbar, Stack, Icon, IconButton, Tooltip } from "@mui/material";
+import { Drawer, Box, Toolbar, Stack, IconButton, Tooltip } from "@mui/material";
 import { NavigateOptions, Outlet, To, useNavigate } from "react-router-dom";
 import MenuNavList from "./MenuNavList";
+import Icon from "@/components/ui/icon";
 
 function AuthMenuLayout() {
   const navigate = useNavigate();
@@ -44,7 +45,7 @@ function AuthMenuLayout() {
           <Stack flexDirection="row">
             <IconButton onClick={out}>
               <Tooltip placement="bottom" arrow title="Cerrar sesión">
-                <Icon>exit_to_app</Icon>
+                <Icon>door-exit</Icon>
               </Tooltip>
             </IconButton>
           </Stack>

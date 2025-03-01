@@ -1,4 +1,5 @@
-import { Grid2 as Grid, TextField, InputAdornment, Icon } from "@mui/material";
+import Icon from "@/components/ui/icon";
+import { Grid2 as Grid, TextField, InputAdornment } from "@mui/material";
 
 interface FiltrosProps {
   setSearch: React.Dispatch<React.SetStateAction<string>>;
@@ -15,7 +16,7 @@ function Filtros({ setSearch, buscar, search }: FiltrosProps) {
             input: {
               startAdornment: (
                 <InputAdornment position="start">
-                  <Icon>search</Icon>
+                  <Icon>user-search</Icon>
                 </InputAdornment>
               ),
             },

@@ -1,6 +1,6 @@
 import "@/styles/tables/virtualized.css";
 import useClientes from "@/core/hooks/clientes/useClientes";
-import { Box, Container, Icon, IconButton, LinearProgress, Menu, MenuItem, Paper, TableContainer } from "@mui/material";
+import { Box, Container, IconButton, LinearProgress, Menu, MenuItem, Paper, TableContainer } from "@mui/material";
 import AutoSizer from "react-virtualized-auto-sizer";
 import { Column, Table, TableCellProps } from "react-virtualized";
 import { useState } from "react";
@@ -10,6 +10,7 @@ import { ClientesResults } from "@/services/dto/clientes/clientes";
 import TableCell from "@/components/ui/tableCell";
 import Ficha from "./modals/ficha";
 import { useNavigate } from "react-router-dom";
+import Icon from "@/components/ui/icon";
 
 function ClientesList() {
   const { lista, isLoading, buscar, isPending, handleModals, modals } = useClientes();
@@ -28,7 +29,7 @@ function ClientesList() {
   const cellOptionRenderer = ({ rowData }: TableCellProps) => (
     <TableCell>
       <IconButton onClick={(event) => handleMenuOpen(event, rowData)}>
-        <Icon>more_vert</Icon>
+        <Icon>caret-down</Icon>
       </IconButton>
     </TableCell>
   );

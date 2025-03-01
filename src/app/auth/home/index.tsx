@@ -1,3 +1,4 @@
+import Icon from "@/components/ui/icon";
 import useHome from "@/core/hooks/home/useHome";
 import { useAuth } from "@/hooks/useAuth";
 import { Card, Container, Typography, Grid2 as Grid, CardContent, LinearProgress } from "@mui/material";
@@ -8,7 +9,9 @@ function Home() {
 
   return (
     <Container>
-      <h3>Hola {userData && userData.name} !</h3>
+      <h3>
+        Hola {userData && userData.name} ! <Icon>ti-dumpling</Icon>
+      </h3>
       {isLoading ? (
         <LinearProgress />
       ) : (

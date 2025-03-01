@@ -1,6 +1,7 @@
+import Icon from "@/components/ui/icon";
 import useClienteConsulta from "@/core/hooks/consultas/useClienteConsulta";
 import { format } from "@formkit/tempo";
-import { Button, Card, CardContent, Container, Grid2 as Grid, Icon, InputAdornment, LinearProgress, TextField, Typography } from "@mui/material";
+import { Button, Card, CardContent, Container, Grid2 as Grid, InputAdornment, LinearProgress, TextField, Typography } from "@mui/material";
 import { Fragment, useState } from "react";
 
 function ClientesFarma() {
