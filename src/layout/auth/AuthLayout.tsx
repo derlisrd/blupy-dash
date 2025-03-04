@@ -37,10 +37,10 @@ function AuthMenuLayout() {
       >
         <Stack justifyContent="space-between" flexDirection="row" width="100%" alignItems="center">
           <IconButton onClick={toggleMobileMenu} sx={{ minWidth: "48px", display: { xs: "block", md: "none" } }}>
-            <Icon color="primary">arrow_forward_ios</Icon>
+            <Icon>menu-2</Icon>
           </IconButton>
           <IconButton onClick={toggleMenu} sx={{ minWidth: "50px", marginLeft: margin_left, display: { xs: "none", md: "block", transition: "all 0.2s" } }}>
-            <Icon color="primary">{isOpenMenu ? "arrow_forward_ios" : "arrow_back_ios"}</Icon>
+            <Icon>menu-2</Icon>
           </IconButton>
           <Stack flexDirection="row">
             <IconButton onClick={out}>
