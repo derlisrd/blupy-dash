@@ -1,6 +1,7 @@
+import Icon from "@/components/ui/icon";
 import useLogin from "@/core/hooks/useLogin";
 import { useAuth } from "@/hooks/useAuth";
-import { TextField, Stack, Button, Typography, Container, Icon, InputAdornment, CircularProgress, Alert, IconButton } from "@mui/material";
+import { TextField, Stack, Button, Typography, Container, InputAdornment, CircularProgress, Alert, IconButton } from "@mui/material";
 
 function Login() {
   const { username, setUsername, password, setPassword, handleLogin, isLoading, error, hide, toggleHide } = useLogin();
@@ -26,7 +27,7 @@ function Login() {
                   input: {
                     startAdornment: (
                       <InputAdornment position="start">
-                        <Icon>person</Icon>
+                        <Icon size={18}>mail</Icon>
                       </InputAdornment>
                     ),
                   },
@@ -48,7 +49,7 @@ function Login() {
                   input: {
                     startAdornment: (
                       <InputAdornment position="start">
-                        <Icon>lock</Icon>
+                        <Icon size={18}>lock</Icon>
                       </InputAdornment>
                     ),
                     endAdornment: (

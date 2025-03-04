@@ -1,4 +1,4 @@
-import { Box, Container, LinearProgress, Paper, Icon, TableContainer, IconButton, Menu, MenuItem } from "@mui/material";
+import { Box, Container, LinearProgress, Paper, TableContainer, IconButton, Menu, MenuItem } from "@mui/material";
 import AutoSizer from "react-virtualized-auto-sizer";
 import { Column, Table, TableCellProps } from "react-virtualized";
 import "@/styles/tables/virtualized.css";
@@ -9,6 +9,7 @@ import Ficha from "./modal/ficha";
 import TableCell from "@/components/ui/tableCell";
 import { cellRenderer, cellRendererEstado, headerRenderer, cellRendererTipo } from "@/core/components/solicitudes/celdas";
 import Filtros from "./filtros";
+import Icon from "@/components/ui/icon";
 
 function Solicitudes() {
   const { lista, isLoading, buscar, isPending } = useSolicitudes();
@@ -38,7 +39,7 @@ function Solicitudes() {
   const cellOptionRenderer = ({ rowData }: TableCellProps) => (
     <TableCell>
       <IconButton onClick={(event) => handleMenuOpen(event, rowData)}>
-        <Icon>more_vert</Icon>
+        <Icon>caret-down</Icon>
       </IconButton>
     </TableCell>
   );

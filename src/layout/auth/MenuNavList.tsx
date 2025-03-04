@@ -1,7 +1,7 @@
 import "simplebar-react/dist/simplebar.min.css";
 import { Fragment, useState } from "react";
 import SimpleBar from "simplebar-react";
-import { Toolbar, List, ListItem, ListItemButton, ListItemText, ListItemIcon, Typography, ListItemButtonBaseProps, Stack, Avatar, Collapse } from "@mui/material";
+import { Toolbar, List, ListItem, ListItemButton, ListItemText, ListItemIcon, Typography, ListItemButtonBaseProps, Stack, Collapse } from "@mui/material";
 
 import { useLocation } from "react-router-dom";
 import { useAuth } from "@/hooks/useAuth";
@@ -54,7 +54,9 @@ const MenuNavList = ({ isMobile = false, navegar }: { isMobile?: boolean; navega
             BLUPY DASHBOARD
           </Typography>
           <Stack direction="column" justifyContent="center" alignItems="center" gap={1}>
-            <Avatar sx={{ width: 48, height: 48 }} />
+            <Icon color="white" size={64}>
+              user-circle
+            </Icon>
             <Typography variant="caption" color="primary.contrastText">
               {userData && userData.name}
             </Typography>

@@ -33,12 +33,12 @@ export default [
         submenu: [
             {
                 id: 1,
-                title: 'Consulta de firma',
+                title: 'Firma de contrato',
                 url: '/farma/consulta-firma-contratos',
             },
             {
                 id: 2,
-                title: 'Consulta de clientes',
+                title: 'Ficha de cliente',
                 url: '/farma/consulta-clientes',
             }
         ]
@@ -64,6 +64,38 @@ export default [
         icon: 'message',
         color: '#0066cc',
         url: '/ventas',
-        open: false
+        open: false,
+        submenu: [
+            {
+                id: 1,
+                title: 'Por sucursales',
+                url: '/ventas/sucursales',
+            },
+            {
+                id: 2,
+                title: 'Por clientes',
+                url: '/ventas/clientes',
+            },
+            {
+                id: 3,
+                title: 'Por productos',
+                url: '/ventas/productos',
+            },
+            {
+                id: 4,
+                title: 'Por vendedores',
+                url: '/ventas/vendedores',
+            },
+            {
+                id: 5,
+                title: 'Por fechas',
+                url: '/ventas/fechas',
+            },
+            {
+                id: 6,
+                title: 'Acumulados',
+                url: '/ventas/acumulados',
+            }
+        ]
     }
 ]

@@ -1,6 +1,7 @@
+import Icon from "@/components/ui/icon";
 import { config } from "@/constants/config";
 import useContratoConsulta from "@/core/hooks/consultas/useContratoConsulta";
-import { Button, Card, CardContent, CardMedia, Container, Grid2 as Grid, Icon, InputAdornment, LinearProgress, TextField, Typography } from "@mui/material";
+import { Button, Card, CardContent, CardMedia, Container, Grid2 as Grid, InputAdornment, LinearProgress, TextField, Typography } from "@mui/material";
 import { Fragment, useState } from "react";
 
 function Contratos() {
@@ -18,7 +19,7 @@ function Contratos() {
               input: {
                 startAdornment: (
                   <InputAdornment position="start">
-                    <Icon>search</Icon>
+                    <Icon size={18}>search</Icon>
                   </InputAdornment>
                 ),
               },

@@ -1,5 +1,6 @@
+import Icon from "@/components/ui/icon";
 import useFotoCedula from "@/core/hooks/clientes/useFotoCedula";
-import { Box, Button, Card, CardMedia, Container, Grid2 as Grid, Icon, IconButton, LinearProgress, Typography } from "@mui/material";
+import { Box, Button, Card, CardMedia, Container, Grid2 as Grid, IconButton, LinearProgress, Tooltip, Typography } from "@mui/material";
 import { Fragment } from "react";
 
 import { useLocation } from "react-router-dom";
@@ -22,18 +23,20 @@ const FotoCedula = () => {
             <Grid size={{ xs: 12, sm: 6 }}>
               <Card sx={{ position: "relative" }}>
                 <CardMedia component="img" height="280" image={imagePreview} alt="Imagen cédula" />
-                <IconButton
-                  sx={{
-                    position: "absolute",
-                    top: 5,
-                    right: 5,
-                    background: "rgba(0,0,0,0.5)",
-                    color: "white",
-                  }}
-                  onClick={removeImage}
-                >
-                  <Icon>delete</Icon>
-                </IconButton>
+                <Tooltip title="Eliminar imagen">
+                  <IconButton
+                    sx={{
+                      position: "absolute",
+                      top: 5,
+                      right: 5,
+                      background: "rgba(0,0,0,0.5)",
+                      color: "white",
+                    }}
+                    onClick={removeImage}
+                  >
+                    <Icon>camera-x</Icon>
+                  </IconButton>
+                </Tooltip>
               </Card>
             </Grid>
             <Grid size={{ xs: 12, sm: 6 }}>
@@ -44,9 +47,15 @@ const FotoCedula = () => {
           </Fragment>
         ) : (
           <Grid size={{ xs: 12 }}>
-            <Box {...getRootProps()} borderRadius={2} border={2} padding={3} sx={{ borderStyle: "dashed", cursor: "pointer" }}>
+            <Box
+              {...getRootProps()}
+              borderRadius={2}
+              border={2}
+              padding={3}
+              sx={{ borderStyle: "dashed", cursor: "pointer", flexDirection: "row", display: "flex", justifyContent: "center", alignItems: "center" }}
+            >
               <input {...getInputProps()} />
-              <Icon>cloud</Icon>
+              <Icon size={48}>upload</Icon>
               <Typography variant="h6" color="textSecondary">
                 {isDragActive ? "Suelta las imágenes aquí..." : "Arrastra y suelta imágenes aquí o haz clic para seleccionar"}
               </Typography>

@@ -1,6 +1,7 @@
+import Icon from "@/components/ui/icon";
 import { config } from "@/constants/config";
 import { ClientesResults } from "@/services/dto/clientes/clientes";
-import { Button, Dialog, DialogActions, DialogContent, DialogTitle, Grid2 as Grid, Icon, Typography } from "@mui/material";
+import { Button, Dialog, DialogActions, DialogContent, DialogTitle, Grid2 as Grid, Typography } from "@mui/material";
 
 interface FichaProps {
   open: boolean;
@@ -61,14 +62,14 @@ function Ficha({ open, onClose, fichaSeleccionada }: FichaProps) {
             {fichaSeleccionada.selfie ? (
               <img src={`${config.PATH_IMAGE}${fichaSeleccionada.selfie}`} alt="selfie" style={{ width: "256px", height: "256px", objectFit: "cover" }} />
             ) : (
-              <Icon>image</Icon>
+              <Icon size={48}>photo-scan</Icon>
             )}
           </Grid>
           <Grid size={{ xs: 12, sm: 6 }}>
             {fichaSeleccionada.foto_ci_frente ? (
               <img src={`${config.PATH_IMAGE}${fichaSeleccionada.foto_ci_frente}`} alt="cedula frente" style={{ width: "256px", height: "256px", objectFit: "cover" }} />
             ) : (
-              <Icon>image</Icon>
+              <Icon size={48}>file-type-jpg</Icon>
             )}
           </Grid>
         </Grid>

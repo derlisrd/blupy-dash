@@ -16,7 +16,7 @@ function Filtros({ setSearch, buscar, search }: FiltrosProps) {
             input: {
               startAdornment: (
                 <InputAdornment position="start">
-                  <Icon>user-search</Icon>
+                  <Icon size={18}>user-search</Icon>
                 </InputAdornment>
               ),
             },
