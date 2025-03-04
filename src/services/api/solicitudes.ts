@@ -16,7 +16,7 @@ export const solicitudesApiService = {
     },
     buscar: async(q : string,  token: string | null)=>{
         try {
-            const {data, status} = await BASE.get(`/solicitud?buscar=${q}`,{headers: { Authorization: token}})
+            const {data, status} = await BASE.get(`/solicitudes/buscar?q=${q}`,{headers: { Authorization: token}})
             return  SolicitudesResponse.fromJSON({success: true, message: '', results: data.results  , status: status})
         } catch (error) {
             if (error instanceof Error) {

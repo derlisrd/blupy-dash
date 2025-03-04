@@ -17,7 +17,7 @@ export const clientesApiService = {
     },
     buscar: async(q: string, token: string | null)=>{
         try {
-            const {data, status} = await BASE.get(`/cliente?buscar=${q}`,{headers: { Authorization: token}})
+            const {data, status} = await BASE.get(`/clientes/buscar?q=${q}`,{headers: { Authorization: token}})
             return  ClientesResponse.fromJson({success: true, message: '', results: data.results  , status: status})
         } catch (error) {
             if (error instanceof Error) {

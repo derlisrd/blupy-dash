@@ -43,11 +43,11 @@ function AuthMenuLayout() {
             <Icon>menu-2</Icon>
           </IconButton>
           <Stack flexDirection="row">
-            <IconButton onClick={out}>
-              <Tooltip placement="bottom" arrow title="Cerrar sesión">
+            <Tooltip title="Cerrar sesión">
+              <IconButton onClick={out}>
                 <Icon>door-exit</Icon>
-              </Tooltip>
-            </IconButton>
+              </IconButton>
+            </Tooltip>
           </Stack>
         </Stack>
       </Toolbar>
