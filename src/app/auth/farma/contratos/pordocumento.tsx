@@ -1,12 +1,12 @@
 import Icon from "@/components/ui/icon";
 import { config } from "@/constants/config";
 import useContratoConsulta from "@/core/hooks/consultas/useContratoConsulta";
-import { Button, Card, CardContent, CardMedia, Container, Grid2 as Grid, InputAdornment, LinearProgress, TextField, Typography } from "@mui/material";
+import { Alert, Button, Card, CardContent, CardMedia, Container, Grid2 as Grid, InputAdornment, LinearProgress, TextField, Typography } from "@mui/material";
 import { Fragment, useState } from "react";
 
 function ContratoPorDocumento() {
   const [search, setSearch] = useState("");
-  const { isPending, buscar, datos } = useContratoConsulta();
+  const { isPending, buscar, dataBuscar, aprobar } = useContratoConsulta();
 
   return (
     <Container>
@@ -38,52 +38,71 @@ function ContratoPorDocumento() {
           <Button onClick={() => buscar(search)}>Consultar</Button>
         </Grid>
       </Grid>
-      {datos && (
+      {dataBuscar && (
         <Grid container rowSpacing={2} columnSpacing={1} p={1.5}>
           <Grid size={12}>
             <Typography variant="h6">Estado de contrato</Typography>
           </Grid>
-          <Grid size={{ xs: 12, sm: 4 }}>
+          <Grid size={{ xs: 12, sm: 6, md: 6 }}>
+            {dataBuscar.cliente?.estado_id === 5 && (
+              <Button
+                onClick={() => {
+                  aprobar(dataBuscar.cliente?.codigo ?? "");
+                }}
+              >
+                Aprobar
+              </Button>
+            )}
+          </Grid>
+          <Grid size={{ xs: 12, sm: 6, md: 6 }}>
+            {dataBuscar && dataBuscar.cliente?.estado_id === 5 && <Alert severity="info"> El contrato se encuentra pendiente de activación</Alert>}
+            {dataBuscar && dataBuscar.cliente?.estado_id === 7 && <Alert severity="success"> El contrato se encuentra vigente</Alert>}
+          </Grid>
+          <Grid size={{ xs: 12, sm: 6, md: 4 }}>
             <Card sx={{ boxShadow: 3, bgcolor: "primary.contrastText" }}>
-              <CardMedia image={`${config.PATH_IMAGE}${datos.cliente?.imagenCedula}`} sx={{ height: 256 }} title="Imagen de cedula" />
+              <CardMedia image={`${config.PATH_IMAGE}${dataBuscar.cliente?.imagenCedula}`} sx={{ height: 256 }} title="Imagen de cedula" />
             </Card>
           </Grid>
-          <Grid size={{ xs: 12, sm: 4 }}>
+          <Grid size={{ xs: 12, sm: 6, md: 4 }}>
             <Card sx={{ boxShadow: 3, bgcolor: "primary.contrastText" }}>
-              <CardMedia image={`${config.PATH_IMAGE}${datos.cliente?.selfie}`} sx={{ height: 256 }} title="Imagen de cedula" />
+              <CardMedia image={`${config.PATH_IMAGE}${dataBuscar.cliente?.selfie}`} sx={{ height: 256 }} title="Imagen de cedula" />
             </Card>
           </Grid>
-          <Grid size={{ xs: 12, sm: 4 }}>
+          <Grid size={{ xs: 12, sm: 12, md: 4 }}>
             <Card sx={{ boxShadow: 3, bgcolor: "primary.contrastText" }}>
               <CardContent>
-                <Grid container rowSpacing={4}>
+                <Grid container rowSpacing={2}>
                   <Grid size={12}>
                     <Typography variant="caption">Cedula</Typography>
-                    <Typography variant="body1">{datos.cliente?.cedula}</Typography>
+                    <Typography variant="body1">{dataBuscar.cliente?.cedula}</Typography>
+                  </Grid>
+                  <Grid size={12}>
+                    <Typography variant="caption">Estado contrato</Typography>
+                    <Typography variant="body1">{dataBuscar.cliente?.estado}</Typography>
                   </Grid>
                   <Grid size={12}>
                     <Typography variant="caption">Nombre</Typography>
-                    <Typography variant="body1">{datos.cliente?.nombre}</Typography>
+                    <Typography variant="body1">{dataBuscar.cliente?.nombre}</Typography>
                   </Grid>
                   <Grid size={12}>
                     <Typography variant="caption">Celular</Typography>
-                    <Typography variant="body1">{datos.cliente?.celular}</Typography>
+                    <Typography variant="body1">{dataBuscar.cliente?.celular}</Typography>
                   </Grid>
                 </Grid>
               </CardContent>
             </Card>
           </Grid>
-          {datos.contratos?.map((item, i) => (
+          {dataBuscar.contratos?.map((item, i) => (
             <Fragment key={i}>
-              <Grid size={{ xs: 12, sm: 4 }}>
+              <Grid size={{ xs: 12, sm: 6, md: 4 }}>
                 <Card sx={{ boxShadow: 3, bgcolor: "primary.contrastText" }}>
                   <CardContent>
-                    <Typography variant="caption">Estado</Typography>
+                    <Typography variant="caption">Estado Farma</Typography>
                     <Typography variant="body1">{item.estadoContrato}</Typography>
                   </CardContent>
                 </Card>
               </Grid>
-              <Grid size={{ xs: 12, sm: 4 }}>
+              <Grid size={{ xs: 12, sm: 6, md: 4 }}>
                 <Card sx={{ boxShadow: 3, bgcolor: "primary.contrastText" }}>
                   <CardContent>
                     <Typography variant="caption">Usuario impresor</Typography>
@@ -91,7 +110,7 @@ function ContratoPorDocumento() {
                   </CardContent>
                 </Card>
               </Grid>
-              <Grid size={{ xs: 12, sm: 4 }}>
+              <Grid size={{ xs: 12, sm: 6, md: 4 }}>
                 <Card sx={{ boxShadow: 3, bgcolor: "primary.contrastText" }}>
                   <CardContent>
                     <Typography variant="caption">Sucursal</Typography>
@@ -99,7 +118,7 @@ function ContratoPorDocumento() {
                   </CardContent>
                 </Card>
               </Grid>
-              <Grid size={{ xs: 12, sm: 4 }}>
+              <Grid size={{ xs: 12, sm: 6, md: 4 }}>
                 <Card sx={{ boxShadow: 3, bgcolor: "primary.contrastText" }}>
                   <CardContent>
                     <Typography variant="caption">Codigo de contrato</Typography>
