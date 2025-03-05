@@ -8,7 +8,7 @@ function useHome() {
 
     const { data, isLoading} = useQuery({
         queryKey: ['home'],
-        queryFn: () => API.info.totales(userData && userData.tokenWithBearer),
+        queryFn: () => API.estadisticas.totales(userData && userData.tokenWithBearer),
         enabled: !!(userData && userData.token),
         staleTime: 1000 * 60 * 5,
     })

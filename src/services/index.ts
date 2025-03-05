@@ -2,14 +2,14 @@ import { authApiService } from "./api/auth";
 import { clientesApiService } from "./api/clientes";
 import { consultasApiService } from "./api/consultas";
 import { solicitudesApiService } from "./api/solicitudes";
-import { totalesApiService } from "./api/totales";
+import { estadisticasApiService } from "./api/estadisticas";
 
 
 
  const API = {
     auth : authApiService,
     clientes: clientesApiService,
-    info:  totalesApiService,
+    estadisticas:  estadisticasApiService,
     solicitudes: solicitudesApiService,
     consultas: consultasApiService
 }
