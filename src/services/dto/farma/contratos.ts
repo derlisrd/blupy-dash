@@ -114,6 +114,9 @@ export class ContratosConsultaResultsCliente {
     selfie: string;
     nombre: string;
     celular: string;
+    codigo: string;
+    estado: string;
+    estado_id: number;
 
     constructor({
       cedula = "",
@@ -122,6 +125,9 @@ export class ContratosConsultaResultsCliente {
       selfie = "",
       nombre = "",
       celular = "",
+      codigo = "",
+      estado = "",
+      estado_id = 0,
     }: Partial<ContratosConsultaResultsCliente>) {
       this.cedula = cedula;
       this.imagenCedula = imagenCedula;
@@ -129,6 +135,9 @@ export class ContratosConsultaResultsCliente {
       this.selfie = selfie;
       this.nombre = nombre;
       this.celular = celular;
+      this.codigo = codigo;
+      this.estado = estado;
+      this.estado_id = estado_id;
     }
     static fromJSON(data: any): ContratosConsultaResultsCliente {
         return new ContratosConsultaResultsCliente({
@@ -138,6 +147,9 @@ export class ContratosConsultaResultsCliente {
           selfie: data.selfie,
           nombre: data.nombre_primero + " " + data.apellido_primero,
           celular: data.celular,
+          codigo: data.codigo,
+          estado: data.estado,
+          estado_id: data.estado_id,
         });
       }
 

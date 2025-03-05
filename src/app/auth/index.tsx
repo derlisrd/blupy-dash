@@ -4,7 +4,6 @@ import Home from "./home";
 import Clientes from "./clientes";
 import LogOut from "./out";
 import Solicitudes from "./solicitudes";
-import Contratos from "./farma/consultas/contratos";
 import { lazy, LazyExoticComponent, Suspense } from "react";
 import Loading from "@/components/ui/loading";
 import EnviarNotificaciones from "./notificaciones/enviarNotificaciones";
@@ -27,8 +26,8 @@ function AuthPages() {
         <Route path="/clientes" element={<Clientes />} />
         <Route path="/clientes/foto-cedula" element={<ClientesFotoCedula />} />
         <Route path="/solicitudes" element={<Solicitudes />} />
-        <Route path="/farma/consulta-firma-contratos" element={<Contratos />} />
-        <Route path="/farma/consulta-clientes" element={<ConsultaClientesFarma />} />
+        <Route path="/farma/contratos/pordocumento" element={<ContratoPorDocumento />} />
+        <Route path="/farma/clientes/ficha" element={<FichaClienteFarma />} />
         <Route path="/notificaciones/enviar-notificaciones" element={<EnviarNotificaciones />} />
         <Route path="/logout" element={<LogOut />} />
       </Route>
@@ -37,6 +36,7 @@ function AuthPages() {
   );
 }
 const ClientesFotoCedula = Loadable(lazy(() => import("./clientes/fotocedula")));
-const ConsultaClientesFarma = Loadable(lazy(() => import("./farma/consultas/clientes")));
+const FichaClienteFarma = Loadable(lazy(() => import("./farma/clientes/ficha")));
+const ContratoPorDocumento = Loadable(lazy(() => import("./farma/contratos/pordocumento")));
 
 export default AuthPages;

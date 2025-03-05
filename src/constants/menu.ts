@@ -33,13 +33,13 @@ export default [
         submenu: [
             {
                 id: 1,
-                title: 'Firma de contrato',
-                url: '/farma/consulta-firma-contratos',
+                title: 'Contrato',
+                url: '/farma/contratos/pordocumento',
             },
             {
                 id: 2,
                 title: 'Ficha de cliente',
-                url: '/farma/consulta-clientes',
+                url: '/farma/clientes/ficha',
             }
         ]
     },

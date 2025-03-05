@@ -8,8 +8,8 @@ function useContratoConsulta() {
     const { userData } = useAuth()
 
     const {isPending, mutate, data} = useMutation({
-        mutationKey: ["consultaContrato"],
-        mutationFn: async(q: string)=> API.consultas.consultaContrato(q, userData && userData.token),
+        mutationKey: ["contratoPorDocumento"],
+        mutationFn: async(q: string)=> API.consultas.contratoPorDocumento(q, userData && userData.token),
     })
 
     

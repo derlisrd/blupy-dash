@@ -4,7 +4,7 @@ import { format } from "@formkit/tempo";
 import { Button, Card, CardContent, Container, Grid2 as Grid, InputAdornment, LinearProgress, TextField, Typography } from "@mui/material";
 import { Fragment, useState } from "react";
 
-function ClientesFarma() {
+function FichaClienteFarma() {
   const [search, setSearch] = useState("");
   const { isPending, datos, buscar } = useClienteConsulta();
 
@@ -41,7 +41,7 @@ function ClientesFarma() {
       {datos && datos.farma && (
         <Grid container rowSpacing={2} columnSpacing={1} p={1.5}>
           <Grid size={12}>
-            <Typography variant="h6">Ficha Farma</Typography>
+            <Typography variant="h6">Ficha Cliente Farma</Typography>
           </Grid>
           <Grid size={{ xs: 12, sm: 2 }}>
             <Card sx={{ boxShadow: 3, bgcolor: "primary.contrastText" }}>
@@ -152,4 +152,4 @@ function ClientesFarma() {
   );
 }
 
-export default ClientesFarma;
+export default FichaClienteFarma;

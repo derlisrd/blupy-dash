@@ -4,7 +4,7 @@ import useContratoConsulta from "@/core/hooks/consultas/useContratoConsulta";
 import { Button, Card, CardContent, CardMedia, Container, Grid2 as Grid, InputAdornment, LinearProgress, TextField, Typography } from "@mui/material";
 import { Fragment, useState } from "react";
 
-function Contratos() {
+function ContratoPorDocumento() {
   const [search, setSearch] = useState("");
   const { isPending, buscar, datos } = useContratoConsulta();
 
@@ -115,4 +115,4 @@ function Contratos() {
   );
 }
 
-export default Contratos;
+export default ContratoPorDocumento;
