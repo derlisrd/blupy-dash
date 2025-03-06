@@ -53,8 +53,13 @@ export default [
         submenu: [
             {
                 id: 1,
-                title: 'Enviar notificaciones',
-                url: '/notificaciones/enviar-notificaciones',
+                title: 'Individual',
+                url: '/notificaciones/individual',
+            },
+            {
+                id: 2,
+                title: 'Difusión',
+                url: '/notificaciones/difusion',
             }
         ]
     },
