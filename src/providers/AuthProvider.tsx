@@ -42,6 +42,14 @@ const AuthProvider = ({ children }: { children: ReactNode }) => {
       const localStorage = window.sessionStorage.getItem("userData");
       if (localStorage && localStorage !== "null") {
         const local = JSON.parse(localStorage);
+        if (!local.token) {
+          cerrarSesion();
+          return null;
+        }
+        if (isTokenExpired(local.token)) {
+          cerrarSesion();
+          return null;
+        }
         const res = await API.auth.check(local.token);
         if (!res) {
           cerrarSesion();
@@ -55,6 +63,31 @@ const AuthProvider = ({ children }: { children: ReactNode }) => {
     staleTime: 5 * 60 * 1000, // Evita reconsultas innecesarias por 5 minutos
     refetchOnWindowFocus: true,
   });
+
+  const isTokenExpired = (token: string): boolean => {
+    if (!token) return true;
+
+    try {
+      // Dividir el token en sus partes (header, payload, signature)
+      const parts = token.split(".");
+      if (parts.length !== 3) return true;
+
+      // Decodificar la parte del payload (la segunda parte)
+      const payload = JSON.parse(atob(parts[1]));
+
+      // Verificar si el token tiene un claim de expiración
+      if (!payload.exp) return false; // Sin exp, asumimos que no expira
+
+      // Convertir el tiempo actual a segundos (mismo formato que exp)
+      const currentTime = Math.floor(Date.now() / 1000);
+
+      // Comparar con el tiempo de expiración
+      return payload.exp < currentTime;
+    } catch (error) {
+      console.error("Error al verificar el token:", error);
+      return true; // Si hay un error al decodificar, asumimos que está expirado
+    }
+  };
 
   const values = {
     isAuth,
