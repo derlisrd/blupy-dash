@@ -32,14 +32,29 @@ export default [
         open: false,
         submenu: [
             {
-                id: 1,
-                title: 'Contrato',
-                url: '/farma/contratos/pordocumento',
-            },
-            {
                 id: 2,
                 title: 'Ficha de cliente',
                 url: '/farma/clientes/ficha',
+            }
+        ]
+    },
+    {
+        id: 123,
+        title: 'Contratos',
+        icon: 'file-description',
+        color: '#0066cc',
+        url: '#',
+        open: false,
+        submenu: [
+            {
+                id: 1,
+                title: 'Por documento',
+                url: '/contratos/pordocumento',
+            },
+            {
+                id: 2,
+                title: 'Por código',
+                url: '/contratos/porcodigo',
             }
         ]
     },

@@ -1,3 +1,5 @@
+import { format } from "@formkit/tempo";
+
 /* eslint-disable @typescript-eslint/no-explicit-any */
 export class ContratosConsultaResponse {
   success: boolean;
@@ -57,6 +59,7 @@ export class ContratosConsultaResultsContratos {
     cedulaCliente: string;
     valorLineaCredito: number;
     usuarioImpresor: string;
+    fechaImpresion: string;
     usuarioGenerador: string;
     usuarioEnvio: string | null;
 
@@ -71,6 +74,7 @@ export class ContratosConsultaResultsContratos {
       cedulaCliente = "",
       valorLineaCredito = 0,
       usuarioImpresor = "",
+      fechaImpresion = "",
       usuarioGenerador = "",
       usuarioEnvio = "",
     }: Partial<ContratosConsultaResultsContratos>) {
@@ -86,6 +90,7 @@ export class ContratosConsultaResultsContratos {
       this.usuarioImpresor = usuarioImpresor;
       this.usuarioGenerador = usuarioGenerador;
       this.usuarioEnvio = usuarioEnvio;
+      this.fechaImpresion = fechaImpresion;
       }
 
     static fromJSON(data: any): ContratosConsultaResultsContratos {
@@ -102,6 +107,7 @@ export class ContratosConsultaResultsContratos {
           usuarioImpresor: data.usuarioImpresor,
           usuarioGenerador: data.usuaCodigoGeneracion,
           usuarioEnvio: data.usuaCodigoEnvio,
+          fechaImpresion: format( data.micoFchImpresion,'long','es-PY' ),
         });
       }
 }
@@ -117,6 +123,7 @@ export class ContratosConsultaResultsCliente {
     codigo: string;
     estado: string;
     estado_id: number;
+    fechaSolicitud: string;
 
     constructor({
       cedula = "",
@@ -128,6 +135,7 @@ export class ContratosConsultaResultsCliente {
       codigo = "",
       estado = "",
       estado_id = 0,
+      fechaSolicitud = "",
     }: Partial<ContratosConsultaResultsCliente>) {
       this.cedula = cedula;
       this.imagenCedula = imagenCedula;
@@ -138,6 +146,7 @@ export class ContratosConsultaResultsCliente {
       this.codigo = codigo;
       this.estado = estado;
       this.estado_id = estado_id;
+      this.fechaSolicitud = fechaSolicitud;
     }
     static fromJSON(data: any): ContratosConsultaResultsCliente {
         return new ContratosConsultaResultsCliente({
@@ -150,6 +159,7 @@ export class ContratosConsultaResultsCliente {
           codigo: data.codigo,
           estado: data.estado,
           estado_id: data.estado_id,
+          fechaSolicitud: format( data.created_at,'medium','es-PY' ),
         });
       }
 

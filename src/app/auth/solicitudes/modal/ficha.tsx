@@ -40,6 +40,17 @@ function Ficha({ open, onClose, fichaSeleccionada }: FichaProps) {
 
           <Grid size={{ xs: 12, sm: 4 }}>
             <Typography display="block" variant="overline" fontSize={14}>
+              Cédula:
+            </Typography>
+          </Grid>
+          <Grid size={{ xs: 12, sm: 8 }}>
+            <Typography variant="body1" fontSize={14}>
+              {fichaSeleccionada.cedula}
+            </Typography>
+          </Grid>
+
+          <Grid size={{ xs: 12, sm: 4 }}>
+            <Typography display="block" variant="overline" fontSize={14}>
               Email:
             </Typography>
           </Grid>
