@@ -26,9 +26,9 @@ export const solicitudesApiService = {
       return new SolicitudesResponse({ success: false, message: "Error desconocido", results: [], status: 500 });
     }
   },
-  aprobarSolicitud: async (q: string, token: string | null) => {
+  aprobarSolicitud: async (codigo: string, token: string | null) => {
     try {
-      const { data, status } = await BASE.put(`/solicitudes/aprobar/${q}`, {}, { headers: { Authorization: token } });
+      const { data, status } = await BASE.post(`/solicitudes/aprobar`, {codigo: codigo}, { headers: { Authorization: token } });
       return AprobarSolicitudResponse.fromJSON({ success: true, message: data.message, status: status });
     } catch (e) {
       if (isAxiosError(e)) {

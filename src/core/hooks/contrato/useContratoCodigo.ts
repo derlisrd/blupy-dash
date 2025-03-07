@@ -19,7 +19,7 @@ function useContratoCodigo() {
                 setDataBuscar(response && response.results || null);
             } 
             if(type === "aprobar") {
-                response = await API.solicitudes.aprobarSolicitud(query, userData && userData.token);
+                response = await API.solicitudes.aprobarSolicitud(query, userData && userData.tokenWithBearer);
                 setDataAprobar(response && response);
             }
             return response;
