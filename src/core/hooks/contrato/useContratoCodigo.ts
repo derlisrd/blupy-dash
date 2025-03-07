@@ -5,7 +5,7 @@ import { AprobarSolicitudResponse } from "@/services/dto/solicitudes/aprobar";
 import { useMutation } from "@tanstack/react-query";
 import { useState } from "react";
 
-function useContratoConsulta() {
+function useContratoCodigo() {
     const { userData } = useAuth();
     const [dataBuscar, setDataBuscar] = useState<ContratosConsultaResults | null>(null);
     const [dataAprobar, setDataAprobar] = useState< AprobarSolicitudResponse | null>(null);
@@ -15,7 +15,7 @@ function useContratoConsulta() {
         mutationFn: async ({ query, type }: { query: string; type: "buscar" | "aprobar" }) => {
             let response;
             if (type === "buscar") {
-               response = await API.consultas.contratoPorDocumento(query, userData && userData.token);
+               response = await API.consultas.contratoPorCodigo(query, userData && userData.token);
                 setDataBuscar(response && response.results || null);
             } 
             if(type === "aprobar") {
@@ -32,4 +32,4 @@ function useContratoConsulta() {
     return { isPending, dataBuscar, dataAprobar, buscar, aprobar };
 }
 
-export default useContratoConsulta;
+export default useContratoCodigo;

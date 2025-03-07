@@ -1,12 +1,12 @@
 import Icon from "@/components/ui/icon";
 import { config } from "@/constants/config";
-import useContratoConsulta from "@/core/hooks/consultas/useContratoConsulta";
+import useContratoDocumento from "@/core/hooks/contrato/useContratoDocumento";
 import { Alert, Button, Card, CardContent, CardMedia, Container, Grid2 as Grid, InputAdornment, LinearProgress, TextField, Typography } from "@mui/material";
 import { Fragment, useState } from "react";
 
 function ContratoPorDocumento() {
   const [search, setSearch] = useState("");
-  const { isPending, buscar, dataBuscar, aprobar } = useContratoConsulta();
+  const { isPending, buscar, dataBuscar, aprobar } = useContratoDocumento();
 
   return (
     <Container>
@@ -45,6 +45,10 @@ function ContratoPorDocumento() {
             <Typography variant="h6">Estado de contrato</Typography>
           </Grid>
           <Grid size={{ xs: 12, sm: 6, md: 6 }}>
+            {dataBuscar && dataBuscar.cliente?.estado_id === 5 && <Alert severity="info"> El contrato se encuentra pendiente de activación</Alert>}
+            {dataBuscar && dataBuscar.cliente?.estado_id === 7 && <Alert severity="success"> El contrato se encuentra vigente</Alert>}
+          </Grid>
+          <Grid size={{ xs: 12, sm: 6, md: 6 }}>
             {dataBuscar.cliente?.estado_id === 5 && (
               <Button
                 onClick={() => {
@@ -55,10 +59,7 @@ function ContratoPorDocumento() {
               </Button>
             )}
           </Grid>
-          <Grid size={{ xs: 12, sm: 6, md: 6 }}>
-            {dataBuscar && dataBuscar.cliente?.estado_id === 5 && <Alert severity="info"> El contrato se encuentra pendiente de activación</Alert>}
-            {dataBuscar && dataBuscar.cliente?.estado_id === 7 && <Alert severity="success"> El contrato se encuentra vigente</Alert>}
-          </Grid>
+
           <Grid size={{ xs: 12, sm: 6, md: 4 }}>
             <Card sx={{ boxShadow: 3, bgcolor: "primary.contrastText" }}>
               <CardMedia image={`${config.PATH_IMAGE}${dataBuscar.cliente?.imagenCedula}`} sx={{ height: 256 }} title="Imagen de cedula" />
