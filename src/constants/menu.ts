@@ -118,8 +118,8 @@ export default [
             },
             {
                 id: 6,
-                title: 'Acumulados',
-                url: '/ventas/acumulados',
+                title: 'Acumuladas',
+                url: '/ventas/acumuladas',
             }
         ]
     }
