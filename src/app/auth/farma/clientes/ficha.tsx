@@ -1,4 +1,5 @@
 import Icon from "@/components/ui/icon";
+import FichaCard from "@/core/components/farma/fichaCard";
 import useClienteFarma from "@/core/hooks/farma/useClienteFarma";
 import { format } from "@formkit/tempo";
 import { Button, Card, CardContent, Container, Grid2 as Grid, InputAdornment, LinearProgress, TextField, Typography } from "@mui/material";
@@ -38,18 +39,38 @@ function FichaClienteFarma() {
           <Button onClick={() => buscar(search)}>Consultar</Button>
         </Grid>
       </Grid>
+      {datos && datos.micredito && (
+        <Grid container rowSpacing={2} columnSpacing={1} p={1.5}>
+          <Grid size={12}>
+            <Typography variant="h6">Ficha Cliente Micredito</Typography>
+          </Grid>
+          <Grid size={{ xs: 12, sm: 4 }}>
+            <FichaCard title="Nombre:" subtitle={datos.micredito.nombre} />
+          </Grid>
+          <Grid size={{ xs: 12, sm: 4 }}>
+            <FichaCard title="Linea:" subtitle={datos.micredito.linea.toLocaleString("es-PY", { style: "currency", currency: "PYG" })} />
+          </Grid>
+          <Grid size={{ xs: 12, sm: 4 }}>
+            <FichaCard title="Deuda:" subtitle={datos.micredito.deuda.toLocaleString("es-PY", { style: "currency", currency: "PYG" })} />
+          </Grid>
+          <Grid size={{ xs: 12, sm: 4 }}>
+            <FichaCard title="Cuenta:" subtitle={datos.micredito.cuenta} />
+          </Grid>
+          <Grid size={{ xs: 12, sm: 4 }}>
+            <FichaCard title="Número de tarjeta:" subtitle={datos.micredito.numeroTarjeta} />
+          </Grid>
+          <Grid size={{ xs: 12, sm: 4 }}>
+            <FichaCard title="Vencimiento:" subtitle={format(datos.micredito.fechaVencimiento)} />
+          </Grid>
+        </Grid>
+      )}
       {datos && datos.farma && (
         <Grid container rowSpacing={2} columnSpacing={1} p={1.5}>
           <Grid size={12}>
             <Typography variant="h6">Ficha Cliente Farma</Typography>
           </Grid>
           <Grid size={{ xs: 12, sm: 2 }}>
-            <Card sx={{ boxShadow: 3, bgcolor: "primary.contrastText" }}>
-              <CardContent>
-                <Typography variant="caption">Código</Typography>
-                <Typography variant="body1">{datos.farma.codigo}</Typography>
-              </CardContent>
-            </Card>
+            <FichaCard title="Código:" subtitle={datos.farma.codigo} />
           </Grid>
           <Grid size={{ xs: 12, sm: 4 }}>
             <Card sx={{ boxShadow: 3, bgcolor: "primary.contrastText" }}>

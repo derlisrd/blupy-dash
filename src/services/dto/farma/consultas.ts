@@ -20,16 +20,18 @@ export class ConsultaClienteResponse{
 }
 export class ConsultaClienteResults {
     farma : ConsultaClienteResultsFarma | null;
+    micredito: ConsultaClienteResultsMiCredito | null;
     registro: boolean;
-    constructor({farma = null, registro = false}: Partial<ConsultaClienteResults>) {
+    constructor({farma = null, registro = false, micredito = null}: Partial<ConsultaClienteResults>) {
         this.farma = farma;
         this.registro = registro
+        this.micredito = micredito
     }
 
     static fromJSON(data: any) : ConsultaClienteResults{
         const farma = data.farma ? ConsultaClienteResultsFarma.fromJSON(data.farma) : null
-
-        return new ConsultaClienteResults({farma, registro: data.registro})
+        const micredito = data.micredito ? ConsultaClienteResultsMiCredito.fromJSON(data.micredito) : null
+        return new ConsultaClienteResults({farma, micredito, registro: data.registro})
     } 
 }
 
@@ -87,6 +89,43 @@ export class ConsultaClienteResultsAlianzas {
             alianza: data.alianza,
             vencimiento: data.vencimiento ? data.vencimiento : null,
             formaPago: data.formaPago
+        })
+    }
+}
+
+export class ConsultaClienteResultsMiCredito {
+    cuenta: string;
+    deuda: number;
+    nombre: string;
+    tipoTarjeta: string;
+    fechaEmision: string;
+    fechaVencimiento: string;
+    pagoMinimo: number;
+    linea: number;
+    numeroTarjeta: string;
+
+    constructor({cuenta = "", numeroTarjeta='', deuda = 0, nombre = "", tipoTarjeta = "", fechaEmision = "", fechaVencimiento = "", pagoMinimo = 0, linea = 0}: Partial<ConsultaClienteResultsMiCredito>) {
+        this.cuenta = cuenta;
+        this.deuda = deuda;
+        this.nombre = nombre;
+        this.tipoTarjeta = tipoTarjeta;
+        this.fechaEmision = fechaEmision;
+        this.fechaVencimiento = fechaVencimiento;
+        this.pagoMinimo = pagoMinimo;
+        this.linea = linea;
+        this.numeroTarjeta = numeroTarjeta;
+    }
+    static fromJSON(data: any) : ConsultaClienteResultsMiCredito{
+        return new ConsultaClienteResultsMiCredito({
+            cuenta: data.MaeCtaId,
+            numeroTarjeta: data.MTNume,
+            deuda: Number(data.MTSaldo),
+            nombre: data.MTNomT,
+            tipoTarjeta: data.MTTipo,
+            fechaEmision: data.MTFEmi,
+            fechaVencimiento: data.MCProxVto,
+            pagoMinimo: Number(data.MCPagMin),
+            linea: Number(data.MTLinea)
         })
     }
 }
