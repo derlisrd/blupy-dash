@@ -11,7 +11,7 @@ function ContratoPorDocumento() {
   return (
     <Container>
       <h3>Consulta de firma de contrato por cédula</h3>
-      <Grid container p={1.5} spacing={1} alignItems="center">
+      <Grid container p={1.5} spacing={2} alignItems="center">
         <Grid size={12}>{isPending && <LinearProgress />}</Grid>
         <Grid size={{ xs: 12, sm: 6 }}>
           <TextField
@@ -36,10 +36,12 @@ function ContratoPorDocumento() {
           />
         </Grid>
         <Grid size={{ xs: 12, sm: 6 }}>
-          <Button onClick={() => buscar(search)}>Consultar</Button>
+          <Button onClick={() => buscar(search)} disabled={isPending}>
+            Consultar
+          </Button>
         </Grid>
       </Grid>
-      {dataBuscar && (
+      {dataBuscar && dataBuscar.cliente && (
         <Grid container rowSpacing={2} columnSpacing={1} p={1.5}>
           <Grid size={12}>
             <Typography variant="h6">Estado de contrato</Typography>
@@ -54,6 +56,7 @@ function ContratoPorDocumento() {
                 onClick={() => {
                   aprobar(dataBuscar.cliente?.codigo ?? "");
                 }}
+                disabled={isPending}
               >
                 Aprobar
               </Button>

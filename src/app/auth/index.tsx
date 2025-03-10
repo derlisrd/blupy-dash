@@ -30,6 +30,8 @@ function AuthPages() {
         <Route path="/contratos/porcodigo" element={<ContratoPorCodigo />} />
         <Route path="/farma/clientes/ficha" element={<FichaClienteFarma />} />
         <Route path="/notificaciones/difusion" element={<NotificacionesDifusion />} />
+        <Route path="/notificaciones/individual" element={<NotificacionesIndividual />} />
+        <Route path="/ventas/por-factura" element={<VentasPorFactura />} />
         <Route path="/logout" element={<LogOut />} />
       </Route>
       <Route path="*" element={<PageNotFound />} />
@@ -41,4 +43,6 @@ const FichaClienteFarma = Loadable(lazy(() => import("./farma/clientes/ficha")))
 const ContratoPorDocumento = Loadable(lazy(() => import("./contratos/pordocumento")));
 const ContratoPorCodigo = Loadable(lazy(() => import("./contratos/porcodigo")));
 const NotificacionesDifusion = Loadable(lazy(() => import("./notificaciones/difusion")));
+const NotificacionesIndividual = Loadable(lazy(() => import("./notificaciones/individual")));
+const VentasPorFactura = Loadable(lazy(() => import("./ventas/por-factura")));
 export default AuthPages;

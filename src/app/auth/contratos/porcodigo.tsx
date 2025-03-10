@@ -10,12 +10,12 @@ function ContratoPorCodigo() {
 
   return (
     <Container>
-      <h3>Consulta de firma de contrato por cédula</h3>
+      <h3>Consulta de firma de contrato por código</h3>
       <Grid container p={1.5} spacing={1} alignItems="center">
         <Grid size={12}>{isPending && <LinearProgress />}</Grid>
         <Grid size={{ xs: 12, sm: 6 }}>
           <TextField
-            label="Ingrese nro de cédula"
+            label="Ingrese código de contrato"
             slotProps={{
               input: {
                 startAdornment: (
@@ -25,7 +25,7 @@ function ContratoPorCodigo() {
                 ),
               },
             }}
-            placeholder="Ingrese nro de cédula"
+            placeholder="Ingrese código de contrato"
             onChange={({ target }) => {
               setSearch(target.value);
             }}
@@ -39,7 +39,7 @@ function ContratoPorCodigo() {
           <Button onClick={() => buscar(search)}>Consultar</Button>
         </Grid>
       </Grid>
-      {dataBuscar && (
+      {dataBuscar && dataBuscar.cliente && (
         <Grid container rowSpacing={2} columnSpacing={1} p={1.5}>
           <Grid size={12}>
             <Typography variant="h6">Estado de contrato</Typography>

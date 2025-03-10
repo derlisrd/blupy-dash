@@ -71,7 +71,7 @@ export class ConsultaClienteResultsFarma {
 export class ConsultaClienteResultsAlianzas {
     codigo: string;
     alianza: string;
-    vencimiento: string;
+    vencimiento: string | null;
     formaPago: string;
 
     constructor({codigo = "", alianza = "", vencimiento = "", formaPago = ""}: Partial<ConsultaClienteResultsAlianzas>) {
@@ -85,7 +85,7 @@ export class ConsultaClienteResultsAlianzas {
         return new ConsultaClienteResultsAlianzas({
             codigo: data.codigoAdicional,
             alianza: data.alianza,
-            vencimiento: data.vencimiento,
+            vencimiento: data.vencimiento ? data.vencimiento : null,
             formaPago: data.formaPago
         })
     }

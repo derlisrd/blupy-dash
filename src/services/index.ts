@@ -3,6 +3,8 @@ import { clientesApiService } from "./api/clientes";
 import { consultasApiService } from "./api/consultas";
 import { solicitudesApiService } from "./api/solicitudes";
 import { estadisticasApiService } from "./api/estadisticas";
+import { notificacionesApiService } from "./api/notificaciones";
+import { farmaApiService } from "./api/farma";
 
 
 
@@ -11,7 +13,9 @@ import { estadisticasApiService } from "./api/estadisticas";
     clientes: clientesApiService,
     estadisticas:  estadisticasApiService,
     solicitudes: solicitudesApiService,
-    consultas: consultasApiService
+    consultas: consultasApiService,
+    notificaciones: notificacionesApiService,
+    farma: farmaApiService
 }
 
 export default API;

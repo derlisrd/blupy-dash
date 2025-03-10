@@ -87,7 +87,12 @@ export default [
         open: false,
         submenu: [
             {
-                id: 1,
+                id: 10,
+                title: 'Por factura',
+                url: '/ventas/por-factura',
+            },
+            {
+                id: 10,
                 title: 'Por sucursales',
                 url: '/ventas/sucursales',
             },

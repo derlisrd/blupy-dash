@@ -1,12 +1,12 @@
 import Icon from "@/components/ui/icon";
-import useClienteConsulta from "@/core/hooks/consultas/useClienteConsulta";
+import useClienteFarma from "@/core/hooks/farma/useClienteFarma";
 import { format } from "@formkit/tempo";
 import { Button, Card, CardContent, Container, Grid2 as Grid, InputAdornment, LinearProgress, TextField, Typography } from "@mui/material";
 import { Fragment, useState } from "react";
 
 function FichaClienteFarma() {
   const [search, setSearch] = useState("");
-  const { isPending, datos, buscar } = useClienteConsulta();
+  const { isPending, datos, buscar } = useClienteFarma();
 
   return (
     <Container>
@@ -140,7 +140,7 @@ function FichaClienteFarma() {
                 <Card sx={{ boxShadow: 3, bgcolor: "primary.contrastText" }}>
                   <CardContent>
                     <Typography variant="caption">Vencimiento:</Typography>
-                    <Typography variant="body1">{format(item.vencimiento)}</Typography>
+                    <Typography variant="body1">{item.vencimiento ? format(item.vencimiento) : "31 de diciembre de 2070"}</Typography>
                   </CardContent>
                 </Card>
               </Grid>
