@@ -29,12 +29,12 @@ export const solicitudesApiService = {
   aprobarSolicitud: async (codigo: string, token: string | null) => {
     try {
       const { data, status } = await BASE.post(`/solicitudes/aprobar`, {codigo: codigo}, { headers: { Authorization: token } });
-      return AprobarSolicitudResponse.fromJSON({ success: true, message: data.message, status: status });
+      return AprobarSolicitudResponse.fromJSON({ success: true, message: data.message, status: status, results: data.results });
     } catch (e) {
       if (isAxiosError(e)) {
-        return new AprobarSolicitudResponse({ success: false, message: e.response?.data.message, status: e.response?.status || 500 });
+        return new AprobarSolicitudResponse({ success: false, message: e.response?.data.message, status: e.response?.status || 500, results: null });
       }
-      return new AprobarSolicitudResponse({ success: false, message: "Error desconocido", status: 500 });
+      return new AprobarSolicitudResponse({ success: false, message: "Error desconocido", status: 500, results: null });
     }
   }
 };

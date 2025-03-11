@@ -10,7 +10,8 @@ function useHome() {
         queryKey: ['home'],
         queryFn: () => API.estadisticas.totales(userData && userData.tokenWithBearer),
         enabled: !!(userData && userData.token),
-        staleTime: 1000 * 60 * 5,
+        staleTime: 10 * 60 * 1000, // Evita reconsultas innecesarias por 10 minutos
+        refetchOnWindowFocus: false,
     })
     return { info: data?.results, isLoading }
 }

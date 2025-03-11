@@ -11,7 +11,7 @@ function ContratoPorCodigo() {
   return (
     <Container>
       <h3>Consulta de firma de contrato por código</h3>
-      <Grid container p={1.5} spacing={1} alignItems="center">
+      <Grid container p={1.5} spacing={2} alignItems="center">
         <Grid size={12}>{isPending && <LinearProgress />}</Grid>
         <Grid size={{ xs: 12, sm: 6 }}>
           <TextField

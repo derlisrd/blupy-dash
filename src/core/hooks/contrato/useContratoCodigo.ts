@@ -6,30 +6,45 @@ import { useMutation } from "@tanstack/react-query";
 import { useState } from "react";
 
 function useContratoCodigo() {
-    const { userData } = useAuth();
-    const [dataBuscar, setDataBuscar] = useState<ContratosConsultaResults | null>(null);
-    const [dataAprobar, setDataAprobar] = useState< AprobarSolicitudResponse | null>(null);
+  const { userData } = useAuth();
+  const [dataBuscar, setDataBuscar] = useState<ContratosConsultaResults | null>(null);
+  const [dataAprobar, setDataAprobar] = useState<AprobarSolicitudResponse | null>(null);
 
-    const { isPending, mutate } = useMutation({
-        mutationKey: ["contratoPorDocumento","aprobar"],
-        mutationFn: async ({ query, type }: { query: string; type: "buscar" | "aprobar" }) => {
-            let response;
-            if (type === "buscar") {
-               response = await API.consultas.contratoPorCodigo(query, userData && userData.token);
-                setDataBuscar(response && response.results || null);
-            } 
-            if(type === "aprobar") {
-                response = await API.solicitudes.aprobarSolicitud(query, userData && userData.tokenWithBearer);
-                setDataAprobar(response && response);
-            }
-            return response;
-        },
-    });
+  const { isPending, mutate } = useMutation({
+    mutationKey: ["contratoPorDocumento", "aprobar"],
+    mutationFn: async ({ query, type }: { query: string; type: "buscar" | "aprobar" }) => {
+      let response;
+      if (type === "buscar") {
+        response = await API.consultas.contratoPorCodigo(query, userData && userData.token);
+        setDataBuscar((response && response.results) || null);
+      }
+      if (type === "aprobar") {
+        response = await API.solicitudes.aprobarSolicitud(query, userData && userData.tokenWithBearer);
+        if (response.success && response.results) {
+          const dataAntigua = dataBuscar ? { ...dataBuscar } : null;
+          // Modificar la copia, no el original
+          if (dataAntigua && dataAntigua.cliente) {
+            // Crear una copia del objeto cliente para mantener la inmutabilidad
+            dataAntigua.cliente = {
+              ...dataAntigua.cliente,
+              estado_id: response.results.estado_id,
+              estado: response.results.estado
+            };
 
-    const buscar = (q: string) => mutate({ query: q, type: "buscar" });
-    const aprobar = (codigo: string) => mutate({ query: codigo, type: "aprobar" });
+            // Actualizar el estado con la copia modificada
+            setDataBuscar(dataAntigua);
+          }
+        }
+        setDataAprobar(response);
+      }
+      return response;
+    }
+  });
 
-    return { isPending, dataBuscar, dataAprobar, buscar, aprobar };
+  const buscar = (q: string) => mutate({ query: q, type: "buscar" });
+  const aprobar = (codigo: string) => mutate({ query: codigo, type: "aprobar" });
+
+  return { isPending, dataBuscar, dataAprobar, buscar, aprobar };
 }
 
 export default useContratoCodigo;

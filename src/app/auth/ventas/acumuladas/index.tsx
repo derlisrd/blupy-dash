@@ -13,7 +13,7 @@ function VentasAcumuladas() {
 
         {data && (
           <Fragment>
-            <Grid size={{ xs: 12, sm: 6, md: 3 }}>
+            <Grid size={{ xs: 12, sm: 6, md: 6 }}>
               <FichaCard title="Totales" bold subtitle={data.total.toLocaleString("es-PY", { style: "currency", currency: "PYG" })} />
             </Grid>
             <Grid size={{ xs: 12, sm: 6, md: 3 }}>

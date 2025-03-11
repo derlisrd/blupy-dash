@@ -14,7 +14,9 @@ export function useVentasAcumuladas() {
                 return res.results
             }
             return null
-        }
+        },
+        staleTime: 30 * 60 * 1000, // Evita reconsultas innecesarias por 30 minutos
+        refetchOnWindowFocus: false,
     })
 
     
