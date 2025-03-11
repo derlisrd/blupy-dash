@@ -96,7 +96,7 @@ function AuthMenuLayout() {
           marginLeft: { xs: 0, md: margin_left },
           transition: "all 0.2s",
           bgcolor: "primary.contrastText",
-          borderRadius: 5,
+          borderRadius: 0,
           position: "relative",
           overflow: "auto",
           flexGrow: 1,
