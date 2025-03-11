@@ -6,7 +6,7 @@ import useSolicitudes from "@/core/hooks/solicitudes/useSolicitudes";
 import { useState } from "react";
 import { SolicitudesResults } from "@/services/dto/solicitudes/solicitudes";
 import Ficha from "./modal/ficha";
-import TableCell from "@/components/ui/tableCell";
+import TableCell from "@/components/ui/tablecell";
 import { cellRenderer, cellRendererEstado, headerRenderer, cellRendererTipo } from "@/core/components/solicitudes/celdas";
 import Filtros from "./filtros";
 import Icon from "@/components/ui/icon";

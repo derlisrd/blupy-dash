@@ -7,7 +7,7 @@ import { useState } from "react";
 import { cellRenderer, cellRendererAlianza, cellRendererFuncionario, headerRenderer } from "@/core/components/clientes/celdas";
 import Filtros from "./filtros";
 import { ClientesResults } from "@/services/dto/clientes/clientes";
-import TableCell from "@/components/ui/tableCell";
+import TableCell from "@/components/ui/tablecell";
 import Ficha from "./modals/ficha";
 import { useNavigate } from "react-router-dom";
 import Icon from "@/components/ui/icon";

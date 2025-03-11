@@ -1,5 +1,5 @@
-import TableCell from "@/components/ui/tableCell";
-import TableCellHead from "@/components/ui/tablecellhead";
+import TableCell from "../../../components/ui/tablecell";
+import TableCellHead from "../../../components/ui/tablecellhead";
 import { TableCellProps, TableHeaderProps } from "react-virtualized";
 
 const headerRenderer = ({ label }: TableHeaderProps) => <TableCellHead>{label}</TableCellHead>;
