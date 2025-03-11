@@ -56,7 +56,7 @@ function Home() {
             <Card sx={{ bgcolor: "white", boxShadow: 5 }}>
               <CardContent>
                 <Typography variant="overline" color="primary">
-                  Total Registros
+                  Total de usuarios
                 </Typography>
                 <Typography variant="h4" color="primary">
                   {info?.registrosTotales}
