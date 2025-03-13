@@ -33,12 +33,12 @@ export default [
         submenu: [
             {
                 id: 2,
-                title: 'Ficha de cliente',
+                title: 'Cliente por doc.',
                 url: '/farma/clientes/ficha',
             },
             {
                 id: 232,
-                title: 'Consulta por codigo',
+                title: 'Cliente por codigo',
                 url: '/farma/clientes/codigo',
             },
         ]
