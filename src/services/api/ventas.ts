@@ -27,5 +27,17 @@ export const ventasApiService = {
       }
       return new VentasAcumuladasResponse({ success: false, message: "Error desconocido", results: null, status: 500 });
     }
+  },
+  acumuladasMes: async (token: string | null) => {
+    try {
+      const { data, status } = await BASE.get("/ventas/acumulados-mes", { headers: { Authorization: `${token}` } });
+      return new VentasAcumuladasResponse({ success: true, message: "", results: data.results, status });
+    }
+    catch (error) {
+      if (error instanceof Error) {
+        return new VentasAcumuladasResponse({ success: false, message: error.message, results: null, status: 500 });
+      }
+      return new VentasAcumuladasResponse({ success: false, message: "Error desconocido", results: null, status: 500 });
+    }
   }
 }

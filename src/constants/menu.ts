@@ -118,8 +118,8 @@ export default [
             },
             {
                 id: 5,
-                title: 'Por fechas',
-                url: '/ventas/fechas',
+                title: 'Por mes',
+                url: '/ventas/acumuladas-mes',
             },
             {
                 id: 6,

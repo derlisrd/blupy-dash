@@ -34,6 +34,7 @@ function AuthPages() {
         <Route path="/notificaciones/individual" element={<NotificacionesIndividual />} />
         <Route path="/ventas/por-factura" element={<VentasPorFactura />} />
         <Route path="/ventas/acumuladas" element={<VentasAcumuladas />} />
+        <Route path="/ventas/acumuladas-mes" element={<VentasAcumuladasMes />} />
         <Route path="/logout" element={<LogOut />} />
       </Route>
       <Route path="*" element={<PageNotFound />} />
@@ -49,4 +50,5 @@ const NotificacionesDifusion = Loadable(lazy(() => import("./notificaciones/difu
 const NotificacionesIndividual = Loadable(lazy(() => import("./notificaciones/individual")));
 const VentasPorFactura = Loadable(lazy(() => import("./ventas/por-factura")));
 const VentasAcumuladas = Loadable(lazy(() => import("./ventas/acumuladas")));
+const VentasAcumuladasMes = Loadable(lazy(() => import("./ventas/acumuladas-mes")));
 export default AuthPages;
