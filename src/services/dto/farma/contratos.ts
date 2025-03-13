@@ -1,4 +1,4 @@
-import { format } from "@formkit/tempo";
+
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
 export class ContratosConsultaResponse {
@@ -107,7 +107,7 @@ export class ContratosConsultaResultsContratos {
           usuarioImpresor: data.usuarioImpresor,
           usuarioGenerador: data.usuaCodigoGeneracion,
           usuarioEnvio: data.usuaCodigoEnvio,
-          fechaImpresion: format( data.micoFchImpresion,'long','es-PY' ),
+          fechaImpresion: ( data.micoFchImpresion ),
         });
       }
 }
@@ -159,7 +159,7 @@ export class ContratosConsultaResultsCliente {
           codigo: data.codigo,
           estado: data.estado,
           estado_id: data.estado_id,
-          fechaSolicitud: format( data.created_at,'medium','es-PY' ),
+          fechaSolicitud: data.created_at,
         });
       }
 

@@ -1,6 +1,7 @@
 import Icon from "@/components/ui/icon";
 import { config } from "@/constants/config";
 import useContratoDocumento from "@/core/hooks/contrato/useContratoDocumento";
+import { format } from "@formkit/tempo";
 import { Alert, Button, Card, CardContent, CardMedia, Container, Grid2 as Grid, InputAdornment, LinearProgress, TextField, Typography } from "@mui/material";
 import { Fragment, useState } from "react";
 
@@ -105,7 +106,7 @@ function ContratoPorDocumento() {
                     <Grid size={12}>
                       <Typography variant="caption">Fecha de solicitud</Typography>
                       <Typography variant="body2" fontWeight="bold">
-                        {dataBuscar.cliente?.fechaSolicitud}
+                        {format(dataBuscar.cliente?.fechaSolicitud, "D MMM YYYY HH:mm", "es-PY")}
                       </Typography>
                     </Grid>
                   </Grid>
@@ -151,7 +152,7 @@ function ContratoPorDocumento() {
                 <Card sx={{ boxShadow: 3, bgcolor: "primary.contrastText" }}>
                   <CardContent>
                     <Typography variant="caption">Fecha de impresión</Typography>
-                    <Typography variant="body1">{item.fechaImpresion}</Typography>
+                    <Typography variant="body1">{format(item.fechaImpresion, "D MMM YYYY HH:mm", "es-PY")}</Typography>
                   </CardContent>
                 </Card>
               </Grid>
