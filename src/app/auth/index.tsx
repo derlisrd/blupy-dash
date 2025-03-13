@@ -29,6 +29,7 @@ function AuthPages() {
         <Route path="/contratos/pordocumento" element={<ContratoPorDocumento />} />
         <Route path="/contratos/porcodigo" element={<ContratoPorCodigo />} />
         <Route path="/farma/clientes/ficha" element={<FichaClienteFarma />} />
+        <Route path="/farma/clientes/codigo" element={<FichaClienteFarmaCodigo />} />
         <Route path="/notificaciones/difusion" element={<NotificacionesDifusion />} />
         <Route path="/notificaciones/individual" element={<NotificacionesIndividual />} />
         <Route path="/ventas/por-factura" element={<VentasPorFactura />} />
@@ -41,6 +42,7 @@ function AuthPages() {
 }
 const ClientesFotoCedula = Loadable(lazy(() => import("./clientes/fotocedula")));
 const FichaClienteFarma = Loadable(lazy(() => import("./farma/clientes/ficha")));
+const FichaClienteFarmaCodigo = Loadable(lazy(() => import("./farma/clientes/codigo")));
 const ContratoPorDocumento = Loadable(lazy(() => import("./contratos/pordocumento")));
 const ContratoPorCodigo = Loadable(lazy(() => import("./contratos/porcodigo")));
 const NotificacionesDifusion = Loadable(lazy(() => import("./notificaciones/difusion")));

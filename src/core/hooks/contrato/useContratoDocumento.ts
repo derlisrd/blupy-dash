@@ -8,7 +8,7 @@ import { useState } from "react";
 function useContratoDocumento() {
     const { userData } = useAuth();
     const [dataBuscar, setDataBuscar] = useState<ContratosConsultaResults | null>(null);
-    const [dataAprobar, setDataAprobar] = useState< AprobarSolicitudResponse | null>(null);
+    const [dataAprobar] = useState< AprobarSolicitudResponse | null>(null);
 
     const { isPending, mutate } = useMutation({
         mutationKey: ["contratoPorDocumento","aprobar"],
@@ -20,7 +20,18 @@ function useContratoDocumento() {
             } 
             if(type === "aprobar") {
                 response = await API.solicitudes.aprobarSolicitud(query, userData && userData.tokenWithBearer);
-                setDataAprobar(response && response);
+                if(response && response.results){
+                    const dataAntigua = dataBuscar ? {...dataBuscar} : null;
+                    // Modificar la copia, no el original
+                    if(dataAntigua && dataAntigua.cliente){
+                        // Crear una copia del objeto cliente para mantener la inmutabilidad
+                        dataAntigua.cliente = {
+                            ...dataAntigua.cliente,
+                            estado_id: response.results.estado_id,
+                            estado: response.results.estado
+                        }
+                    }
+                }
             }
             return response;
         },

@@ -35,7 +35,12 @@ export default [
                 id: 2,
                 title: 'Ficha de cliente',
                 url: '/farma/clientes/ficha',
-            }
+            },
+            {
+                id: 232,
+                title: 'Consulta por codigo',
+                url: '/farma/clientes/codigo',
+            },
         ]
     },
     {
