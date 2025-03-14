@@ -97,19 +97,14 @@ export default [
                 url: '/ventas/por-factura',
             },
             {
-                id: 10,
+                id: 34343,
                 title: 'Por sucursales',
                 url: '/ventas/sucursales',
             },
             {
-                id: 2,
-                title: 'Por clientes',
-                url: '/ventas/clientes',
-            },
-            {
-                id: 3,
-                title: 'Por productos',
-                url: '/ventas/productos',
+                id: 10,
+                title: 'Por alianzas',
+                url: '/ventas/alianzas',
             },
             {
                 id: 4,

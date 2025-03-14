@@ -1,28 +1,58 @@
+import { utils } from "@/core/helpers/utils";
 import { useAuth } from "@/hooks/useAuth";
 import API from "@/services";
-import { useQuery } from "@tanstack/react-query";
+import { VentasAcumuladasResults } from "@/services/dto/ventas/ventasAcumuladas";
+import { useMutation, useQuery } from "@tanstack/react-query";
+import { useState } from "react";
 
 export function useVentasAcumuladasMes() {
     
+    const [month,setMonth] = useState<string>(utils.getMonthFormatMM())
+    const [year,setYear] = useState<string>(utils.getYearFormatYYYY())
+    const [data, setData] = useState<VentasAcumuladasResults | null>(null)
     const {userData} = useAuth()
     
-    const {isLoading, data} = useQuery({
+    const {isLoading} = useQuery({
         queryKey: ['ventasAcumuladas'],
         queryFn: async() => {
-            const res = await API.venta.acumuladasMes(userData && userData.tokenWithBearer)
-            if(res.success){
-                return res.results
+            const periodo = `${year}-${month}`
+            const res = await API.venta.acumuladasMes( periodo, userData && userData.tokenWithBearer)
+            if(res && res.success){
+                
+                setData(res.results)
             }
             return null
         },
+        
         staleTime: 30 * 60 * 1000, // Evita reconsultas innecesarias por 30 minutos
         refetchOnWindowFocus: false,
     })
 
+    const filtrarMutate = useMutation({
+        mutationFn: async() => {
+            const periodo = `${year}-${month}`
+            const res = await API.venta.acumuladasMes( periodo, userData && userData.tokenWithBearer)
+            if(res.success){
+                return res
+            }
+            return null
+        },
+        onSettled(data) {
+            if(data && data.results && data.success){
+                setData(data.results)
+            }   
+        },
+    })
+
     
     return {
-        isLoading,
-        data
+        isLoading : isLoading || filtrarMutate.isPending,
+        data,
+        month,
+        year,
+        setMonth,
+        setYear,
+        filtrar : filtrarMutate.mutate
     }
 }
 
