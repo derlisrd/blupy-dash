@@ -14,7 +14,28 @@ export default defineConfig({
   },
   build:{
     outDir: './site',
-    emptyOutDir: true
+    emptyOutDir: true,
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          'react-vendor': ['react', 'react-dom', 'react-router-dom'],
+          "react-virtualized": ["react-virtualized"],
+          'utils-vendor': [
+            'axios', 
+            'zustand', 
+            'browser-image-compression', 
+            'react-csv',
+            'react-dropzone',
+            'sweetalert',
+            '@tanstack/react-query',
+            '@formkit/tempo'
+          ]
+        },
+        chunkFileNames: "assets/[name].[hash].js",
+        entryFileNames: "assets/[name].[hash].js",
+        assetFileNames: "assets/[name].[hash].[ext]",
+      },
+    }
   },
   resolve: {
     alias: {
