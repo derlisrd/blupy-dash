@@ -90,6 +90,15 @@ function ClientesList() {
         >
           Actualizar foto cédula
         </MenuItem>
+        <MenuItem
+          onClick={() => {
+            if (selectedRow) {
+              navigate("/clientes/cambiar-contrasena", { state: { cliente: selectedRow } });
+            }
+          }}
+        >
+          Restablecer contraseña
+        </MenuItem>
       </Menu>
       <Ficha
         open={modals.ficha}

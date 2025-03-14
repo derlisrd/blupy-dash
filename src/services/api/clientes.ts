@@ -1,6 +1,7 @@
 import { BASE } from "../base"
 import { ActualizarFotoCedulaResponse } from "../dto/clientes/actualizarFotoCedula"
 import {  ClientesResponse } from "../dto/clientes/clientes"
+import { isAxiosError } from "axios";
 
 export const clientesApiService = {
     list: async(token: string | null)=>{
@@ -36,6 +37,20 @@ export const clientesApiService = {
                 return new ActualizarFotoCedulaResponse({success: false, message: error.message, results: null, status: 500})
             }
             return new ActualizarFotoCedulaResponse({success: false, message: 'Error desconocido', results: null, status: 500})
+        }
+    },
+    restablecerContrasena: async(token : string | null, user_id: number, password: string)=>{
+        try {
+            const {data} = await BASE.put(`/clientes/restablecer-contrasena`,{
+                id: user_id,
+                password
+            },{headers: { Authorization: token}})
+            return  {success: data.success as boolean, message: data.message as string}
+        } catch (e) {
+            if (isAxiosError(e)) {
+                return  ({ success: false, message: e.response?.data.message as string})
+            }
+            return  ({success: false, message: 'Error desconocido'})
         }
     }
 }

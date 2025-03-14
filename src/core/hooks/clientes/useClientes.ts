@@ -8,7 +8,7 @@ function useClientes() {
     const {userData} = useAuth()
 
     const [modals, setModals] = useState({
-      ficha: false
+      ficha: false,
     });
     
     const handleModals = (modal: keyof typeof modals, open: boolean) => {
