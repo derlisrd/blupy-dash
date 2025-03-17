@@ -18,6 +18,20 @@ const Loadable =
     );
   };
 
+const CambiarContrasena = Loadable(lazy(() => import("./clientes/cambiar.contrasena")));
+const ClientesFotoCedula = Loadable(lazy(() => import("./clientes/fotocedula")));
+const FichaClienteFarma = Loadable(lazy(() => import("./farma/clientes/ficha")));
+const FichaClienteFarmaCodigo = Loadable(lazy(() => import("./farma/clientes/codigo")));
+const ContratoPorDocumento = Loadable(lazy(() => import("./contratos/pordocumento")));
+const ContratoPorCodigo = Loadable(lazy(() => import("./contratos/porcodigo")));
+const NotificacionesDifusion = Loadable(lazy(() => import("./notificaciones/difusion")));
+const NotificacionesIndividual = Loadable(lazy(() => import("./notificaciones/individual")));
+const VentasPorFactura = Loadable(lazy(() => import("./ventas/por-factura")));
+const VentasPorFecha = Loadable(lazy(() => import("./ventas/por-fecha")));
+const Comparativa = Loadable(lazy(() => import("./ventas/comparativa")));
+const VentasAcumuladas = Loadable(lazy(() => import("./ventas/acumuladas")));
+const VentasAcumuladasMes = Loadable(lazy(() => import("./ventas/acumuladas-mes")));
+
 function AuthPages() {
   return (
     <Routes>
@@ -34,6 +48,8 @@ function AuthPages() {
         <Route path="/notificaciones/difusion" element={<NotificacionesDifusion />} />
         <Route path="/notificaciones/individual" element={<NotificacionesIndividual />} />
         <Route path="/ventas/por-factura" element={<VentasPorFactura />} />
+        <Route path="/ventas/por-fecha" element={<VentasPorFecha />} />
+        <Route path="/ventas/comparativa" element={<Comparativa />} />
         <Route path="/ventas/acumuladas" element={<VentasAcumuladas />} />
         <Route path="/ventas/acumuladas-mes" element={<VentasAcumuladasMes />} />
         <Route path="/logout" element={<LogOut />} />
@@ -42,15 +58,5 @@ function AuthPages() {
     </Routes>
   );
 }
-const CambiarContrasena = Loadable(lazy(() => import("./clientes/cambiar.contrasena")));
-const ClientesFotoCedula = Loadable(lazy(() => import("./clientes/fotocedula")));
-const FichaClienteFarma = Loadable(lazy(() => import("./farma/clientes/ficha")));
-const FichaClienteFarmaCodigo = Loadable(lazy(() => import("./farma/clientes/codigo")));
-const ContratoPorDocumento = Loadable(lazy(() => import("./contratos/pordocumento")));
-const ContratoPorCodigo = Loadable(lazy(() => import("./contratos/porcodigo")));
-const NotificacionesDifusion = Loadable(lazy(() => import("./notificaciones/difusion")));
-const NotificacionesIndividual = Loadable(lazy(() => import("./notificaciones/individual")));
-const VentasPorFactura = Loadable(lazy(() => import("./ventas/por-factura")));
-const VentasAcumuladas = Loadable(lazy(() => import("./ventas/acumuladas")));
-const VentasAcumuladasMes = Loadable(lazy(() => import("./ventas/acumuladas-mes")));
+
 export default AuthPages;

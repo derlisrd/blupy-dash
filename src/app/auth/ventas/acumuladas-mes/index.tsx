@@ -1,5 +1,6 @@
 import FichaCard from "@/components/common/fichaCard";
 import { fechas } from "@/constants/fechas";
+import { utils } from "@/core/helpers/utils";
 import { useVentasAcumuladasMes } from "@/core/hooks/ventas/useVentasAcumuladasMes";
 
 import { Button, Container, FormControl, Grid2 as Grid, InputLabel, LinearProgress, MenuItem, Select } from "@mui/material";
@@ -28,7 +29,7 @@ function VentasAcumuladasMes() {
           <FormControl fullWidth>
             <InputLabel>Año</InputLabel>
             <Select value={year} label="Año" onChange={(event) => setYear(event.target.value)}>
-              {fechas.getYearsRange().map((year) => (
+              {utils.getYearsRange().map((year) => (
                 <MenuItem key={year.value} value={year.value}>
                   {year.name}
                 </MenuItem>

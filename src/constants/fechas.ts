@@ -16,19 +16,5 @@ export const fechas = {
             { name: 'diciembre', value: '12' }
         ];
     },
-    getYearsRange: (startYear?: number, endYear?: number) => {
-        const currentYear = new Date().getFullYear();
-        const start = startYear || currentYear - 5; // Por defecto, 5 años atrás
-        const end = endYear || currentYear + 1;     // Por defecto, hasta el próximo año
-        
-        const years = [];
-        for (let year = start; year <= end; year++) {
-            years.push({
-                name: year.toString(),
-                value: year.toString()
-            });
-        }
-        
-        return years;
-    }
+    
 }

@@ -98,8 +98,8 @@ export default [
             },
             {
                 id: 34343,
-                title: 'Por sucursales',
-                url: '/ventas/sucursales',
+                title: 'Comparativa',
+                url: '/ventas/comparativa',
             },
             {
                 id: 10,
@@ -108,8 +108,8 @@ export default [
             },
             {
                 id: 4,
-                title: 'Por vendedores',
-                url: '/ventas/vendedores',
+                title: 'Por fecha',
+                url: '/ventas/por-fecha',
             },
             {
                 id: 5,
