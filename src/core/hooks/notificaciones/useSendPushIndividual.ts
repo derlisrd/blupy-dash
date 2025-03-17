@@ -1,40 +1,38 @@
-import API from "@/services"
-import { useMutation } from "@tanstack/react-query"
+import { useAuth } from "@/hooks/useAuth";
+import API from "@/services";
+import { useMutation } from "@tanstack/react-query";
+import { useState } from "react";
+import swal from "sweetalert";
 
 function useSendPushIndividual() {
-    
-    const {isPending, mutate} = useMutation({
-        mutationFn: ({
-            to,
-            title,
-            body
-        }: {
-            to: string,
-            title: string,
-            body: string
-        }) => {
-            return API.noti.expo(to, title, body)
+  const { userData } = useAuth();
 
-        },
-        onSettled(data, error, variables, context) {
-            console.log(data, error, variables, context)
-        },
-    })
-    
-    const sendPush = async(to: string, title: string, body: string) => {
-        
-        mutate({
-            to,
-            title,
-            body
-        })
+  const [title, setTitle] = useState<string>("");
+  const [body, setBody] = useState<string>("");
 
+  const { isPending, mutate, isSuccess } = useMutation({
+    mutationFn: ({ id }: { id: number }) => {
+      return API.noti.sendIndividual({ id, title, body, token: userData && userData.tokenWithBearer });
+    },
+    onSettled(data) {
+      if(data && data.success) {
+        setTitle("");
+        setBody("");
+        swal("Notificación enviada", data.message, "success");
+      }
     }
+  });
 
+  const sendPush = async (id: number) => mutate({id});
+  
 
-    return {
-        isPending, sendPush
-    }
+  return {
+    isPending,
+    sendPush,
+    setTitle,
+    setBody,
+    isSuccess
+  };
 }
 
-export default useSendPushIndividual
+export default useSendPushIndividual;

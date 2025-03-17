@@ -1,6 +1,7 @@
-import axios from "axios"
+
 import { BASE } from "../base"
 import { FichaResponse } from "../dto/notificaciones/ficha"
+import { NotificacionResponse } from "../dto/notificaciones/notificacion"
 
 export const notificacionesApiService = {
     ficha: async( q: string, token: string | null)=>{
@@ -16,25 +17,13 @@ export const notificacionesApiService = {
     },
     sendIndividual : async ({ token, id, title, body }: { token: string | null, id: number, title: string, body: string }) => {
         try {
-            const {data, status} = await BASE.post(`/notificacion/individual`, {id, title, body}, {headers: { Authorization: token}})
-            return FichaResponse.fromJSON({success: true, message: data.message, results: data.results, status: status})
+            const {data, status} = await BASE.post(`/notificacion/individual`, {device_id: id, title, body}, {headers: { Authorization: token}})
+            return new NotificacionResponse({success: true, message: data.message, status: status})
         } catch (error) {
             if (error instanceof Error) {
-                return new FichaResponse({success: false, message: error.message, results: null, status: 500})
+                return new NotificacionResponse({success: false, message: error.message, status: 500})
             }
-            return new FichaResponse({success: false, message: 'Error desconocido', results: null, status: 500})
-        }
-    },
-    expo : async(to : Array<string> | string, title: string, body: string) => {
-        try {
-            const {data, status} = await axios.post('https://exp.host/--/api/v2/push/send',{
-                to,
-                title,
-                body
-            }, {headers: { 'Content-Type': 'application/json' }})
-            return {data, status}
-        } catch (e) {
-            return e
+            return new NotificacionResponse({success: false, message: 'Error desconocido',  status: 500})
         }
     }
 }
