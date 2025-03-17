@@ -1,3 +1,4 @@
+import axios from "axios"
 import { BASE } from "../base"
 import { FichaResponse } from "../dto/notificaciones/ficha"
 
@@ -22,6 +23,18 @@ export const notificacionesApiService = {
                 return new FichaResponse({success: false, message: error.message, results: null, status: 500})
             }
             return new FichaResponse({success: false, message: 'Error desconocido', results: null, status: 500})
+        }
+    },
+    expo : async(to : Array<string> | string, title: string, body: string) => {
+        try {
+            const {data, status} = await axios.post('https://exp.host/--/api/v2/push/send',{
+                to,
+                title,
+                body
+            }, {headers: { 'Content-Type': 'application/json' }})
+            return {data, status}
+        } catch (e) {
+            return e
         }
     }
 }

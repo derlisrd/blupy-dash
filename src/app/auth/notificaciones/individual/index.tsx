@@ -1,10 +1,11 @@
 import Icon from "@/components/ui/icon";
-import DevicesTable from "@/core/components/notificaciones/individual/devicesTable";
 import useNotificaIndividual from "@/core/hooks/notificaciones/useNotificacionIndividual";
 import { Button, Card, CardContent, Container, Grid2 as Grid, InputAdornment, LinearProgress, TextField, Typography } from "@mui/material";
+import DevicesTable from "./devices.table";
+import EnviarModal from "./enviar.modal";
 
 function Individual() {
-  const { setSearch, search, buscarFicha, cliente, isPending } = useNotificaIndividual();
+  const { setSearch, search, buscarFicha, cliente, isPending, selectedDevice, handleSelectedDevice, setSelectedDevice } = useNotificaIndividual();
 
   return (
     <Container>
@@ -91,11 +92,18 @@ function Individual() {
           </Grid>
           {cliente.devices && (
             <Grid size={{ xs: 12 }}>
-              <DevicesTable items={cliente.devices} />
+              <DevicesTable items={cliente.devices} onSelected={handleSelectedDevice} />
             </Grid>
           )}
         </Grid>
       )}
+      <EnviarModal
+        open={selectedDevice ? true : false}
+        device={selectedDevice}
+        onClose={() => {
+          setSelectedDevice(null);
+        }}
+      />
     </Container>
   );
 }

@@ -17,7 +17,8 @@ import { ventasApiService } from "./api/ventas";
     consultas: consultasApiService,
     notificaciones: notificacionesApiService,
     farma: farmaApiService,
-    venta: ventasApiService
+    venta: ventasApiService,
+    noti: notificacionesApiService
 }
 
 export default API;

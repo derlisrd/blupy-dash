@@ -1,6 +1,6 @@
 import { useAuth } from "@/hooks/useAuth";
 import API from "@/services";
-import { FichaResults } from "@/services/dto/notificaciones/ficha";
+import { FichaResults, UserDevice } from "@/services/dto/notificaciones/ficha";
 import { useMutation } from "@tanstack/react-query";
 import { useState } from "react";
 
@@ -10,6 +10,10 @@ function useNotificaIndividual() {
 
     const [cliente,setCliente] = useState<FichaResults | null>(null);
 
+    const [selectedDevice, setSelectedDevice] = useState<UserDevice | null>(null);
+
+    const handleSelectedDevice = (device: UserDevice) => setSelectedDevice(device);
+    
 
     const { isPending, mutate } = useMutation({
         mutationKey: ['buscarFicha'],
@@ -27,7 +31,7 @@ function useNotificaIndividual() {
 
     const buscarFicha = (q: string) => mutate({ query: q, type: "buscar" });
 
-    return {setSearch,search, buscarFicha, isPending, cliente}
+    return {setSearch,search, buscarFicha, isPending, cliente, selectedDevice, setSelectedDevice, handleSelectedDevice};
 }
 
 export default useNotificaIndividual

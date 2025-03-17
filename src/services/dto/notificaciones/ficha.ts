@@ -59,13 +59,15 @@ export class UserDevice{
     id: number;
     fechaIngreso: string;
     modelo: string;
+    web: boolean;
     os: string;
     dispositivo: string;
     fechaUltimaSesion: string;
     version: string;
     deviceToken: string | null;
+    expoToken: string | null;
 
-    constructor({ id = 0, fechaIngreso = '', dispositivo = '', modelo = '', os = '', fechaUltimaSesion = '', version = '', deviceToken = null }: Partial<UserDevice>){
+    constructor({ expoToken = null, web = false, id = 0, fechaIngreso = '', dispositivo = '', modelo = '', os = '', fechaUltimaSesion = '', version = '', deviceToken = null }: Partial<UserDevice>){
         this.fechaIngreso = fechaIngreso;
         this.modelo = modelo;
         this.os = os;
@@ -74,6 +76,8 @@ export class UserDevice{
         this.deviceToken = deviceToken;
         this.dispositivo = dispositivo;
         this.id = id;
+        this.expoToken = expoToken;
+        this.web = web;
     }
 
     static fromJSON(json: any): UserDevice{
@@ -85,7 +89,9 @@ export class UserDevice{
             version: json.version || '',
             deviceToken : json.device_token || null,
             dispositivo: json.device || '',
-            id: json.id || 0
+            id: json.id || 0,
+            expoToken: json.notitoken || null,
+            web: json.web === 1
         })
     }
 }
