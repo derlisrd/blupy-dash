@@ -31,7 +31,7 @@ export default defineConfig({
             '@formkit/tempo'
           ]
         },
-        chunkFileNames: "assets/[name].[hash].js",
+        chunkFileNames: "js/[name].[hash].js",
         entryFileNames: "assets/[name].[hash].js",
         assetFileNames: "assets/[name].[hash].[ext]",
       },

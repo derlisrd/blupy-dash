@@ -1,7 +1,7 @@
 import { utils } from "@/core/helpers/utils";
 import { useAuth } from "@/hooks/useAuth";
 import API from "@/services";
-import { VentasAcumuladasResults } from "@/services/dto/ventas/ventasAcumuladas";
+import { VentasAcumuladasMesResults } from "@/services/dto/ventas/ventasAcumuladosMes";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import { useState } from "react";
 
@@ -9,7 +9,7 @@ export function useVentasAcumuladasMes() {
     
     const [month,setMonth] = useState<string>(utils.getMonthFormatMM())
     const [year,setYear] = useState<string>(utils.getYearFormatYYYY())
-    const [data, setData] = useState<VentasAcumuladasResults | null>(null)
+    const [data, setData] = useState<VentasAcumuladasMesResults | null>(null)
     const {userData} = useAuth()
     
     const {isLoading} = useQuery({

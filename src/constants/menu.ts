@@ -32,6 +32,11 @@ export default [
         open: false,
         submenu: [
             {
+                id: 1,
+                title: 'Sucursales',
+                url: '/ventas/por-factura',
+            },
+            {
                 id: 2,
                 title: 'Cliente por doc.',
                 url: '/farma/clientes/ficha',
@@ -40,6 +45,11 @@ export default [
                 id: 232,
                 title: 'Cliente por codigo',
                 url: '/farma/clientes/codigo',
+            },
+            {
+                id: 212,
+                title: 'Comisiones',
+                url: '/farma/comisiones',
             },
         ]
     },
@@ -86,7 +96,7 @@ export default [
     {
         id: 6,
         title: 'Ventas',
-        icon: 'message',
+        icon: 'building-store',
         color: '#0066cc',
         url: '/ventas',
         open: false,
@@ -121,6 +131,31 @@ export default [
                 title: 'Acumuladas',
                 url: '/ventas/acumuladas',
             }
+        ]
+    },
+    {
+        id: 2423006,
+        title: 'Actualizaciones',
+        icon: 'refresh',
+        color: '#0066cc',
+        url: '/ventas',
+        open: false,
+        submenu: [
+            {
+                id: 1,
+                title: 'Sucursales',
+                url: '/actualizaciones/sucursales',
+            },
+            {
+                id: 2,
+                title: 'Perfiles Farma',
+                url: '/actualizaciones/perfiles-farma',
+            },
+            {
+                id: 3,
+                title: 'Perfiles Alianzas',
+                url: '/actualizaciones/perfiles-alianzas',
+            },
         ]
     }
 ]

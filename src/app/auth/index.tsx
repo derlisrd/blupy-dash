@@ -21,6 +21,7 @@ const Loadable =
 const CambiarContrasena = Loadable(lazy(() => import("./clientes/cambiar.contrasena")));
 const ClientesFotoCedula = Loadable(lazy(() => import("./clientes/fotocedula")));
 const FichaClienteFarma = Loadable(lazy(() => import("./farma/clientes/ficha")));
+const Comisiones = Loadable(lazy(() => import("./farma/comisiones")));
 const FichaClienteFarmaCodigo = Loadable(lazy(() => import("./farma/clientes/codigo")));
 const ContratoPorDocumento = Loadable(lazy(() => import("./contratos/pordocumento")));
 const ContratoPorCodigo = Loadable(lazy(() => import("./contratos/porcodigo")));
@@ -31,6 +32,7 @@ const VentasPorFecha = Loadable(lazy(() => import("./ventas/por-fecha")));
 const Comparativa = Loadable(lazy(() => import("./ventas/comparativa")));
 const VentasAcumuladas = Loadable(lazy(() => import("./ventas/acumuladas")));
 const VentasAcumuladasMes = Loadable(lazy(() => import("./ventas/acumuladas-mes")));
+const VentasPeriodoForma = Loadable(lazy(() => import("./ventas/periodo-forma")));
 
 function AuthPages() {
   return (
@@ -45,6 +47,7 @@ function AuthPages() {
         <Route path="/contratos/porcodigo" element={<ContratoPorCodigo />} />
         <Route path="/farma/clientes/ficha" element={<FichaClienteFarma />} />
         <Route path="/farma/clientes/codigo" element={<FichaClienteFarmaCodigo />} />
+        <Route path="/farma/comisiones" element={<Comisiones />} />
         <Route path="/notificaciones/difusion" element={<NotificacionesDifusion />} />
         <Route path="/notificaciones/individual" element={<NotificacionesIndividual />} />
         <Route path="/ventas/por-factura" element={<VentasPorFactura />} />
@@ -52,6 +55,7 @@ function AuthPages() {
         <Route path="/ventas/comparativa" element={<Comparativa />} />
         <Route path="/ventas/acumuladas" element={<VentasAcumuladas />} />
         <Route path="/ventas/acumuladas-mes" element={<VentasAcumuladasMes />} />
+        <Route path="/ventas/periodo-forma" element={<VentasPeriodoForma />} />
         <Route path="/logout" element={<LogOut />} />
       </Route>
       <Route path="*" element={<PageNotFound />} />
