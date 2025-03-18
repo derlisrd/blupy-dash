@@ -25,5 +25,16 @@ export const notificacionesApiService = {
             }
             return new NotificacionResponse({success: false, message: 'Error desconocido',  status: 500})
         }
-    }
+    },
+    sendDifusion : async ({ token, title, body }: { token: string | null,title: string, body: string }) => {
+        try {
+            const {data, status} = await BASE.post(`/notificacion/difusion`, { title, text: body}, {headers: { Authorization: token}})
+            return new NotificacionResponse({success: true, message: data.message, status: status})
+        } catch (error) {
+            if (error instanceof Error) {
+                return new NotificacionResponse({success: false, message: error.message, status: 500})
+            }
+            return new NotificacionResponse({success: false, message: 'Error desconocido',  status: 500})
+        }
+    },
 }
