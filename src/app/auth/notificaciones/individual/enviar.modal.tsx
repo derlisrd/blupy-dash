@@ -9,12 +9,13 @@ interface EnviarModalProps {
 }
 
 function EnviarModal({ open, device, onClose }: EnviarModalProps) {
-  const { isPending, sendPush, setTitle, setBody, isSuccess } = useSendPushIndividual();
+  const { isPending, sendPush, setTitle, setBody, title, body } = useSendPushIndividual();
+
   const enviarNotificacion = () => {
     if (device) {
       sendPush(device.id);
+      onClose();
     }
-    isSuccess && onClose();
   };
 
   if (!device) return null;
@@ -24,12 +25,14 @@ function EnviarModal({ open, device, onClose }: EnviarModalProps) {
       <DialogContent>
         <Grid container spacing={2} mt={1}>
           <Grid size={12}>{isPending && <LinearProgress />}</Grid>
-          <Grid size={12}>{device.os}</Grid>
           <Grid size={12}>
-            <TextField label="Título" autoFocus fullWidth onChange={({ target }) => setTitle(target.value)} />
+            {device.os} {device.dispositivo}
           </Grid>
           <Grid size={12}>
-            <TextField label="Descripción" fullWidth onChange={({ target }) => setBody(target.value)} />
+            <TextField label="Título" autoFocus value={title} fullWidth onChange={({ target }) => setTitle(target.value)} />
+          </Grid>
+          <Grid size={12}>
+            <TextField label="Descripción" value={body} fullWidth onChange={({ target }) => setBody(target.value)} />
           </Grid>
         </Grid>
       </DialogContent>

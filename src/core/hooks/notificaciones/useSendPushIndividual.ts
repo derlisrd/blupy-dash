@@ -10,7 +10,7 @@ function useSendPushIndividual() {
   const [title, setTitle] = useState<string>("");
   const [body, setBody] = useState<string>("");
 
-  const { isPending, mutate, isSuccess } = useMutation({
+  const { isPending, mutate, isSuccess,data } = useMutation({
     mutationFn: ({ id }: { id: number }) => {
       return API.noti.sendIndividual({ id, title, body, token: userData && userData.tokenWithBearer });
     },
@@ -31,7 +31,10 @@ function useSendPushIndividual() {
     sendPush,
     setTitle,
     setBody,
-    isSuccess
+    isSuccess,
+    data,
+    title,
+    body,
   };
 }
 
