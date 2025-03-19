@@ -1,43 +1,23 @@
 import FichaCard from "@/components/common/fichaCard";
-import Icon from "@/components/ui/icon";
-import useVentasPorFactura from "@/core/hooks/ventas/useVentaPorFactura";
+
+import useVentasPorCodigo from "@/core/hooks/ventas/useVentaPorCodigo";
+
 import { format } from "@formkit/tempo";
-import { Button, Container, Grid2 as Grid, InputAdornment, LinearProgress, TextField } from "@mui/material";
+import { Container, Grid2 as Grid, LinearProgress } from "@mui/material";
+import { useParams } from "react-router-dom";
 
 function VentaPorCodigo() {
-  const { search, setSearch, buscarVentaPorFactura, data, isPending } = useVentasPorFactura();
+  const { codigo = "" } = useParams();
+  const { data, isPending } = useVentasPorCodigo(codigo);
 
   return (
     <Container>
-      <h3>Venta por factura</h3>
+      <h3>Detalles de venta por codigo</h3>
 
       <Grid container spacing={2}>
         <Grid size={12}>{isPending && <LinearProgress />}</Grid>
-        <Grid size={{ xs: 12, sm: 6 }}>
-          <TextField
-            label="Ingrese código de venta"
-            slotProps={{
-              input: {
-                startAdornment: (
-                  <InputAdornment position="start">
-                    <Icon size={18}>search</Icon>
-                  </InputAdornment>
-                ),
-              },
-            }}
-            placeholder="Ingrese nro de factura"
-            onChange={({ target }) => {
-              setSearch(target.value);
-            }}
-            onKeyUp={({ key }) => {
-              if (key === "Enter") buscarVentaPorFactura(search);
-            }}
-            fullWidth
-          />
-        </Grid>
-        <Grid size={{ xs: 12, sm: 6 }}>
-          <Button onClick={() => buscarVentaPorFactura(search)}>Buscar</Button>
-        </Grid>
+        <Grid size={{ xs: 12, sm: 6 }}>Codigo: {codigo}</Grid>
+        <Grid size={{ xs: 12, sm: 6 }}></Grid>
       </Grid>
       {data && (
         <Grid container spacing={2} mt={2}>
@@ -48,7 +28,7 @@ function VentaPorCodigo() {
             <FichaCard title="Fecha de factura" subtitle={format(data.fecha, "DD MMM YYYY HH:mm", "es-PY")} />
           </Grid>
           <Grid size={{ xs: 12, sm: 6, md: 3 }}>
-            <FichaCard title="Tipo" subtitle={data.tipoVenta} />
+            <FichaCard title="Operacion" subtitle={data.operacion} />
           </Grid>
           <Grid size={{ xs: 12, sm: 6, md: 3 }}>
             <FichaCard title="Forma de pago" subtitle={data.formaPagoDescripcion} />

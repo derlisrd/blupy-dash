@@ -28,6 +28,7 @@ const ContratoPorCodigo = Loadable(lazy(() => import("./contratos/porcodigo")));
 const NotificacionesDifusion = Loadable(lazy(() => import("./notificaciones/difusion")));
 const NotificacionesIndividual = Loadable(lazy(() => import("./notificaciones/individual")));
 const VentasPorFactura = Loadable(lazy(() => import("./ventas/por-factura")));
+const VentasPorCodigo = Loadable(lazy(() => import("./ventas/por-codigo")));
 const VentasPorFecha = Loadable(lazy(() => import("./ventas/por-fecha")));
 const Comparativa = Loadable(lazy(() => import("./ventas/comparativa")));
 const VentasAcumuladas = Loadable(lazy(() => import("./ventas/acumuladas")));
@@ -51,6 +52,7 @@ function AuthPages() {
         <Route path="/notificaciones/difusion" element={<NotificacionesDifusion />} />
         <Route path="/notificaciones/individual" element={<NotificacionesIndividual />} />
         <Route path="/ventas/por-factura" element={<VentasPorFactura />} />
+        <Route path="/ventas/por-codigo/:codigo" element={<VentasPorCodigo />} />
         <Route path="/ventas/por-fecha" element={<VentasPorFecha />} />
         <Route path="/ventas/comparativa" element={<Comparativa />} />
         <Route path="/ventas/acumuladas" element={<VentasAcumuladas />} />

@@ -38,6 +38,7 @@ export class VentasPorFacturaResults {
   observaciones: string;
   descuento: number;
   bruto: number;
+  operacion: string;
 
   constructor({
     codigo = 0,
@@ -54,7 +55,8 @@ export class VentasPorFacturaResults {
     sucursal = "",
     observaciones = "",
     descuento = 0,
-    bruto = 0
+    bruto = 0,
+    operacion = "",
   }: Partial<VentasPorFacturaResults>) {
     this.codigo = codigo;
     this.factura = factura;
@@ -71,6 +73,7 @@ export class VentasPorFacturaResults {
     this.observaciones = observaciones;
     this.bruto = bruto
     this.descuento = descuento
+    this.operacion = operacion
   }
 
 
@@ -90,7 +93,8 @@ export class VentasPorFacturaResults {
       cliente: json.nombre,
       formaPagoDescripcion: json.frpaDescripcion,
       sucursal: json.estrDescripcion,
-      observaciones: json.ventObservacion
+      observaciones: json.ventObservacion,
+      operacion: json.ticoCodigo
     });
   }
 }

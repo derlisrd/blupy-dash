@@ -24,5 +24,7 @@ export const utils = {
         }
         
         return years;
-    }
+    },
+    formatPYG : (amount?: number) =>  amount?.toLocaleString("es-PY", { style: "currency", currency: "PYG" }) || "0,00 ₲",
+    formatPY: (amount?: number) =>  amount?.toLocaleString("es-PY") || "0"
 }
