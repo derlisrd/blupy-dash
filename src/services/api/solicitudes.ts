@@ -2,6 +2,7 @@ import { BASE } from "../base";
 import { isAxiosError } from "axios";
 import { AprobarSolicitudResponse } from "../dto/solicitudes/aprobar";
 import { SolicitudesResponse } from "../dto/solicitudes/solicitudes";
+import { ActualizarSolicitudResponse } from "../dto/solicitudes/actualizar.solicitud";
 
 export const solicitudesApiService = {
   list: async (token: string | null) => {
@@ -35,6 +36,17 @@ export const solicitudesApiService = {
         return new AprobarSolicitudResponse({ success: false, message: e.response?.data.message, status: e.response?.status || 500, results: null });
       }
       return new AprobarSolicitudResponse({ success: false, message: "Error desconocido", status: 500, results: null });
+    }
+  },
+  actualizarSolicitud: async (q : string , token: string | null) => {
+    try {
+      const { data, status } = await BASE.put(`/solicitudes/actualizar-solicitud`, {codigo: q}, { headers: { Authorization: token } });
+      return new ActualizarSolicitudResponse ({ success: true, message: data.message, results: data.results, status: status })
+    } catch (e) {
+      if (isAxiosError(e)) {
+        return  new ActualizarSolicitudResponse({ success: false, message: e.response?.data.message, results: null, status: e.response?.status || 500 })
+      }
+      return  new ActualizarSolicitudResponse({ success: false, message: "Error desconocido", results: null, status: 500 })
     }
   }
 };

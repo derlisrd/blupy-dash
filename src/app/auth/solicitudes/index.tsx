@@ -12,7 +12,7 @@ import Filtros from "./filtros";
 import Icon from "@/components/ui/icon";
 
 function Solicitudes() {
-  const { lista, isLoading, buscar, isPending } = useSolicitudes();
+  const { lista, isLoading, buscar, isPending, actualizar } = useSolicitudes();
 
   const [openFicha, setOpenFicha] = useState(false);
   const [search, setSearch] = useState("");
@@ -91,7 +91,7 @@ function Solicitudes() {
         >
           Ver Ficha
         </MenuItem>
-        <MenuItem onClick={() => console.log("Editar", selectedRow)}>Enviar notificación </MenuItem>
+        <MenuItem onClick={() => actualizar(selectedRow)}>Actualizar solicitud</MenuItem>
       </Menu>
       <Ficha
         open={openFicha}

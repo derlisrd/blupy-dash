@@ -66,12 +66,12 @@ function ContratoPorCodigo() {
               <CardMedia image={`${config.PATH_IMAGE}${dataBuscar.cliente?.imagenCedula}`} sx={{ height: 256 }} title="Imagen de cedula" />
             </Card>
           </Grid>
-          <Grid size={{ xs: 12, sm: 6, md: 4 }}>
+          <Grid size={{ xs: 12, sm: 6, md: 3 }}>
             <Card sx={{ boxShadow: 3, bgcolor: "primary.contrastText" }}>
               <CardMedia image={`${config.PATH_IMAGE}${dataBuscar.cliente?.selfie}`} sx={{ height: 256 }} title="Imagen de cedula" />
             </Card>
           </Grid>
-          <Grid size={{ xs: 12, sm: 12, md: 4 }}>
+          <Grid size={{ xs: 12, sm: 12, md: 5 }}>
             {dataBuscar.cliente && (
               <Card sx={{ boxShadow: 3, bgcolor: "primary.contrastText" }}>
                 <CardContent>
