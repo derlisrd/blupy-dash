@@ -10,7 +10,7 @@ function useSolicitudes() {
     const [lista,setLista] = useState<SolicitudesResults[]>([])
 
     const { isLoading  } = useQuery({
-        queryKey: ["solicitudes"],
+        queryKey: ["solicitudes", userData && userData.token],
         queryFn: async() =>  {
             const res = await API.solicitudes.list( userData && userData.tokenWithBearer )
             if(res && res.success){

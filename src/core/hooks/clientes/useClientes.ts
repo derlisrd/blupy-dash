@@ -18,7 +18,7 @@ function useClientes() {
     const [lista,setLista] = useState<ClientesResults[]>([])
 
     const { data, isLoading } = useQuery({
-        queryKey: ["clientes"],
+        queryKey: ["clientes", userData && userData.token],
         queryFn: () =>  API.clientes.list( userData && userData.tokenWithBearer ),
         enabled: !!(userData && userData.token),
         staleTime: 1000 * 60 * 5,

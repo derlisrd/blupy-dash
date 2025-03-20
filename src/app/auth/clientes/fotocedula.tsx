@@ -17,7 +17,7 @@ const FotoCedula = () => {
     <Container>
       <h2>Actualizar foto de cédula : {cliente?.cedula}</h2>
       {isPending && <LinearProgress />}
-      <Grid container spacing={1}>
+      <Grid container spacing={1} mt={2}>
         {imagePreview ? (
           <Fragment>
             <Grid size={{ xs: 12, sm: 6 }}>
