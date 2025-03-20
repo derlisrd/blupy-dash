@@ -31,11 +31,7 @@ export default [
         url: '#',
         open: false,
         submenu: [
-            {
-                id: 1,
-                title: 'Sucursales',
-                url: '/ventas/por-factura',
-            },
+            
             {
                 id: 2,
                 title: 'Cliente por doc.',
@@ -50,6 +46,11 @@ export default [
                 id: 212,
                 title: 'Comisiones',
                 url: '/farma/comisiones',
+            },
+            {
+                id: 1,
+                title: 'Sucursales',
+                url: '/farma/sucursales',
             },
         ]
     },
@@ -155,6 +156,11 @@ export default [
                 id: 3,
                 title: 'Perfiles Alianzas',
                 url: '/actualizaciones/perfiles-alianzas',
+            },
+            {
+                id: 4,
+                title: 'Ventas a fecha',
+                url: '/actualizaciones/ventas',
             },
         ]
     }

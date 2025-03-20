@@ -1,8 +1,9 @@
 import Icon from "@/components/ui/icon";
 import useNotificaIndividual from "@/core/hooks/notificaciones/useNotificacionIndividual";
-import { Button, Card, CardContent, Container, Grid2 as Grid, InputAdornment, LinearProgress, TextField, Typography } from "@mui/material";
+import { Button, Container, Grid2 as Grid, InputAdornment, LinearProgress, TextField } from "@mui/material";
 import DevicesTable from "./devices.table";
 import EnviarModal from "./enviar.modal";
+import CardCliente from "./card.cliente";
 
 function Individual() {
   const { setSearch, search, buscarFicha, cliente, isPending, selectedDevice, handleSelectedDevice, setSelectedDevice } = useNotificaIndividual();
@@ -42,53 +43,23 @@ function Individual() {
       {cliente && (
         <Grid container spacing={2} mt={2}>
           <Grid size={{ xs: 12, sm: 6, md: 6 }}>
-            <Card sx={{ boxShadow: 3, bgcolor: "primary.contrastText" }}>
-              <CardContent>
-                <Typography variant="caption">Nombre:</Typography>
-                <Typography variant="body1">{cliente.nombre}</Typography>
-              </CardContent>
-            </Card>
+            <CardCliente title="Nombre" descripcion={cliente.nombre} />
           </Grid>
 
           <Grid size={{ xs: 12, sm: 6, md: 6 }}>
-            <Card sx={{ boxShadow: 3, bgcolor: "primary.contrastText" }}>
-              <CardContent>
-                <Typography variant="caption">Correo:</Typography>
-                <Typography variant="body1">{cliente.email}</Typography>
-              </CardContent>
-            </Card>
+            <CardCliente title="Correo" descripcion={cliente.email} />
           </Grid>
           <Grid size={{ xs: 12, sm: 6, md: 3 }}>
-            <Card sx={{ boxShadow: 3, bgcolor: "primary.contrastText" }}>
-              <CardContent>
-                <Typography variant="caption">Cliente ID:</Typography>
-                <Typography variant="body1">{cliente.cliente_id}</Typography>
-              </CardContent>
-            </Card>
+            <CardCliente title="Cliente ID:" descripcion={String(cliente.cliente_id)} />
           </Grid>
           <Grid size={{ xs: 12, sm: 6, md: 3 }}>
-            <Card sx={{ boxShadow: 3, bgcolor: "primary.contrastText" }}>
-              <CardContent>
-                <Typography variant="caption">User ID:</Typography>
-                <Typography variant="body1">{cliente.user_id}</Typography>
-              </CardContent>
-            </Card>
+            <CardCliente title="User ID:" descripcion={String(cliente.user_id)} />
           </Grid>
           <Grid size={{ xs: 12, sm: 6, md: 3 }}>
-            <Card sx={{ boxShadow: 3, bgcolor: "primary.contrastText" }}>
-              <CardContent>
-                <Typography variant="caption">Cedula:</Typography>
-                <Typography variant="body1">{cliente.cedula}</Typography>
-              </CardContent>
-            </Card>
+            <CardCliente title="Cédula" descripcion={cliente.cedula} />
           </Grid>
           <Grid size={{ xs: 12, sm: 6, md: 3 }}>
-            <Card sx={{ boxShadow: 3, bgcolor: "primary.contrastText" }}>
-              <CardContent>
-                <Typography variant="caption">Teléfono:</Typography>
-                <Typography variant="body1">{cliente.celular}</Typography>
-              </CardContent>
-            </Card>
+            <CardCliente title="Telefono:" descripcion={cliente.celular} />
           </Grid>
           {cliente.devices && (
             <Grid size={{ xs: 12 }}>
