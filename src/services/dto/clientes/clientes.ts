@@ -41,6 +41,7 @@ export class ClientesResults {
   vendedor_id: number;
   created_at: string;
   fecha: string;
+  codigo_farma: string | null;
 
   constructor({
     fecha = "",
@@ -59,7 +60,8 @@ export class ClientesResults {
     id_micredito = "",
     user_id = 0,
     vendedor_id = 0,
-    created_at = ""
+    created_at = "",
+    codigo_farma = null,
   }: Partial<ClientesResults>) {
     this.id = id;
     this.name = name;
@@ -78,6 +80,7 @@ export class ClientesResults {
     this.vendedor_id = vendedor_id;
     this.created_at = created_at;
     this.fecha = fecha;
+    this.codigo_farma = codigo_farma;
   }
 
   static fromJSON(data: Partial<ClientesResults>): ClientesResults {
