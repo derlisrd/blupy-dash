@@ -120,7 +120,7 @@ export class ConsultaClienteResultsMiCredito {
             cuenta: data.MaeCtaId,
             numeroTarjeta: data.MTNume,
             deuda: Number(data.MTSaldo),
-            nombre: data.MTNomT,
+            nombre: data.MTNomT as string,
             tipoTarjeta: data.MTTipo,
             fechaEmision: data.MTFEmi,
             fechaVencimiento: data.MCProxVto,

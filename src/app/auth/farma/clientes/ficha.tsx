@@ -60,7 +60,12 @@ function FichaClienteFarma() {
             <FichaCard title="Número de tarjeta:" subtitle={datos.micredito.numeroTarjeta} />
           </Grid>
           <Grid size={{ xs: 12, sm: 4 }}>
-            <FichaCard title="Vencimiento:" subtitle={format(datos.micredito.fechaVencimiento)} />
+            <FichaCard
+              title="Vencimiento:"
+              subtitle={
+                datos.micredito.fechaVencimiento && datos.micredito.fechaVencimiento !== "0000-00-00" ? format(datos.micredito.fechaVencimiento) : "Sin fecha de vencimiento"
+              }
+            />
           </Grid>
         </Grid>
       )}
