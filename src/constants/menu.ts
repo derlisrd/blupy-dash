@@ -160,7 +160,7 @@ export default [
             {
                 id: 4,
                 title: 'Ventas a fecha',
-                url: '/actualizaciones/ventas',
+                url: '/actualizaciones/ventas-fecha',
             },
         ]
     }

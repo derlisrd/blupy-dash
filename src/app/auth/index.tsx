@@ -34,6 +34,7 @@ const Comparativa = Loadable(lazy(() => import("./ventas/comparativa")));
 const VentasAcumuladas = Loadable(lazy(() => import("./ventas/acumuladas")));
 const VentasAcumuladasMes = Loadable(lazy(() => import("./ventas/acumuladas-mes")));
 const VentasPeriodoForma = Loadable(lazy(() => import("./ventas/periodo-forma")));
+const VentasFecha = Loadable(lazy(() => import("./actualizaciones/ventas-fecha")));
 
 function AuthPages() {
   return (
@@ -58,6 +59,7 @@ function AuthPages() {
         <Route path="/ventas/acumuladas" element={<VentasAcumuladas />} />
         <Route path="/ventas/acumuladas-mes" element={<VentasAcumuladasMes />} />
         <Route path="/ventas/periodo-forma" element={<VentasPeriodoForma />} />
+        <Route path="/actualizaciones/ventas-fecha" element={<VentasFecha />} />
         <Route path="/logout" element={<LogOut />} />
       </Route>
       <Route path="*" element={<PageNotFound />} />

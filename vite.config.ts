@@ -22,7 +22,6 @@ export default defineConfig({
           "react-virtualized": ["react-virtualized"],
           'utils-vendor': [
             'axios', 
-            'zustand', 
             'browser-image-compression', 
             'react-csv',
             'react-dropzone',
