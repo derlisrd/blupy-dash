@@ -14,10 +14,10 @@ function ResultadosVentas({ data, periodo }: ResultadosVentasProps) {
   const formatPYG = (amount?: number) => {
     return amount?.toLocaleString("es-PY", { style: "currency", currency: "PYG" }) || "0,00 ₲";
   };
-  const navegar = (codigo?: number, alianza?: boolean) => {
+  const navegar = (codigo?: number, alianza?: boolean, descripcion?: string) => {
     if (!codigo) return;
     const alianzaStr = alianza ? "1" : "0";
-    navigate(`/ventas/periodo-forma?codigo=${codigo}&periodo=${periodo}&alianza=${alianzaStr}`);
+    navigate(`/ventas/periodo-forma?codigo=${codigo}&periodo=${periodo}&alianza=${alianzaStr}&descripcion=${descripcion}`);
   };
 
   if (!data) return <Fragment></Fragment>;
@@ -34,7 +34,7 @@ function ResultadosVentas({ data, periodo }: ResultadosVentasProps) {
           subtitle={formatPYG(data.blupyDigital?.total)}
           actions
           onClickButtonActions={() => {
-            navegar(data.blupyDigital?.codigo, data.blupyDigital?.alianza);
+            navegar(data.blupyDigital?.codigo, data.blupyDigital?.alianza, data.blupyDigital?.descripcion);
           }}
         />
       </Grid>
@@ -45,7 +45,7 @@ function ResultadosVentas({ data, periodo }: ResultadosVentasProps) {
           subtitle={formatPYG(data.blupy1DiaFuncionarios?.total)}
           actions
           onClickButtonActions={() => {
-            navegar(data.blupy1DiaFuncionarios?.codigo, data.blupy1DiaFuncionarios?.alianza);
+            navegar(data.blupy1DiaFuncionarios?.codigo, data.blupy1DiaFuncionarios?.alianza, data.blupyDigital?.descripcion);
           }}
         />
       </Grid>
@@ -56,7 +56,7 @@ function ResultadosVentas({ data, periodo }: ResultadosVentasProps) {
           subtitle={formatPYG(data.blupy1DiaAlianzas?.total)}
           actions
           onClickButtonActions={() => {
-            navegar(data.blupy1DiaAlianzas?.codigo, data.blupy1DiaAlianzas?.alianza);
+            navegar(data.blupy1DiaAlianzas?.codigo, data.blupy1DiaAlianzas?.alianza, data.blupyDigital?.descripcion);
           }}
         />
       </Grid>
@@ -67,7 +67,7 @@ function ResultadosVentas({ data, periodo }: ResultadosVentasProps) {
           subtitle={formatPYG(data.blupy3Cuotas?.total)}
           actions
           onClickButtonActions={() => {
-            navegar(data.blupy3Cuotas?.codigo, data.blupy3Cuotas?.alianza);
+            navegar(data.blupy3Cuotas?.codigo, data.blupy3Cuotas?.alianza, data.blupyDigital?.descripcion);
           }}
         />
       </Grid>
@@ -78,7 +78,7 @@ function ResultadosVentas({ data, periodo }: ResultadosVentasProps) {
           subtitle={formatPYG(data.blupy3CuotasAlianza?.total)}
           actions
           onClickButtonActions={() => {
-            navegar(data.blupy3CuotasAlianza?.codigo, data.blupy3CuotasAlianza?.alianza);
+            navegar(data.blupy3CuotasAlianza?.codigo, data.blupy3CuotasAlianza?.alianza, data.blupyDigital?.descripcion);
           }}
         />
       </Grid>
@@ -89,7 +89,7 @@ function ResultadosVentas({ data, periodo }: ResultadosVentasProps) {
           subtitle={formatPYG(data.blupy4CuotasAlianza?.total)}
           actions
           onClickButtonActions={() => {
-            navegar(data.blupy4CuotasAlianza?.codigo, data.blupy4CuotasAlianza?.alianza);
+            navegar(data.blupy4CuotasAlianza?.codigo, data.blupy4CuotasAlianza?.alianza, data.blupyDigital?.descripcion);
           }}
         />
       </Grid>

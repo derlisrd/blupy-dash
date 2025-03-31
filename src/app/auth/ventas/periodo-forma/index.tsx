@@ -15,6 +15,7 @@ function VentasPorFechaForma() {
 
   // Obtener parámetros individuales
   const forma_codigo = searchParams.get("codigo") || "";
+  const descripcion = searchParams.get("descripcion") || "";
   const periodo = searchParams.get("periodo") || "";
   const alianza = searchParams.get("alianza") || "";
 
@@ -57,12 +58,22 @@ function VentasPorFechaForma() {
   return (
     <Container>
       <Grid container spacing={2} my={1}>
-        <Grid size={{ xs: 12, sm: 4 }}>
+        <Grid size={{ xs: 12, sm: 3 }}>
           <Alert severity="info" icon={false}>
             <strong>Periodo: {format(periodo, "MMMM YYYY")}</strong>
           </Alert>
         </Grid>
-        <Grid size={{ xs: 12, sm: 4 }}>
+        <Grid size={{ xs: 12, sm: 3 }}>
+          <Alert severity="info" icon={false}>
+            <strong>Forma Pago: {descripcion}</strong>
+          </Alert>
+        </Grid>
+        <Grid size={{ xs: 12, sm: 3 }}>
+          <Alert severity="info" icon={false}>
+            <strong>Total: {utils.formatPYG(total)}</strong>
+          </Alert>
+        </Grid>
+        <Grid size={{ xs: 12, sm: 3 }}>
           <Alert severity="info" icon={false}>
             <strong>Total: {utils.formatPYG(total)}</strong>
           </Alert>

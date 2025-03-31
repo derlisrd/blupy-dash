@@ -2,6 +2,7 @@ import { useAuth } from "@/hooks/useAuth"
 import { actualizacionesApiService } from "@/services/api/actualizaciones"
 import { useMutation } from "@tanstack/react-query"
 import { useState } from "react"
+import swal from "sweetalert"
 
 function useVentasActualizaciones() {
     
@@ -12,6 +13,9 @@ function useVentasActualizaciones() {
         mutationKey: ['ventas', 'actualizar'],
         mutationFn: async () => {
             const res = await actualizacionesApiService.ventas(fecha, userData && userData.tokenWithBearer)
+            if(res && res.success){
+                swal({title: 'Actualización de ventas', text: res.message, icon: 'success'})
+            }
             return res
         }
     })
