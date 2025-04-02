@@ -99,6 +99,7 @@ function ClientesList() {
         >
           Restablecer contraseña
         </MenuItem>
+        <MenuItem onClick={() => {}}>{selectedRow?.active ? "Desactivar" : "Activar"} usuario</MenuItem>
       </Menu>
       <Ficha
         open={modals.ficha}
