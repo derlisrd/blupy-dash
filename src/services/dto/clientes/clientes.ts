@@ -87,6 +87,7 @@ export class ClientesResults {
     
     return new ClientesResults({
         ...data,
+        active: data.active ?? 0,
         fecha: format(data.created_at ?? new Date(), {date: 'medium', time: 'short'}, 'es-ES')
     });
   }

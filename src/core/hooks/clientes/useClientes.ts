@@ -36,10 +36,21 @@ function useClientes() {
         }
     });
 
-    
+    const cambiarEstado = useMutation({
+      mutationFn: (id: number) => API.clientes.cambiarEstado(userData && userData.tokenWithBearer, id),
+      onError: (error) => {
+          console.log(error)
+      },
+      onSettled: (data) => {
+          console.log(data)
+      }
+  });
 
     const buscar = (q: string) => {mutate(q)}
     
+    const cambiarEstadoCliente = (id: number) => {
+      cambiarEstado.mutate(id)
+    }
 
     useEffect(() => {
       if (data) {
@@ -47,7 +58,7 @@ function useClientes() {
       }
     }, [data]);
     
-    return {lista, isLoading, isPending, buscar, modals, handleModals}
+    return {lista, isLoading, isPending, buscar, modals, handleModals,cambiarEstadoCliente}
 }
 
 export default useClientes;

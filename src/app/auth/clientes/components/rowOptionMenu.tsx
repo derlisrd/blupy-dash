@@ -10,6 +10,8 @@ interface RowOptionsMenuProps {
   open: boolean;
   onClose: () => void;
   options: MenuOption[];
+  /*   selectedRow: ClientesResults | null;
+  onToggleActive?: (row: ClientesResults) => void; */
 }
 
 function RowOptionsMenu({ anchorEl, open, onClose, options }: RowOptionsMenuProps) {

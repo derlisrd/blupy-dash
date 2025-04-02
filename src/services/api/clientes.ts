@@ -52,5 +52,16 @@ export const clientesApiService = {
             }
             return  ({success: false, message: 'Error desconocido'})
         }
+    },
+    cambiarEstado: async(token: string | null, id: number)=>{
+        try {
+            const {data} = await BASE.put(`/clientes/estado`,{id},{headers: { Authorization: token}})
+            return  {success: data.success as boolean, message: data.message as string}
+        } catch (e) {
+            if (isAxiosError(e)) {
+                return  ({ success: false, message: e.response?.data.message as string})
+            }
+            return  ({success: false, message: 'Error desconocido'})
+        }
     }
 }

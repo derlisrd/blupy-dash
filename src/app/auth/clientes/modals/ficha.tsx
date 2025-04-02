@@ -12,10 +12,20 @@ interface FichaProps {
 function Ficha({ open, onClose, fichaSeleccionada }: FichaProps) {
   if (!fichaSeleccionada) return null;
   return (
-    <Dialog open={open} onClose={onClose} fullWidth>
+    <Dialog open={open} onClose={onClose} fullWidth autoFocus disableAutoFocus={false}>
       <DialogTitle>Ficha de cliente</DialogTitle>
       <DialogContent>
         <Grid container spacing={1}>
+          <Grid size={{ xs: 12, sm: 4 }}>
+            <Typography variant="overline" display="block" fontSize={14}>
+              Estado:
+            </Typography>
+          </Grid>
+          <Grid size={{ xs: 12, sm: 8 }}>
+            <Typography variant="overline" fontSize={14}>
+              {fichaSeleccionada.active === 1 ? "Activo" : "Inactivo"}
+            </Typography>
+          </Grid>
           <Grid size={{ xs: 12, sm: 4 }}>
             <Typography variant="overline" sx={{ textDecoration: "underline" }} display="block" fontSize={14}>
               Documento:
