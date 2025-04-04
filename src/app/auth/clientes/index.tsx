@@ -1,21 +1,21 @@
 import "@/styles/tables/virtualized.css";
-import useClientes from "@/core/hooks/clientes/useClientes";
 import { Box, Container, IconButton, LinearProgress, Link, Paper, TableContainer } from "@mui/material";
-import AutoSizer from "react-virtualized-auto-sizer";
 import { Column, Table, TableCellProps } from "react-virtualized";
 import { useState } from "react";
 import { cellRenderer, cellRendererAlianza, cellRendererFuncionario, headerRenderer } from "@/core/components/clientes/celdas";
-import Filtros from "./filtros";
 import { ClientesResults } from "@/services/dto/clientes/clientes";
+import { useNavigate } from "react-router-dom";
+import { ColumnConfigType } from "./types/column.config";
+import useClientes from "@/core/hooks/clientes/useClientes";
+import AutoSizer from "react-virtualized-auto-sizer";
+import Filtros from "./filtros";
 import TableCell from "@/components/ui/tableCell";
 import Ficha from "./modals/ficha";
-import { useNavigate } from "react-router-dom";
-import Icon from "@/components/ui/icon";
-import { ColumnConfigType } from "./types/column.config";
 import RowOptionsMenu from "./components/rowOptionMenu";
+import Icon from "@/components/ui/icon";
 
 function ClientesList() {
-  const { lista, isLoading, buscar, isPending, handleModals, modals, cambiarEstadoCliente } = useClientes();
+  const { lista, isLoading, buscar, isPending, handleModals, modals, cambiarEstadoCliente, refetch } = useClientes();
   const [search, setSearch] = useState("");
   const navigate = useNavigate();
   const listado = lista?.filter((cliente) => cliente.name.toLowerCase().includes(search.toLowerCase()) || cliente.cedula.includes(search)) || [];
@@ -101,7 +101,7 @@ function ClientesList() {
         <LinearProgress />
       ) : (
         <Box boxShadow={6} borderRadius={4} component={Paper}>
-          <Filtros setSearch={setSearch} buscar={buscar} search={search} />
+          <Filtros setSearch={setSearch} buscar={buscar} search={search} refresh={refetch} />
           <TableContainer component={Paper} sx={{ borderRadius: 0, border: 0, boxShadow: 0, minHeight: `calc(100% - 160px)` }}>
             {listado && (
               <AutoSizer>

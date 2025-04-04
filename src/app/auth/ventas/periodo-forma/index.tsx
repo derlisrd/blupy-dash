@@ -1,6 +1,6 @@
 import { useAuth } from "@/hooks/useAuth";
 import API from "@/services";
-import { Container, Typography, LinearProgress, Alert, Grid2 as Grid } from "@mui/material";
+import { Container, Typography, LinearProgress, Alert, Grid2 as Grid, TextField } from "@mui/material";
 import { useQuery } from "@tanstack/react-query";
 import { useSearchParams } from "react-router-dom";
 import TableResults from "./table.results";
@@ -11,9 +11,9 @@ import { format } from "@formkit/tempo";
 function VentasPorFechaForma() {
   const [searchParams] = useSearchParams();
   const { userData } = useAuth();
-  const [total, setTotal] = useState(0);
+  const [search, setSearch] = useState("");
+  const [filtroFecha, setFiltroFecha] = useState("");
 
-  // Obtener parámetros individuales
   const forma_codigo = searchParams.get("codigo") || "";
   const descripcion = searchParams.get("descripcion") || "";
   const periodo = searchParams.get("periodo") || "";
@@ -30,11 +30,6 @@ function VentasPorFechaForma() {
         periodo,
         alianza,
       });
-      let suma = 0;
-      res.results?.forEach((item) => {
-        suma += item.importe;
-      });
-      setTotal(suma);
       return res && res.results;
     },
     enabled: queryEnabled && !!userData?.tokenWithBearer,
@@ -54,32 +49,35 @@ function VentasPorFechaForma() {
       </Container>
     );
   }
+  const filtroIdentificacion = data?.filter((elm) => elm.documento.toLowerCase().includes(search.toLowerCase()) || elm.factura.includes(search)) || [];
+
+  const listado = filtroFecha === "" ? filtroIdentificacion : filtroIdentificacion.filter((elm) => elm.fechaSimple?.toLowerCase().includes(filtroFecha.toLowerCase()));
+
+  const total = listado?.reduce((acc, item) => acc + item.importe, 0) || 0;
 
   return (
     <Container>
-      <Grid container spacing={2} my={1}>
+      <Grid container spacing={2} my={1} alignItems="center">
         <Grid size={{ xs: 12, sm: 3 }}>
           <Alert severity="info" icon={false}>
-            <strong>Periodo: {format(periodo, "MMMM YYYY")}</strong>
-          </Alert>
-        </Grid>
-        <Grid size={{ xs: 12, sm: 3 }}>
-          <Alert severity="info" icon={false}>
-            <strong>Forma Pago: {descripcion}</strong>
-          </Alert>
-        </Grid>
-        <Grid size={{ xs: 12, sm: 3 }}>
-          <Alert severity="info" icon={false}>
-            <strong>Total: {utils.formatPYG(total)}</strong>
+            <strong>
+              {format(periodo, "MMMM YYYY")} {descripcion}
+            </strong>
           </Alert>
         </Grid>
         <Grid size={{ xs: 12, sm: 3 }}>
           <Alert severity="info" icon={false}>
             <strong>Total: {utils.formatPYG(total)}</strong>
           </Alert>
+        </Grid>
+        <Grid size={{ xs: 12, sm: 3 }}>
+          <TextField placeholder="Filtrar por cédula o factura" fullWidth value={search} onChange={({ target }) => setSearch(target.value)} variant="outlined" size="small" />
+        </Grid>
+        <Grid size={{ xs: 12, sm: 3 }}>
+          <TextField type="date" size="small" value={filtroFecha} onChange={({ target }) => setFiltroFecha(target.value)} variant="outlined" fullWidth />
         </Grid>
       </Grid>
-      {isLoading ? <LinearProgress /> : <TableResults data={data || []} />}
+      {isLoading ? <LinearProgress /> : <TableResults data={listado || []} />}
     </Container>
   );
 }

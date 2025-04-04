@@ -33,11 +33,13 @@ export class VentasPeriodoFormaResults {
     forma_codigo: number;
     importe: number;
     fecha: string;
+    fechaRaw: string;
+    fechaSimple: string;
     adicional: string | null;
     sucursal: string;
     operacion: string | null;
 
-    constructor({ id= 0, codigo = '', factura = '', documento ='',forma_codigo=0,importe=0, fecha='',adicional=null, sucursal='', operacion =null  } : Partial<VentasPeriodoFormaResults>) {
+    constructor({ id= 0, codigo = '', factura = '', documento ='',forma_codigo=0,importe=0, fecha='', fechaRaw='',fechaSimple='',adicional=null, sucursal='', operacion =null  } : Partial<VentasPeriodoFormaResults>) {
         this.id = id;
         this.codigo = codigo;
         this.factura = factura;
@@ -48,6 +50,8 @@ export class VentasPeriodoFormaResults {
         this.adicional = adicional;
         this.sucursal = sucursal;
         this.operacion = operacion;
+        this.fechaRaw = fechaRaw;
+        this.fechaSimple = fechaSimple
     }
     static fromJSON(json: any): VentasPeriodoFormaResults {
         return new VentasPeriodoFormaResults({
@@ -58,6 +62,8 @@ export class VentasPeriodoFormaResults {
             forma_codigo: json.forma_codigo,
             importe: json.importe_final,
             fecha: format(json.fecha, 'DD MMM YY HH:mm'),
+            fechaSimple: format(json.fecha, 'YYYY-MM-DD'),
+            fechaRaw: json.fecha,
             adicional: json.adicional,
             sucursal: json.sucursal,
             operacion: json.operacion

@@ -1,15 +1,16 @@
 import Icon from "@/components/ui/icon";
-import { Grid2 as Grid, TextField, InputAdornment } from "@mui/material";
+import { Grid2 as Grid, TextField, InputAdornment, Button } from "@mui/material";
 
 interface FiltrosProps {
   setSearch: React.Dispatch<React.SetStateAction<string>>;
   buscar: (q: string) => void;
   search: string;
+  refresh?: () => void;
 }
 
-function Filtros({ setSearch, buscar, search }: FiltrosProps) {
+function Filtros({ setSearch, buscar, search, refresh }: FiltrosProps) {
   return (
-    <Grid container p={1.5} spacing={0}>
+    <Grid container p={1.5} spacing={0.5} alignItems="center">
       <Grid size={{ xs: 12, md: 4 }}>
         <TextField
           slotProps={{
@@ -32,7 +33,17 @@ function Filtros({ setSearch, buscar, search }: FiltrosProps) {
           fullWidth
         />
       </Grid>
-      <Grid size={{ xs: 12, md: 4 }}></Grid>
+      <Grid size={{ xs: 12, md: 4 }}>
+        <Button
+          variant="contained"
+          onClick={() => {
+            refresh && refresh();
+            setSearch("");
+          }}
+        >
+          Refrescar lista
+        </Button>
+      </Grid>
     </Grid>
   );
 }

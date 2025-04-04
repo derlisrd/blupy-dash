@@ -17,7 +17,7 @@ function useClientes() {
     
     const [lista,setLista] = useState<ClientesResults[]>([])
 
-    const { data, isLoading } = useQuery({
+    const { data, isLoading, refetch } = useQuery({
         queryKey: ["clientes", userData && userData.token],
         queryFn: () =>  API.clientes.list( userData && userData.tokenWithBearer ),
         enabled: !!(userData && userData.token),
@@ -41,8 +41,16 @@ function useClientes() {
       onError: (error) => {
           console.log(error)
       },
-      onSettled: (data) => {
-          console.log(data)
+      onSettled: (data,error,id) => {
+        
+         if(data && data.success && !error){
+          const copiaLista = [...lista]
+          const findUser = copiaLista.find((cliente) => cliente.user_id === id);
+         if (findUser) {
+            findUser.active = findUser.active === 1 ? 0 : 1;
+            setLista(copiaLista);
+          }
+         }
       }
   });
 
@@ -58,7 +66,7 @@ function useClientes() {
       }
     }, [data]);
     
-    return {lista, isLoading, isPending, buscar, modals, handleModals,cambiarEstadoCliente}
+    return {lista, isLoading, isPending, buscar, modals, handleModals,cambiarEstadoCliente, refetch}
 }
 
 export default useClientes;
