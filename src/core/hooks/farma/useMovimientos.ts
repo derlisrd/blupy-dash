@@ -12,7 +12,7 @@ function useMovimientos() {
   const [movimientos,setMovimientos] = useState<MovimientosResults[]>([]);
 
   const { mutate, isPending } = useMutation({
-    mutationFn: async({ periodo }: { periodo: string }) => API.farma.movimientos({ cedula, periodo, token: userData && userData?.tokenWithBearer }),
+    mutationFn: async() => API.farma.movimientos({ cedula, periodo, token: userData && userData?.tokenWithBearer }),
     onSettled(data) {
       //console.log(data, error, variables, context);
       if (data && data.results) {
@@ -25,9 +25,10 @@ function useMovimientos() {
     if (cedula.length < 4) return setError({ code: 1, message: "Cedula invalida" });
     if (periodo.length < 6) return setError({ code: 2, message: "Periodo invalido" });
     setError({ code: 0, message: "" });
-    const nuevoPeriodoSplit = periodo.split("-");
-    const nuevoPeriodo = `${nuevoPeriodoSplit[1]}-${nuevoPeriodoSplit[0]}`;
-    mutate({ periodo: nuevoPeriodo });
+    /* const nuevoPeriodoSplit = periodo.split("-");
+    const nuevoPeriodo = `${nuevoPeriodoSplit[1]}-${nuevoPeriodoSplit[0]}`; */
+    //mutate({ periodo: periodo });
+    mutate()
   };
 
   return { consultar, periodo, setPeriodo, cedula, setCedula, error, isPending,movimientos };

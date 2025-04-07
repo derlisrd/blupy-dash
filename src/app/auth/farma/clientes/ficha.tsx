@@ -44,14 +44,17 @@ function FichaClienteFarma() {
           <Grid size={12}>
             <Typography variant="h6">Ficha Cliente Micredito</Typography>
           </Grid>
-          <Grid size={{ xs: 12, sm: 4 }}>
+          <Grid size={{ xs: 12, sm: 3 }}>
             <FichaCard title="Nombre:" subtitle={datos.micredito.nombre} />
           </Grid>
-          <Grid size={{ xs: 12, sm: 4 }}>
+          <Grid size={{ xs: 12, sm: 3 }}>
             <FichaCard title="Linea:" subtitle={datos.micredito.linea.toLocaleString("es-PY", { style: "currency", currency: "PYG" })} />
           </Grid>
-          <Grid size={{ xs: 12, sm: 4 }}>
+          <Grid size={{ xs: 12, sm: 3 }}>
             <FichaCard title="Deuda:" subtitle={datos.micredito.deuda.toLocaleString("es-PY", { style: "currency", currency: "PYG" })} />
+          </Grid>
+          <Grid size={{ xs: 12, sm: 3 }}>
+            <FichaCard title="Minimo:" subtitle={datos.micredito.pagoMinimo.toLocaleString("es-PY", { style: "currency", currency: "PYG" })} />
           </Grid>
           <Grid size={{ xs: 12, sm: 4 }}>
             <FichaCard title="Cuenta:" subtitle={datos.micredito.cuenta} />

@@ -52,11 +52,6 @@ export default [
                 title: 'Comisiones',
                 url: '/farma/comisiones',
             },
-            {
-                id: 1,
-                title: 'Sucursales',
-                url: '/farma/sucursales',
-            },
         ]
     },
     {

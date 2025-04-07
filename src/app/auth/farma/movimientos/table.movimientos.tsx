@@ -15,7 +15,7 @@ const cellRenderer = ({ cellData }: TableCellProps) => <TableCell>{cellData}</Ta
 function TableMovimientos({ data }: TableMovimientosProps) {
   return (
     <Box boxShadow={6} borderRadius={4} component={Paper}>
-      <TableContainer component={Paper} sx={{ borderRadius: 0, border: 0, boxShadow: 0, minHeight: `calc(100% - 100px)` }}>
+      <TableContainer component={Paper} sx={{ borderRadius: 0, border: 0, boxShadow: 0, minHeight: `calc(100% - 160px)` }}>
         <AutoSizer>
           {({ height, width }) => (
             <Table

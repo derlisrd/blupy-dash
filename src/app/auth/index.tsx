@@ -7,6 +7,8 @@ import Solicitudes from "./solicitudes";
 import { lazy, LazyExoticComponent, Suspense } from "react";
 import Loading from "@/components/ui/loading";
 import PageNotFound from "../404";
+import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
+import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 
 const Loadable =
   <T extends object>(Component: LazyExoticComponent<() => JSX.Element>) =>
@@ -39,33 +41,35 @@ const Movimientos = Loadable(lazy(() => import("./farma/movimientos")));
 
 function AuthPages() {
   return (
-    <Routes>
-      <Route path="/" element={<AuthMenuLayout />}>
-        <Route index element={<Home />} />
-        <Route path="/clientes" element={<Clientes />} />
-        <Route path="/clientes/foto-cedula" element={<ClientesFotoCedula />} />
-        <Route path="/clientes/cambiar-contrasena" element={<CambiarContrasena />} />
-        <Route path="/solicitudes" element={<Solicitudes />} />
-        <Route path="/contratos/pordocumento" element={<ContratoPorDocumento />} />
-        <Route path="/contratos/porcodigo" element={<ContratoPorCodigo />} />
-        <Route path="/farma/clientes/ficha" element={<FichaClienteFarma />} />
-        <Route path="/farma/clientes/codigo" element={<FichaClienteFarmaCodigo />} />
-        <Route path="/farma/comisiones" element={<Comisiones />} />
-        <Route path="/notificaciones/difusion" element={<NotificacionesDifusion />} />
-        <Route path="/notificaciones/individual" element={<NotificacionesIndividual />} />
-        <Route path="/ventas/por-factura" element={<VentasPorFactura />} />
-        <Route path="/ventas/por-codigo/:codigo" element={<VentasPorCodigo />} />
-        <Route path="/ventas/por-fecha" element={<VentasPorFecha />} />
-        <Route path="/ventas/comparativa" element={<Comparativa />} />
-        <Route path="/ventas/acumuladas" element={<VentasAcumuladas />} />
-        <Route path="/ventas/acumuladas-mes" element={<VentasAcumuladasMes />} />
-        <Route path="/ventas/periodo-forma" element={<VentasPeriodoForma />} />
-        <Route path="/actualizaciones/ventas-fecha" element={<VentasFecha />} />
-        <Route path="/farma/movimientos" element={<Movimientos />} />
-        <Route path="/logout" element={<LogOut />} />
-      </Route>
-      <Route path="*" element={<PageNotFound />} />
-    </Routes>
+    <LocalizationProvider dateAdapter={AdapterDayjs}>
+      <Routes>
+        <Route path="/" element={<AuthMenuLayout />}>
+          <Route index element={<Home />} />
+          <Route path="/clientes" element={<Clientes />} />
+          <Route path="/clientes/foto-cedula" element={<ClientesFotoCedula />} />
+          <Route path="/clientes/cambiar-contrasena" element={<CambiarContrasena />} />
+          <Route path="/solicitudes" element={<Solicitudes />} />
+          <Route path="/contratos/pordocumento" element={<ContratoPorDocumento />} />
+          <Route path="/contratos/porcodigo" element={<ContratoPorCodigo />} />
+          <Route path="/farma/clientes/ficha" element={<FichaClienteFarma />} />
+          <Route path="/farma/clientes/codigo" element={<FichaClienteFarmaCodigo />} />
+          <Route path="/farma/comisiones" element={<Comisiones />} />
+          <Route path="/notificaciones/difusion" element={<NotificacionesDifusion />} />
+          <Route path="/notificaciones/individual" element={<NotificacionesIndividual />} />
+          <Route path="/ventas/por-factura" element={<VentasPorFactura />} />
+          <Route path="/ventas/por-codigo/:codigo" element={<VentasPorCodigo />} />
+          <Route path="/ventas/por-fecha" element={<VentasPorFecha />} />
+          <Route path="/ventas/comparativa" element={<Comparativa />} />
+          <Route path="/ventas/acumuladas" element={<VentasAcumuladas />} />
+          <Route path="/ventas/acumuladas-mes" element={<VentasAcumuladasMes />} />
+          <Route path="/ventas/periodo-forma" element={<VentasPeriodoForma />} />
+          <Route path="/actualizaciones/ventas-fecha" element={<VentasFecha />} />
+          <Route path="/farma/movimientos" element={<Movimientos />} />
+          <Route path="/logout" element={<LogOut />} />
+        </Route>
+        <Route path="*" element={<PageNotFound />} />
+      </Routes>
+    </LocalizationProvider>
   );
 }
 
