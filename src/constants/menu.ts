@@ -43,6 +43,11 @@ export default [
                 url: '/farma/clientes/codigo',
             },
             {
+                id: 287,
+                title: 'Movimientos',
+                url: '/farma/movimientos',
+            },
+            {
                 id: 212,
                 title: 'Comisiones',
                 url: '/farma/comisiones',
