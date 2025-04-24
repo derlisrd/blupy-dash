@@ -37,4 +37,15 @@ export const notificacionesApiService = {
             return new NotificacionResponse({success: false, message: 'Error desconocido',  status: 500})
         }
     },
+    enviarSMS: async({ token, number, text }: { token: string | null, number: string, text: string })=>{
+        try {
+            const {data, status} = await BASE.post(`/notificacion/enviar-sms`, { number, text}, {headers: { Authorization: token}})
+            return  ({success: true, message: data.message, status: status})
+        } catch (error) {
+            if (error instanceof Error) {
+                return  ({success: false, message: error.message, status: 500})
+            }
+            return  ({success: false, message: 'Error desconocido',  status: 500})
+        }
+    }
 }

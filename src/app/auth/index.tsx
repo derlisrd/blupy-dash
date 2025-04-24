@@ -38,6 +38,7 @@ const VentasAcumuladasMes = Loadable(lazy(() => import("./ventas/acumuladas-mes"
 const VentasPeriodoForma = Loadable(lazy(() => import("./ventas/periodo-forma")));
 const VentasFecha = Loadable(lazy(() => import("./actualizaciones/ventas-fecha")));
 const Movimientos = Loadable(lazy(() => import("./farma/movimientos")));
+const SMS = Loadable(lazy(() => import("./notificaciones/sms")));
 
 function AuthPages() {
   return (
@@ -56,6 +57,7 @@ function AuthPages() {
           <Route path="/farma/comisiones" element={<Comisiones />} />
           <Route path="/notificaciones/difusion" element={<NotificacionesDifusion />} />
           <Route path="/notificaciones/individual" element={<NotificacionesIndividual />} />
+          <Route path="/notificaciones/sms" element={<SMS />} />
           <Route path="/ventas/por-factura" element={<VentasPorFactura />} />
           <Route path="/ventas/por-codigo/:codigo" element={<VentasPorCodigo />} />
           <Route path="/ventas/por-fecha" element={<VentasPorFecha />} />

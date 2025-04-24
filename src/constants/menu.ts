@@ -92,6 +92,12 @@ export default [
                 title: 'Difusión',
                 url: '/notificaciones/difusion',
             }
+            ,
+            {
+                id: 3,
+                title: 'Enviar SMS',
+                url: '/notificaciones/sms',
+            }
         ]
     },
     {
