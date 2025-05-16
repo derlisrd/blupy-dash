@@ -4,7 +4,7 @@ import TableMovimientos from "./table.movimientos";
 import { DatePicker } from "@mui/x-date-pickers";
 
 function Movimientos() {
-  const { setCedula, setPeriodo, consultar, error, isPending, movimientos } = useMovimientos();
+  const { setCedula, setPeriodo, consultar, error, isPending, movimientos, total } = useMovimientos();
 
   return (
     <Container>
@@ -34,11 +34,12 @@ function Movimientos() {
             }}
           />
         </Grid>
-        <Grid size={{ xs: 12, sm: 4 }}>
+        <Grid size={{ xs: 12, sm: 2 }}>
           <Button size="large" onClick={consultar} disabled={isPending}>
             Consultar
           </Button>
         </Grid>
+        <Grid size={{ xs: 12, sm: 2 }}>Total: {total.toLocaleString("es-PY")}</Grid>
       </Grid>
       {movimientos.length > 0 && <TableMovimientos data={movimientos} />}
     </Container>

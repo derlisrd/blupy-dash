@@ -14,7 +14,7 @@ const cellRenderer = ({ cellData }: TableCellProps) => <TableCell>{cellData}</Ta
 
 function TableMovimientos({ data }: TableMovimientosProps) {
   return (
-    <Box boxShadow={6} borderRadius={4} component={Paper}>
+    <Box boxShadow={5} borderRadius={4} component={Paper}>
       <TableContainer component={Paper} sx={{ borderRadius: 0, border: 0, boxShadow: 0, minHeight: `calc(100% - 160px)` }}>
         <AutoSizer>
           {({ height, width }) => (
@@ -31,7 +31,13 @@ function TableMovimientos({ data }: TableMovimientosProps) {
               <Column headerRenderer={headerRenderer} cellRenderer={cellRenderer} dataKey="comercio" label="comercio" width={width * 0.3} />
               <Column headerRenderer={headerRenderer} cellRenderer={cellRenderer} dataKey="descripcion" label="descripcion" width={width * 0.3} />
               <Column headerRenderer={headerRenderer} cellRenderer={cellRenderer} dataKey="detalles" label="detalles" width={width * 0.3} />
-              <Column headerRenderer={headerRenderer} cellRenderer={cellRenderer} dataKey="monto" label="monto" width={width * 0.3} />
+              <Column
+                headerRenderer={headerRenderer}
+                dataKey="monto"
+                label="monto"
+                width={width * 0.3}
+                cellRenderer={({ cellData }: TableCellProps) => <TableCell>{cellData.toLocaleString("es-PY")}</TableCell>}
+              />
             </Table>
           )}
         </AutoSizer>

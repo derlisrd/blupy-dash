@@ -10,6 +10,7 @@ function useMovimientos() {
   const [cedula, setCedula] = useState<string>("");
   const [error, setError] = useState({ code: 0, message: "" });
   const [movimientos,setMovimientos] = useState<MovimientosResults[]>([]);
+  const [total,setTotal] = useState(0);
 
   const { mutate, isPending } = useMutation({
     mutationFn: async() => API.farma.movimientos({ cedula, periodo, token: userData && userData?.tokenWithBearer }),
@@ -17,6 +18,8 @@ function useMovimientos() {
       //console.log(data, error, variables, context);
       if (data && data.results) {
         setMovimientos(data.results);
+        const newTotal = data.results.reduce((acumulador, movimiento) => acumulador + movimiento.monto, 0);
+        setTotal(newTotal);
       }
     }
   });
@@ -31,7 +34,7 @@ function useMovimientos() {
     mutate()
   };
 
-  return { consultar, periodo, setPeriodo, cedula, setCedula, error, isPending,movimientos };
+  return { consultar, periodo, setPeriodo, cedula, setCedula, error, isPending,movimientos, total };
 }
 
 export default useMovimientos;
