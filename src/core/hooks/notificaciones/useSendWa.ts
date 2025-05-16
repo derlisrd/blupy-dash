@@ -4,31 +4,31 @@ import { useMutation } from "@tanstack/react-query";
 import { useState } from "react";
 import swal from "sweetalert";
 
-function useSendPushIndividual() {
+function useSendWa() {
   const { userData } = useAuth();
   const [error, setError] = useState({ code: 0, message: "" });
   const [title, setTitle] = useState<string>("");
   const [body, setBody] = useState<string>("");
 
   const { isPending, mutate, isSuccess,data } = useMutation({
-    mutationFn: ({ id }: { id: number }) => {
-      return API.noti.sendIndividual({ id, title, body, token: userData && userData.tokenWithBearer });
+    mutationFn: ({ number}: {number : string }) => {
+      return API.noti.sendWa({ number, title, body, token: userData && userData.tokenWithBearer });
     },
     onSettled(data) {
       if(data && data.success) {
         setTitle("");
         setBody("");
-        swal("Notificación enviada", data.message, "success");
+        swal("Mensaje ha sido enviado", data.message, "success");
       }
     }
   });
 
-  const sendPush = async (id: number) => mutate({id});
+  const sendWa = async (number: string) => mutate({number});
   
 
   return {
     isPending,
-    sendPush,
+    sendWa,
     setTitle,
     setBody,
     isSuccess,
@@ -39,4 +39,4 @@ function useSendPushIndividual() {
   };
 }
 
-export default useSendPushIndividual;
+export default useSendWa;

@@ -1,13 +1,15 @@
 import Icon from "@/components/ui/icon";
 import { UserDevice } from "@/services/dto/notificaciones/ficha";
-import { IconButton, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Tooltip } from "@mui/material";
+import { IconButton, Stack, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Tooltip } from "@mui/material";
+import { useNotificationHook } from "./provider";
 
 interface DevicesTableProps {
   items: UserDevice[];
-  onSelected: (device: UserDevice) => void;
+  //onSelected: (device: UserDevice) => void;
 }
 
-function DevicesTable({ items, onSelected }: DevicesTableProps) {
+function DevicesTable({ items }: DevicesTableProps) {
+  const { handleModal, setSelectedDevice } = useNotificationHook();
   return (
     <TableContainer sx={{ mt: 2 }}>
       <Table>
@@ -30,15 +32,28 @@ function DevicesTable({ items, onSelected }: DevicesTableProps) {
               <TableCell>{item.version}</TableCell>
               <TableCell>{item.fechaUltimaSesion}</TableCell>
               <TableCell>
-                <Tooltip title="Enviar Notificación" arrow>
-                  <IconButton
-                    onClick={() => {
-                      onSelected(item);
-                    }}
-                  >
-                    <Icon>brand-telegram</Icon>
-                  </IconButton>
-                </Tooltip>
+                <Stack direction="row" spacing={0}>
+                  <Tooltip title="Enviar Notificación" arrow>
+                    <IconButton
+                      onClick={() => {
+                        setSelectedDevice(item);
+                        handleModal("push");
+                      }}
+                    >
+                      <Icon>brand-telegram</Icon>
+                    </IconButton>
+                  </Tooltip>
+                  <Tooltip title="Enviar whatsapp" arrow>
+                    <IconButton
+                      onClick={() => {
+                        setSelectedDevice(item);
+                        handleModal("wa");
+                      }}
+                    >
+                      <Icon>brand-whatsapp</Icon>
+                    </IconButton>
+                  </Tooltip>
+                </Stack>
               </TableCell>
             </TableRow>
           ))}
