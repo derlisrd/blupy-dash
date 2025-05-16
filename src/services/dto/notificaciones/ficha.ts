@@ -31,8 +31,9 @@ export class FichaResults{
     email: string;
     cedula: string;
     devices: Array<UserDevice> | null;
+    micredito : MiCreditoFicha | null;
 
-    constructor({ cliente_id = 0, user_id = 0, nombre = '', celular = '', email = '', cedula = '', devices = null }: Partial<FichaResults>){
+    constructor({ cliente_id = 0, user_id = 0, nombre = '', celular = '', email = '', cedula = '', devices = null, micredito = null }: Partial<FichaResults>){
         this.cliente_id = cliente_id;
         this.user_id = user_id;
         this.nombre = nombre;
@@ -40,18 +41,43 @@ export class FichaResults{
         this.email = email;
         this.cedula = cedula;
         this.devices = devices;
+        this.micredito = micredito;
     }
 
     static fromJSON(json: any): FichaResults{
         return new FichaResults({
-            cliente_id: json.cliente_id || 0,
-            user_id: json.user_id || 0,
-            nombre: json.name || "",
-            celular: json.celular || "",
-            email: json.email || "",
-            cedula: json.cedula || "",
-            devices: json.devices ? json.devices.map((item: any) => UserDevice.fromJSON(item)) : null  
-        })
+          cliente_id: json.cliente_id || 0,
+          user_id: json.user_id || 0,
+          nombre: json.name || "",
+          celular: json.celular || "",
+          email: json.email || "",
+          cedula: json.cedula || "",
+          devices: json.devices ? json.devices.map((item: any) => UserDevice.fromJSON(item)) : null,
+          micredito: json.micredito ? MiCreditoFicha.fromJSON(json.micredito) : null
+        });
+    }
+}
+
+export class MiCreditoFicha{
+    pagoMinimo: number;
+    deuda: number;
+    fechaVencimiento: string;
+    cuenta: string;
+
+    constructor({ pagoMinimo = 0, deuda = 0, fechaVencimiento = '', cuenta = '' }: Partial<MiCreditoFicha>){
+        this.pagoMinimo = pagoMinimo;
+        this.deuda = deuda;
+        this.fechaVencimiento = fechaVencimiento;
+        this.cuenta = cuenta;
+    }
+
+    static fromJSON(json: any): MiCreditoFicha{
+        return new MiCreditoFicha({
+            pagoMinimo: Number(json.MCPagMin) || 0,
+            deuda: Number(json.MTSaldo) || 0,
+            fechaVencimiento: json.MCProxVto || "",
+            cuenta: json.MaeCtaId || ""
+        });
     }
 }
 

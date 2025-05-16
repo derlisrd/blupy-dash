@@ -1,6 +1,6 @@
 import useSendPushIndividual from "@/core/hooks/notificaciones/useSendPushIndividual";
 import { UserDevice } from "@/services/dto/notificaciones/ficha";
-import { Button, Dialog, DialogActions, DialogContent, DialogTitle, Grid2 as Grid, LinearProgress, TextField } from "@mui/material";
+import { Button, Dialog, DialogActions, DialogContent, DialogTitle, Grid2 as Grid, LinearProgress, TextField, Typography } from "@mui/material";
 
 interface EnviarModalProps {
   open: boolean;
@@ -33,6 +33,24 @@ function EnviarModal({ open, device, onClose }: EnviarModalProps) {
           </Grid>
           <Grid size={12}>
             <TextField label="Descripción" value={body} fullWidth onChange={({ target }) => setBody(target.value)} />
+          </Grid>
+          <Grid size={12}>
+            <Typography variant="button">Mensajes predefinidos:</Typography>
+          </Grid>
+          <Grid size={4}>
+            <Button variant="outlined" color="warning" size="small" fullWidth>
+              Reclamar deuda
+            </Button>
+          </Grid>
+          <Grid size={4}>
+            <Button variant="outlined" color="info" size="small" fullWidth>
+              30% Miércoles
+            </Button>
+          </Grid>
+          <Grid size={4}>
+            <Button variant="outlined" size="small" fullWidth>
+              Reclamar deuda
+            </Button>
           </Grid>
         </Grid>
       </DialogContent>
