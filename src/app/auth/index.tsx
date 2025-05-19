@@ -12,16 +12,17 @@ import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 
 const Loadable =
   <T extends object>(Component: LazyExoticComponent<() => JSX.Element>) =>
-  (props: T) => {
-    return (
-      <Suspense fallback={<Loading />}>
-        <Component {...props} />
-      </Suspense>
-    );
-  };
+    (props: T) => {
+      return (
+        <Suspense fallback={<Loading />}>
+          <Component {...props} />
+        </Suspense>
+      );
+    };
 
 const CambiarContrasena = Loadable(lazy(() => import("./clientes/cambiar.contrasena")));
 const ClientesFotoCedula = Loadable(lazy(() => import("./clientes/fotocedula")));
+const Adjuntos = Loadable(lazy(() => import("./adjuntos")));
 const FichaClienteFarma = Loadable(lazy(() => import("./farma/clientes/ficha")));
 const Comisiones = Loadable(lazy(() => import("./farma/comisiones")));
 const FichaClienteFarmaCodigo = Loadable(lazy(() => import("./farma/clientes/codigo")));
@@ -47,6 +48,7 @@ function AuthPages() {
         <Route path="/" element={<AuthMenuLayout />}>
           <Route index element={<Home />} />
           <Route path="/clientes" element={<Clientes />} />
+          <Route path="/adjuntos" element={<Adjuntos />} />
           <Route path="/clientes/foto-cedula" element={<ClientesFotoCedula />} />
           <Route path="/clientes/cambiar-contrasena" element={<CambiarContrasena />} />
           <Route path="/solicitudes" element={<Solicitudes />} />

@@ -6,12 +6,14 @@ import { estadisticasApiService } from "./api/estadisticas";
 import { notificacionesApiService } from "./api/notificaciones";
 import { farmaApiService } from "./api/farma";
 import { ventasApiService } from "./api/ventas";
+import { adjuntosApiService } from "./api/adjuntos";
 
 
 
  const API = {
     auth : authApiService,
     clientes: clientesApiService,
+    adjuntos: adjuntosApiService,
     estadisticas:  estadisticasApiService,
     solicitudes: solicitudesApiService,
     consultas: consultasApiService,

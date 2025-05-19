@@ -41,7 +41,7 @@ const AuthProvider = ({ children }: { children: ReactNode }) => {
     queryFn: async () => {
       const localStorage = window.sessionStorage.getItem("userData");
       if (localStorage && localStorage !== "null") {
-        const local = JSON.parse(localStorage);
+        const local = JSON.parse(localStorage) as LoginResults;
         if (!local.token) {
           cerrarSesion();
           return null;
@@ -62,6 +62,9 @@ const AuthProvider = ({ children }: { children: ReactNode }) => {
     },
     staleTime: 5 * 60 * 1000, // Evita reconsultas innecesarias por 5 minutos
     refetchOnWindowFocus: true,
+    refetchOnMount: true,
+    refetchOnReconnect: true,
+
   });
 
   const isTokenExpired = (token: string): boolean => {

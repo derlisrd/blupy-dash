@@ -34,6 +34,12 @@ function ClientesList() {
     handleModals("ficha", true);
   };
 
+  const handleAdjuntos = () => {
+    if (selectedRow) {
+      navigate("/adjuntos", { state: { cliente: selectedRow } });
+    }
+    handleMenuClose();
+  };
   const handleUpdatePhoto = () => {
     if (selectedRow) {
       navigate("/clientes/foto-cedula", { state: { cliente: selectedRow } });
@@ -51,6 +57,7 @@ function ClientesList() {
   // Opciones del menú
   const menuOptions = [
     { label: "Ver Ficha", onClick: handleViewProfile },
+    { label: "Adjuntos", onClick: handleAdjuntos },
     { label: "Actualizar foto cédula", onClick: handleUpdatePhoto },
     { label: "Restablecer contraseña", onClick: handleResetPassword },
   ];

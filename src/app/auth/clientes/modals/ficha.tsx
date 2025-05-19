@@ -12,7 +12,7 @@ interface FichaProps {
 function Ficha({ open, onClose, fichaSeleccionada }: FichaProps) {
   if (!fichaSeleccionada) return null;
   return (
-    <Dialog open={open} onClose={onClose} fullWidth autoFocus disableAutoFocus={false}>
+    <Dialog open={open} onClose={onClose} fullWidth disableRestoreFocus>
       <DialogTitle>Ficha de cliente</DialogTitle>
       <DialogContent>
         <Grid container spacing={1}>
