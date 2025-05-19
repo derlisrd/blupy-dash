@@ -1,7 +1,10 @@
+import PageNotFound from "@/app/404";
+import Icon from "@/components/ui/icon";
 import { config } from "@/constants/config";
 import useAdjuntos from "@/core/hooks/adjuntos/useAdjuntos";
 import { Button, Container, Grid2 as Grid, LinearProgress, Stack, Typography } from "@mui/material";
 import { useLocation } from "react-router-dom";
+import { Link as RouterLink } from "react-router-dom";
 
 function Adjuntos() {
   const location = useLocation();
@@ -13,7 +16,7 @@ function Adjuntos() {
   const { isLoading, data } = useAdjuntos(String(cliente.id))
 
 
-  if (!cliente) return null;
+  if (!cliente) return <PageNotFound />
 
 
   return <Container>
@@ -24,7 +27,13 @@ function Adjuntos() {
       <Grid size={12}>
         <Stack direction='row' justifyContent='space-between'>
           <Typography variant="h6">Adjuntos: {cliente.name}</Typography>
-          <Button>Agregar adjunto</Button>
+          <Button
+            startIcon={<Icon>photo-plus</Icon>}
+            component={RouterLink} // Usa Link de React Router si estás navegando dentro de la app
+            to={`/agregar-adjunto/${cliente.id}`}
+          >
+            Agregar
+          </Button>
         </Stack>
       </Grid>
       {

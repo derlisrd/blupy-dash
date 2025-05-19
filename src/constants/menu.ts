@@ -8,6 +8,26 @@ export default [
         open: false
     },
     {
+        id: 123,
+        title: 'Contratos',
+        icon: 'file-description',
+        color: '#0066cc',
+        url: '#',
+        open: false,
+        submenu: [
+            {
+                id: 1,
+                title: 'Por documento',
+                url: '/contratos/pordocumento',
+            },
+            {
+                id: 2,
+                title: 'Por código',
+                url: '/contratos/porcodigo',
+            }
+        ]
+    },
+    {
         id: 2,
         title: 'Clientes',
         icon: 'users',
@@ -54,26 +74,7 @@ export default [
             },
         ]
     },
-    {
-        id: 123,
-        title: 'Contratos',
-        icon: 'file-description',
-        color: '#0066cc',
-        url: '#',
-        open: false,
-        submenu: [
-            {
-                id: 1,
-                title: 'Por documento',
-                url: '/contratos/pordocumento',
-            },
-            {
-                id: 2,
-                title: 'Por código',
-                url: '/contratos/porcodigo',
-            }
-        ]
-    },
+    
     {
         id: 5,
         title: 'Notificaciones',

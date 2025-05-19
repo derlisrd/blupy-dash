@@ -40,6 +40,12 @@ function ClientesList() {
     }
     handleMenuClose();
   };
+  const handleAgregarAdjunto = () => {
+    if (selectedRow) {
+      navigate(`/agregar-adjunto/${selectedRow.id}`);
+    }
+    handleMenuClose();
+  };
   const handleUpdatePhoto = () => {
     if (selectedRow) {
       navigate("/clientes/foto-cedula", { state: { cliente: selectedRow } });
@@ -57,6 +63,7 @@ function ClientesList() {
   // Opciones del menú
   const menuOptions = [
     { label: "Ver Ficha", onClick: handleViewProfile },
+    { label: "Agregar adjunto", onClick: handleAgregarAdjunto },
     { label: "Adjuntos", onClick: handleAdjuntos },
     { label: "Actualizar foto cédula", onClick: handleUpdatePhoto },
     { label: "Restablecer contraseña", onClick: handleResetPassword },

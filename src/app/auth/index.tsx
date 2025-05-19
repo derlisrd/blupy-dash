@@ -23,6 +23,7 @@ const Loadable =
 const CambiarContrasena = Loadable(lazy(() => import("./clientes/cambiar.contrasena")));
 const ClientesFotoCedula = Loadable(lazy(() => import("./clientes/fotocedula")));
 const Adjuntos = Loadable(lazy(() => import("./adjuntos")));
+const AgregarAdjunto = Loadable(lazy(() => import("./adjuntos/agregar")));
 const FichaClienteFarma = Loadable(lazy(() => import("./farma/clientes/ficha")));
 const Comisiones = Loadable(lazy(() => import("./farma/comisiones")));
 const FichaClienteFarmaCodigo = Loadable(lazy(() => import("./farma/clientes/codigo")));
@@ -49,6 +50,7 @@ function AuthPages() {
           <Route index element={<Home />} />
           <Route path="/clientes" element={<Clientes />} />
           <Route path="/adjuntos" element={<Adjuntos />} />
+          <Route path="/agregar-adjunto/:id" element={<AgregarAdjunto />} />
           <Route path="/clientes/foto-cedula" element={<ClientesFotoCedula />} />
           <Route path="/clientes/cambiar-contrasena" element={<CambiarContrasena />} />
           <Route path="/solicitudes" element={<Solicitudes />} />

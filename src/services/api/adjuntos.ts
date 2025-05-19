@@ -33,12 +33,35 @@ export const adjuntosApiService = {
             });
         }
     },
-    agregarAdjunto: async (token: string, id: string, adjunto: File) => {
-        const response = await BASE.put(`clientes/adjuntos/${id}`, adjunto, {
-            headers: {
-                Authorization: token,
-            },
-        });
-        return response.data;
+    agregarAdjunto: async (token: string | null, id: string, form: FormData) => {
+        try {
+            const {data,status} = await BASE.post(`clientes/agregar-adjunto/${id}`, form, {
+                headers: {
+                    Authorization: token,
+                },
+            });
+            return ({
+                success: data.success,
+                status: status,
+                message: '',
+                results: data.results,
+            });
+        } catch (error) {
+            if(isAxiosError(error)){
+                return ({
+                    success: false,
+                    status: error.response?.status ?? 500,
+                    message: error.response?.data.message ?? "Error desconocido",
+                    results: null,
+                });
+            }
+            return ({
+                success: false,
+                status: 500,
+                message: "Error desconocido",
+                results: null,
+            });
+        }
+        
     },
 };
