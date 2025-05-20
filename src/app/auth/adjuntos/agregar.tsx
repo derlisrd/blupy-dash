@@ -1,16 +1,22 @@
 import Icon from "@/components/ui/icon";
 import useAddAdjunto from "@/core/hooks/adjuntos/useAddAdjunto";
-import { Box, Button, Card, CardMedia, Container, Grid2 as Grid, IconButton, LinearProgress, TextField, Tooltip, Typography } from "@mui/material";
+import { Box, Button, Card, CardMedia, Container, Grid2 as Grid, IconButton, LinearProgress, MenuItem, Select, Tooltip, Typography } from "@mui/material";
 import { Fragment } from "react";
 import { useParams } from "react-router-dom";
 
 function AgregarAdjunto() {
 
     const { id } = useParams<{ id: string }>();
-
-
-
     const { imagePreview, isDragActive, getInputProps, getRootProps, removeImage, subir, isPending, nombre, setNombre } = useAddAdjunto(id);
+
+    const handleSubmit = async () => {
+        if (nombre === "0") return swal({
+            title: 'Error',
+            icon: "error",
+            text: "Debe seleccionar un tipo"
+        })
+        await subir();
+    };
 
     return <Container>
         <Grid container mt={2} spacing={2}>
@@ -41,11 +47,22 @@ function AgregarAdjunto() {
                             </Tooltip>
                         </Card>
                     </Grid>
-                    <Grid size={{ xs: 12, sm: 8 }}>
-                        <TextField label="Nombre o tipo de adjunto" value={nombre} onChange={({ target }) => setNombre(target.value)} placeholder="Nombre o tipo de adjunto..." fullWidth />
+                    <Grid size={{ xs: 12, sm: 4 }}>
+                        <Select sx={{ width: "100%" }} value={nombre} onChange={(e) => setNombre(e.target.value)}>
+                            <MenuItem value="0" disabled >Seleccionar tipo</MenuItem>
+                            <MenuItem value="cedula1">Cedula frente</MenuItem>
+                            <MenuItem value="cedula2">Cedula dorso</MenuItem>
+                            <MenuItem value="selfie">Selfie</MenuItem>
+                            <MenuItem value="contrato">Contrato</MenuItem>
+                            <MenuItem value="ande">Factura de Ande</MenuItem>
+                            <MenuItem value="ingreso">Comprobante de ingreso</MenuItem>
+                        </Select>
+                    </Grid>
+                    <Grid size={{ xs: 12, sm: 4 }}>
+
                     </Grid>
                     <Grid size={12}>
-                        <Button size="large" startIcon={<Icon>upload</Icon>} onClick={() => subir()}>
+                        <Button size="large" startIcon={<Icon>upload</Icon>} onClick={() => handleSubmit()}>
                             Subir
                         </Button>
                     </Grid>

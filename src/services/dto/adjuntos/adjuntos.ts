@@ -18,12 +18,14 @@ export class AdjuntosResults{
     nombre: string;
     url: string;
     path: string;
+    tipo: string;
 
-    constructor({ id, nombre, url, path }: { id: number, nombre: string, url: string, path: string }) {
+    constructor({ id, nombre, url, path, tipo }: { id: number, nombre: string, url: string, path: string, tipo: string }) {
         this.id = id;
         this.nombre = nombre;
         this.url = url;
         this.path = path;
+        this.tipo = tipo
     }
 
 }

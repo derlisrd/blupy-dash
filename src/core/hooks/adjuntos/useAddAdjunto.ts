@@ -13,7 +13,8 @@ function useAddAdjunto(id:  string | undefined) {
   const navigate = useNavigate()
 
   const [adjunto, setAdjunto] = useState<File | null>(null);
-  const [nombre, setNombre] = useState<string>("");
+  const [nombre, setNombre] = useState<string>("0");
+  const [error,setError] = useState({code:0,message:''})
 
     const {data, isPending, mutateAsync} = useMutation({
       mutationFn: async () => {
@@ -90,7 +91,7 @@ function useAddAdjunto(id:  string | undefined) {
 
     
     
-    return { imagePreview, onDrop, removeImage, getRootProps, getInputProps, isDragActive, isPending, data, subir : mutateAsync, nombre, setNombre}
+    return { imagePreview, onDrop, removeImage, getRootProps, getInputProps, isDragActive, isPending, data, subir : mutateAsync, nombre, setNombre, error,setError}
 }
 
 export default useAddAdjunto 

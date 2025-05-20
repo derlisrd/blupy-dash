@@ -10,7 +10,6 @@ function Adjuntos() {
   const location = useLocation();
   const cliente = location.state?.cliente;
 
-  console.log(cliente);
 
 
   const { isLoading, data } = useAdjuntos(String(cliente.id))
@@ -38,10 +37,10 @@ function Adjuntos() {
       </Grid>
       {
         data && data.map((item, i) => (
-          <Grid key={i} size={{ xs: 12, md: 6 }}>
+          <Grid key={i} size={{ xs: 12, md: 4 }}>
             <Stack>
-              <Typography variant="overline" fontSize={14}>{item.nombre}</Typography>
-              <img src={`${config.PATH}${item.path}/${item.url}`} alt="selfie" style={{ width: "320px", height: "280px", objectFit: "cover", maxWidth: "100%" }} />
+              <Typography variant="overline" fontSize={14}>{item.tipo}</Typography>
+              <img src={`${config.PATH}/${item.path}/${item.nombre}`} alt={item.tipo} style={{ width: "320px", height: "280px", objectFit: "cover", maxWidth: "100%" }} />
             </Stack>
           </Grid>
         ))
