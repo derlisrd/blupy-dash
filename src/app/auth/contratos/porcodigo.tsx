@@ -2,7 +2,7 @@ import Icon from "@/components/ui/icon";
 import { config } from "@/constants/config";
 import useContratoCodigo from "@/core/hooks/contrato/useContratoCodigo";
 import { format } from "@formkit/tempo";
-import { Alert, Button, Card, CardContent, CardMedia, Container, Grid2 as Grid, InputAdornment, LinearProgress, TextField, Typography } from "@mui/material";
+import { Alert, Button, Card, CardContent, Container, Grid2 as Grid, InputAdornment, LinearProgress, TextField, Typography } from "@mui/material";
 import { Fragment, useState } from "react";
 
 function ContratoPorCodigo() {
