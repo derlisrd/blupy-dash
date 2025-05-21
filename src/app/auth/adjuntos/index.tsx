@@ -25,7 +25,8 @@ function Adjuntos() {
       </Grid>
       <Grid size={12}>
         <Stack direction='row' justifyContent='space-between'>
-          <Typography variant="h6">Adjuntos: {cliente.name}</Typography>
+          <Typography variant="h6" display='block'>Adjuntos: {cliente.name}</Typography>
+          <Typography variant="h6" display='block'> {cliente.cedula}</Typography>
           <Button
             startIcon={<Icon>photo-plus</Icon>}
             component={RouterLink} // Usa Link de React Router si estás navegando dentro de la app

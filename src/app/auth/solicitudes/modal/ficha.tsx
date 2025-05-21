@@ -98,7 +98,7 @@ function Ficha({ open, onClose, fichaSeleccionada }: FichaProps) {
           </Grid>
           <Grid size={{ xs: 12, sm: 6 }}>
             {fichaSeleccionada.foto_ci_frente ? (
-              <img src={`${config.PATH_IMAGE}${fichaSeleccionada.foto_ci_frente}`} alt="cedula frente" style={{ width: "256px", height: "256px", objectFit: "cover" }} />
+              <img src={`${config.PATH_IMAGE}/clientes/${fichaSeleccionada.foto_ci_frente}`} alt="cedula frente" style={{ width: "256px", height: "256px", objectFit: "cover" }} />
             ) : (
               <Icon size={64}>photo-scan</Icon>
             )}
