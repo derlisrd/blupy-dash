@@ -28,4 +28,18 @@ export class AdjuntosResults{
         this.tipo = tipo
     }
 
+    static fromJSON(data: any): AdjuntosResults {
+        return new AdjuntosResults({
+            id: data.id,
+            nombre: data.nombre,
+            url: data.url,
+            path: data.path,
+            tipo: data.tipo
+        });
+    }
+
+    static toArray(data: AdjuntosResults[]): AdjuntosResults[] {
+        return data.map(item => AdjuntosResults.fromJSON(item));
+    }
+
 }

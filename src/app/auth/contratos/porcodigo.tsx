@@ -42,14 +42,13 @@ function ContratoPorCodigo() {
       </Grid>
       {dataBuscar && dataBuscar.cliente && (
         <Grid container rowSpacing={2} columnSpacing={1} p={1.5}>
-          <Grid size={12}>
+          <Grid size={{ xs: 12, sm: 6, md: 6 }}>
             <Typography variant="h6">Estado de contrato</Typography>
           </Grid>
           <Grid size={{ xs: 12, sm: 6, md: 6 }}>
             {dataBuscar && dataBuscar.cliente?.estado_id === 5 && <Alert severity="info"> El contrato se encuentra pendiente de activación</Alert>}
             {dataBuscar && dataBuscar.cliente?.estado_id === 7 && <Alert severity="success"> El contrato se encuentra vigente</Alert>}
-          </Grid>
-          <Grid size={{ xs: 12, sm: 6, md: 6 }}>
+
             {dataBuscar.cliente?.estado_id === 5 && (
               <Button
                 onClick={() => {
@@ -60,17 +59,17 @@ function ContratoPorCodigo() {
               </Button>
             )}
           </Grid>
+          {
+            dataBuscar.adjuntos && dataBuscar.adjuntos.map((item, i) => (
+              <Grid size={{ xs: 12, sm: 6, md: 3 }} key={i}>
+                <a href={`${config.PATH}/${item.url}`} target="_blank" rel="noreferrer">
+                  <img src={`${config.PATH}/${item.url}`} alt={item.nombre} style={{ width: "100%", maxWidth: '320px', borderRadius: '10px' }} />
+                </a>
+              </Grid>
+            ))
+          }
+          <Grid size={12} />
 
-          <Grid size={{ xs: 12, sm: 6, md: 4 }}>
-            <Card sx={{ boxShadow: 3, bgcolor: "primary.contrastText" }}>
-              <CardMedia image={`${config.PATH_IMAGE}/clientes/${dataBuscar.cliente?.imagenCedula}`} sx={{ height: 256 }} title="Imagen de cedula" />
-            </Card>
-          </Grid>
-          <Grid size={{ xs: 12, sm: 6, md: 3 }}>
-            <Card sx={{ boxShadow: 3, bgcolor: "primary.contrastText" }}>
-              <CardMedia image={`${config.PATH_IMAGE}${dataBuscar.cliente?.selfie}`} sx={{ height: 256 }} title="Imagen de cedula" />
-            </Card>
-          </Grid>
           <Grid size={{ xs: 12, sm: 12, md: 5 }}>
             {dataBuscar.cliente && (
               <Card sx={{ boxShadow: 3, bgcolor: "primary.contrastText" }}>

@@ -1,13 +1,16 @@
 import Icon from "@/components/ui/icon";
 import { config } from "@/constants/config";
+
 import useContratoDocumento from "@/core/hooks/contrato/useContratoDocumento";
 import { format } from "@formkit/tempo";
-import { Alert, Button, Card, CardContent, CardMedia, Container, Grid2 as Grid, InputAdornment, LinearProgress, TextField, Typography } from "@mui/material";
+import { Alert, Button, Card, CardContent, Container, Grid2 as Grid, InputAdornment, LinearProgress, TextField, Typography } from "@mui/material";
 import { Fragment, useState } from "react";
 
 function ContratoPorDocumento() {
   const [search, setSearch] = useState("");
   const { isPending, buscar, dataBuscar, aprobar } = useContratoDocumento();
+
+  console.log(dataBuscar)
 
   return (
     <Container>
@@ -44,36 +47,33 @@ function ContratoPorDocumento() {
       </Grid>
       {dataBuscar && dataBuscar.cliente && (
         <Grid container rowSpacing={2} columnSpacing={1} p={1.5}>
-          <Grid size={12}>
+          <Grid size={{ xs: 12, sm: 6, md: 6 }}>
             <Typography variant="h6">Estado de contrato</Typography>
           </Grid>
           <Grid size={{ xs: 12, sm: 6, md: 6 }}>
             {dataBuscar && dataBuscar.cliente?.estado_id === 5 && <Alert severity="info"> El contrato se encuentra pendiente de activación</Alert>}
             {dataBuscar && dataBuscar.cliente?.estado_id === 7 && <Alert severity="success"> El contrato se encuentra vigente</Alert>}
-          </Grid>
-          <Grid size={{ xs: 12, sm: 6, md: 6 }}>
+
             {dataBuscar.cliente?.estado_id === 5 && (
               <Button
                 onClick={() => {
                   aprobar(dataBuscar.cliente?.codigo ?? "");
                 }}
-                disabled={isPending}
               >
                 Aprobar
               </Button>
             )}
           </Grid>
-
-          <Grid size={{ xs: 12, sm: 6, md: 4 }}>
-            <Card sx={{ boxShadow: 3, bgcolor: "primary.contrastText" }}>
-              <CardMedia image={`${config.PATH_IMAGE}/clientes/${dataBuscar.cliente?.imagenCedula}`} sx={{ height: 280 }} title="Imagen de cedula" />
-            </Card>
-          </Grid>
-          <Grid size={{ xs: 12, sm: 6, md: 3 }}>
-            <Card sx={{ boxShadow: 3, bgcolor: "primary.contrastText" }}>
-              <CardMedia image={`${config.PATH_IMAGE}${dataBuscar.cliente?.selfie}`} sx={{ height: 280 }} title="Imagen de cedula" />
-            </Card>
-          </Grid>
+          {
+            dataBuscar.adjuntos && dataBuscar.adjuntos.map((item, i) => (
+              <Grid size={{ xs: 12, sm: 6, md: 3 }} key={i}>
+                <a href={`${config.PATH}/${item.url}`} target="_blank" rel="noreferrer">
+                  <img src={`${config.PATH}/${item.url}`} alt={item.nombre} style={{ width: "100%", maxWidth: '320px', borderRadius: '10px' }} />
+                </a>
+              </Grid>
+            ))
+          }
+          <Grid size={12} />
           <Grid size={{ xs: 12, sm: 12, md: 5 }}>
             {dataBuscar.cliente && (
               <Card sx={{ boxShadow: 3, bgcolor: "primary.contrastText" }}>

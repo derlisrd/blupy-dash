@@ -1,3 +1,4 @@
+import { AdjuntosResults } from "../adjuntos/adjuntos";
 
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
@@ -36,15 +37,18 @@ export class ContratosConsultaResponse {
 export class ContratosConsultaResults {
   contratos: ContratosConsultaResultsContratos[] | null;
   cliente: ContratosConsultaResultsCliente | null;
+  adjuntos: AdjuntosResults[] | null;
 
-  constructor({ contratos = [], cliente = null }: Partial<ContratosConsultaResults>) {
+  constructor({ contratos = [], cliente = null, adjuntos = null }: Partial<ContratosConsultaResults>) {
     this.contratos = contratos;
     this.cliente = cliente;
+    this.adjuntos = adjuntos;
   }
   static fromJSON(data : any) : ContratosConsultaResults{
     const contratos = data.contratos ? data.contratos.map((contrato: any) => ContratosConsultaResultsContratos.fromJSON(contrato)) : []
     const cliente = data.cliente ? ContratosConsultaResultsCliente.fromJSON(data.cliente) : null
-    return new ContratosConsultaResults({contratos, cliente})
+    const adjuntos = data.adjuntos ? data.adjuntos.map((adjunto: any) => new AdjuntosResults(adjunto)) : []
+    return new ContratosConsultaResults({contratos, cliente, adjuntos})
   }
 }
 

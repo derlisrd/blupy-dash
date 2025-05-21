@@ -8,6 +8,14 @@ export default [
         open: false
     },
     {
+        id: 2,
+        title: 'Clientes',
+        icon: 'users',
+        color: '#0066cc',
+        url: '/clientes',
+        open: false
+    },
+    {
         id: 123,
         title: 'Contratos',
         icon: 'file-description',
@@ -27,14 +35,7 @@ export default [
             }
         ]
     },
-    {
-        id: 2,
-        title: 'Clientes',
-        icon: 'users',
-        color: '#0066cc',
-        url: '/clientes',
-        open: false
-    },
+    
     {
         id: 3,
         title: 'Solicitudes',
