@@ -66,7 +66,7 @@ function ContratoPorDocumento() {
 
           <Grid size={{ xs: 12, sm: 6, md: 4 }}>
             <Card sx={{ boxShadow: 3, bgcolor: "primary.contrastText" }}>
-              <CardMedia image={`${config.PATH_IMAGE}${dataBuscar.cliente?.imagenCedula}`} sx={{ height: 280 }} title="Imagen de cedula" />
+              <CardMedia image={`${config.PATH_IMAGE}/clientes/${dataBuscar.cliente?.imagenCedula}`} sx={{ height: 280 }} title="Imagen de cedula" />
             </Card>
           </Grid>
           <Grid size={{ xs: 12, sm: 6, md: 3 }}>
