@@ -42,13 +42,14 @@ function ContratoPorCodigo() {
       </Grid>
       {dataBuscar && dataBuscar.cliente && (
         <Grid container rowSpacing={2} columnSpacing={1} p={1.5}>
-          <Grid size={{ xs: 12, sm: 6, md: 6 }}>
-            <Typography variant="h6">Estado de contrato</Typography>
+          <Grid size={{ xs: 12, sm: 4 }}>
+            <Typography variant="h6">Estado</Typography>
           </Grid>
-          <Grid size={{ xs: 12, sm: 6, md: 6 }}>
-            {dataBuscar && dataBuscar.cliente?.estado_id === 5 && <Alert severity="info"> El contrato se encuentra pendiente de activación</Alert>}
-            {dataBuscar && dataBuscar.cliente?.estado_id === 7 && <Alert severity="success"> El contrato se encuentra vigente</Alert>}
-
+          <Grid size={{ xs: 12, sm: 6, md: 4 }}>
+            {dataBuscar && dataBuscar.cliente?.estado_id === 5 && <Alert severity="info"> Pendiente de activación</Alert>}
+            {dataBuscar && dataBuscar.cliente?.estado_id === 7 && <Alert severity="success"> Vigente</Alert>}
+          </Grid>
+          <Grid size={{ xs: 12, sm: 4 }}>
             {dataBuscar.cliente?.estado_id === 5 && (
               <Button
                 onClick={() => {
