@@ -4,11 +4,12 @@ import useContratoCodigo from "@/core/hooks/contrato/useContratoCodigo";
 import { format } from "@formkit/tempo";
 import { Alert, Button, Card, CardContent, Container, Grid2 as Grid, InputAdornment, LinearProgress, TextField, Typography } from "@mui/material";
 import { Fragment, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 function ContratoPorCodigo() {
   const [search, setSearch] = useState("");
   const { isPending, buscar, dataBuscar, aprobar } = useContratoCodigo();
-
+  const nav = useNavigate()
   return (
     <Container>
       <h3>Consulta de firma de contrato por código</h3>
@@ -42,14 +43,11 @@ function ContratoPorCodigo() {
       </Grid>
       {dataBuscar && dataBuscar.cliente && (
         <Grid container rowSpacing={2} columnSpacing={1} p={1.5}>
-          <Grid size={{ xs: 12, sm: 4 }}>
-            <Typography variant="h6">Estado</Typography>
-          </Grid>
-          <Grid size={{ xs: 12, sm: 6, md: 4 }}>
+          <Grid size={{ xs: 12, sm: 6 }}>
             {dataBuscar && dataBuscar.cliente?.estado_id === 5 && <Alert severity="info"> Pendiente de activación</Alert>}
             {dataBuscar && dataBuscar.cliente?.estado_id === 7 && <Alert severity="success"> Vigente</Alert>}
           </Grid>
-          <Grid size={{ xs: 12, sm: 4 }}>
+          <Grid size={{ xs: 12, sm: 6 }}>
             {dataBuscar.cliente?.estado_id === 5 && (
               <Button
                 onClick={() => {
@@ -59,6 +57,7 @@ function ContratoPorCodigo() {
                 Aprobar
               </Button>
             )}
+
           </Grid>
           {
             dataBuscar.adjuntos && dataBuscar.adjuntos.map((item, i) => (
@@ -105,6 +104,9 @@ function ContratoPorCodigo() {
                       <Typography variant="body2" fontWeight="bold">
                         {format(dataBuscar.cliente?.fechaSolicitud, "D MMM YYYY HH:mm", "es-PY")}
                       </Typography>
+                    </Grid>
+                    <Grid size={12}>
+                      <Button sx={{ mx: 1 }} onClick={() => nav(`/agregar-adjunto/${dataBuscar.cliente?.id}`)} endIcon={<Icon>file</Icon>}>Adjuntar</Button>
                     </Grid>
                   </Grid>
                 </CardContent>
