@@ -9,9 +9,10 @@ import Icon from "@/components/ui/icon";
 import { ColumnConfigType } from "@/core/types/columnsconfig";
 import TableHeadRender from "@/components/table/tableheadrender";
 import TableCellRender from "@/components/table/tablecellrender";
+import { useUsersContext } from "../provider";
 
 const AccionesCell = () => {
-
+    const { handleModal } = useUsersContext()
     return (
         <Stack direction="row">
             <Tooltip title="Editar" placement="top" arrow>
@@ -20,7 +21,7 @@ const AccionesCell = () => {
                 </IconButton>
             </Tooltip>
             <Tooltip title="Permisos" placement="top" arrow>
-                <IconButton onClick={() => { }}>
+                <IconButton onClick={() => { handleModal('permisos') }}>
                     <Icon>user-square-rounded</Icon>
                 </IconButton>
             </Tooltip>

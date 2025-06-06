@@ -76,7 +76,7 @@ export default [
         ]
     },
     {
-        id: 2,
+        id: 28,
         title: 'Usuarios',
         icon: 'user-scan',
         color: '#0066cc',

@@ -5,8 +5,8 @@ import columns from "./_components/columns";
 
 function MainUsers() {
 
-  const { isLoading, users, permisos } = useUsersContext()
-  console.log(permisos);
+  const { isLoading, users } = useUsersContext()
+
 
   return <Container>
     <Typography variant="h5" mt={2}>Usuarios moderadores</Typography>

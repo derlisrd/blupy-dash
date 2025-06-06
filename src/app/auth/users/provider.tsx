@@ -3,12 +3,18 @@ import API from "@/services";
 import { AdminResponse, AdminResults } from "@/services/dto/auth/admin";
 import { PermisosResponse, PermisosResults } from "@/services/dto/auth/permisos";
 import { useQueries } from "@tanstack/react-query";
-import { createContext, useContext, ReactNode } from "react";
+import { createContext, useContext, ReactNode, useState } from "react";
+
+type Modals = {
+    permisos: boolean
+}
 
 interface UserContextI {
     users: AdminResults[];
     permisos: PermisosResults[];
     isLoading: boolean;
+    modals: Modals;
+    handleModal: (key: keyof Modals) => void;
 }
 
 const UsersContext = createContext<UserContextI | null>(null);
@@ -17,6 +23,11 @@ const UsersContext = createContext<UserContextI | null>(null);
 function UsersProvider({ children }: { children: ReactNode }) {
 
     const { userData } = useAuth()
+
+    const [modals, setModals] = useState<Modals>({ permisos: false });
+
+    const handleModal = (key: keyof Modals) => setModals({ ...modals, [key]: !modals[key] });
+
 
     const results = useQueries({
         queries: [
@@ -34,7 +45,7 @@ function UsersProvider({ children }: { children: ReactNode }) {
             },
             {
                 queryKey: ["permisos"],
-                queryFn: () => API.permisos.lista(userData && userData?.token),
+                queryFn: () => API.permisos.lista(userData && userData.token),
                 select: (data: PermisosResponse) => {
                     if (data && data.success) {
                         return data.results;
@@ -54,6 +65,8 @@ function UsersProvider({ children }: { children: ReactNode }) {
         users: results[0].data || [],
         permisos: results[1].data || [],
         isLoading: results[0].isLoading || results[1].isLoading || false,
+        modals,
+        handleModal,
     };
 
     return <UsersContext.Provider value={values} >{children}</UsersContext.Provider>;
