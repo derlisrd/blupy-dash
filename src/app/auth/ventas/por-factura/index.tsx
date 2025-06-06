@@ -45,6 +45,12 @@ function VentasPorFactura() {
             <FichaCard title="Nro de factura" subtitle={data.factura} />
           </Grid>
           <Grid size={{ xs: 12, sm: 6, md: 3 }}>
+            <FichaCard title="Codigo" subtitle={String(data.codigo)} />
+          </Grid>
+          <Grid size={{ xs: 12, sm: 6, md: 3 }}>
+            <FichaCard title="Estado" subtitle={data.estado} />
+          </Grid>
+          <Grid size={{ xs: 12, sm: 6, md: 3 }}>
             <FichaCard title="Fecha de factura" subtitle={format(data.fecha, "DD MMM YYYY HH:mm", "es-PY")} />
           </Grid>
           <Grid size={{ xs: 12, sm: 6, md: 3 }}>
@@ -62,19 +68,16 @@ function VentasPorFactura() {
           <Grid size={{ xs: 12, sm: 6, md: 3 }}>
             <FichaCard title="Codigo adicional" subtitle={data.codigoClienteAdicional ?? "Sin adicional"} />
           </Grid>
-          <Grid size={{ xs: 12, sm: 6, md: 4 }}>
+          <Grid size={{ xs: 12, sm: 6, md: 3 }}>
             <FichaCard title="Valor total" subtitle={data.importe.toLocaleString("es-PY", { style: "currency", currency: "PYG" })} />
           </Grid>
-          <Grid size={{ xs: 12, sm: 6, md: 4 }}>
+          <Grid size={{ xs: 12, sm: 6, md: 3 }}>
             <FichaCard title="Valor descuento" subtitle={data.descuento.toLocaleString("es-PY", { style: "currency", currency: "PYG" })} />
           </Grid>
           <Grid size={{ xs: 12, sm: 6, md: 4 }}>
-            <FichaCard title="Valor bruto" subtitle={data.bruto.toLocaleString("es-PY", { style: "currency", currency: "PYG" })} />
-          </Grid>
-          <Grid size={{ xs: 12, sm: 6, md: 6 }}>
             <FichaCard title="Sucursal" subtitle={data.sucursal} />
           </Grid>
-          <Grid size={{ xs: 12, sm: 6, md: 6 }}>
+          <Grid size={{ xs: 12, sm: 6, md: 8 }}>
             <FichaCard title="Observacion" subtitle={data.observaciones} />
           </Grid>
         </Grid>

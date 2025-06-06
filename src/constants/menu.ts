@@ -75,7 +75,14 @@ export default [
             },
         ]
     },
-    
+    {
+        id: 2,
+        title: 'Usuarios',
+        icon: 'user-scan',
+        color: '#0066cc',
+        url: '/users',
+        open: false
+    },
     {
         id: 5,
         title: 'Notificaciones',

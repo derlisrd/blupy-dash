@@ -42,6 +42,8 @@ const VentasFecha = Loadable(lazy(() => import("./actualizaciones/ventas-fecha")
 const Movimientos = Loadable(lazy(() => import("./farma/movimientos")));
 const SMS = Loadable(lazy(() => import("./notificaciones/sms")));
 
+const Users = Loadable(lazy(() => import("./users")));
+
 function AuthPages() {
   return (
     <LocalizationProvider dateAdapter={AdapterDayjs}>
@@ -71,6 +73,7 @@ function AuthPages() {
           <Route path="/ventas/periodo-forma" element={<VentasPeriodoForma />} />
           <Route path="/actualizaciones/ventas-fecha" element={<VentasFecha />} />
           <Route path="/farma/movimientos" element={<Movimientos />} />
+          <Route path="/users" element={<Users />} />
           <Route path="/logout" element={<LogOut />} />
         </Route>
         <Route path="*" element={<PageNotFound />} />

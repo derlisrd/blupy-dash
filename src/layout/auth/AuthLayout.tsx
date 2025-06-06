@@ -31,7 +31,7 @@ function AuthMenuLayout() {
           zIndex: 1100,
           alignItems: "center",
           boxShadow: 12,
-          borderRadius: 4,
+          borderRadius: 0,
           backgroundColor: "primary.contrastText",
         }}
       >
