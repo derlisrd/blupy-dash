@@ -11,6 +11,20 @@ export class AdminResponse {
     this.status = status;
   }}
 
+export class AdminStoreResponse{
+  success: boolean = false;
+  message: string = "";
+  results: AdminResults | null = null;
+  status: number = 0;
+
+  constructor({ success = false, message = "", results = null, status = 0 }: Partial<AdminStoreResponse>) {
+    this.success = success;
+    this.message = message;
+    this.results = results;
+    this.status = status;
+  }
+}
+
 export class AdminResults{
     id: number = 0;
     username: string = '';
@@ -28,3 +42,4 @@ export class AdminResults{
     this.updated_at = updated_at;
   }
 }
+

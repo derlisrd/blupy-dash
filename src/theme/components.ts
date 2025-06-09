@@ -99,15 +99,14 @@ export const components = {
       }
     },
 
-    MuiDialog:{
-      defaultProps:{
-        fullWidth:true,
-        autoFocus:true,
-        disableAutoFocus:false
+    MuiDialog: {
+      defaultProps: {
+        fullWidth: true,
+        disableRestoreFocus: true
       },
-      styleOverrides:{
-        paper:{
-          borderRadius:"12px"
+      styleOverrides: {
+        paper: {
+          borderRadius: "12px"
         }
       }
     },

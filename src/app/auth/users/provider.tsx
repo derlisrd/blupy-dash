@@ -3,10 +3,11 @@ import API from "@/services";
 import { AdminResponse, AdminResults } from "@/services/dto/auth/admin";
 import { PermisosResponse, PermisosResults } from "@/services/dto/auth/permisos";
 import { useQueries } from "@tanstack/react-query";
-import { createContext, useContext, ReactNode, useState } from "react";
+import { createContext, useContext, ReactNode, useState, Dispatch, SetStateAction } from "react";
 
 type Modals = {
-    permisos: boolean
+    permisos: boolean;
+    add: boolean;
 }
 
 interface UserContextI {
@@ -15,6 +16,8 @@ interface UserContextI {
     isLoading: boolean;
     modals: Modals;
     handleModal: (key: keyof Modals) => void;
+    selectedAdmin: AdminResults | null;
+    setSelectedAdmin: Dispatch<SetStateAction<AdminResults | null>>;
 }
 
 const UsersContext = createContext<UserContextI | null>(null);
@@ -24,9 +27,11 @@ function UsersProvider({ children }: { children: ReactNode }) {
 
     const { userData } = useAuth()
 
-    const [modals, setModals] = useState<Modals>({ permisos: false });
+    const [modals, setModals] = useState<Modals>({ permisos: false, add: false });
 
     const handleModal = (key: keyof Modals) => setModals({ ...modals, [key]: !modals[key] });
+
+    const [selectedAdmin, setSelectedAdmin] = useState<AdminResults | null>(null);
 
 
     const results = useQueries({
@@ -67,6 +72,8 @@ function UsersProvider({ children }: { children: ReactNode }) {
         isLoading: results[0].isLoading || results[1].isLoading || false,
         modals,
         handleModal,
+        selectedAdmin,
+        setSelectedAdmin,
     };
 
     return <UsersContext.Provider value={values} >{children}</UsersContext.Provider>;

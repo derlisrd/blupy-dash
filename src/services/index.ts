@@ -8,6 +8,7 @@ import { farmaApiService } from "./api/farma";
 import { ventasApiService } from "./api/ventas";
 import { adjuntosApiService } from "./api/adjuntos";
 import { permisosApiService } from "./api/permisos";
+import { adminApiService } from "./api/admin";
 
 
 
@@ -22,7 +23,8 @@ import { permisosApiService } from "./api/permisos";
     farma: farmaApiService,
     venta: ventasApiService,
     noti: notificacionesApiService,
-  permisos: permisosApiService
+  permisos: permisosApiService,
+  admin: adminApiService
 }
 
 export default API;

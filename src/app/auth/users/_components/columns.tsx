@@ -10,9 +10,12 @@ import { ColumnConfigType } from "@/core/types/columnsconfig";
 import TableHeadRender from "@/components/table/tableheadrender";
 import TableCellRender from "@/components/table/tablecellrender";
 import { useUsersContext } from "../provider";
+import { AdminResults } from "@/services/dto/auth/admin";
 
-const AccionesCell = () => {
-    const { handleModal } = useUsersContext()
+const AccionesCell = (rowData: AdminResults) => {
+    const { handleModal, setSelectedAdmin } = useUsersContext()
+
+
     return (
         <Stack direction="row">
             <Tooltip title="Editar" placement="top" arrow>
@@ -21,7 +24,7 @@ const AccionesCell = () => {
                 </IconButton>
             </Tooltip>
             <Tooltip title="Permisos" placement="top" arrow>
-                <IconButton onClick={() => { handleModal('permisos') }}>
+                <IconButton onClick={() => { setSelectedAdmin(rowData); handleModal('permisos') }}>
                     <Icon>user-square-rounded</Icon>
                 </IconButton>
             </Tooltip>
@@ -38,20 +41,15 @@ export const productosColumnConfig = (width: number): ColumnConfigType[] => [
         dataKey: "created_at",
         label: "Fecha",
         width: width * 0.18,
-        cellRenderer: ({ rowData }: TableCellProps) => (
-
-            <Typography variant="caption">{format(rowData.created_at, "DD-MMM-YY")}</Typography>
-
-        ),
+        cellRenderer: ({ rowData }: TableCellProps) => <Typography variant="caption">{format(rowData.created_at, "DD-MMM-YY")}</Typography>,
     },
     {
         dataKey: "_",
         label: "Acciones",
         width: width * 0.2,
-        cellRenderer: () => <AccionesCell />,
+        cellRenderer: ({ rowData }: TableCellProps) => <AccionesCell {...rowData} />,
     },
-
-]
+];
 
 
 
