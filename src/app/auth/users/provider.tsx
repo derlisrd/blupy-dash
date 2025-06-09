@@ -8,6 +8,7 @@ import { createContext, useContext, ReactNode, useState, Dispatch, SetStateActio
 type Modals = {
     permisos: boolean;
     add: boolean;
+    resetPassword: boolean;
 }
 
 interface UserContextI {
@@ -27,7 +28,7 @@ function UsersProvider({ children }: { children: ReactNode }) {
 
     const { userData } = useAuth()
 
-    const [modals, setModals] = useState<Modals>({ permisos: false, add: false });
+    const [modals, setModals] = useState<Modals>({ permisos: false, add: false, resetPassword: false });
 
     const handleModal = (key: keyof Modals) => setModals({ ...modals, [key]: !modals[key] });
 

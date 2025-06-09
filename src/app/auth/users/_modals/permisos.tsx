@@ -16,14 +16,14 @@ type PermisosMapeados = {
 }
 
 function PermisosModal() {
-    const { modals, handleModal, permisos, selectedAdmin } = useUsersContext()
+    const { modals, handleModal, permisos, selectedAdmin, setSelectedAdmin } = useUsersContext()
     const { userData } = useAuth()
     const [permisosSelect, setPermisosSelect] = useState<PermisosMapeados[]>([]);
 
     const { data: permisosData, isLoading } = useQuery({
         queryKey: ["permisosByAdmin", selectedAdmin ? selectedAdmin.id : 0],
         queryFn: () => API.permisos.byAdmin(userData && userData.token, selectedAdmin ? selectedAdmin.id : 0),
-        enabled: !!selectedAdmin,
+        enabled: !!selectedAdmin && modals.permisos,
         refetchOnWindowFocus: false
     });
 
@@ -78,6 +78,7 @@ function PermisosModal() {
                     timer: 2000,
                 });
                 handleModal("permisos");
+                setSelectedAdmin(null);
             }
         }
     })
@@ -106,8 +107,13 @@ function PermisosModal() {
         await mutateAsync({ id: selectedAdmin?.id, asignados: permisosParaEnviar, revocados: permisosRevocados });
     };
 
+    const close = () => {
+        setSelectedAdmin(null);
+        handleModal("permisos");
+    };
+
     return (
-        <Dialog open={modals.permisos} maxWidth="xs" onClose={() => handleModal("permisos")}>
+        <Dialog open={modals.permisos} maxWidth="xs" onClose={close}>
             <DialogTitle>Permisos</DialogTitle>
             <DialogContent>
                 {(isLoading || isPending) ? <LinearProgress /> :
@@ -135,7 +141,7 @@ function PermisosModal() {
                 <Button
                     variant="outlined"
                     startIcon={<Icon>arrow-narrow-left-dashed</Icon>}
-                    onClick={() => handleModal("permisos")}
+                    onClick={close}
                 >
                     Regresar
                 </Button>

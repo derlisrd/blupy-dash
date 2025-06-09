@@ -29,5 +29,30 @@ export const adminApiService = {
           status: 500
         })
     }
+  },
+  resetPassword: async (token: string | null, form: { password: string, password_confirmation: string, id: number }) => {
+    try {
+      const {data, status} = await BASE.post("/admin/reset-password", form, { headers: { Authorization: `Bearer ${token}` } });
+      return {
+        success: data.success as boolean,
+        message: data.message as string,
+        status
+      }
+      
+    }
+    catch (error) {
+      if (axios.isAxiosError(error) && error.response) {
+        return ({
+          success: false,
+          message: error?.response?.data?.message as string || "Error",
+          status: error.response.status
+        });
+      }
+      return ({
+        success: false,
+        message: "Error",
+        status: 500
+      });
+    }
   }
 };

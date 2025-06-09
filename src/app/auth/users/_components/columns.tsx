@@ -19,7 +19,7 @@ const AccionesCell = (rowData: AdminResults) => {
     return (
         <Stack direction="row">
             <Tooltip title="Editar" placement="top" arrow>
-                <IconButton onClick={() => { }}>
+                <IconButton onClick={() => { setSelectedAdmin(rowData); handleModal('resetPassword') }}>
                     <Icon>edit</Icon>
                 </IconButton>
             </Tooltip>
