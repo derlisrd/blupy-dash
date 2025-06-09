@@ -48,9 +48,7 @@ function AddModal() {
             }
             if (data && data.results) {
                 // Actualizar la cache agregando el nuevo usuario
-                queryClient.setQueryData<AdminResults[]>(["users"], (old = []) => {
-                    return [...old, data.results as AdminResults];
-                });
+                queryClient.invalidateQueries({ queryKey: ["users"] });
             }
             setForm({ name: "", email: "", password: "", role: "", password_confirmation: "" });
             handleModal("add");
