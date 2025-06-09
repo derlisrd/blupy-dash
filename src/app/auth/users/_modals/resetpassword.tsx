@@ -38,6 +38,10 @@ function ResetPasswordModal() {
                     title: "Contraseña restablecida",
                     text: "La contraseña se ha restablecido correctamente",
                 });
+                setForm({
+                    password: "",
+                    password_confirmation: "",
+                });
                 setSelectedAdmin(null);
                 return;
             }
