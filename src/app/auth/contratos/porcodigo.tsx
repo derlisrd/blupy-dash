@@ -2,13 +2,13 @@ import Icon from "@/components/ui/icon";
 import { config } from "@/constants/config";
 import useContratoCodigo from "@/core/hooks/contrato/useContratoCodigo";
 import { format } from "@formkit/tempo";
-import { Alert, Button, Card, CardContent, Container, Grid2 as Grid, InputAdornment, LinearProgress, TextField, Typography } from "@mui/material";
+import { Alert, Button, Card, CardContent, Container, Grid2 as Grid, InputAdornment, LinearProgress, Stack, TextField, Typography } from "@mui/material";
 import { Fragment, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 function ContratoPorCodigo() {
   const [search, setSearch] = useState("");
-  const { isPending, buscar, dataBuscar, aprobar } = useContratoCodigo();
+  const { isPending, buscar, dataBuscar, aprobar, recibir } = useContratoCodigo();
   const nav = useNavigate()
   return (
     <Container>
@@ -57,20 +57,18 @@ function ContratoPorCodigo() {
                 Aprobar
               </Button>
             )}
-
           </Grid>
-          {
-            dataBuscar.adjuntos && dataBuscar.adjuntos.map((item, i) => (
+          {dataBuscar.adjuntos &&
+            dataBuscar.adjuntos.map((item, i) => (
               <Grid size={{ xs: 12, sm: 6, md: 3 }} key={i}>
                 <a href={`${config.PATH}/${item.url}`} target="_blank" rel="noreferrer">
-                  <img src={`${config.PATH}/${item.url}`} alt={item.nombre} style={{ width: "100%", maxWidth: '320px', borderRadius: '10px' }} />
+                  <img src={`${config.PATH}/${item.url}`} alt={item.nombre} style={{ width: "100%", maxWidth: "320px", borderRadius: "10px" }} />
                 </a>
               </Grid>
-            ))
-          }
+            ))}
           <Grid size={12} />
 
-          <Grid size={{ xs: 12, sm: 12, md: 5 }}>
+          <Grid size={{ xs: 12, sm: 6, md: 8 }}>
             {dataBuscar.cliente && (
               <Card sx={{ boxShadow: 3, bgcolor: "primary.contrastText" }}>
                 <CardContent>
@@ -106,7 +104,9 @@ function ContratoPorCodigo() {
                       </Typography>
                     </Grid>
                     <Grid size={12}>
-                      <Button sx={{ mx: 1 }} onClick={() => nav(`/agregar-adjunto/${dataBuscar.cliente?.id}`)} endIcon={<Icon>file</Icon>}>Adjuntar</Button>
+                      <Button sx={{ mx: 1 }} onClick={() => nav(`/agregar-adjunto/${dataBuscar.cliente?.id}`)} endIcon={<Icon>file</Icon>}>
+                        Adjuntar
+                      </Button>
                     </Grid>
                   </Grid>
                 </CardContent>
@@ -118,8 +118,13 @@ function ContratoPorCodigo() {
               <Grid size={{ xs: 12, sm: 6, md: 4 }}>
                 <Card sx={{ boxShadow: 3, bgcolor: "primary.contrastText" }}>
                   <CardContent>
-                    <Typography variant="caption">Estado Farma</Typography>
-                    <Typography variant="body1">{item.estadoContrato}</Typography>
+                    <Stack spacing={2} alignItems='end'>
+                      <Typography variant="caption">Estado Farma</Typography>
+                      <Typography variant="body1">{item.estadoContrato}</Typography>
+                      <Button disabled={item.estadoContrato == "RECI" || isPending} onClick={() => recibir(item.codigoContrato)} endIcon={<Icon>check</Icon>}>
+                        Confimar recepción
+                      </Button>
+                    </Stack>
                   </CardContent>
                 </Card>
               </Grid>

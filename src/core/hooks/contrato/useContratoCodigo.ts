@@ -42,13 +42,35 @@ function useContratoCodigo() {
       }
     }
   });
-
+  const recibirMutate = useMutation({
+    mutationKey: ["contratoPorDocumento", "recibir"],
+    mutationFn: async ({ codigo }: { codigo: number }) => {
+      const response = await API.contratos.recibir(codigo, userData && userData.tokenWithBearer);
+      return response
+    },
+    onSettled: (data, _, variables) => {
+      if(data && data.success && data.results && dataBuscar!==null){
+        const dataAntigua = { ...dataBuscar } 
+        const codigo = variables.codigo;
+ 
+        if (dataAntigua.contratos) {
+          const contratoIndex = dataAntigua.contratos.findIndex(e=> e.codigoContrato === codigo)
+          if (contratoIndex >= 0) {
+            dataAntigua.contratos[contratoIndex].estadoContrato = data.results.estado;
+            setDataBuscar(dataAntigua);
+            
+          }
+        }
+      }
+    }  })
   
-
+  const recibir = async (codigo: number) => {
+    recibirMutate.mutateAsync({codigo});
+  };
   const buscar = (q: string) => buscarMutate.mutate(q);
   const aprobar = (codigo: string) => aprobarMutate.mutate(codigo);
 
-  return { isPending : aprobarMutate.isPending || buscarMutate.isPending, dataBuscar, buscar, aprobar };
+  return { isPending: aprobarMutate.isPending || buscarMutate.isPending || recibirMutate.isPending, dataBuscar, buscar, aprobar, recibir };
 }
 
 export default useContratoCodigo;

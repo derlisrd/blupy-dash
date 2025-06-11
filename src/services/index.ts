@@ -9,6 +9,7 @@ import { ventasApiService } from "./api/ventas";
 import { adjuntosApiService } from "./api/adjuntos";
 import { permisosApiService } from "./api/permisos";
 import { adminApiService } from "./api/admin";
+import { contratosApiService } from "./api/contratos";
 
 
 
@@ -24,7 +25,8 @@ import { adminApiService } from "./api/admin";
     venta: ventasApiService,
     noti: notificacionesApiService,
   permisos: permisosApiService,
-  admin: adminApiService
+  admin: adminApiService,
+  contratos: contratosApiService
 }
 
 export default API;
