@@ -53,6 +53,15 @@ function DevicesTable({ items }: DevicesTableProps) {
                       <Icon>brand-whatsapp</Icon>
                     </IconButton>
                   </Tooltip>
+                  <Tooltip title="Copiar token" arrow>
+                    <IconButton
+                      onClick={() => {
+                        console.log(item)
+                      }}
+                    >
+                      <Icon>copy</Icon>
+                    </IconButton>
+                  </Tooltip>
                 </Stack>
               </TableCell>
             </TableRow>

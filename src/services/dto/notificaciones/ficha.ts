@@ -113,7 +113,7 @@ export class UserDevice{
             os: json.os || '',
             fechaUltimaSesion: json.updated_at || '',
             version: json.version || '',
-            deviceToken : json.device_token || null,
+            deviceToken : json.devicetoken || null,
             dispositivo: json.device || '',
             id: json.id || 0,
             expoToken: json.notitoken || null,
