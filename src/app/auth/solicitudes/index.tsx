@@ -91,7 +91,12 @@ function Solicitudes() {
         >
           Ver Ficha
         </MenuItem>
-        <MenuItem onClick={() => actualizar(selectedRow)}>Actualizar solicitud</MenuItem>
+        <MenuItem onClick={() => {
+          actualizar(selectedRow)
+          handleMenuClose();
+        }
+        }
+        >Actualizar solicitud</MenuItem>
       </Menu>
       <Ficha
         open={openFicha}
