@@ -24,9 +24,7 @@ const AuthProvider = ({ children }: { children: ReactNode }) => {
         setUserData(data);
         if (mantener) setSessionUserData(data);
       }
-    },
-    [setSessionUserData]
-  );
+    }, [setSessionUserData]);
 
   // Función para cerrar sesión
   const cerrarSesion = useCallback(() => {
@@ -39,58 +37,28 @@ const AuthProvider = ({ children }: { children: ReactNode }) => {
   const { isLoading } = useQuery({
     queryKey: ["checkAuth"],
     queryFn: async () => {
-      const localStorage = window.sessionStorage.getItem("userData");
-      if (localStorage && localStorage !== "null") {
-        const local = JSON.parse(localStorage) as LoginResults;
-        if (!local.token) {
-          cerrarSesion();
-          return null;
+      const localData = window.sessionStorage.getItem("userData");
+      if (localData) {
+        const localDataParsed = JSON.parse(localData) as LoginResults;
+        if (localDataParsed.tokenWithBearer) {
+          const res = await API.auth.check(localDataParsed.token)
+          return res
         }
-        if (isTokenExpired(local.token)) {
-          cerrarSesion();
-          return null;
-        }
-        const res = await API.auth.check(local.token);
-        if (!res) {
-          cerrarSesion();
-          return null;
-        }
-        iniciarSesion(local);
-        return local;
       }
-      return null;
     },
-    staleTime: 5 * 60 * 1000, // Evita reconsultas innecesarias por 5 minutos
+    throwOnError() {
+      window.sessionStorage.removeItem("userData");
+      useQueryCliente.clear();
+      window.location.reload()
+      return true
+    },
+    retry: 1,
+    staleTime: 30 * 60000,
     refetchOnWindowFocus: true,
-    refetchOnMount: true,
-    refetchOnReconnect: true,
-
+    refetchInterval: 30 * 60000,
   });
 
-  const isTokenExpired = (token: string): boolean => {
-    if (!token) return true;
 
-    try {
-      // Dividir el token en sus partes (header, payload, signature)
-      const parts = token.split(".");
-      if (parts.length !== 3) return true;
-
-      // Decodificar la parte del payload (la segunda parte)
-      const payload = JSON.parse(atob(parts[1]));
-
-      // Verificar si el token tiene un claim de expiración
-      if (!payload.exp) return false; // Sin exp, asumimos que no expira
-
-      // Convertir el tiempo actual a segundos (mismo formato que exp)
-      const currentTime = Math.floor(Date.now() / 1000);
-
-      // Comparar con el tiempo de expiración
-      return payload.exp < currentTime;
-    } catch (error) {
-      console.error("Error al verificar el token:", error);
-      return true; // Si hay un error al decodificar, asumimos que está expirado
-    }
-  };
 
   const values = {
     isAuth,

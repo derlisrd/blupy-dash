@@ -22,7 +22,7 @@ export const authApiService = {
       });
       return data.success;
     } catch (error) {
-      return false;
+      throw error
     }
   }
 };

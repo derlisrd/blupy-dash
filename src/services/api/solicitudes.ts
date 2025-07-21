@@ -10,10 +10,10 @@ export const solicitudesApiService = {
       const { data, status } = await BASE.get("/solicitudes", { headers: { Authorization: token } });
       return SolicitudesResponse.fromJSON({ success: true, message: "", results: data.results, status: status });
     } catch (error) {
-      if (error instanceof Error) {
-        return new SolicitudesResponse({ success: false, message: error.message, results: [], status: 500 });
+      if (isAxiosError(error)) {
+       throw new Error(error.response?.data.message || 'Error de servidor')
       }
-      return new SolicitudesResponse({ success: false, message: "Error desconocido", results: [], status: 500 });
+      throw new Error('Error de servidor')
     }
   },
   buscar: async (q: string, token: string | null) => {
