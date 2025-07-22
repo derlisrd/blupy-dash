@@ -73,37 +73,37 @@ function ContratoPorCodigo() {
               <Card sx={{ boxShadow: 3, bgcolor: "primary.contrastText" }}>
                 <CardContent>
                   <Grid container rowSpacing={1}>
-                    <Grid size={12}>
+                    <Grid size={{ xs: 12, sm: 6 }}>
                       <Typography variant="caption">Cedula</Typography>
                       <Typography variant="body2" fontWeight="bold">
                         {dataBuscar.cliente?.cedula}
                       </Typography>
                     </Grid>
-                    <Grid size={12}>
+                    <Grid size={{ xs: 12, sm: 6 }}>
                       <Typography variant="caption">Estado contrato</Typography>
                       <Typography variant="body2" fontWeight="bold">
                         {dataBuscar.cliente?.estado}
                       </Typography>
                     </Grid>
-                    <Grid size={12}>
+                    <Grid size={{ xs: 12, sm: 6 }}>
                       <Typography variant="caption">Nombre</Typography>
                       <Typography variant="body2" fontWeight="bold">
                         {dataBuscar.cliente?.nombre}
                       </Typography>
                     </Grid>
-                    <Grid size={12}>
+                    <Grid size={{ xs: 12, sm: 6 }}>
                       <Typography variant="caption">Celular</Typography>
                       <Typography variant="body2" fontWeight="bold">
                         {dataBuscar.cliente?.celular}
                       </Typography>
                     </Grid>
-                    <Grid size={12}>
+                    <Grid size={{ xs: 12, sm: 6 }}>
                       <Typography variant="caption">Fecha de solicitud</Typography>
                       <Typography variant="body2" fontWeight="bold">
                         {format(dataBuscar.cliente?.fechaSolicitud, "D MMM YYYY HH:mm", "es-PY")}
                       </Typography>
                     </Grid>
-                    <Grid size={12}>
+                    <Grid size={{ xs: 12, sm: 6 }}>
                       <Button sx={{ mx: 1 }} onClick={() => nav(`/agregar-adjunto/${dataBuscar.cliente?.id}`)} endIcon={<Icon>file</Icon>}>
                         Adjuntar
                       </Button>
@@ -121,10 +121,19 @@ function ContratoPorCodigo() {
                     <Stack spacing={2} alignItems='end'>
                       <Typography variant="caption">Estado Farma</Typography>
                       <Typography variant="body1">{item.estadoContrato}</Typography>
+                      _
                       <Button disabled={item.estadoContrato == "RECI" || isPending} onClick={() => recibir(item.codigoContrato)} endIcon={<Icon>check</Icon>}>
                         Confimar recepción
                       </Button>
                     </Stack>
+                  </CardContent>
+                </Card>
+              </Grid>
+              <Grid size={{ xs: 12, sm: 6, md: 4 }}>
+                <Card sx={{ boxShadow: 3, bgcolor: "primary.contrastText" }}>
+                  <CardContent>
+                    <Typography variant="caption">Cédula del impresor</Typography>
+                    <Typography variant="body1">{item.cedulaVendedor}</Typography>
                   </CardContent>
                 </Card>
               </Grid>

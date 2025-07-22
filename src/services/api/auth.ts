@@ -20,9 +20,9 @@ export const authApiService = {
           Authorization: `Bearer ${token}`
         }
       });
-      return data.success;
+      return data.success as boolean
     } catch (error) {
-      throw error
+      throw error;
     }
   }
 };

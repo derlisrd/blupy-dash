@@ -91,7 +91,7 @@ function Ficha({ open, onClose, fichaSeleccionada }: FichaProps) {
           </Grid>
           <Grid size={{ xs: 12, sm: 6 }}>
             {fichaSeleccionada.selfie ? (
-              <img src={`${config.PATH_IMAGE}${fichaSeleccionada.selfie}`} alt="selfie" style={{ width: "256px", height: "256px", objectFit: "cover" }} />
+              <img src={`${config.PATH_IMAGE}/adjuntos/${fichaSeleccionada.selfie}`} alt="selfie" style={{ width: "256px", height: "256px", objectFit: "cover" }} />
             ) : (
               <Icon size={64}>photo-scan</Icon>
             )}

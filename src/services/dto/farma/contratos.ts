@@ -53,67 +53,71 @@ export class ContratosConsultaResults {
 }
 
 export class ContratosConsultaResultsContratos {
-    codigoSucursal: number;
-    sucursal: string;
-    fechaIngreso: string;
-    cantidadImpresiones: number;
-    codigoContrato: number;
-    estadoContrato: string;
-    fechaEnvio: string | null;
-    cedulaCliente: string;
-    valorLineaCredito: number;
-    usuarioImpresor: string;
-    fechaImpresion: string;
-    usuarioGenerador: string;
-    usuarioEnvio: string | null;
+  codigoSucursal: number;
+  sucursal: string;
+  fechaIngreso: string;
+  cantidadImpresiones: number;
+  codigoContrato: number;
+  estadoContrato: string;
+  fechaEnvio: string | null;
+  cedulaCliente: string;
+  cedulaVendedor: string;
+  valorLineaCredito: number;
+  usuarioImpresor: string;
+  fechaImpresion: string;
+  usuarioGenerador: string;
+  usuarioEnvio: string | null;
 
-    constructor({
-      codigoSucursal = 0,
-      sucursal = "",
-      fechaIngreso = "",
-      cantidadImpresiones = 0,
-      codigoContrato = 0,
-      estadoContrato = "",
-      fechaEnvio = "",
-      cedulaCliente = "",
-      valorLineaCredito = 0,
-      usuarioImpresor = "",
-      fechaImpresion = "",
-      usuarioGenerador = "",
-      usuarioEnvio = "",
-    }: Partial<ContratosConsultaResultsContratos>) {
-      this.codigoSucursal = codigoSucursal;
-      this.sucursal = sucursal;
-      this.fechaIngreso = fechaIngreso;
-      this.cantidadImpresiones = cantidadImpresiones;
-      this.codigoContrato = codigoContrato;
-      this.estadoContrato = estadoContrato;
-      this.fechaEnvio = fechaEnvio;
-      this.cedulaCliente = cedulaCliente;
-      this.valorLineaCredito = valorLineaCredito;
-      this.usuarioImpresor = usuarioImpresor;
-      this.usuarioGenerador = usuarioGenerador;
-      this.usuarioEnvio = usuarioEnvio;
-      this.fechaImpresion = fechaImpresion;
-      }
+  constructor({
+    codigoSucursal = 0,
+    sucursal = "",
+    fechaIngreso = "",
+    cantidadImpresiones = 0,
+    codigoContrato = 0,
+    estadoContrato = "",
+    fechaEnvio = "",
+    cedulaCliente = "",
+    cedulaVendedor = "",
+    valorLineaCredito = 0,
+    usuarioImpresor = "",
+    fechaImpresion = "",
+    usuarioGenerador = "",
+    usuarioEnvio = ""
+  }: Partial<ContratosConsultaResultsContratos>) {
+    this.codigoSucursal = codigoSucursal;
+    this.sucursal = sucursal;
+    this.fechaIngreso = fechaIngreso;
+    this.cantidadImpresiones = cantidadImpresiones;
+    this.codigoContrato = codigoContrato;
+    this.estadoContrato = estadoContrato;
+    this.fechaEnvio = fechaEnvio;
+    this.cedulaCliente = cedulaCliente;
+    this.valorLineaCredito = valorLineaCredito;
+    this.usuarioImpresor = usuarioImpresor;
+    this.usuarioGenerador = usuarioGenerador;
+    this.usuarioEnvio = usuarioEnvio;
+    this.fechaImpresion = fechaImpresion;
+    this.cedulaVendedor = cedulaVendedor;
+  }
 
-    static fromJSON(data: any): ContratosConsultaResultsContratos {
-        return new ContratosConsultaResultsContratos({
-          codigoSucursal: data.codigoSucursal,
-          sucursal: data.estrDescripcion,
-          fechaIngreso: data.fchIns,
-          cantidadImpresiones: data.micoCantImpresiones,
-          codigoContrato: data.micoCodigo,
-          estadoContrato: data.micoEstado,
-          fechaEnvio: data.micoFchEnvio,
-          cedulaCliente: data.micoPersCi,
-          valorLineaCredito: data.micoValorLineaCredito,
-          usuarioImpresor: data.usuarioImpresor,
-          usuarioGenerador: data.usuaCodigoGeneracion,
-          usuarioEnvio: data.usuaCodigoEnvio,
-          fechaImpresion: ( data.micoFchImpresion ),
-        });
-      }
+  static fromJSON(data: any): ContratosConsultaResultsContratos {
+    return new ContratosConsultaResultsContratos({
+      codigoSucursal: data.codigoSucursal,
+      sucursal: data.estrDescripcion,
+      fechaIngreso: data.fchIns,
+      cantidadImpresiones: data.micoCantImpresiones,
+      codigoContrato: data.micoCodigo,
+      estadoContrato: data.micoEstado,
+      fechaEnvio: data.micoFchEnvio,
+      cedulaCliente: data.micoPersCi,
+      valorLineaCredito: data.micoValorLineaCredito,
+      usuarioImpresor: data.usuarioImpresor,
+      usuarioGenerador: data.usuaCodigoGeneracion,
+      usuarioEnvio: data.usuaCodigoEnvio,
+      fechaImpresion: data.micoFchImpresion,
+      cedulaVendedor: data.persCi
+    });
+  }
 }
 
 

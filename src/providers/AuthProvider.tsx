@@ -1,19 +1,43 @@
 import { useState, useCallback, ReactNode } from "react";
-import { useSessionStorage } from "@/hooks/useSessionStorage";
 import { LoginResults } from "@/services/dto/auth/login";
 import API from "@/services";
 import AuthContext from "@/contexts/AuthContext";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 
-// Proveedor del contexto
+// Constantes
+const AUTH_STORAGE_KEY = "userData";
+
+
+const storage = {
+  get: (key: string): LoginResults | null => {
+    try {
+      const data = window.sessionStorage.getItem(key);
+      return data ? JSON.parse(data) : null;
+    } catch {
+      return null;
+    }
+  },
+  set: (key: string, value: LoginResults): void => {
+    try {
+      window.sessionStorage.setItem(key, JSON.stringify(value));
+    } catch (error) {
+      console.error("Error guardando en sessionStorage:", error);
+    }
+  },
+  remove: (key: string): void => {
+    window.sessionStorage.removeItem(key);
+  }
+};
+
+
 const AuthProvider = ({ children }: { children: ReactNode }) => {
-  const { setItemValue: setSessionUserData } = useSessionStorage<LoginResults | null>("userData", null);
+
   const useQueryCliente = useQueryClient();
   const [isAuth, setIsAuth] = useState(false);
   const [userData, setUserData] = useState<LoginResults | null>(null);
   const updateUserData = (data: LoginResults) => {
     setUserData(data);
-    setSessionUserData(data);
+    storage.set(AUTH_STORAGE_KEY, data);
   };
 
   // Función para iniciar sesión
@@ -22,31 +46,39 @@ const AuthProvider = ({ children }: { children: ReactNode }) => {
       if (data !== null) {
         setIsAuth(true);
         setUserData(data);
-        if (mantener) setSessionUserData(data);
+        if (mantener) window.sessionStorage.setItem("userData", JSON.stringify(data));
       }
-    }, [setSessionUserData]);
+    }, []);
 
-  // Función para cerrar sesión
-  const cerrarSesion = useCallback(() => {
+
+  const cerrarSesion = () => {
     setIsAuth(false);
     setUserData(null);
-    setSessionUserData(null);
+    storage.remove(AUTH_STORAGE_KEY);
     useQueryCliente.clear();
-  }, [setSessionUserData, useQueryCliente]);
+  }
 
   const { isLoading } = useQuery({
     queryKey: ["checkAuth"],
     queryFn: async () => {
       const localData = window.sessionStorage.getItem("userData");
-      if (localData) {
-        const localDataParsed = JSON.parse(localData) as LoginResults;
-        if (localDataParsed.tokenWithBearer) {
-          const res = await API.auth.check(localDataParsed.token)
-          return res
-        }
+      if (!localData) {
+        return null
       }
+      const localDataParsed = JSON.parse(localData) as LoginResults;
+      if (!localDataParsed.tokenWithBearer) {
+        return null
+      }
+      const res = await API.auth.check(localDataParsed.token)
+      if (!res) {
+        cerrarSesion()
+        return null
+      }
+      iniciarSesion(localDataParsed, true)
     },
     throwOnError() {
+      setIsAuth(false);
+      setUserData(null);
       window.sessionStorage.removeItem("userData");
       useQueryCliente.clear();
       window.location.reload()
