@@ -12,7 +12,7 @@ import Icon from "@/components/ui/icon";
 import { useProviderSolicitudes } from "./provider";
 
 function ListaSolicitudes() {
-    const { lista, isLoading, setSelectedRow, selectedRow, actualizarSolicitud } = useProviderSolicitudes()
+    const { lista, isLoading, setSelectedRow, selectedRow, actualizarSolicitud, buscar } = useProviderSolicitudes()
 
     const [openFicha, setOpenFicha] = useState(false);
     const [search, setSearch] = useState("");
@@ -52,7 +52,13 @@ function ListaSolicitudes() {
             {isLoading && <LinearProgress />}
 
             <Box boxShadow={6} borderRadius={4} component={Paper}>
-                <Filtros setSearch={setSearch} setEstadoFiltro={setEstadoFiltro} estadoFiltro={estadoFiltro} buscar={() => { }} search={search} />
+                <Filtros
+                    setSearch={setSearch}
+                    setEstadoFiltro={setEstadoFiltro}
+                    estadoFiltro={estadoFiltro}
+                    buscar={buscar}
+                    search={search}
+                />
                 <TableContainer component={Paper} sx={{ borderRadius: 0, border: 0, boxShadow: 0, minHeight: `calc(100% - 160px)` }}>
                     {listado && (
                         <AutoSizer>

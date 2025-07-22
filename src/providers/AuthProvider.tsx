@@ -74,7 +74,9 @@ const AuthProvider = ({ children }: { children: ReactNode }) => {
         cerrarSesion()
         return null
       }
-      iniciarSesion(localDataParsed, true)
+      setIsAuth(true);
+      setUserData(localDataParsed);
+      return res;
     },
     throwOnError() {
       setIsAuth(false);
