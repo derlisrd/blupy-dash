@@ -41,6 +41,7 @@ const VentasPeriodoForma = Loadable(lazy(() => import("./ventas/periodo-forma"))
 const VentasFecha = Loadable(lazy(() => import("./actualizaciones/ventas-fecha")));
 const Movimientos = Loadable(lazy(() => import("./farma/movimientos")));
 const SMS = Loadable(lazy(() => import("./notificaciones/sms")));
+const InfoSucursales = Loadable(lazy(() => import("./farma/sucursales")));
 
 const Users = Loadable(lazy(() => import("./users")));
 
@@ -61,6 +62,7 @@ function AuthPages() {
           <Route path="/farma/clientes/ficha" element={<FichaClienteFarma />} />
           <Route path="/farma/clientes/codigo" element={<FichaClienteFarmaCodigo />} />
           <Route path="/farma/comisiones" element={<Comisiones />} />
+          <Route path="/farma/info-sucursales" element={<InfoSucursales />} />
           <Route path="/notificaciones/difusion" element={<NotificacionesDifusion />} />
           <Route path="/notificaciones/individual" element={<NotificacionesIndividual />} />
           <Route path="/notificaciones/sms" element={<SMS />} />

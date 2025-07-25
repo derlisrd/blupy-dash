@@ -53,22 +53,27 @@ export default [
     open: false,
     submenu: [
       {
+        id: 1,
+        title: "Sucursales",
+        url: "/farma/info-sucursales"
+      },
+      {
         id: 2,
         title: "Cliente por doc.",
         url: "/farma/clientes/ficha"
       },
       {
-        id: 232,
+        id: 3,
         title: "Cliente por codigo",
         url: "/farma/clientes/codigo"
       },
       {
-        id: 287,
+        id: 4,
         title: "Movimientos",
         url: "/farma/movimientos"
       },
       {
-        id: 212,
+        id: 5,
         title: "Comisiones",
         url: "/farma/comisiones"
       }
