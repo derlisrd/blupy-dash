@@ -1,6 +1,6 @@
 import { useAuth } from "@/hooks/useAuth";
 import API from "@/services";
-import { Container, Grid2, LinearProgress, TextField, Button, Table, TableHead, TableCell } from "@mui/material";
+import { Container, Grid2, LinearProgress, TextField, Button } from "@mui/material";
 import { useMutation } from "@tanstack/react-query";
 import { useState } from "react";
 
@@ -16,15 +16,16 @@ function InfoSucursales() {
 
     });
 
+    console.log(data && data.results)
+
+
     return (
         <Container>
             <Grid2 container spacing={2} alignItems="center">
                 <Grid2 size={12}>
                     <h1>Info Sucursales</h1>
                 </Grid2>
-                <Grid2 size={12}>
-                    {isPending && <LinearProgress />}
-                </Grid2>
+                <Grid2 size={12}>{isPending && <LinearProgress />}</Grid2>
 
                 <Grid2 size={8}>
                     <TextField fullWidth placeholder="Punto" onChange={(e) => setPunto(e.target.value)} />
@@ -33,15 +34,16 @@ function InfoSucursales() {
                     <Button onClick={() => mutateAsync()}>Consultar</Button>
                 </Grid2>
                 <Grid2 size={12}>
-                    <Table>
-                        <TableHead>
-                            <TableCell>CODIGO</TableCell>
-                            <TableCell>DESCRIPCION</TableCell>
-                            <TableCell>ENCARGADO</TableCell>
-                            <TableCell>CONTACTO</TableCell>
-                            <TableCell>CEDULA</TableCell>
-                        </TableHead>
-                    </Table>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>CODIGO</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                        </tbody>
+                    </table>
                 </Grid2>
             </Grid2>
         </Container>
