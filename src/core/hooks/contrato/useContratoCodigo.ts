@@ -21,10 +21,7 @@ function useContratoCodigo() {
   });
   const aprobarMutate =  useMutation({
     mutationKey: ["contratoPorDocumento", "aprobar"],
-    mutationFn: async (q: string) => {
-      const response = await API.solicitudes.aprobarSolicitud(q, userData && userData.tokenWithBearer);
-      return response  
-    },
+    mutationFn: async (q: string) => API.solicitudes.aprobarSolicitud(q, userData && userData.tokenWithBearer),
     onSettled: (data) => {
       if (data && data.success && data.results) {
         const dataAntigua = dataBuscar ? { ...dataBuscar } : null;
