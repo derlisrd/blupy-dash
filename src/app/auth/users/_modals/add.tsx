@@ -6,7 +6,7 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { FormAddUserType } from "@/core/types/formadduser";
 import API from "@/services";
 import { useAuth } from "@/hooks/useAuth";
-
+import swal from 'sweetalert'
 
 
 function AddModal() {
@@ -36,9 +36,9 @@ function AddModal() {
     const { isPending, mutateAsync } = useMutation({
         mutationKey: ["addUser"],
         mutationFn: () => API.admin.add(userData && userData.token, form),
-        onSettled: (data) => {
+        onSettled: async (data) => {
             if (data && !data.success) {
-                swal({
+                await swal({
                     icon: "error",
                     title: "Error",
                     text: data.message,

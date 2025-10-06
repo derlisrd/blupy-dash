@@ -2,6 +2,7 @@ import { useAuth } from "@/hooks/useAuth";
 import API from "@/services";
 import { useMutation } from "@tanstack/react-query";
 import { useState } from "react";
+import swal from 'sweetalert'
 
 function useSendSMS() {
     const {userData} = useAuth()
@@ -13,11 +14,14 @@ function useSendSMS() {
         mutationFn: async() => {
             return await API.notificaciones.enviarSMS({token: userData && userData.tokenWithBearer, number: number, text: text})
         },
-        onSettled(data) {
+        onSettled : async(data)=> {
             if(data && data.success) {
               setNumber("");
               setText("");
-              swal("SMS enviado", data.message, "success");
+              await swal({
+                text: 'Mensaje enviado',
+                icon: 'success'
+              });
             }
           }
     })

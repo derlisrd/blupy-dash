@@ -96,6 +96,11 @@ export default [
     open: false,
     submenu: [
       {
+        id: 4,
+        title: "Cobranzas",
+        url: "/notificaciones/cobranzas"
+      },
+      {
         id: 1,
         title: "Individual",
         url: "/notificaciones/individual"
@@ -184,6 +189,11 @@ export default [
         id: 4,
         title: "Ventas a fecha",
         url: "/actualizaciones/ventas-fecha"
+      },
+      {
+        id: 5,
+        title: "Clientes digitales",
+        url: "/actualizaciones/clientes-digitales"
       }
     ]
   }

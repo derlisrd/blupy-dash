@@ -31,6 +31,8 @@ const ContratoPorDocumento = Loadable(lazy(() => import("./contratos/pordocument
 const ContratoPorCodigo = Loadable(lazy(() => import("./contratos/porcodigo")));
 const NotificacionesDifusion = Loadable(lazy(() => import("./notificaciones/difusion")));
 const NotificacionesIndividual = Loadable(lazy(() => import("./notificaciones/individual")));
+const Cobranzas = Loadable(lazy(() => import("./notificaciones/cobranzas")));
+const ClientesDigitales = Loadable(lazy(() => import("./actualizaciones/clientes-digitales")));
 const VentasPorFactura = Loadable(lazy(() => import("./ventas/por-factura")));
 const VentasPorCodigo = Loadable(lazy(() => import("./ventas/por-codigo")));
 const VentasPorFecha = Loadable(lazy(() => import("./ventas/por-fecha")));
@@ -66,6 +68,7 @@ function AuthPages() {
           <Route path="/notificaciones/difusion" element={<NotificacionesDifusion />} />
           <Route path="/notificaciones/individual" element={<NotificacionesIndividual />} />
           <Route path="/notificaciones/sms" element={<SMS />} />
+          <Route path="/notificaciones/cobranzas" element={<Cobranzas />} />
           <Route path="/ventas/por-factura" element={<VentasPorFactura />} />
           <Route path="/ventas/por-codigo/:codigo" element={<VentasPorCodigo />} />
           <Route path="/ventas/por-fecha" element={<VentasPorFecha />} />
@@ -74,6 +77,7 @@ function AuthPages() {
           <Route path="/ventas/acumuladas-mes" element={<VentasAcumuladasMes />} />
           <Route path="/ventas/periodo-forma" element={<VentasPeriodoForma />} />
           <Route path="/actualizaciones/ventas-fecha" element={<VentasFecha />} />
+          <Route path="/actualizaciones/clientes-digitales" element={<ClientesDigitales />} />
           <Route path="/farma/movimientos" element={<Movimientos />} />
           <Route path="/users" element={<Users />} />
           <Route path="/logout" element={<LogOut />} />

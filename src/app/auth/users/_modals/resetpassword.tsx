@@ -5,6 +5,7 @@ import { useState } from "react";
 import { useMutation } from "@tanstack/react-query";
 import { useAuth } from "@/hooks/useAuth";
 import API from "@/services";
+import swal from 'sweetalert'
 
 function ResetPasswordModal() {
     const { modals, handleModal, selectedAdmin, setSelectedAdmin } = useUsersContext();
@@ -22,7 +23,7 @@ function ResetPasswordModal() {
                 ...form,
                 id: selectedAdmin ? selectedAdmin?.id : 0,
             }),
-        onSettled: (data) => {
+        onSettled: async (data) => {
             if (data && !data.success) {
                 swal({
                     icon: "error",
@@ -33,7 +34,7 @@ function ResetPasswordModal() {
             }
             if (data && data.success) {
                 handleModal("resetPassword");
-                swal({
+                await swal({
                     icon: "success",
                     title: "Contraseña restablecida",
                     text: "La contraseña se ha restablecido correctamente",
@@ -51,7 +52,7 @@ function ResetPasswordModal() {
 
     const handleSubmit = async () => {
         if (form.password !== form.password_confirmation) {
-            swal({
+            await swal({
                 icon: "error",
                 title: "Error",
                 text: "Las contraseñas no coinciden",

@@ -3,6 +3,7 @@ import useAddAdjunto from "@/core/hooks/adjuntos/useAddAdjunto";
 import { Box, Button, Card, CardMedia, Container, Grid2 as Grid, IconButton, LinearProgress, MenuItem, Select, Tooltip, Typography } from "@mui/material";
 import { Fragment } from "react";
 import { useParams } from "react-router-dom";
+import swal from 'sweetalert'
 
 function AgregarAdjunto() {
 
@@ -10,11 +11,14 @@ function AgregarAdjunto() {
     const { imagePreview, isDragActive, getInputProps, getRootProps, removeImage, subir, isPending, nombre, setNombre } = useAddAdjunto(id);
 
     const handleSubmit = async () => {
-        if (nombre === "0") return swal({
-            title: 'Error',
-            icon: "error",
-            text: "Debe seleccionar un tipo"
-        })
+        if (nombre.length < 1) {
+            await swal({
+                title: 'Error',
+                icon: "error",
+                text: "Debe seleccionar un tipo"
+            })
+            return
+        }
         await subir();
     };
 
