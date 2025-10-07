@@ -12,7 +12,7 @@ interface FichaProps {
 function Ficha({ open, onClose, fichaSeleccionada }: FichaProps) {
   if (!fichaSeleccionada) return null;
   return (
-    <Dialog open={open} onClose={onClose} fullWidth>
+    <Dialog open={open} onClose={onClose} maxWidth='lg' fullWidth >
       <DialogTitle>Ficha de cliente</DialogTitle>
       <DialogContent>
         <Grid container spacing={0}>
@@ -89,20 +89,28 @@ function Ficha({ open, onClose, fichaSeleccionada }: FichaProps) {
               Ver en Google Maps
             </a>
           </Grid>
-          <Grid size={{ xs: 12, sm: 6 }}>
-            {fichaSeleccionada.selfie ? (
-              <img src={`${config.PATH_IMAGE}/adjuntos/${fichaSeleccionada.selfie}`} alt="selfie" style={{ width: "256px", height: "256px", objectFit: "cover" }} />
-            ) : (
-              <Icon size={64}>photo-scan</Icon>
-            )}
-          </Grid>
-          <Grid size={{ xs: 12, sm: 6 }}>
+          <Grid size={{ xs: 12, sm: 4 }}>
             {fichaSeleccionada.foto_ci_frente ? (
               <img src={`${config.PATH_IMAGE}/clientes/${fichaSeleccionada.foto_ci_frente}`} alt="cedula frente" style={{ width: "256px", height: "256px", objectFit: "cover" }} />
             ) : (
               <Icon size={64}>photo-scan</Icon>
             )}
           </Grid>
+          <Grid size={{ xs: 12, sm: 4 }}>
+            {fichaSeleccionada.selfie ? (
+              <img src={`${config.PATH_IMAGE}/clientes/${fichaSeleccionada.selfie}`} alt="selfie" style={{ width: "256px", height: "256px", objectFit: "cover" }} />
+            ) : (
+              <Icon size={64}>photo-scan</Icon>
+            )}
+          </Grid>
+          <Grid size={{ xs: 12, sm: 4 }}>
+            {fichaSeleccionada.selfie ? (
+              <img src={`${config.PATH_IMAGE}/adjuntos/${fichaSeleccionada.selfie}`} alt="selfie" style={{ width: "256px", height: "256px", objectFit: "cover" }} />
+            ) : (
+              <Icon size={64}>photo-scan</Icon>
+            )}
+          </Grid>
+
         </Grid>
       </DialogContent>
       <DialogActions>
