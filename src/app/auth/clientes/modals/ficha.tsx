@@ -67,21 +67,28 @@ function Ficha({ open, onClose, fichaSeleccionada }: FichaProps) {
               {fichaSeleccionada.email}
             </Typography>
           </Grid>
-
-          <Grid size={{ xs: 12, sm: 6 }}>
-            {fichaSeleccionada.selfie ? (
-              <img src={`${config.PATH_IMAGE}/adjuntos/${fichaSeleccionada.selfie}`} alt="selfie" style={{ width: "256px", height: "256px", objectFit: "cover" }} />
-            ) : (
-              <Icon size={48}>photo-scan</Icon>
-            )}
-          </Grid>
-          <Grid size={{ xs: 12, sm: 6 }}>
+          <Grid size={{ xs: 12, sm: 3 }}>
             {fichaSeleccionada.foto_ci_frente ? (
               <img src={`${config.PATH_IMAGE}/clientes/${fichaSeleccionada.foto_ci_frente}`} alt="cedula frente" style={{ width: "256px", height: "256px", objectFit: "cover" }} />
             ) : (
               <Icon size={48}>file-type-jpg</Icon>
             )}
           </Grid>
+          <Grid size={{ xs: 12, sm: 3 }}>
+            {fichaSeleccionada.foto_ci_frente ? (
+              <img src={`${config.PATH_IMAGE}/clientes/${fichaSeleccionada.selfie}`} alt="cedula frente" style={{ width: "256px", height: "256px", objectFit: "cover" }} />
+            ) : (
+              <Icon size={48}>file-type-jpg</Icon>
+            )}
+          </Grid>
+          <Grid size={{ xs: 12, sm: 3 }}>
+            {fichaSeleccionada.selfie ? (
+              <img src={`${config.PATH_IMAGE}/adjuntos/${fichaSeleccionada.selfie}`} alt="selfie" style={{ width: "256px", height: "256px", objectFit: "cover" }} />
+            ) : (
+              <Icon size={48}>photo-scan</Icon>
+            )}
+          </Grid>
+
         </Grid>
       </DialogContent>
       <DialogActions>
