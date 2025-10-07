@@ -27,9 +27,7 @@ function NotFoundPage() {
       <Slide direction="down" in={true} mountOnEnter unmountOnExit>
         <Box>
           <IconWrapper>
-            <Icon color="silver" size={64}>
-              carrot
-            </Icon>
+            <span style={{ fontSize: 48 }} >⚠</span>
           </IconWrapper>
           <Typography variant="h4" gutterBottom>
             Página no encontrada
