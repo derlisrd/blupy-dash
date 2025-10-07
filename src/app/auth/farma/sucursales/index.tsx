@@ -17,22 +17,28 @@ function InfoSucursales() {
 
     });
 
+    const enviar = () => {
+        if (punto.length > 0) {
+            mutateAsync()
+        }
+    }
+
     const parentRef = useRef(null)
 
     // Ensure data.results is available before setting count
     const rowVirtualizer = useVirtualizer({
         count: data?.results?.length || 0, // Use optional chaining and default to 0
         getScrollElement: () => parentRef.current,
-        estimateSize: () => 70, // Increased estimateSize for more content
+        estimateSize: () => 90, // Increased estimateSize for more content
         overscan: 5,
     })
 
     const virtualItems = rowVirtualizer.getVirtualItems();
 
-    const itemHeight = 70; // La altura estimada de tus items (o un valor conocido)
+    const itemHeight = 90; // La altura estimada de tus items (o un valor conocido)
     const maxVisibleItems = 6;
     const calculatedHeight = data && data?.results?.length > 0
-        ? Math.min(data.results.length, maxVisibleItems) * itemHeight
+        ? (Math.min(data.results.length, maxVisibleItems) * itemHeight)
         : itemHeight;
 
     return (
@@ -44,7 +50,9 @@ function InfoSucursales() {
                 <Grid2 size={12}>{isPending && <LinearProgress />}</Grid2>
 
                 <Grid2 size={8}>
-                    <TextField fullWidth placeholder="Punto" label="Ingrese número de sucursal" onChange={(e) => setPunto(e.target.value)} />
+                    <TextField fullWidth placeholder="Punto" label="Ingrese número de sucursal" onChange={(e) => setPunto(e.target.value)}
+                        onKeyUp={(e) => e.key === 'Enter' && enviar()}
+                    />
                 </Grid2>
                 <Grid2 size={4}>
                     <Button onClick={() => mutateAsync()}>Consultar</Button>
@@ -91,8 +99,8 @@ function InfoSucursales() {
                                             <Box>
                                                 <Typography variant="body1" fontWeight="bold">Sucursal: {sucursal.descripcion}</Typography>
                                                 <Typography variant="body2">Encargado: {sucursal.encargado} (CI: {sucursal.encargadoCi})</Typography>
-                                                <Typography variant="body2">Contacto: {sucursal.contacto}</Typography>
-                                                <Typography variant="body2">Dirección: {sucursal.direccion}</Typography>
+                                                <Typography variant="body2">Contacto: {sucursal.contacto} - {sucursal.direccion}</Typography>
+
                                             </Box>
                                         ) : (
                                             <Typography>Cargando información...</Typography>
