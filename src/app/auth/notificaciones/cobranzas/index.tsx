@@ -11,7 +11,7 @@ export default function Cobranzas() {
   const [text, setText] = useState("");
   const [file, setFile] = useState<File | null>(null);
   const [fileName, setFileName] = useState("");
-  const MAX_CHARS = 100;
+  const MAX_CHARS = 120;
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files.length > 0) {
