@@ -12,14 +12,15 @@ import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 
 const Loadable =
   <T extends object>(Component: LazyExoticComponent<() => JSX.Element>) =>
-    (props: T) => {
-      return (
-        <Suspense fallback={<Loading />}>
-          <Component {...props} />
-        </Suspense>
-      );
-    };
+  (props: T) => {
+    return (
+      <Suspense fallback={<Loading />}>
+        <Component {...props} />
+      </Suspense>
+    );
+  };
 
+const ImpresosEnFarma = Loadable(lazy(() => import("./contratos/impresos-en-farma")));
 const CambiarContrasena = Loadable(lazy(() => import("./clientes/cambiar.contrasena")));
 const ClientesFotoCedula = Loadable(lazy(() => import("./clientes/fotocedula")));
 const Adjuntos = Loadable(lazy(() => import("./adjuntos")));
@@ -61,6 +62,7 @@ function AuthPages() {
           <Route path="/solicitudes" element={<Solicitudes />} />
           <Route path="/contratos/pordocumento" element={<ContratoPorDocumento />} />
           <Route path="/contratos/porcodigo" element={<ContratoPorCodigo />} />
+          <Route path="/contratos/impresos-en-farma" element={<ImpresosEnFarma />} />
           <Route path="/farma/clientes/ficha" element={<FichaClienteFarma />} />
           <Route path="/farma/clientes/codigo" element={<FichaClienteFarmaCodigo />} />
           <Route path="/farma/comisiones" element={<Comisiones />} />

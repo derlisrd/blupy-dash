@@ -32,7 +32,12 @@ export default [
         id: 2,
         title: "Por código",
         url: "/contratos/porcodigo"
-      }
+      },
+      {
+        id: 3,
+        title: "Impresos",
+        url: "/contratos/impresos-en-farma"
+      },
     ]
   },
 
