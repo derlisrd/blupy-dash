@@ -28,6 +28,7 @@ export default function ImpresosEnFarma() {
     { dataKey: "usuarioImpresor", label: "Func.", width: width * 0.2 },
     { dataKey: "persCi", label: "Ci. Func.", width: width * 0.1 },
     { dataKey: "micoPersCi", label: "Cliente", width: width * 0.1 },
+    { dataKey: "micoFchImpresion", label: "Fech", width: width * 0.1 },
   ];
   return (
     <Container>
