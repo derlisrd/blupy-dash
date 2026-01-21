@@ -101,6 +101,11 @@ export default [
     open: false,
     submenu: [
       {
+        id: 5,
+        title: "Dispositivos",
+        url: "/notificaciones/dispositivos"
+      },
+      {
         id: 4,
         title: "Cobranzas",
         url: "/notificaciones/cobranzas"

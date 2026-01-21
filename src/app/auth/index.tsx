@@ -12,13 +12,13 @@ import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 
 const Loadable =
   <T extends object>(Component: LazyExoticComponent<() => JSX.Element>) =>
-  (props: T) => {
-    return (
-      <Suspense fallback={<Loading />}>
-        <Component {...props} />
-      </Suspense>
-    );
-  };
+    (props: T) => {
+      return (
+        <Suspense fallback={<Loading />}>
+          <Component {...props} />
+        </Suspense>
+      );
+    };
 
 const ImpresosEnFarma = Loadable(lazy(() => import("./contratos/impresos-en-farma")));
 const CambiarContrasena = Loadable(lazy(() => import("./clientes/cambiar.contrasena")));
@@ -45,6 +45,8 @@ const VentasFecha = Loadable(lazy(() => import("./actualizaciones/ventas-fecha")
 const Movimientos = Loadable(lazy(() => import("./farma/movimientos")));
 const SMS = Loadable(lazy(() => import("./notificaciones/sms")));
 const InfoSucursales = Loadable(lazy(() => import("./farma/sucursales")));
+const Dispositivos = Loadable(lazy(() => import("./notificaciones/dispositivos")));
+const DetalleDispositivo = Loadable(lazy(() => import("./notificaciones/dispositivos/detalles")));
 
 const Users = Loadable(lazy(() => import("./users")));
 
@@ -67,10 +69,14 @@ function AuthPages() {
           <Route path="/farma/clientes/codigo" element={<FichaClienteFarmaCodigo />} />
           <Route path="/farma/comisiones" element={<Comisiones />} />
           <Route path="/farma/info-sucursales" element={<InfoSucursales />} />
+
           <Route path="/notificaciones/difusion" element={<NotificacionesDifusion />} />
           <Route path="/notificaciones/individual" element={<NotificacionesIndividual />} />
           <Route path="/notificaciones/sms" element={<SMS />} />
           <Route path="/notificaciones/cobranzas" element={<Cobranzas />} />
+          <Route path="/notificaciones/dispositivos" element={<Dispositivos />} />
+          <Route path="/notificaciones/dispositivos/:id" element={<DetalleDispositivo />} />
+
           <Route path="/ventas/por-factura" element={<VentasPorFactura />} />
           <Route path="/ventas/por-codigo/:codigo" element={<VentasPorCodigo />} />
           <Route path="/ventas/por-fecha" element={<VentasPorFecha />} />

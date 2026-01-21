@@ -10,23 +10,23 @@ import { adjuntosApiService } from "./api/adjuntos";
 import { permisosApiService } from "./api/permisos";
 import { adminApiService } from "./api/admin";
 import { contratosApiService } from "./api/contratos";
+import { devicesApiService } from "./api/devices";
 
-
-
- const API = {
-    auth : authApiService,
-    clientes: clientesApiService,
-    adjuntos: adjuntosApiService,
-    estadisticas:  estadisticasApiService,
-    solicitudes: solicitudesApiService,
-    consultas: consultasApiService,
-    notificaciones: notificacionesApiService,
-    farma: farmaApiService,
-    venta: ventasApiService,
-    noti: notificacionesApiService,
+const API = {
+  auth: authApiService,
+  clientes: clientesApiService,
+  adjuntos: adjuntosApiService,
+  estadisticas: estadisticasApiService,
+  solicitudes: solicitudesApiService,
+  consultas: consultasApiService,
+  notificaciones: notificacionesApiService,
+  farma: farmaApiService,
+  venta: ventasApiService,
+  noti: notificacionesApiService,
   permisos: permisosApiService,
   admin: adminApiService,
-  contratos: contratosApiService
-}
+  contratos: contratosApiService,
+  devices: devicesApiService
+};
 
 export default API;
