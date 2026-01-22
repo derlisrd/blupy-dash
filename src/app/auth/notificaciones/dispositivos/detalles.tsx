@@ -12,6 +12,8 @@ import {
 } from '@mui/material';
 import Icon from "@/components/ui/icon";
 import { DevicesResults } from "@/services/dto/notificaciones/devices";
+import { useMutation } from "@tanstack/react-query";
+import API from "@/services";
 export default function DetalleDispositivo() {
 
     const location = useLocation();
@@ -25,6 +27,17 @@ export default function DetalleDispositivo() {
 
 
 const UserReviewCard = ({ data }: { data: DevicesResults }) => {
+
+    const { mutateAsync } = useMutation({
+        mutationKey: ['aprobar', data.id],
+        mutationFn: () => API.devices.aprobar(data.id)
+    })
+
+    const validar = async () => {
+        await mutateAsync()
+    }
+
+
     return (
         <Card sx={{ maxWidth: 800, margin: '20px auto', borderRadius: 3, boxShadow: 3 }}>
             <CardContent>
@@ -83,7 +96,7 @@ const UserReviewCard = ({ data }: { data: DevicesResults }) => {
 
                 {/* Acciones */}
                 <Box mt={4} display="flex" gap={2}>
-                    <Button variant="contained" color="primary" fullWidth>
+                    <Button variant="contained" color="primary" onClick={validar} fullWidth>
                         Aprobar Usuario
                     </Button>
                     <Button variant="outlined" color="error" fullWidth>
