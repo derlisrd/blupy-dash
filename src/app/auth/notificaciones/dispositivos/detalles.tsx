@@ -44,7 +44,7 @@ const UserReviewCard = ({ data }: { data: DevicesResults }) => {
                 {/* Cabecera: Estado y Título */}
                 <Box display="flex" justifyContent="space-between" alignItems="center" mb={2}>
                     <Typography variant="h5" fontWeight="bold">
-                        Revisión de Usuario ID: {data.user_id}
+                        Revisión de Usuario {data.cedula} {data.name}
                     </Typography>
                     <Chip
                         icon={data.aprobado ? <Icon size={24}>square-rounded-check</Icon> : <Icon size={24}>alert-circle</Icon>}
