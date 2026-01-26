@@ -30,6 +30,8 @@ export class DevicesResults {
   cedula_frente_url: string;
   cedula_selfie_url: string;
   celular: string;
+  cedula: string;
+  name: string;
   created_at: string;
   desktop: number;
   device: string | null;
@@ -54,6 +56,8 @@ export class DevicesResults {
     cedula_frente_url = "",
     cedula_selfie_url = "",
     celular = "",
+    cedula = "",
+    name = "",
     created_at = "",
     desktop = 0,
     device = null,
@@ -77,6 +81,8 @@ export class DevicesResults {
     this.cedula_frente_url = cedula_frente_url;
     this.cedula_selfie_url = cedula_selfie_url;
     this.celular = celular;
+    this.cedula = cedula;
+    this.name = name;
     this.created_at = created_at;
     this.desktop = desktop;
     this.device = device;

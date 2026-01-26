@@ -43,6 +43,8 @@ export default function Dispositivos() {
               <TableHead>
                 <TableRow>
                   <TableCell>User ID</TableCell>
+                  <TableCell>Cedula</TableCell>
+                  <TableCell>Nombre</TableCell>
                   <TableCell>Modelo</TableCell>
                   <TableCell>OS</TableCell>
                   <TableCell>Acciones</TableCell>
@@ -56,6 +58,8 @@ export default function Dispositivos() {
                       key={row.id}
                     >
                       <TableCell>{row.user_id}</TableCell>
+                      <TableCell>{row.cedula}</TableCell>
+                      <TableCell>{row.name}</TableCell>
                       <TableCell>{row.model}</TableCell>
                       <TableCell>{row.os}</TableCell>
                       <TableCell>
