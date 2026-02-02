@@ -19,7 +19,7 @@ import swal from 'sweetalert'; // Importamos sweetalert
 export default function DetalleDispositivo() {
     const location = useLocation();
 
-    if (!location.state) return null;
+    if (!location.state) return <></>;
 
     return <UserReviewCard data={location.state.device} />
 }
