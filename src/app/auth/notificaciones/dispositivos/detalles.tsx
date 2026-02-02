@@ -1,4 +1,4 @@
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom"; // Importamos useNavigate
 import {
     Card,
     CardContent,
@@ -14,34 +14,55 @@ import Icon from "@/components/ui/icon";
 import { DevicesResults } from "@/services/dto/notificaciones/devices";
 import { useMutation } from "@tanstack/react-query";
 import API from "@/services";
-export default function DetalleDispositivo() {
+import swal from 'sweetalert'; // Importamos sweetalert
 
+export default function DetalleDispositivo() {
     const location = useLocation();
 
-    if (!location.state) return (<></>)
+    if (!location.state) return null;
 
     return <UserReviewCard data={location.state.device} />
 }
 
-
-
-
 const UserReviewCard = ({ data }: { data: DevicesResults }) => {
+    const navigate = useNavigate(); // Hook para volver atrás
 
-    const { mutateAsync } = useMutation({
+    const { mutate, isPending } = useMutation({
         mutationKey: ['aprobar', data.id],
-        mutationFn: () => API.devices.aprobar(data.id)
-    })
+        mutationFn: () => API.devices.aprobar(data.id),
+        onSuccess: () => {
+            // 1. Alerta de éxito
+            swal("¡Aprobado!", "El dispositivo ha sido validado correctamente.", "success")
+                .then(() => {
+                    // 2. Volver atrás después de cerrar el alert
+                    navigate(-1);
+                });
+        },
+        onError: (error: any) => {
+            // Alerta de error
+            swal("Error", "No se pudo aprobar el dispositivo: " + (error.message || "Error desconocido"), "error");
+        }
+    });
 
-    const validar = async () => {
-        await mutateAsync()
-    }
-
+    const validar = () => {
+        // Usamos swal para confirmar ANTES de ejecutar la mutación (opcional pero recomendado)
+        swal({
+            title: "¿Estás seguro?",
+            text: `Vas a aprobar al usuario ${data.name}`,
+            icon: "warning",
+            buttons: ["Cancelar", "Sí, aprobar"],
+            dangerMode: false,
+        }).then((willApprove) => {
+            if (willApprove) {
+                mutate();
+            }
+        });
+    };
 
     return (
         <Card sx={{ maxWidth: 800, margin: '20px auto', borderRadius: 3, boxShadow: 3 }}>
             <CardContent>
-                {/* Cabecera: Estado y Título */}
+                {/* Cabecera */}
                 <Box display="flex" justifyContent="space-between" alignItems="center" mb={2}>
                     <Typography variant="h5" fontWeight="bold">
                         Revisión de Usuario {data.cedula} {data.name}
@@ -87,7 +108,7 @@ const UserReviewCard = ({ data }: { data: DevicesResults }) => {
                                 <Avatar
                                     src={img.url}
                                     variant="rounded"
-                                    sx={{ width: '100%', height: 150, mt: 1, border: '1px solid #eee' }}
+                                    sx={{ width: '100%', height: 150, mt: 1, border: '1px solid #eee', objectFit: 'cover' }}
                                 />
                             </Box>
                         </Grid>
@@ -96,15 +117,25 @@ const UserReviewCard = ({ data }: { data: DevicesResults }) => {
 
                 {/* Acciones */}
                 <Box mt={4} display="flex" gap={2}>
-                    <Button variant="contained" color="primary" onClick={validar} fullWidth>
-                        Aprobar Usuario
+                    <Button
+                        variant="contained"
+                        color="success" // Cambiado a success para diferenciar
+                        onClick={validar}
+                        fullWidth
+                        disabled={isPending || data.aprobado}
+                    >
+                        {isPending ? "Aprobando..." : "Aprobar Usuario"}
                     </Button>
-                    <Button variant="outlined" color="error" fullWidth>
-                        Rechazar
+                    <Button
+                        variant="outlined"
+                        color="error"
+                        fullWidth
+                        onClick={() => navigate(-1)} // Acción para cancelar
+                    >
+                        Cancelar
                     </Button>
                 </Box>
             </CardContent>
         </Card>
     );
 };
-

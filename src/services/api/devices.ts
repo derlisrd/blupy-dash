@@ -24,4 +24,15 @@ export const devicesApiService = {
              throw new Error('Error de app')
         }
     },
+    eliminar: async(id: number)=>{
+        try {
+          const { data } = await BASE.delete("/devices/"+id);
+          return data;
+        } catch (error) {
+          if (error instanceof Error) {
+            throw new Error("Error de servidor");
+          }
+          throw new Error("Error de app");
+        }
+    }
 }
