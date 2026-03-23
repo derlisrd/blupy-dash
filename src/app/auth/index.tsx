@@ -47,6 +47,7 @@ const SMS = Loadable(lazy(() => import("./notificaciones/sms")));
 const InfoSucursales = Loadable(lazy(() => import("./farma/sucursales")));
 const Dispositivos = Loadable(lazy(() => import("./notificaciones/dispositivos")));
 const DispositivosDetalles = Loadable(lazy(() => import("./notificaciones/dispositivos/detalles")));
+const Validaciones = Loadable(lazy(() => import("./notificaciones/validaciones")));
 
 
 const Users = Loadable(lazy(() => import("./users")));
@@ -77,6 +78,7 @@ function AuthPages() {
           <Route path="/notificaciones/cobranzas" element={<Cobranzas />} />
           <Route path="/notificaciones/dispositivos" element={<Dispositivos />} />
           <Route path="/notificaciones/dispositivos/:id" element={<DispositivosDetalles />} />
+          <Route path="/notificaciones/validaciones" element={<Validaciones />} />
 
           <Route path="/ventas/por-factura" element={<VentasPorFactura />} />
           <Route path="/ventas/por-codigo/:codigo" element={<VentasPorCodigo />} />

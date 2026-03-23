@@ -101,27 +101,32 @@ export default [
     open: false,
     submenu: [
       {
-        id: 5,
+        id: 1,
+        title: "Validaciones",
+        url: "/notificaciones/validaciones"
+      },
+      {
+        id: 2,
         title: "Dispositivos",
         url: "/notificaciones/dispositivos"
       },
       {
-        id: 4,
+        id: 3,
         title: "Cobranzas",
         url: "/notificaciones/cobranzas"
       },
       {
-        id: 1,
+        id: 4,
         title: "Individual",
         url: "/notificaciones/individual"
       },
       {
-        id: 2,
+        id: 5,
         title: "Difusión",
         url: "/notificaciones/difusion"
       },
       {
-        id: 3,
+        id: 6,
         title: "Enviar SMS",
         url: "/notificaciones/sms"
       }
