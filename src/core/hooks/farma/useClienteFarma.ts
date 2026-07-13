@@ -18,7 +18,10 @@ function useClienteFarma() {
         }
     })
     
-    const buscar = (q: string)=> mutate(q)
+    const buscar = (q: string)=> {
+        if(!q || q.length < 6) return;
+        mutate(q);
+    }
 
     return {isPending, datos, buscar}
 }

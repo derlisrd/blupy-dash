@@ -51,6 +51,7 @@ export default function Validaciones() {
                                 <Column headerRenderer={headerRenderer} dataKey="celular" label="Celular" width={120} cellRenderer={cellRenderer} />
                                 <Column headerRenderer={headerRenderer} dataKey="origen" label="Origen" width={160} cellRenderer={cellRenderer} />
                                 <Column headerRenderer={headerRenderer} dataKey="codigo" label="PIN" width={100} cellRenderer={cellRenderer} />
+                                <Column headerRenderer={headerRenderer} dataKey="validado" label="Validado" width={100} cellRenderer={cellRenderer} />
                             </Table>
                         )}
                     </AutoSizer>

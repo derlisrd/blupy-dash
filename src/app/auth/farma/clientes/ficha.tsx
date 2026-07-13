@@ -19,7 +19,6 @@ function FichaClienteFarma() {
 
   return (
     <Container maxWidth="lg" sx={{ py: 4 }}>
-      {/* Header y Buscador */}
       <Paper
         elevation={0}
         sx={{
@@ -156,26 +155,26 @@ function FichaClienteFarma() {
                 <Grid size={{ xs: 12, sm: 3 }}>
                   <Paper sx={{ p: 2, bgcolor: 'warning.light', color: 'warning.contrastText', borderRadius: 2 }}>
                     <Typography variant="caption">Deuda pendiente:</Typography>
-                    <Typography variant="h6" fontWeight="bold">{toPYG(datos.farma.pendiente)}</Typography>
+                    <Typography variant="h6" fontWeight="bold">{toPYG(datos.farma.deuda)}</Typography>
                   </Paper>
                 </Grid>
 
                 {/* ALIANZAS */}
-                {datos.farma.alianzas?.map((item, key) => (
-                  <Grid size={{ xs: 12, md: 6 }} key={key} mt={1}>
+                {datos.farma.alianza &&
+                  <Grid size={{ xs: 12, md: 6 }} mt={1}>
                     <Card variant="outlined" sx={{ borderRadius: 3, border: '1px solid #e0e0e0', position: 'relative', overflow: 'visible' }}>
                       <Box sx={{ position: 'absolute', top: -10, left: 15, bgcolor: 'white', px: 1 }}>
                         <Typography variant="caption" color="primary" fontWeight="bold">ALIANZA ACTIVA</Typography>
                       </Box>
                       <CardContent>
                         <Stack spacing={1}>
-                          <Typography variant="h6" color="primary.main">{item.alianza}</Typography>
+                          <Typography variant="h6" color="primary.main">{datos.farma.alianza.descripcion}</Typography>
                           <Grid container spacing={1}>
-                            <Grid size={6}><Typography variant="caption">Código: {item.codigo}</Typography></Grid>
-                            <Grid size={6}><Typography variant="caption">Pago: {item.formaPago}</Typography></Grid>
+                            <Grid size={6}><Typography variant="caption">Código: {datos.farma.alianza.codigo}</Typography></Grid>
+                            <Grid size={6}><Typography variant="caption">Pago: {datos.farma.alianza.formaPago}</Typography></Grid>
                             <Grid size={12}>
                               <Typography variant="caption" sx={{ display: 'block', mt: 1 }}>
-                                Vencimiento: <b>{item.vencimiento ? format(item.vencimiento, "D MMM YYYY", "es-PY") : "31 Dic 2070"}</b>
+                                Vencimiento: <b>{datos.farma.alianza.vencimiento ? format(datos.farma.alianza.vencimiento, "D MMM YYYY", "es-PY") : "31 Dic 2070"}</b>
                               </Typography>
                             </Grid>
                           </Grid>
@@ -183,7 +182,7 @@ function FichaClienteFarma() {
                       </CardContent>
                     </Card>
                   </Grid>
-                ))}
+                }
               </Grid>
             </Box>
           )}

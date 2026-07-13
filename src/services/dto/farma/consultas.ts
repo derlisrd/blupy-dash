@@ -41,11 +41,12 @@ export class ConsultaClienteResultsFarma {
     credito: number | null;
     creditoAdicional : number | null;
     pendiente: number;
+    deuda:number;
     saldoDisponible: number;
     esFuncionario: boolean;
-    alianzas: ConsultaClienteResultsAlianzas[] | null;
+    alianza: ConsultaClienteResultsAlianzas | null;
 
-    constructor({codigo = "", nombre = "", credito = 0, creditoAdicional = 0, pendiente = 0, saldoDisponible = 0, esFuncionario = false, alianzas = null}: Partial<ConsultaClienteResultsFarma>) {
+    constructor({codigo = "", nombre = "", credito = 0, creditoAdicional = 0, pendiente = 0, deuda = 0, saldoDisponible = 0, esFuncionario = false, alianza = null}: Partial<ConsultaClienteResultsFarma>) {
         this.codigo = codigo;
         this.nombre = nombre;
         this.credito = credito;
@@ -53,7 +54,8 @@ export class ConsultaClienteResultsFarma {
         this.pendiente = pendiente;
         this.saldoDisponible = saldoDisponible;
         this.esFuncionario = esFuncionario;
-        this.alianzas = alianzas;
+        this.alianza = alianza;
+        this.deuda = deuda;
     }
 
     static fromJSON(data: any) : ConsultaClienteResultsFarma{
@@ -63,33 +65,34 @@ export class ConsultaClienteResultsFarma {
         credito: data.clerLimiteCredito,
         creditoAdicional: data.clerLimiteCreditoAdic,
         pendiente: data.pendiente,
-        saldoDisponible: data.saldoDisponible,
-        esFuncionario: data.esFuncionario ==='S' ? true : false,
-        alianzas: data.alianzas ? data.alianzas.map((alianza: any) => ConsultaClienteResultsAlianzas.fromJSON(alianza)) : null
+        deuda: data.deuda,
+        saldoDisponible: data.clerLimiteCredito - data.deuda,
+        esFuncionario: data.funcionario,
+        alianza: data.alianza ? ConsultaClienteResultsAlianzas.fromJSON(data.alianza) : null //data.alianzas ? data.alianzas.map((alianza: any) => ConsultaClienteResultsAlianzas.fromJSON(alianza)) : null
        })
     }
 }
 
 export class ConsultaClienteResultsAlianzas {
-    codigo: string;
-    alianza: string;
+    codigo: number;
+    descripcion: string;
     vencimiento: string | null;
     formaPago: string;
 
-    constructor({codigo = "", alianza = "", vencimiento = "", formaPago = ""}: Partial<ConsultaClienteResultsAlianzas>) {
+    constructor({codigo = 0, descripcion = "", vencimiento = "", formaPago = ""}: Partial<ConsultaClienteResultsAlianzas>) {
         this.codigo = codigo;
-        this.alianza = alianza;
+        this.descripcion = descripcion;
         this.vencimiento = vencimiento;
         this.formaPago = formaPago;
     }
 
     static fromJSON(data: any) : ConsultaClienteResultsAlianzas{
         return new ConsultaClienteResultsAlianzas({
-            codigo: data.codigoAdicional,
-            alianza: data.alianza,
-            vencimiento: data.vencimiento ? data.vencimiento : null,
-            formaPago: data.formaPago
-        })
+          codigo: data.codigo,
+          descripcion: data.descripcion,
+          vencimiento: data.fechaVencimiento ? data.fechaVencimiento : null,
+          formaPago: data.formaPago
+        });
     }
 }
 
