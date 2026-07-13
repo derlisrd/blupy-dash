@@ -104,8 +104,8 @@ function FichaClienteFarma() {
               </CardContent>
             </Card>
           </Grid>
-          {datos.farma.alianzas?.map((item, key) => (
-            <Fragment key={key}>
+          {datos.farma.alianza && (
+            <Fragment >
               <Grid size={12}>
                 <Typography variant="h6">Alianza</Typography>
               </Grid>
@@ -113,7 +113,7 @@ function FichaClienteFarma() {
                 <Card sx={{ boxShadow: 3, bgcolor: "primary.contrastText" }}>
                   <CardContent>
                     <Typography variant="caption">Alianza:</Typography>
-                    <Typography variant="body1">{item.alianza}</Typography>
+                    <Typography variant="body1">{datos.farma.alianza.descripcion}</Typography>
                   </CardContent>
                 </Card>
               </Grid>
@@ -121,7 +121,7 @@ function FichaClienteFarma() {
                 <Card sx={{ boxShadow: 3, bgcolor: "primary.contrastText" }}>
                   <CardContent>
                     <Typography variant="caption">Código alianza:</Typography>
-                    <Typography variant="body1">{item.codigo}</Typography>
+                    <Typography variant="body1">{datos.farma.alianza.codigo}</Typography>
                   </CardContent>
                 </Card>
               </Grid>
@@ -129,7 +129,7 @@ function FichaClienteFarma() {
                 <Card sx={{ boxShadow: 3, bgcolor: "primary.contrastText" }}>
                   <CardContent>
                     <Typography variant="caption">Forma de pago:</Typography>
-                    <Typography variant="body1">{item.formaPago}</Typography>
+                    <Typography variant="body1">{datos.farma.alianza.formaPago}</Typography>
                   </CardContent>
                 </Card>
               </Grid>
@@ -137,12 +137,12 @@ function FichaClienteFarma() {
                 <Card sx={{ boxShadow: 3, bgcolor: "primary.contrastText" }}>
                   <CardContent>
                     <Typography variant="caption">Vencimiento:</Typography>
-                    <Typography variant="body1">{item.vencimiento ? format(item.vencimiento) : "31 de diciembre de 2070"}</Typography>
+                    <Typography variant="body1">{datos.farma.alianza.vencimiento ? format(datos.farma.alianza.vencimiento) : "31 de diciembre de 2070"}</Typography>
                   </CardContent>
                 </Card>
               </Grid>
             </Fragment>
-          ))}
+          )}
         </Grid>
       )}
     </Container>
