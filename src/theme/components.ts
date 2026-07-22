@@ -114,7 +114,6 @@ export const components = {
       styleOverrides:{
         root:{
           borderRadius:"12px",
-          backgroundColor: '#fff',
         }
       }
     }

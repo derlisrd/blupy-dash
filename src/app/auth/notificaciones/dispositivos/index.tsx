@@ -101,17 +101,17 @@ export default function Dispositivos() {
               height: 'calc(100vh - 250px)',
               overflow: 'auto',
               '&::-webkit-scrollbar': { width: '8px' },
-              '&::-webkit-scrollbar-thumb': { backgroundColor: '#ccc', borderRadius: '4px' }
+              '&::-webkit-scrollbar-thumb': { borderRadius: '4px' }
             }}
           >
             <Table stickyHeader>
               <TableHead>
                 <TableRow>
-                  <TableCell sx={{ bgcolor: '#f8f9fa', fontWeight: 'bold' }}>Usuario</TableCell>
-                  <TableCell sx={{ bgcolor: '#f8f9fa', fontWeight: 'bold' }}>Identificación</TableCell>
-                  <TableCell sx={{ bgcolor: '#f8f9fa', fontWeight: 'bold' }}>Dispositivo</TableCell>
-                  <TableCell sx={{ bgcolor: '#f8f9fa', fontWeight: 'bold' }}>Sistema Operativo</TableCell>
-                  <TableCell sx={{ bgcolor: '#f8f9fa', fontWeight: 'bold', textAlign: 'center' }}>Acciones</TableCell>
+                  <TableCell sx={{ fontWeight: 'bold' }}>Usuario</TableCell>
+                  <TableCell sx={{ fontWeight: 'bold' }}>Identificación</TableCell>
+                  <TableCell sx={{ fontWeight: 'bold' }}>Dispositivo</TableCell>
+                  <TableCell sx={{ fontWeight: 'bold' }}>Sistema Operativo</TableCell>
+                  <TableCell sx={{ fontWeight: 'bold', textAlign: 'center' }}>Acciones</TableCell>
                 </TableRow>
               </TableHead>
               <TableBody>

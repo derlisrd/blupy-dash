@@ -9,15 +9,15 @@
 }
 
 .ReactVirtualized__Table__row{
-    background-color:rgb(249, 249, 249);
+    background-color:#5d5d5d;
     border-bottom-width: 1px;
     padding: 0 14px;
 }
 .ReactVirtualized__Table__row:hover{
-    background-color:rgb(235, 235, 235);
+    background-color:#494949;
     border-bottom-width: 1px;
-    border-bottom-color: #d9d9d9;
+    border-bottom-color: #4c4c4c;
 }
 .ReactVirtualized__Table__row:nth-child(even){
-    background-color: #f2f2f2;
+    background-color: #494949;
 }

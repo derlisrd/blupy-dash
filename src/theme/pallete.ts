@@ -1,9 +1,16 @@
 import { PaletteOptions } from "@mui/material";
-import { colors } from "./colors";
+
 
 export const pallete = {
-  mode: "light",
-  primary: colors.primary,
+  mode: "dark",
+  primary: {
+      lighter: '#585858',
+      light: '#4a4a4a',
+      main: '#373737',
+      dark: '#272727',
+      darker: '#181818',
+      contrastText: '#fff',
+    },
   secondary: {
     main: "#E0C2FF",
     light: "#F5EBFF",
@@ -11,12 +18,12 @@ export const pallete = {
     contrastText: "#47008F"
   },
   background: {
-    default: "#fff",
-    paper: "#f1f1f1",
-    negroFoco: "#383838"
+    default: "#2f2f2f",
+    paper: "#000",
+    negroFoco: "#acacacff"
   },
-  text:{
-    primary: "#000",
-    secondary: "#bbb"
+  text: {
+    primary: "#FFF",
+    secondary: "#d0d0d0"
   }
 } as PaletteOptions;

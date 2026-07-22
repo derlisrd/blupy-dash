@@ -30,9 +30,9 @@ function AuthMenuLayout() {
           backdropFilter: "blur(5px)",
           zIndex: 1100,
           alignItems: "center",
-          boxShadow: 12,
+          boxShadow: 0,
           borderRadius: 0,
-          backgroundColor: "primary.contrastText",
+          backgroundColor: "primary.dark",
         }}
       >
         <Stack justifyContent="space-between" flexDirection="row" width="100%" alignItems="center">
@@ -65,9 +65,9 @@ function AuthMenuLayout() {
 
           "& .MuiDrawer-paper": {
             boxSizing: "border-box",
-            backgroundColor: "primary.darker",
+            backgroundColor: "primary.main",
             width: DRAWER_WIDTH,
-            borderRight: "0",
+            borderRight: "1px solid primary.light",
           },
         }}
       >
@@ -95,7 +95,7 @@ function AuthMenuLayout() {
           width: { xs: "100%", md: width_main },
           marginLeft: { xs: 0, md: margin_left },
           transition: "all 0.2s",
-          bgcolor: "primary.contrastText",
+          bgcolor: "primary.main",
           borderRadius: 0,
           position: "relative",
           overflow: "auto",

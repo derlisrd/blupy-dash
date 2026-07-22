@@ -22,8 +22,8 @@ function FichaClienteFarma() {
       <Paper
         elevation={0}
         sx={{
-          p: { xs: 3, md: 5 }, borderRadius: 4, bgcolor: 'primary.main', color: 'white', mb: 4,
-          boxShadow: '0 8px 32px rgba(25, 118, 210, 0.15)'
+          p: { xs: 3, md: 5 }, borderRadius: 4, bgcolor: 'primary.dark', color: 'white', mb: 4,
+          borderWidth: 1
         }}
       >
         <Typography variant="h4" fontWeight="bold" gutterBottom>Consulta de Clientes Farma</Typography>
@@ -39,7 +39,7 @@ function FichaClienteFarma() {
               value={search}
               onChange={({ target }) => setSearch(target.value)}
               onKeyUp={({ key }) => key === "Enter" && buscar(search)}
-              sx={{ bgcolor: 'white', borderRadius: 2, '& .MuiOutlinedInput-root': { borderRadius: 2 } }}
+              sx={{ borderRadius: 2, '& .MuiOutlinedInput-root': { borderRadius: 2 } }}
               slotProps={{
                 input: {
                   startAdornment: (
@@ -73,7 +73,7 @@ function FichaClienteFarma() {
           {datos.micredito && (
             <Box>
               <Stack direction="row" alignItems="center" spacing={1.5} mb={2}>
-                <Avatar sx={{ bgcolor: 'primary.main' }}><Icon>credit-card</Icon></Avatar>
+                <Avatar ><Icon>credit-card</Icon></Avatar>
                 <Typography variant="h5" fontWeight="bold">Ficha Cliente Micredito</Typography>
               </Stack>
               <Grid container spacing={2}>
@@ -81,13 +81,13 @@ function FichaClienteFarma() {
                   <FichaCard title="Nombre:" subtitle={datos.micredito.nombre} />
                 </Grid>
                 <Grid size={{ xs: 12, sm: 6, md: 3 }}>
-                  <Paper sx={{ p: 2, borderLeft: '5px solid', borderColor: 'success.main', borderRadius: 2 }}>
+                  <Paper sx={{ p: 2, borderLeft: '2px solid', borderColor: 'success.main', borderRadius: 2 }}>
                     <Typography variant="caption" color="text.secondary">Linea:</Typography>
                     <Typography variant="h6" color="success.main" fontWeight="bold">{toPYG(datos.micredito.linea)}</Typography>
                   </Paper>
                 </Grid>
                 <Grid size={{ xs: 12, sm: 6, md: 3 }}>
-                  <Paper sx={{ p: 2, borderLeft: '5px solid', borderColor: 'error.main', borderRadius: 2 }}>
+                  <Paper sx={{ p: 2, borderLeft: '2px solid', borderColor: 'error.main', borderRadius: 2 }}>
                     <Typography variant="caption" color="text.secondary">Deuda:</Typography>
                     <Typography variant="h6" color="error.main" fontWeight="bold">{toPYG(datos.micredito.deuda)}</Typography>
                   </Paper>
@@ -168,7 +168,7 @@ function FichaClienteFarma() {
                       </Box>
                       <CardContent>
                         <Stack spacing={1}>
-                          <Typography variant="h6" color="primary.main">{datos.farma.alianza.descripcion}</Typography>
+                          <Typography variant="h6" >{datos.farma.alianza.descripcion}</Typography>
                           <Grid container spacing={1}>
                             <Grid size={6}><Typography variant="caption">Código: {datos.farma.alianza.codigo}</Typography></Grid>
                             <Grid size={6}><Typography variant="caption">Pago: {datos.farma.alianza.formaPago}</Typography></Grid>
