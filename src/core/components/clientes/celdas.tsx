@@ -4,20 +4,20 @@ import { TableCellProps, TableHeaderProps } from "react-virtualized";
 
 const colores: { [key: number]: string } = {
   0: "#ccc",
-  1: "#06c",
+  1: "#000",
 };
 
 const cellRendererFuncionario = ({ cellData }: TableCellProps) => {
   return (
     <TableCell>
-      <span style={{ color: colores[cellData] }}>{cellData === 1 ? "FARMA SA" : ""}</span>
+      <span style={{ color: colores[cellData], fontWeight: 'bold' }}>{cellData === 1 ? "FARMA SA" : ""}</span>
     </TableCell>
   );
 };
 const cellRendererAlianza = ({ cellData }: TableCellProps) => {
   return (
     <TableCell>
-      <span style={{ color: colores[cellData] }}>{cellData === 1 ? "Alianza" : ""}</span>
+      <span style={{ color: colores[cellData], fontWeight: 'bold' }}>{cellData === 1 ? "Alianza" : ""}</span>
     </TableCell>
   );
 };

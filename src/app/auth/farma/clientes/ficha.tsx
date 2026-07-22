@@ -53,7 +53,7 @@ function FichaClienteFarma() {
           </Grid>
           <Grid size={{ xs: 12, sm: 4, md: 2 }}>
             <Button
-              fullWidth variant="contained" color="secondary" size="large"
+              fullWidth variant="contained" color="secondary"
               onClick={() => buscar(search)}
               disabled={isPending}
               sx={{ height: 56, borderRadius: 2, fontWeight: 'bold' }}

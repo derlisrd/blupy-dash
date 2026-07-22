@@ -74,7 +74,7 @@ export default function Dispositivos() {
     <Container maxWidth="xl" sx={{ py: 4 }}>
       <Box display="flex" justifyContent="space-between" alignItems="center" mb={3}>
         <Box>
-          <Typography variant="h4" fontWeight="bold" color="primary">
+          <Typography variant="h4" fontWeight="bold" >
             Solicitudes de Dispositivos
           </Typography>
           <Typography variant="body2" color="text.secondary">

@@ -4,13 +4,13 @@ import { PaletteOptions } from "@mui/material";
 export const pallete = {
   mode: "dark",
   primary: {
-      lighter: '#585858',
-      light: '#4a4a4a',
-      main: '#000',
-      dark: '#272727',
-      darker: '#181818',
-      contrastText: '#fff',
-    },
+    lighter: "#BDBDBD",
+    light: "#757575",
+    main: "#4D4D4D",
+    dark: "#303030",
+    darker: "#1F1F1F",
+    contrastText: "#fff"
+  },
   secondary: {
     main: "#E0C2FF",
     light: "#F5EBFF",

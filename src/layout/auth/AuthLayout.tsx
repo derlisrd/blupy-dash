@@ -32,7 +32,7 @@ function AuthMenuLayout() {
           alignItems: "center",
           boxShadow: 0,
           borderRadius: 0,
-          backgroundColor: "primary.dark",
+          backgroundColor: "primary.darker",
         }}
       >
         <Stack justifyContent="space-between" flexDirection="row" width="100%" alignItems="center">
@@ -65,7 +65,7 @@ function AuthMenuLayout() {
 
           "& .MuiDrawer-paper": {
             boxSizing: "border-box",
-            backgroundColor: "primary.main",
+            backgroundColor: "primary.darker",
             width: DRAWER_WIDTH,
             borderRight: "1px solid primary.light",
           },
@@ -95,7 +95,7 @@ function AuthMenuLayout() {
           width: { xs: "100%", md: width_main },
           marginLeft: { xs: 0, md: margin_left },
           transition: "all 0.2s",
-          bgcolor: "primary.lighter",
+          bgcolor: "background.default",
           borderRadius: 0,
           position: "relative",
           overflow: "auto",

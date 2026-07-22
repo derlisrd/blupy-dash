@@ -74,7 +74,7 @@ function ClientesList() {
     { dataKey: "name", label: "Nombre", width: width * 0.3 },
     { dataKey: "celular", label: "Tel.", width: width * 0.1 },
     { dataKey: "funcionario", label: "_", width: width * 0.1, cellRenderer: cellRendererFuncionario },
-    { dataKey: "asofarma", label: "_", width: width * 0.1, cellRenderer: cellRendererAlianza },
+    { dataKey: "asofarma", label: "Alianza", width: width * 0.1, cellRenderer: cellRendererAlianza },
     { dataKey: "fecha", label: "Fecha Registro", width: width * 0.14 },
     {
       dataKey: "active",
