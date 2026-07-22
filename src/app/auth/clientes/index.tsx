@@ -87,7 +87,7 @@ function ClientesList() {
           }}
           sx={{
             color: rowData.active === 1 ? "green" : "red",
-            cursor: "pointer",
+            cursor: "pointer", textDecoration: 'none'
           }}
         >
           {rowData.active === 1 ? "Activo" : "Inactivo"}

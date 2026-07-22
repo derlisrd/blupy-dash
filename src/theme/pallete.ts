@@ -6,7 +6,7 @@ export const pallete = {
   primary: {
       lighter: '#585858',
       light: '#4a4a4a',
-      main: '#373737',
+      main: '#000',
       dark: '#272727',
       darker: '#181818',
       contrastText: '#fff',
@@ -24,6 +24,6 @@ export const pallete = {
   },
   text: {
     primary: "#FFF",
-    secondary: "#d0d0d0"
+    secondary: "#e4e4e4ff"
   }
 } as PaletteOptions;

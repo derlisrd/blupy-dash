@@ -55,7 +55,7 @@ function Login() {
                     endAdornment: (
                       <InputAdornment position="end">
                         <IconButton onClick={toggleHide}>
-                          <Icon>{hide ? `visibility_off` : `visibility`}</Icon>
+                          <Icon>{hide ? `eye-off` : `eye`}</Icon>
                         </IconButton>
                       </InputAdornment>
                     ),

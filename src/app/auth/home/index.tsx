@@ -15,7 +15,7 @@ function Home() {
   return (
     <Container sx={{ py: 4 }}>
       <Box display="flex" alignItems="center" gap={2} mb={4}>
-        <Typography variant="h4" fontWeight="800" color="primary.dark">
+        <Typography variant="h4" fontWeight="800" color="text.primary">
           Hola, {userData?.name || 'Usuario'}!
         </Typography>
         <Icon size={40}>ti-dumpling</Icon>
@@ -41,14 +41,14 @@ function Home() {
             { label: "Total Usuarios", val: info?.registrosTotales, icon: "users-group", color: "info.main" },
           ].map((item, index) => (
             <Grid size={{ xs: 12, sm: 6, md: 3 }} key={index}>
-              <Card sx={{ borderRadius: 3, border: '1px solid', borderColor: 'divider', boxShadow: 'none' }}>
+              <Card sx={{ borderRadius: 3, border: '1px solid', bgcolor: 'grey.900', borderColor: 'divider', boxShadow: 'none' }}>
                 <CardContent>
                   <Box display="flex" justifyContent="space-between" alignItems="center">
                     <Box>
                       <Typography variant="overline" color="text.secondary" fontWeight="bold">
                         {item.label}
                       </Typography>
-                      <Typography variant="h4" fontWeight="bold" sx={{ color: item.color }}>
+                      <Typography variant="h4" fontWeight="bold" >
                         {formatVal(item.val)}
                       </Typography>
                     </Box>
@@ -73,7 +73,7 @@ function Home() {
 
           {/* Card Destacada: Vigentes */}
           <Grid size={{ xs: 12, md: 4 }}>
-            <Card sx={{ bgcolor: "success.main", color: "white", borderRadius: 4, position: 'relative', overflow: 'hidden' }}>
+            <Card sx={{ bgcolor: "success.main", borderRadius: 4, position: 'relative', overflow: 'hidden' }}>
               <CardContent>
                 <Box sx={{ position: 'absolute', right: -10, bottom: -10, opacity: 0.2, color: 'white' }}>
                   <Icon size={120}>circle-check</Icon>
@@ -118,7 +118,7 @@ function Home() {
 
           {/* Detalle de Dispositivos (Extra) */}
           <Grid size={{ xs: 12 }}>
-            <Card variant="outlined" sx={{ borderRadius: 3, bgcolor: 'grey.50' }}>
+            <Card variant="outlined" sx={{ borderRadius: 3, bgcolor: 'grey.800' }}>
               <CardContent sx={{ display: 'flex', alignItems: 'center', gap: 3 }}>
                 <Icon size={48}>device-mobile</Icon>
                 <Box>

@@ -66,7 +66,6 @@ function InfoSucursales() {
                             width: `100%`,
                             overflow: 'auto',
                             borderRadius: '8px', // Added some border radius
-                            backgroundColor: '#f9f9f9' // Added background color
                         }}
                     >
                         <div
@@ -92,7 +91,7 @@ function InfoSucursales() {
                                             padding: '10px 15px', // Added padding
                                             borderBottom: '1px solid #eee', // Separator between items
                                             boxSizing: 'border-box', // Include padding in element's total width and height
-                                            backgroundColor: virtualRow.index % 2 ? '#e0e0e0' : '#ffffff', // Alternating row colors
+                                            backgroundColor: virtualRow.index % 2 ? '#585858ff' : '#323232ff', // Alternating row colors
                                         }}
                                     >
                                         {sucursal ? (

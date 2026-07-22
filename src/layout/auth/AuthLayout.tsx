@@ -55,7 +55,7 @@ function AuthMenuLayout() {
   };
 
   return (
-    <Box sx={{ display: "flex", bgcolor: "primary.darker", minHeight: "100vh", position: "fixed", top: 0, right: 0, width: "100%" }}>
+    <Box sx={{ display: "flex", bgcolor: "primary.light", minHeight: "100vh", position: "fixed", top: 0, right: 0, width: "100%" }}>
       <Drawer
         variant="persistent"
         open={isOpenMenu}
@@ -95,7 +95,7 @@ function AuthMenuLayout() {
           width: { xs: "100%", md: width_main },
           marginLeft: { xs: 0, md: margin_left },
           transition: "all 0.2s",
-          bgcolor: "primary.main",
+          bgcolor: "primary.lighter",
           borderRadius: 0,
           position: "relative",
           overflow: "auto",
