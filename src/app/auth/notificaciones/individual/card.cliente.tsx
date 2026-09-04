@@ -9,7 +9,7 @@ interface CardClienteProps {
 
 function CardCliente({ title, descripcion, action, actionText }: CardClienteProps) {
   return (
-    <Card sx={{ boxShadow: 3, bgcolor: "primary.contrastText" }}>
+    <Card sx={{ boxShadow: 3 }}>
       <CardContent>
         <Typography variant="caption">{title}</Typography>
         <Typography variant="body1">{descripcion}</Typography>
